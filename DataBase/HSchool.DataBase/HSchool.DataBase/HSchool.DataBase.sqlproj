@@ -103,6 +103,7 @@
     <Build Include="Tables\ApplicationPrivilege.sql" />
     <Build Include="Tables\ApplicationPermissions.sql" />
     <Build Include="Tables\AcademicYears.sql" />
+    <Build Include="Tables\Subjects.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
