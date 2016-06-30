@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>HASHINY INTERNATIONAL MATRIC SCHOOL</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/Custom/Entity.js")
+    @Scripts.Render("~/Scripts/jquery.form.js")
+    @Scripts.Render("~/Scripts/Custom/Common.js")
+    @Scripts.Render("~/Scripts/jquery.blockUI.js")
+    @Scripts.Render("~/Scripts/jsrender.min.js")
+    <script src="~/Scripts/Custom/Validation.js"></script>
+    <script src="~/Scripts/Application/AdminView.js"></script>
+    <script src="~/Scripts/Application/ApplicationForm.js"></script>
+    <script src="~/Scripts/Application/Home.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse set-radius-zero">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Admin Portal</a>
+
+            </div>
+
+            <div class="left-div">
+                <div class="user-settings-wrapper">
+                    <ul class="nav"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ribbonErrorMessage" id="ribbonErrorMessage" style="display:none"></div>
+    <div class="content-wrapper">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>
+    <!-- Onvia progress bar -->
+    <div id="ajaxProgressLoader" style="display: none;">
+        <div class="loadingProgress">
+            <img src="@(Url.Content("~/Content/Images/loading_2.gif"))" alt=" alt=" processing.." class="loadingImage" />
+            <span id="additionalLoadingMessage"></span><span id="loadingMessage">Loading...</span>
+        </div>
+    </div>
+    <!-- Onvia dialog -->
+    <div id="OnviaAdminDialog">
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

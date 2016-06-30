@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{66E64BC3-9F66-4E06-96C8-6EB2FEE5900E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HSchool.Data</RootNamespace>
+    <AssemblyName>HSchool.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Bootstrapper">
+      <HintPath>..\packages\Bootstrapper.2.0.3.13\lib\Net40\Bootstrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Bootstrapper.AutoMapper">
+      <HintPath>..\packages\Bootstrapper.AutoMapper.2.0.3.14\lib\Net40\Bootstrapper.AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Insight.Database">
+      <HintPath>..\packages\Insight.Database.Core.5.2.7\lib\NET45\Insight.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Insight.Database.Configuration">
+      <HintPath>..\packages\Insight.Database.5.2.7\lib\NET45\Insight.Database.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Insight.Database.Providers.Default">
+      <HintPath>..\packages\Insight.Database.5.2.7\lib\NET45\Insight.Database.Providers.Default.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\DataConstants.cs" />
+    <Compile Include="Helper\SqlDataConnection.cs" />
+    <Compile Include="Helper\UserAuthentication.cs" />
+    <Compile Include="Models\AcademicYear.cs" />
+    <Compile Include="Models\ApplicationModule.cs" />
+    <Compile Include="Models\ApplicationPermission.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
+    <Compile Include="Models\Classes.cs" />
+    <Compile Include="Models\ClassSections.cs" />
+    <Compile Include="Models\CommunityMaster.cs" />
+    <Compile Include="Models\MotherLanguages.cs" />
+    <Compile Include="Models\PasswordQuestions.cs" />
+    <Compile Include="Models\Sections.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\UserCredential.cs" />
+    <Compile Include="Models\UserGuardian.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\UserRelationship.cs" />
+    <Compile Include="Models\UserSecurity.cs" />
+    <Compile Include="Models\UserStatus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlRepository\AdminRepository.cs" />
+    <Compile Include="SqlRepository\UserRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HSchool.Business\HSchool.Business.csproj">
+      <Project>{8607a432-107a-48c4-b9a0-9b7bcfe1a583}</Project>
+      <Name>HSchool.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HSchool.Logging\HSchool.Logging.csproj">
+      <Project>{2a946909-490d-4833-946e-7ec00b5e1568}</Project>
+      <Name>HSchool.Logging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

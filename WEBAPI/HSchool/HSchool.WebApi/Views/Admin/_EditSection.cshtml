@@ -1,0 +1,25 @@
+﻿@model HSchool.Business.Models.Section
+<h1 class="page-head-line" id="headAdminEditText">Add/Edit Section </h1>
+@using (Html.BeginForm("EditSection", "Admin", FormMethod.Post, new { @id = "formSectionEdit" }))
+{
+    <div class="">
+        <div class="row">
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.SectionName, new { @class = "clsTextBox", @id = "" })
+                @Html.LabelFor(m => m.SectionName)
+                <i class="fa fa-exclamation-circle" style="display:none"></i>
+                <i class="fa fa-check-circle"></i>
+                <em class="error-msg">Error Message</em>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+                <input type="submit" value="Save" />
+            </div>
+        </div>
+    </div>
+}

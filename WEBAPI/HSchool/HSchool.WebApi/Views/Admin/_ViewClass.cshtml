@@ -1,0 +1,32 @@
+﻿@model List<HSchool.Business.Models.Classes>
+<h1 class="page-head-line">Classes </h1>
+<div class="row">
+    @if (Model.Count > 0)
+    {
+        <table class="table table-striped table-hover">
+            <thead class="thead-default">
+                <tr>
+                    <th>#</th>                    
+                    <th>Class Name</th>
+                    <th>Name In Text</th>
+                    <th>Visible To Application</th>
+                </tr>
+            </thead>
+            @{int counter = 1;}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(counter++)</td>
+                    <td><a href="#" onclick="adminView.classes.edit(@(item.ClassId))">@(item.ClassName)</a></td>                    
+                    <td>@(item.NameInLetter)</td>
+                    <td>@(item.IsVisibleToApplication)</td>
+                </tr>
+            }
+        </table>
+    }
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a href="#" onclick="adminView.classes.edit(0)">Add Class</a>
+    </div>
+</div>

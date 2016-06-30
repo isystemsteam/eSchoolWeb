@@ -1,0 +1,21 @@
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HSchool.Business.Models
+{
+    public class UserStatus
+    {
+        [JsonProperty("statusId")]
+        [DisplayName("StatusId")]
+        public int StatusId { get; set; }
+
+        [JsonProperty("userStatus")]
+        [DisplayName("Status")]
+        public string StatusValue { get; set; }
+    }
+}

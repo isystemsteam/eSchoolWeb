@@ -1,0 +1,165 @@
+﻿body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 30px;
+	background-color:#222;
+}
+
+.set-radius-zero {
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+}
+
+.content-wrapper {
+    min-height: 400px;
+    padding-bottom:15px;
+	background-color:#fff;
+}
+
+.page-head-line {
+    font-weight: 900;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #F0677C;
+    text-transform: uppercase;
+    color: #F0677C;
+    font-size: 20px;
+   /* margin-bottom: 40px;*/
+}
+
+.btn {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
+
+.progress {
+    height: 8px;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+}
+.login-icon {
+    height: 60px;
+width: 60px;
+padding: 13px;
+border-radius: 50%;
+font-size: 30px;
+margin-bottom: 20px;
+color: #fff;
+text-align: center;
+cursor:pointer;
+background-color:#F0677C;
+-webkit-border-radius:50%;
+    -moz-border-radius:50%;
+}
+/* =============================================================
+   HEADER SECTION STYLES
+ ============================================================ */
+header {
+    background-color: #F0677C;
+    color: #fff;
+    padding: 10px;
+    text-align: right;
+}
+
+
+/* =============================================================
+   LOGO SECTION STYLES
+ ============================================================ */
+.left-div {
+    padding-left: 30px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.navbar-brand {
+    width: 250px;
+    padding-top: 30px;
+	text-transform:uppercase;
+	font-size:20px; font-weight:900;
+}
+
+
+
+/*Common*/
+
+/* =============================================================
+   GENERAL STYLES
+ ============================================================ */
+
+@import url(http://fonts.googleapis.com/css?family=Roboto); /* FREE GOOGLE FONT */
+
+/* Input Buttons */
+.btn-orange-border, .btn-blue-border, .btn-grey-border, .btn-orange, .btn-grey, .btn-blue {width:100%; padding:10px 0; text-align:center; text-transform:uppercase; border-radius:8px; font-size:14px; font-style:normal; font-weight:700}
+.btn-orange-border {color:#F0677C; background-color:#fff; border:#F0677C 1px solid}
+.btn-blue-border {color:#3C5A78; background-color:#fff; border:#3C5A78 1px solid}
+.btn-grey-border {color:#939393; background-color:#fff; border:#939393 1px solid}
+.btn-orange {color:#fff; background-color:#F0677C; border:#F0677C 1px solid}
+.btn-grey {color:#fff; background-color:#939393; border:#939393 1px solid}
+.btn-blue {color:#fff; background-color:#3C5A78; border:#3C5A78 1px solid; }
+.btn-wrapper {margin-top:0px}
+
+.admin-form .row  {position:relative;}
+.admin-form [class*="col-"]  {margin:10px 0}
+.admin-form [class*="col-"] .row [class*="col-"]  {margin:0}
+.admin-form input[type="text"]  {color:#575757; font-size:14px; padding:20px 20px 10px 20px; line-height:20px;  font-family: 'Merriweather', serif;display:block; width:100%; border:none; border:1px solid #D5D5D5; border-radius:4px; box-shadow:none}
+.admin-form input[type="text"]:focus  {outline:none}
+.admin-form label {color:#a4a4a4; z-index:100; font-size:14px; text-transform:uppercase; pointer-events:none; line-height:20px; position:absolute; left:30px; top:15px; transition:0.2s ease all;  -moz-transition:0.2s ease all;   -webkit-transition:0.2s ease all;}
+.admin-form sup {color:#F0677C; font-size:14px; position:relative; top:-2px}
+.admin-form input[type="text"]:focus ~ label, input[type="text"]:valid ~ label  {top:0px; font-size:10px; color:#F0677C;}
+
+.admin-form i.fa-exclamation-circle, .admin-form  i.fa-check-circle {position:absolute; top:18px; right:30px; font-size:18px}
+.admin-form i.fa-exclamation-circle{color:#ff0000; z-index:10}
+.admin-form i.fa-check-circle{color:#3C5A78; font-size:18px; z-index:11}
+.admin-form .dashed-square {position:absolute; left:20px; margin-top:5px; width:30px; height:30px; text-align:center; border:#355A78 2px dashed; margin-right:20px; display:inline-block;}
+.admin-form .dashed-square i {color:#355A78; margin-top:6px}
+
+.admin-form em.error-msg {color:#E3412F; font-size:12px; line-height:15px; font-style:normal; position:absolute; display:none }
+.admin-form .btn-default {padding:15px 20px; width:100%;border:#D5D5D5 1px solid; border-radius:4px; text-align:left; color:#a4a4a4; font-size:14px; text-transform:uppercase; font-weight:bold}
+.admin-form .dropdown-menu {width:100%}
+.admin-form .btn-default .caret {margin-top:8px; border-top:6px solid; border-right:6px solid transparent; border-left:6px solid transparent;}
+.admin-form .btn-default:hover, 
+.admin-form .btn-default:focus, 
+.admin-form .btn-default.focus, 
+.admin-form .btn-default:active, 
+.admin-form .btn-default.active, 
+.admin-form .open > .dropdown-toggle.btn-default{background-color:transparent; border:#D5D5D5 1px solid; color:#a4a4a4}
+.admin-form .dropdown-menu > li > a {color:#a4a4a4}
+
+.admin-form .date input[type="text"]{height:50px}
+.admin-form .date .input-group-addon {padding:6px 15px}
+.admin-form .fileinput  span.btn-default {padding:12px 20px}
+
+
+.admin-form [type="checkbox"]:not(:checked),[type="checkbox"]:checked {opacity:0}
+.admin-form [type="checkbox"] + label {display:block; margin-bottom:0}
+.admin-form [type="checkbox"]:not(:checked) + label > span, [type="checkbox"]:checked + label > span {top:0px}
+.admin-form [type="checkbox"] + label > span {position:absolute; left:0; top:0px; border:1px solid #d5d6d6; border-radius:2px; outline:none}
+.admin-form [type="checkbox"]:not(:checked) + label > span > span {opacity:0; transform: scale(0);}ord
+.admin-form [type="checkbox"]:checked + label > span > span {opacity:1; transform: scale(1); position:relative}
+
+.form-group-collapse-link {margin-top:30px; border-bottom:#d5d5d5 2px solid; display:block; padding:7px 0px 3px; cursor:pointer; color:#23527c; font-size:14px; font-weight:900; text-transform:uppercase}
+.form-group-collapse-link .fa-chevron-right, .form-group-collapse-link .fa-chevron-down {margin-right:5px}
+.form-group-collapse-link .fa-plus, .form-group-collapse-link .fa-minus {margin-top:8px}
+
+/*Ajax loader*/
+.loadingImage{border:none;	margin-right: 10px;	vertical-align:middle;}
+
+.loadingProgress
+{
+    z-index: 10002;    
+    background-color: white;    
+    color: #666666;    
+    padding: 10px;	
+    border: 1px solid #bbbbbb;	
+    border-radius: 3px;	
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.30);    
+    -moz-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.30);    
+    -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.30);    
+    position: fixed;    top: 50%;
+    left: 50%;
+    margin-top: -52px;
+    margin-left: -32px;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size: 13px;
+}

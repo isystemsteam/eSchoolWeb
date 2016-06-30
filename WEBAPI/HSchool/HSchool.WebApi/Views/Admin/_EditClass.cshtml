@@ -1,0 +1,38 @@
+﻿@model HSchool.Business.Models.Classes
+<h1 class="page-head-line" id="headAdminEditText">Edit Class </h1>
+<div class="">
+    @using (Html.BeginForm("EditClass", "Admin", FormMethod.Post, new { @id = "formClassEdit" }))
+    {
+        <div class="row">
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.ClassName, new { @class = "clsTextBox", @id = "" })
+                @Html.HiddenFor(m => m.ClassId, new { @class = "clsTextBox", @id = "" })
+                @Html.LabelFor(m => m.ClassName)
+                <i class="fa fa-exclamation-circle" style="display:none"></i>
+                <i class="fa fa-check-circle"></i>
+                <em class="error-msg">Error Message</em>
+            </div>
+            <div class="col-md-6">
+                @Html.TextBoxFor(m => m.NameInLetter, new { @class = "clsTextBox", @id = "" })
+                @Html.LabelFor(m => m.NameInLetter)
+                <i class="fa fa-exclamation-circle" style="display:none"></i>
+                <i class="fa fa-check-circle"></i>
+                <em class="error-msg">Error Message</em>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.CheckBoxFor(m => m.IsVisibleToApplication, new { @class = "", @id = "" })
+                @Html.LabelFor(m => m.IsVisibleToApplication, new { @class = "" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+                <input type="submit" value="Save" />
+            </div>
+        </div>
+    }
+</div>

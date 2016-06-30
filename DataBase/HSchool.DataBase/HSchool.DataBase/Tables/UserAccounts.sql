@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[UserAccounts]
+(
+	UserId INT NOT NULL PRIMARY KEY identity,
+	Title varchar(10),
+	FirstName varchar(120),
+	LastName varchar(120),
+	UserName varchar(120),
+	Email varchar(255),
+	Gender varchar(15),
+	Age int,
+	DateOfBirth datetime,
+	BloodGroup varchar(12),
+	Religion varchar(50),
+	Nationality varchar(50),
+	Community int foreign key references dbo.CommunityMaster (CommunityId),
+	MobileNumber varchar(20),
+	UserStatus int foreign key references dbo.UserStatus (StatusId),
+	MotherLanguage int foreign key references dbo.MotherLanguages (LanguageId),
+	IsVerified bit,
+	IsLocked bit,
+	SMSEnabled bit,
+	EmailEnabled bit,
+	[NotificationEnabled] bit,
+	IsDeleted bit,
+	CreatedDate datetime,	
+	ModifiedDate datetime	
+)
