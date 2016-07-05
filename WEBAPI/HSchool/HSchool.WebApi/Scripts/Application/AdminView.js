@@ -7,10 +7,10 @@
 
 var adminView = {
     editControlId: "divEditContainer",
-    loadGridId: "divViewContainer",
+    viewContainerId: "divViewContainer",
     init: function (typeId, controlId) {
         $("#" + this.editControlId).html("");
-        $("#" + this.loadGridId).html("");
+        $("#" + this.viewContainerId).html("");
         switch (typeId) {
             case "1":
                 this.classes.load();
@@ -34,6 +34,8 @@ var adminView = {
                 this.rolesPrivileges.load();
                 break;
         }
+    },
+    handleException: function (xhr, error, messgage) {
     },
     //Classes
     classes: {
@@ -67,7 +69,7 @@ var adminView = {
         },
         loadGrid: function () {
             var _successcallback = function (result) {
-                $("#" + adminView.loadGridId).html(result);
+                $("#" + adminView.viewContainerId).html(result);
             };
             $.fn.appCommon.ajax.getForm(appService.viewClass, null, _successcallback, null);
         },
@@ -107,7 +109,7 @@ var adminView = {
         },
         loadGrid: function () {
             var _successcallback = function (result) {
-                $("#" + adminView.loadGridId).html(result);
+                $("#" + adminView.viewContainerId).html(result);
             };
             $.fn.appCommon.ajax.getForm(appService.viewSection, null, _successcallback, null);
         },
@@ -118,40 +120,71 @@ var adminView = {
     //Class Sections
     classSections: {
         load: function () {
-            adminView.classSections.edit(0);
-            adminView.classSections.loadGrid();
+            adminView.classSections.edit();
         },
         edit: function (id) {
             //load success
             var successcallback = function (result) {
-                $("#" + adminView.controlId).html(result);
+                $("#" + adminView.editControlId).html(result);
 
-                //ajax form before submit call
-                var _beforecallback = function () { };
+                $("#txtClassName").click(function () {
+                    $("#divClassesContainer").show();
+                });
 
-                //ajax form success callback
-                var _successcallback = function () {
-                    if (result != null && result.IsSuccess) {
-                        adminView.sections.loadGrid();
-                    }
-                    jQuery.fn.appCommon.UI.displayMessage(result.Message, 3);
-                };
-
-                //ajax form errorcallback
-                var _errorcallback = function () { };
-
-                //bind ajax form
-                $.fn.appCommon.ajax.bind("formSectionEdit", _beforecallback, _successcallback, _errorcallback);
+                //bind events
+                $(".clsAppClassItem").click(function () {
+                    adminView.classSections.selectClass(this);
+                });
             };
-            var parameters = [];
-            parameters.push(new ajaxParam("id", id));
-            $.fn.appCommon.ajax.getForm(appService.editClass, parameters, successcallback, null);
+
+            $.fn.appCommon.ajax.getForm(appService.editClassSection, null, successcallback, adminView.handleException);
         },
         loadGrid: function () {
             var _successcallback = function (result) {
-                $("#" + adminView.loadGridId).html(result);
+                $("#" + adminView.viewContainerId).html(result);
             };
             $.fn.appCommon.ajax.getForm(appService.viewClass, [], _successcallback, null);
+        },
+        selectClass: function (obj) {
+            var classId = $(obj).attr("classId");
+
+            var successcallback = function (result) {
+                var data = JSON.parse(result);
+                //js render - template 
+                var template = $.templates("#tempClassSections");
+                var htmlOutput = template.render(data);
+                $("#" + adminView.viewContainerId).html(htmlOutput);
+                $("#divClassesContainer").hide();
+
+                //bind events
+                $("#btnUpdateClassSection").click(function () {                    
+                    adminView.classSections.saveClassSections();
+                });
+            };
+            $("#txtClassName").val($(obj).text());
+            $("#txtClassId").val(classId);
+            var parameters = [];
+            parameters.push(new ajaxParam("classId", classId));
+            $.fn.appCommon.ajax.getForm(appService.viewClassSections, parameters, successcallback, adminView.handleException);
+        },
+        saveClassSections: function () {
+            var jsonObj = [];
+            var classId = $("#txtClassId").val();
+            var tablesRowsCheckBoxes = $(".clsClassSectionCollection").find("input");
+            $(tablesRowsCheckBoxes).each(function (index, item) {
+                if (item.checked) {
+                    var sectionId = $(item).attr("sectionid");
+                    jsonObj.push({ ClassId: classId, SectionId: sectionId, IsActive: true });
+                }
+            });
+
+            var parameters = [];
+            parameters.push(new ajaxParam("classSections", jsonObj));
+
+            var successcallback = function (result) {
+            };
+
+            $.fn.appCommon.ajax.post(appService.saveClassSections, parameters, 'application/json', successcallback, adminView.handleException)
         }
     },
     //Roles
@@ -185,21 +218,12 @@ var adminView = {
         },
         loadGrid: function () {
             var _successcallback = function (result) {
-                $("#" + adminView.loadGridId).html(result);
+                $("#" + adminView.viewContainerId).html(result);
             };
             $.fn.appCommon.ajax.getForm(appService.viewRole, null, _successcallback, null);
         },
         saveApplicationRole: function () {
             $('#formApplicationRoleEdit').submit();
-        },
-        privileges: {
-            loadPrivilegesForModule: function (moduleId) {
-
-            },
-            setPrivilege: function () {
-            },
-            savePrivilege: function () {
-            }
         }
     },
     rolesPrivileges: {
@@ -224,6 +248,7 @@ var adminView = {
         loadPrivilegesForModule: function (moduleId) {
             var successcallback = function (result) {
                 var data = JSON.parse(result);
+                $.views.settings.debugMode(true);
                 //js render - template 
                 var template = $.templates("#tempRolesPrivilege");
                 var htmlOutput = template.render(data);
@@ -241,7 +266,7 @@ var adminView = {
         selectModule: function (obj) {
             var moduleId = $(obj).attr("moduleid");
             var _successcallback = function (result) {
-                debugger
+
             };
             var parameters = [];
             parameters.push(new ajaxParam("moduleid", moduleId));

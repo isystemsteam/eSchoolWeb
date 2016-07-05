@@ -155,16 +155,69 @@ namespace HSchool.WebApi.Controllers
         #endregion
 
         #region ClassSections
-        public ActionResult EditClassSection(int id)
+        public ActionResult EditClassSection()
         {
             LogHelper.Info(string.Format("AdminController.EditClassSection - Begin"));
-            var hClassSection = new ClassSection();
-            if (id != 0)
+            try
             {
-                hClassSection = _adminRepository.GetClassSectionById(id);
+                var hClassSectionForm = new ClassSectionForm();
+                hClassSectionForm.ClassCollection = _adminRepository.GetAllClasses(false);
+                LogHelper.Info(string.Format("AdminController.EditClassSection - End"));
+                return PartialView("_EditClassSection", hClassSectionForm);
             }
-            LogHelper.Info(string.Format("AdminController.EditClassSection - End"));
-            return PartialView("_EditClassSection", hClassSection);
+            catch (Exception ex)
+            {
+                return PartialView("_Error", ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="classId"></param>
+        /// <returns></returns>
+        public JsonResult ViewClassSections(int classId)
+        {
+            LogHelper.Info(string.Format("AdminController.ViewClassSections - Begin"));
+            try
+            {
+                var classSections = _adminRepository.GetClassSectionsByClassId(classId);
+                var sections = _adminRepository.GetAllSections(true);
+                foreach (Section section in sections)
+                {
+                    var item = classSections.Where(sec => sec.SectionId == section.SectionId);
+                    if (item != null && item.Any())
+                    {
+                        section.IsSelected = true;
+                    }
+                }
+                var classSectionForm = new ClassSectionForm();
+                classSectionForm.SectionCollection = sections;
+                var response = new MessageResponse<ClassSectionForm>(classSectionForm, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                LogHelper.Info(string.Format("AdminController.ViewClassSections - End"));
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var response = new MessageResponse<ClassSectionForm>(null, ApiConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult SaveClassSections(List<ClassSection> classSections)
+        {
+            LogHelper.Info(string.Format("AdminController.ViewClassSections - Begin"));
+            try
+            {               
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                var response = new MessageResponse<string>(null, ApiConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
         }
         #endregion
 

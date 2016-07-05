@@ -68,6 +68,7 @@
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\AuthenticationResult.cs" />
     <Compile Include="Models\Classes.cs" />
+    <Compile Include="Models\ClassSectionForm.cs" />
     <Compile Include="Models\ClassSections.cs" />
     <Compile Include="Models\CommunityMaster.cs" />
     <Compile Include="Models\Enum.cs" />
