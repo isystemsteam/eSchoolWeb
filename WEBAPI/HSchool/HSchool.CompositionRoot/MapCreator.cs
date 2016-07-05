@@ -17,6 +17,9 @@ using ClassSection = HSchool.Business.Models.ClassSection;
 using CommunityMaster = HSchool.Business.Models.CommunityMaster;
 using PasswordQuestions = HSchool.Business.Models.PasswordQuestions;
 using ApplicationRole = HSchool.Business.Models.ApplicationRole;
+using ApplicationModule = HSchool.Business.Models.ApplicationModule;
+using RolePrivilege = HSchool.Business.Models.RolePrivilege;
+using ApplicationPrivilege = HSchool.Business.Models.ApplicationPrivilege;
 
 namespace HSchool.CompositionRoot
 {
@@ -59,6 +62,17 @@ namespace HSchool.CompositionRoot
 
             mapper.CreateMap<ApplicationRole, Data.Models.ApplicationRole>();
             mapper.CreateMap<Data.Models.ApplicationRole, ApplicationRole>();
+
+            mapper.CreateMap<ApplicationModule, Data.Models.ApplicationModule>();
+            mapper.CreateMap<Data.Models.ApplicationModule, ApplicationModule>();
+
+            mapper.CreateMap<RolePrivilege, Data.Models.RolePrivilege>();
+            mapper.CreateMap<Data.Models.RolePrivilege, RolePrivilege>();
+
+            mapper.CreateMap<ApplicationPrivilege, Data.Models.ApplicationPrivilege>();
+            mapper.CreateMap<Data.Models.ApplicationPrivilege, ApplicationPrivilege>();
+
+            
 
         }
     }

@@ -16,6 +16,8 @@ using ClassSection = HSchool.Business.Models.ClassSection;
 using ApplicationRole = HSchool.Business.Models.ApplicationRole;
 using ApplicationPermission = HSchool.Business.Models.ApplicationPermission;
 using ApplicationModule = HSchool.Business.Models.ApplicationModule;
+using RolePrivilege = HSchool.Business.Models.RolePrivilege;
+using ApplicationPrivilege = HSchool.Business.Models.ApplicationPrivilege;
 
 namespace HSchool.Data.SqlRepository
 {
@@ -518,15 +520,15 @@ namespace HSchool.Data.SqlRepository
         /// </summary>
         /// <param name="moduleId"></param>
         /// <returns></returns>
-        public List<ApplicationPermission> GetApplicationPermissionByModuleId(int moduleId)
+        public List<RolePrivilege> GetApplicationPermissionByModuleId(int moduleId)
         {
             LogHelper.Info(string.Format("AdminRepository.GetApplicationPermissionByModuleId - Begin"));
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                var result = connection.Query<Models.ApplicationPermission>(Procedures.GetRoleById, new { @Id = moduleId });
-                var businessResults = Mapper.Map<IEnumerable<Models.ApplicationPermission>, IEnumerable<ApplicationPermission>>(result);
-                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<ApplicationPermission>();
+                var result = connection.Query<Models.RolePrivilege>(Procedures.GetRoleById, new { @Id = moduleId });
+                var businessResults = Mapper.Map<IEnumerable<Models.RolePrivilege>, IEnumerable<RolePrivilege>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<RolePrivilege>();
             }
             catch (SqlException ex)
             {
@@ -544,15 +546,15 @@ namespace HSchool.Data.SqlRepository
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<ApplicationPermission> GetAllApplicationPermission()
+        public List<RolePrivilege> GetAllApplicationPermission()
         {
             LogHelper.Info(string.Format("AdminRepository.GetAllApplicationPermission - Begin"));
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                var result = connection.Query<Models.ApplicationPermission>(Procedures.GetRoleById);
-                var businessResults = Mapper.Map<IEnumerable<Models.ApplicationPermission>, IEnumerable<ApplicationPermission>>(result);
-                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<ApplicationPermission>();
+                var result = connection.Query<Models.RolePrivilege>(Procedures.GetRoleById);
+                var businessResults = Mapper.Map<IEnumerable<Models.RolePrivilege>, IEnumerable<RolePrivilege>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<RolePrivilege>();
             }
             catch (SqlException ex)
             {
@@ -572,9 +574,35 @@ namespace HSchool.Data.SqlRepository
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                var result = connection.Query<Models.ApplicationModule>(Procedures.GetRoleById);
+                var result = connection.Query<Models.ApplicationModule>(Procedures.GetApplicationModules);
                 var businessResults = Mapper.Map<IEnumerable<Models.ApplicationModule>, IEnumerable<ApplicationModule>>(result);
                 return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<ApplicationModule>();
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetAllModules - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetAllModules - Exception:{0}", ex.Message), ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<ApplicationPrivilege> GetApplicationPrivileges()
+        {
+            LogHelper.Info(string.Format("AdminRepository.GetAllModules - Begin"));
+            try
+            {
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<Models.ApplicationPrivilege>(Procedures.GetApplicationPrivileges);
+                var businessResults = Mapper.Map<IEnumerable<Models.ApplicationPrivilege>, IEnumerable<ApplicationPrivilege>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<ApplicationPrivilege>();
             }
             catch (SqlException ex)
             {

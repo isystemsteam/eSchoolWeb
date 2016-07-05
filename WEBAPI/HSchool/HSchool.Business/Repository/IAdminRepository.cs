@@ -51,10 +51,12 @@ namespace HSchool.Business.Repository
 
         List<ApplicationPermission> GetApplicationPermissionByRoleId(int roleId);
 
-        List<ApplicationPermission> GetApplicationPermissionByModuleId(int moduleId);
+        List<RolePrivilege> GetApplicationPermissionByModuleId(int moduleId);
 
-        List<ApplicationPermission> GetAllApplicationPermission();
+        List<RolePrivilege> GetAllApplicationPermission();
 
         List<ApplicationModule> GetAllModules();
+
+        List<ApplicationPrivilege> GetApplicationPrivileges();
     }
 }
