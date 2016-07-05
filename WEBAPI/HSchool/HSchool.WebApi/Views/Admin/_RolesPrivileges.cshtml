@@ -4,14 +4,14 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        @Html.TextBox("txtModuleName", new { @class = "clsTextBox", @id = "txtModuleName", @onclick = "adminView.rolesPrivileges.roleBoxFocus()", @onblur = "adminView.rolesPrivileges.roleBoxBlur()" })
-        <div class="divModulesContainer">
+        @Html.TextBox("txtModuleName", string.Empty, new { @class = "clsTextBox", @id = "txtModuleName", @onclick = "adminView.rolesPrivileges.roleBoxFocus()" })
+        <div class="divModulesContainer" style="display:none;">
             @if (Model != null && Model.Modules.Count > 0)
             {
                 <ul>
                     @foreach (var item in Model.Modules)
                     {
-                        <li moduleid="@item.ModuleId" onclick="">@(item.ModuleName)</li>
+                        <li moduleid="@item.ModuleId" class="clsAppModuleItem">@(item.ModuleName)</li>
                     }
                 </ul>
             }
@@ -32,18 +32,17 @@
     <table class="col-lg-12">
         <thead>
             <tr>
-                <th>Roles & Privileges</th>
-                <th>All</th>
-                <th>Edit</th>
-                <th>View</th>
-                <th>Delete</th>
-            </tr>
-            {{for RolesPermissions}}
-            <tr>
-                <td>{{:RoleName}}</td>
-                {{for Privileges}}
-                <td><input type="checkbox" />{{:PrivilegeName}}</td>
+                <th></th>
+                {{for Instance.Privileges}}
+                <th>{{:PrivilegeName}}</th>
                 {{/for}}
+            </tr>
+            {{for Instance.Roles}}
+            <tr>
+                <td>{{:RoleName}}</td> 
+                {{for #Parent.Privileges}}
+                <th><input type="checkbox" /></th>
+                {{/for}}            
             </tr>
             {{/for}}
         </thead>

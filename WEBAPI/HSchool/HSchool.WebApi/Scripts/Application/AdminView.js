@@ -22,13 +22,16 @@ var adminView = {
                 this.classSections.load();
                 break;
             case "4":
-                this.roles.load();
                 break;
             case "5":
                 break;
             case "6":
                 break;
             case "7":
+                this.roles.load();
+                break;
+            case "8":
+                this.rolesPrivileges.load();
                 break;
         }
     },
@@ -188,33 +191,48 @@ var adminView = {
         },
         saveApplicationRole: function () {
             $('#formApplicationRoleEdit').submit();
+        },
+        privileges: {
+            loadPrivilegesForModule: function (moduleId) {
+
+            },
+            setPrivilege: function () {
+            },
+            savePrivilege: function () {
+            }
         }
     },
     rolesPrivileges: {
         load: function () {
+            this.edit();
         },
         edit: function () {
-            var _successcallback = function (result) {
+            var successcallback = function (result) {
                 $("#" + adminView.editControlId).html(result);
 
-                //ajax form before submit call
-                var _beforecallback = function () { };
+                //bind events
+                $(".clsAppModuleItem").click(function () {
+                    var moduleId = $(this).attr("moduleid");
+                    $("#txtModuleName").val($(this).text());
+                    $(".divModulesContainer").hide();
+                    adminView.rolesPrivileges.loadPrivilegesForModule(moduleId);
+                });
 
-                //ajax form success callback
-                var _successcallback = function (result) {
-                    if (result != null && result.IsSuccess) {
-                        adminView.roles.loadGrid();
-                    }
-                    jQuery.fn.appCommon.UI.displayMessage(result.Message, 3);
-                };
-
-                //ajax form errorcallback
-                var _errorcallback = function () { };
-                //bind ajax form
-                $.fn.appCommon.ajax.bind("formApplicationRoleEdit", _beforecallback, _successcallback, _errorcallback);
+            };
+            $.fn.appCommon.ajax.getForm(appService.editPrivilege, null, successcallback, null);
+        },
+        loadPrivilegesForModule: function (moduleId) {
+            var successcallback = function (result) {
+                var data = JSON.parse(result);
+                //js render - template 
+                var template = $.templates("#tempRolesPrivilege");
+                var htmlOutput = template.render(data);
+                $("#divRolesPrivilegesContainer").html(htmlOutput);
             };
 
-            $.fn.appCommon.ajax.getForm(appService.editRole, nill, _successcallback, null);
+            var parameters = [];
+            parameters.push(new ajaxParam("moduleId", moduleId));
+            $.fn.appCommon.ajax.getForm(appService.rolesPrivilegeForModule, parameters, successcallback, null);
         },
         loadGrid: function () {
         },
@@ -222,17 +240,12 @@ var adminView = {
         },
         selectModule: function (obj) {
             var moduleId = $(obj).attr("moduleid");
-            $("#txtModuleName").val($(obj).text());
-            $(".divModulesContainer").hide();
-
             var _successcallback = function (result) {
                 debugger
             };
-
             var parameters = [];
             parameters.push(new ajaxParam("moduleid", moduleId));
-            $.fn.appCommon.ajax.get(appService.init("rolesPrivilege"), parameters, 'json', _successcallback, null);
-
+            $.fn.appCommon.ajax.get(appService.init("rolesPrivilegeForModule"), parameters, 'json', _successcallback, null);
         },
         roleBoxFocus: function () {
             $(".divModulesContainer").show();

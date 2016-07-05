@@ -42,5 +42,9 @@ namespace HSchool.Data
         public const string SaveApplicationRole = "SaveApplicationRole";
 
         public const string GetRoleById = "GetRoleById";
+
+        public const string GetApplicationModules = "GetApplicationModules";
+
+        public const string GetApplicationPrivileges = "GetApplicationPrivileges";
     }
 }

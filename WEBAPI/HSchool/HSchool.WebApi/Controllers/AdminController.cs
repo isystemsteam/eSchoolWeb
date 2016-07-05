@@ -250,7 +250,7 @@ namespace HSchool.WebApi.Controllers
             try
             {
                 var form = new RolePrivilegeForm();
-                form.Modules = _adminRepository.GetAllModules();                
+                form.Modules = _adminRepository.GetAllModules();
                 LogHelper.Info(string.Format("AdminController.EditPrivileges - End"));
                 return PartialView("_RolesPrivileges", form);
             }
@@ -272,8 +272,11 @@ namespace HSchool.WebApi.Controllers
             LogHelper.Info(string.Format("AdminController.PrivilegesForModule - Begin"));
             try
             {
-                List<ApplicationPermission> permissions = _adminRepository.GetApplicationPermissionByModuleId(moduleId);                
-                var response = new MessageResponse<List<ApplicationPermission>>(permissions, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                ModuleRolePrivilege modulePrivileges = new ModuleRolePrivilege();
+                modulePrivileges.Privileges = _adminRepository.GetApplicationPrivileges();
+                modulePrivileges.Roles = _adminRepository.GetAllRoles(false);
+                modulePrivileges.RolePrivileges = _adminRepository.GetApplicationPermissionByModuleId(moduleId);
+                var response = new MessageResponse<ModuleRolePrivilege>(modulePrivileges, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
                 LogHelper.Info(string.Format("AdminController.PrivilegesForModule - End"));
                 return Json(response, JsonRequestBehavior.AllowGet);
             }

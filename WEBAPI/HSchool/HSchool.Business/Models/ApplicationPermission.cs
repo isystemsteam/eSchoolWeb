@@ -19,7 +19,9 @@ namespace HSchool.Business.Models
         public string RoleName { get; set; }
 
         [DisplayName("Module Name")]
-        public string ModuleName { get; set; }        
+        public string ModuleName { get; set; }
+
+        public List<ApplicationRole> Roles { get; set; }
 
         public List<ApplicationPrivilege> Privileges { get; set; }
     }

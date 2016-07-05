@@ -6,7 +6,7 @@
     editRole: 'EditRole',
     viewRole: 'ViewRole',
     editPrivilege: 'EditPrivileges',
-    rolesPrivilege: 'PrivilegesForModule',
+    rolesPrivilegeForModule: 'PrivilegesForModule',
     init: function (keyName) {
         return appService[keyName];
     }

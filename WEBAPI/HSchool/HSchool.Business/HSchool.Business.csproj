@@ -73,9 +73,11 @@
     <Compile Include="Models\Enum.cs" />
     <Compile Include="Models\MessageResponse.cs" />
     <Compile Include="Models\ApiResponse.cs" />
+    <Compile Include="Models\ModuleRolePrivilege.cs" />
     <Compile Include="Models\MotherLanguages.cs" />
     <Compile Include="Models\PasswordQuestions.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\RolePrivilege.cs" />
     <Compile Include="Models\RolePrivilegeForm.cs" />
     <Compile Include="Models\Sections.cs" />
     <Compile Include="Models\Settings.cs" />

@@ -67,12 +67,14 @@
     <Compile Include="Models\AcademicYear.cs" />
     <Compile Include="Models\ApplicationModule.cs" />
     <Compile Include="Models\ApplicationPermission.cs" />
+    <Compile Include="Models\ApplicationPrivilege.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\Classes.cs" />
     <Compile Include="Models\ClassSections.cs" />
     <Compile Include="Models\CommunityMaster.cs" />
     <Compile Include="Models\MotherLanguages.cs" />
     <Compile Include="Models\PasswordQuestions.cs" />
+    <Compile Include="Models\RolePrivilege.cs" />
     <Compile Include="Models\Sections.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\UserCredential.cs" />
