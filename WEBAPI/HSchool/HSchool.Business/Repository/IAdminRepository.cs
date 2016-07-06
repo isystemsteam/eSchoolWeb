@@ -33,7 +33,7 @@ namespace HSchool.Business.Repository
 
         Section GetSectionById(int sectionId);
 
-        int? SaveClassSection(ClassSection classSection);
+        void SaveClassSection(List<ClassSection> classSection);
 
         ClassSection GetClassSectionById(int classSectionId);
 
@@ -51,12 +51,14 @@ namespace HSchool.Business.Repository
 
         List<ApplicationPermission> GetApplicationPermissionByRoleId(int roleId);
 
-        List<RolePrivilege> GetApplicationPermissionByModuleId(int moduleId);
+        List<RolePrivilege> GetRolePrivilegesByModuleId(int moduleId);
 
         List<RolePrivilege> GetAllApplicationPermission();
 
         List<ApplicationModule> GetAllModules();
 
         List<ApplicationPrivilege> GetApplicationPrivileges();
+
+        void SaveRolePrivileges(List<RolePrivilege> rolePrivileges);
     }
 }

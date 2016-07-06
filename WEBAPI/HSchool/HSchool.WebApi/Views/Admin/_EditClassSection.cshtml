@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-lg-12">
         @Html.TextBox("txtModuleName", string.Empty, new { @class = "clsTextBox", @id = "txtClassName" })
-        @Html.TextBox("txtClassId", string.Empty, new { @class = "clsTextBox", @id = "txtClassName", @style = "display:none" })
+        @Html.TextBox("txtClassId", string.Empty, new { @class = "clsTextBox", @id = "txtClassId", @style = "display:none" })
         <div class="divClassesContainer" style="display:none;position:absolute" id="divClassesContainer">
             @if (Model != null && Model.ClassCollection.Count > 0)
             {

@@ -276,21 +276,19 @@ namespace HSchool.Data.SqlRepository
         /// </summary>
         /// <param name="classSection"></param>
         /// <returns></returns>
-        public int? SaveClassSection(ClassSection classSection)
+        public void SaveClassSection(List<ClassSection> classSections)
         {
             LogHelper.Info(string.Format("AdminRepository.SaveClassSection - Begin"));
             try
             {
-                Models.ClassSection dClassSection = Mapper.Map<ClassSection, Models.ClassSection>(classSection);
+                List<Models.ClassSection> dClassSection = Mapper.Map<List<ClassSection>, List<Models.ClassSection>>(classSections);
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
                 var result = connection.Query<int>(Procedures.SaveClassSections, dClassSection);
-                return result != null && result.Any() ? result.First() : (int?)null;
             }
             catch (SqlException ex)
             {
                 LogHelper.Error(string.Format("AdminRepository.SaveClassSection - SqlException:{0}", ex.Message), ex);
                 throw;
-
             }
             catch (Exception ex)
             {
@@ -520,24 +518,24 @@ namespace HSchool.Data.SqlRepository
         /// </summary>
         /// <param name="moduleId"></param>
         /// <returns></returns>
-        public List<RolePrivilege> GetApplicationPermissionByModuleId(int moduleId)
+        public List<RolePrivilege> GetRolePrivilegesByModuleId(int moduleId)
         {
-            LogHelper.Info(string.Format("AdminRepository.GetApplicationPermissionByModuleId - Begin"));
+            LogHelper.Info(string.Format("AdminRepository.GetRolePrivilegesByModuleId - Begin"));
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                var result = connection.Query<Models.RolePrivilege>(Procedures.GetRoleById, new { @Id = moduleId });
+                var result = connection.Query<Models.RolePrivilege>(Procedures.GetRolePrivilegesByModuleId, new { @ModuleId = moduleId });
                 var businessResults = Mapper.Map<IEnumerable<Models.RolePrivilege>, IEnumerable<RolePrivilege>>(result);
                 return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<RolePrivilege>();
             }
             catch (SqlException ex)
             {
-                LogHelper.Error(string.Format("AdminRepository.GetApplicationPermissionByModuleId - SqlException:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("AdminRepository.GetRolePrivilegesByModuleId - SqlException:{0}", ex.Message), ex);
                 throw;
             }
             catch (Exception ex)
             {
-                LogHelper.Error(string.Format("AdminRepository.GetApplicationPermissionByModuleId - Exception:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("AdminRepository.GetRolePrivilegesByModuleId - Exception:{0}", ex.Message), ex);
                 throw;
             }
         }
@@ -596,7 +594,7 @@ namespace HSchool.Data.SqlRepository
         /// <returns></returns>
         public List<ApplicationPrivilege> GetApplicationPrivileges()
         {
-            LogHelper.Info(string.Format("AdminRepository.GetAllModules - Begin"));
+            LogHelper.Info(string.Format("AdminRepository.GetApplicationPrivileges - Begin"));
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
@@ -606,12 +604,37 @@ namespace HSchool.Data.SqlRepository
             }
             catch (SqlException ex)
             {
-                LogHelper.Error(string.Format("AdminRepository.GetAllModules - SqlException:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("AdminRepository.GetApplicationPrivileges - SqlException:{0}", ex.Message), ex);
                 throw;
             }
             catch (Exception ex)
             {
-                LogHelper.Error(string.Format("AdminRepository.GetAllModules - Exception:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("AdminRepository.GetApplicationPrivileges - Exception:{0}", ex.Message), ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="rolePrivileges"></param>
+        public void SaveRolePrivileges(List<RolePrivilege> rolePrivileges)
+        {
+            LogHelper.Info(string.Format("AdminRepository.SaveRolePrivileges - Begin"));
+            try
+            {
+                List<Models.RolePrivilege> dRolePrivileges = Mapper.Map<List<RolePrivilege>, List<Models.RolePrivilege>>(rolePrivileges);
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<int>(Procedures.SaveRolePrivileges, dRolePrivileges);
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.SaveRolePrivileges - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.SaveRolePrivileges - Exception:{0}", ex.Message), ex);
                 throw;
             }
         }

@@ -13,5 +13,9 @@ namespace HSchool.Data.Models
         public int RoleId { get; set; }
 
         public string Privileges { get; set; }
+
+        public int ModuleId { get; set; }
+
+        public int RowNumber { get; set; }
     }
 }

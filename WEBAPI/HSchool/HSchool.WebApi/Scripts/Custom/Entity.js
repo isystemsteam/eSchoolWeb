@@ -10,6 +10,7 @@
     editClassSection: "EditClassSection",
     viewClassSections: "ViewClassSections",
     saveClassSections: "SaveClassSections",
+    SaveRolesPrivileges: "SaveRolesPrivileges",
     init: function (keyName) {
         return appService[keyName];
     }

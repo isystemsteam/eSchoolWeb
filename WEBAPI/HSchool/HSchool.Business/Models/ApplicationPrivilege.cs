@@ -11,5 +11,7 @@ namespace HSchool.Business.Models
         public int PrivilegeId { get; set; }
 
         public string PrivilegeName { get; set; }
+
+        public bool IsChecked { get; set; }
     }
 }

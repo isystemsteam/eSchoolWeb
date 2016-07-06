@@ -157,7 +157,7 @@ var adminView = {
                 $("#divClassesContainer").hide();
 
                 //bind events
-                $("#btnUpdateClassSection").click(function () {                    
+                $("#btnUpdateClassSection").click(function () {
                     adminView.classSections.saveClassSections();
                 });
             };
@@ -172,9 +172,11 @@ var adminView = {
             var classId = $("#txtClassId").val();
             var tablesRowsCheckBoxes = $(".clsClassSectionCollection").find("input");
             $(tablesRowsCheckBoxes).each(function (index, item) {
+                var sectionId = $(item).attr("sectionid");
                 if (item.checked) {
-                    var sectionId = $(item).attr("sectionid");
-                    jsonObj.push({ ClassId: classId, SectionId: sectionId, IsActive: true });
+                    jsonObj.push({ ClassId: classId, SectionId: sectionId, IsActive: true, RowNumber: index + 1 });
+                } else {
+                    jsonObj.push({ ClassId: classId, SectionId: sectionId, IsActive: false, RowNumber: index + 1 });
                 }
             });
 
@@ -182,9 +184,12 @@ var adminView = {
             parameters.push(new ajaxParam("classSections", jsonObj));
 
             var successcallback = function (result) {
+                if (result != null) {
+                    $.fn.appCommon.UI.displayMessage(result.Reason, null);
+                }
             };
 
-            $.fn.appCommon.ajax.post(appService.saveClassSections, parameters, 'application/json', successcallback, adminView.handleException)
+            $.fn.appCommon.ajax.post(appService.saveClassSections, parameters, 'application/json', successcallback, adminView.handleException);
         }
     },
     //Roles
@@ -254,14 +259,45 @@ var adminView = {
                 var htmlOutput = template.render(data);
                 $("#divRolesPrivilegesContainer").html(htmlOutput);
             };
-
+            $("#hdnModuleId").val(moduleId);
             var parameters = [];
             parameters.push(new ajaxParam("moduleId", moduleId));
             $.fn.appCommon.ajax.getForm(appService.rolesPrivilegeForModule, parameters, successcallback, null);
         },
         loadGrid: function () {
         },
-        saveRolesPermissions: function () {
+        saveRolePrivileges: function () {            
+            var jsonObj = [];
+            var moduleId = $("#hdnModuleId").val();
+            var trRows = $(".trRolesActive");
+            $(trRows).each(function (index, item) {                
+                var privileges = [];
+                var roleId = $(item).find(".hdnRoleId").val();
+                var rowCheckBoxes = $(item).find(".chkRoleEnabled");
+                if (rowCheckBoxes != null && rowCheckBoxes.length > 0) {
+                    for (var roleCheckCounter = 0; roleCheckCounter < rowCheckBoxes.length; roleCheckCounter++) {                        
+                        if (rowCheckBoxes[roleCheckCounter].checked) {
+                            var privilegeId = $(rowCheckBoxes[roleCheckCounter]).attr("privilegeid");
+                            privileges.push(privilegeId);
+                        }
+                    }
+                    var rolePrivilege = { PrivilgeIds: privileges, RoleId: roleId, ModuleId: moduleId, RowNumber: index + 1 };
+                    jsonObj.push(rolePrivilege);
+                }
+            });
+            
+            //success callback for save
+            var successcallback = function (result) {
+                if (result != null) {
+                    $.fn.appCommon.UI.displayMessage(result.Reason, null);
+                }
+            };
+
+            //parameters save
+            var parameters = [];
+            parameters.push(new ajaxParam("rolesPrivileges", jsonObj));
+            $.fn.appCommon.ajax.post(appService.SaveRolesPrivileges, parameters, 'application/json', successcallback, adminView.handleException);
+
         },
         selectModule: function (obj) {
             var moduleId = $(obj).attr("moduleid");

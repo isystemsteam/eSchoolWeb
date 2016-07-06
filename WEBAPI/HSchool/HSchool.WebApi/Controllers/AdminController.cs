@@ -189,7 +189,7 @@ namespace HSchool.WebApi.Controllers
                     var item = classSections.Where(sec => sec.SectionId == section.SectionId);
                     if (item != null && item.Any())
                     {
-                        section.IsSelected = true;
+                        section.IsSelected = item.FirstOrDefault().IsActive;
                     }
                 }
                 var classSectionForm = new ClassSectionForm();
@@ -205,12 +205,19 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="classSections"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult SaveClassSections(List<ClassSection> classSections)
         {
             LogHelper.Info(string.Format("AdminController.ViewClassSections - Begin"));
             try
-            {               
+            {
+                _adminRepository.SaveClassSection(classSections);
+                var response = new MessageResponse<string>(null, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -326,9 +333,35 @@ namespace HSchool.WebApi.Controllers
             try
             {
                 ModuleRolePrivilege modulePrivileges = new ModuleRolePrivilege();
-                modulePrivileges.Privileges = _adminRepository.GetApplicationPrivileges();
+                var privileges = _adminRepository.GetApplicationPrivileges();
+                var rolePrivileges = _adminRepository.GetRolePrivilegesByModuleId(moduleId);
                 modulePrivileges.Roles = _adminRepository.GetAllRoles(false);
-                modulePrivileges.RolePrivileges = _adminRepository.GetApplicationPermissionByModuleId(moduleId);
+                modulePrivileges.Privileges = privileges;
+                foreach (ApplicationRole roleItem in modulePrivileges.Roles)
+                {
+                    roleItem.Privileges = new List<ApplicationPrivilege>();
+                    foreach (var pItem in privileges)
+                    {
+                        roleItem.Privileges.Add(new ApplicationPrivilege { PrivilegeId = pItem.PrivilegeId, PrivilegeName = pItem.PrivilegeName });
+                    }
+
+                    if (privileges != null && rolePrivileges != null)
+                    {
+                        var rolePrivilege = rolePrivileges.Where(rp => rp.RoleId == roleItem.RoleId).FirstOrDefault();
+                        if (rolePrivilege != null)
+                        {
+                            foreach (var privilegeId in rolePrivilege.PrivilegeCollection)
+                            {
+                                var item = roleItem.Privileges.Where(p => p.PrivilegeId == privilegeId).FirstOrDefault();
+                                if (item != null)
+                                {
+                                    item.IsChecked = true;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 var response = new MessageResponse<ModuleRolePrivilege>(modulePrivileges, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
                 LogHelper.Info(string.Format("AdminController.PrivilegesForModule - End"));
                 return Json(response, JsonRequestBehavior.AllowGet);
@@ -338,6 +371,29 @@ namespace HSchool.WebApi.Controllers
                 var response = new MessageResponse(ApiConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
                 LogHelper.Error(string.Format("AdminController.EditPrivileges - Exception:{0}", ex.Message));
                 return Json(response, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult SaveRolesPrivileges(List<RolePrivilege> rolesPrivileges)
+        {
+            LogHelper.Info(string.Format("AdminController.SaveRolesPrivileges - Begin"));
+            try
+            {
+                _adminRepository.SaveRolePrivileges(rolesPrivileges);
+                var response = new MessageResponse<string>(null, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                LogHelper.Info(string.Format("AdminController.SaveRolesPrivileges - End"));
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminController.SaveRolesPrivileges - Exception:{0}", ex.Message));
+                var response = new MessageResponse<string>(null, ApiConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
+                return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
         #endregion
