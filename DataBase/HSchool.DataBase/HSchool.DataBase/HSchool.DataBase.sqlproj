@@ -101,11 +101,14 @@
     <Build Include="Stored Procedures\GetAllRoles.sql" />
     <Build Include="Tables\ApplicationModules.sql" />
     <Build Include="Tables\ApplicationPrivilege.sql" />
-    <Build Include="Tables\ApplicationPermissions.sql" />
+    <Build Include="Tables\RolePrivileges.sql" />
     <Build Include="Tables\AcademicYears.sql" />
     <Build Include="Tables\Subjects.sql" />
     <Build Include="Stored Procedures\GetApplicationModules.sql" />
     <Build Include="Stored Procedures\GetApplicationPrivileges.sql" />
+    <Build Include="Stored Procedures\SaveRolePrivileges.sql" />
+    <Build Include="User-Defined Table Types\TypeRolePrivileges.sql" />
+    <Build Include="Stored Procedures\GetRolePrivilegesByModuleId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
@@ -116,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\BaseLine.dacpac" />
+    <None Include="User-Defined Table Types\TypeClassSections.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Script.PreDeployment.Certificates.sql" />

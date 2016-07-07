@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HSchool.Business.Models
 {
-    public class StudentInfo : UserInfo
+    public class StudentInfo : UserAccount
     {
         [DisplayName("Fluency In Others")]
         public string FluencyinOthers { get; set; }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserInfo = HSchool.Business.Models.UserInfo;
+using UserInfo = HSchool.Business.Models.UserAccount;
 using UserCredential = HSchool.Business.Models.UserCredential;
 using UserGuardian = HSchool.Business.Models.UserGuardian;
 using UserStatus = HSchool.Business.Models.UserStatus;
@@ -27,8 +27,8 @@ namespace HSchool.CompositionRoot
     {
         public void CreateMap(IProfileExpression mapper)
         {
-            mapper.CreateMap<UserInfo, Data.Models.UserInfo>();
-            mapper.CreateMap<Data.Models.UserInfo, UserInfo>();
+            mapper.CreateMap<UserInfo, Data.Models.UserAccount>();
+            mapper.CreateMap<Data.Models.UserAccount, UserInfo>();
 
             mapper.CreateMap<UserGuardian, Data.Models.UserGuardian>();
             mapper.CreateMap<Data.Models.UserGuardian, UserGuardian>();

@@ -51,7 +51,7 @@ namespace HSchool.WebApi.Controllers
                 if (authenticateResult.IsAuthorized)
                 {
                     authenticateResult.AuthorizationToken = Authentication.EncodeUserCredentials(credential.UserName, credential.Password);
-                    authenticateResult.UserInfo = new UserInfo();
+                    authenticateResult.UserInfo = new UserAccount();
                 }
                 return ResponseMessage(authenticateResult, new ApiResponse { StatusCode = HttpStatusCode.OK, StatusText = ApiConstants.StatusSuccess });
             }

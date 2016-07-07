@@ -12,7 +12,7 @@ using Insight.Database;
 
 using Models = HSchool.Business.Models;
 using UserCredential = HSchool.Business.Models.UserCredential;
-using UserInfo = HSchool.Business.Models.UserInfo;
+using UserAccount = HSchool.Business.Models.UserAccount;
 using AutoMapper;
 using System.Security.Cryptography;
 using HSchool.Data.Helper;
@@ -57,14 +57,14 @@ namespace HSchool.Data.SqlRepository
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
-        public int InsertUpdateUser(UserInfo userInfo)
+        public int InsertUpdateUser(UserAccount userInfo)
         {
             LogHelper.Info(string.Format("UserRepository.InsertUpdateUser - Begin."));
             int userId = 0;
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                Models.UserInfo dUserInfo = Mapper.Map<UserInfo, Models.UserInfo>(userInfo);
+                Models.UserAccount dUserInfo = Mapper.Map<UserAccount, Models.UserAccount>(userInfo);
                 var results = connection.Query<int>(Procedures.SaveUserInformation, dUserInfo);
                 userId = results.Any() ? results.FirstOrDefault() : 0;
             }
@@ -87,15 +87,15 @@ namespace HSchool.Data.SqlRepository
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public UserInfo GetUserDetailsById(int userId)
+        public UserAccount GetUserDetailsById(int userId)
         {
             LogHelper.Info(string.Format("UserRepository.GetUserDetailsById - Begin. UserId:{0}", userId));
-            UserInfo userInfo = null;
+            UserAccount userInfo = null;
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                var results = connection.Query<Models.UserInfo>(Procedures.GetUserDetailsById, new { @userId = userId });
-                IEnumerable<UserInfo> userCollection = Mapper.Map<IEnumerable<Models.UserInfo>, IEnumerable<UserInfo>>(results);
+                var results = connection.Query<Models.UserAccount>(Procedures.GetUserDetailsById, new { @userId = userId });
+                IEnumerable<UserAccount> userCollection = Mapper.Map<IEnumerable<Models.UserAccount>, IEnumerable<UserAccount>>(results);
                 userInfo = userCollection.Any() ? userCollection.FirstOrDefault() : null;
             }
             catch (SqlException ex)
