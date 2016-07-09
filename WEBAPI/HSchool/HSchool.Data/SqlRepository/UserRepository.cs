@@ -15,42 +15,14 @@ using UserCredential = HSchool.Business.Models.UserCredential;
 using UserAccount = HSchool.Business.Models.UserAccount;
 using AutoMapper;
 using System.Security.Cryptography;
-using HSchool.Data.Helper;
+using HSchool.Data;
 
 namespace HSchool.Data.SqlRepository
 {
     public class UserRepository : IUserRepository
     {
-        #region Public Methods
-        /// <summary>
-        /// to validate user
-        /// </summary>
-        /// <param name="credential"></param>
-        /// <returns></returns>
-        public bool ValidateUser(UserCredential credential)
-        {
-            LogHelper.Info(string.Format("UserRepository.ValidateUser - Begin. UserName:{0}", credential.UserName));
-            var loginResult = false;
-            try
-            {
-                using (SqlConnection connection = SqlDataConnection.GetSqlConnection())
-                {
-                    var dSecurity = connection.Query<Models.UserSecurity>(Procedures.GetUserDetailsById, new { credential.UserName });
-                    var dUserCredential = Mapper.Map<UserCredential, Models.UserCredential>(credential);
-                    loginResult = UserAuthentication.ValidateUserCredential(dSecurity.Any() ? dSecurity.FirstOrDefault() : new UserSecurity(), dUserCredential);
-                }
-            }
-            catch (SqlException ex)
-            {
-                LogHelper.Error(string.Format("UserRepository.ValidateUser- SqlException:{0}", ex.Message), ex);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Error(string.Format("UserRepository.ValidateUser- SqlException:{0}", ex.Message), ex); ;
-            }
-            LogHelper.Info(string.Format("UserRepository.ValidateUser - End. UserName:{0} - LoginResult", credential.UserName, loginResult));
-            return loginResult;
-        }
+        #region Public Methods      
+       
 
         /// <summary>
         /// To save user information

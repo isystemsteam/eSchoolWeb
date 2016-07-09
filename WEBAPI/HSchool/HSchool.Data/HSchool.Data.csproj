@@ -11,6 +11,7 @@
     <AssemblyName>HSchool.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper">
@@ -54,6 +57,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,7 +67,6 @@
   <ItemGroup>
     <Compile Include="Helper\DataConstants.cs" />
     <Compile Include="Helper\SqlDataConnection.cs" />
-    <Compile Include="Helper\UserAuthentication.cs" />
     <Compile Include="Models\AcademicYear.cs" />
     <Compile Include="Models\ApplicationModule.cs" />
     <Compile Include="Models\ApplicationPermission.cs" />
@@ -77,8 +80,12 @@
     <Compile Include="Models\RolePrivilege.cs" />
     <Compile Include="Models\Sections.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\StudentClass.cs" />
+    <Compile Include="Models\StudentGuardianImage.cs" />
+    <Compile Include="Models\StudentImage.cs" />
     <Compile Include="Models\UserCredential.cs" />
-    <Compile Include="Models\UserGuardian.cs" />
+    <Compile Include="Models\StudentGuardian.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserRelationship.cs" />
     <Compile Include="Models\UserSecurity.cs" />
@@ -86,12 +93,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlRepository\AdminRepository.cs" />
     <Compile Include="SqlRepository\LoginRepository.cs" />
+    <Compile Include="SqlRepository\StudentRepository.cs" />
     <Compile Include="SqlRepository\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HSchool.Business\HSchool.Business.csproj">
       <Project>{8607a432-107a-48c4-b9a0-9b7bcfe1a583}</Project>
       <Name>HSchool.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HSchool.Common\HSchool.Common.csproj">
+      <Project>{3282c4c8-8eb4-4877-93a0-adb0cf0b622a}</Project>
+      <Name>HSchool.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\HSchool.Logging\HSchool.Logging.csproj">
       <Project>{2a946909-490d-4833-946e-7ec00b5e1568}</Project>

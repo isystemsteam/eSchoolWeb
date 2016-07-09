@@ -15,17 +15,18 @@ namespace HSchool.WebApi.Helpers
     public class LoginHelper
     {
         private static string initVector = "";
-        private static ILoginRepository _loginRepository;
-        public LoginHelper(ILoginRepository loginRepository)
-        {
-            _loginRepository = loginRepository;
-        }
-
-        public static bool ValidateUser(UserCredential credential)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="credential"></param>
+        /// <param name="security"></param>
+        /// <returns></returns>
+        public static bool ValidateUser(UserCredential credential, UserSecurity security)
         {
             LogHelper.Info(string.Format("LoginHelper.ValidateUser - Begin. Username:{0}", credential.UserName));
-            if (_loginRepository.ValidateUser(credential))
+            if (credential != null && security != null)
             {
+                LogHelper.Info(string.Format("LoginHelper.ValidateUser - Details Available"));
             }
             return true;
         }
@@ -35,20 +36,32 @@ namespace HSchool.WebApi.Helpers
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        private static string GenerateUserPassword(string password)
+        public static UserSecurity CreateUserSecurity(UserCredential credential, bool isDefault)
         {
-            LogHelper.Info(string.Format("LoginHelper.ReadUserInfo - Begin."));
+            LogHelper.Info(string.Format("LoginHelper.CreateUserSecurity - Begin."));
+            var userSecurity = new UserSecurity();
             try
             {
-                string securityKey = CommonHelper.GetWebConfigValue<string>(WebConstants.AppSecurityKey);
-
-                LogHelper.Info(string.Format("LoginHelper.ReadUserInfo - End."));
+                string initVector = CommonHelper.GetWebConfigValue<string>(WebConstants.AppSecurityKey);
+                credential.Password = CommonHelper.GetWebConfigValue<string>(WebConstants.AppSecurityKey);
+                if (string.IsNullOrWhiteSpace(credential.UserName) && string.IsNullOrWhiteSpace(credential.Password))
+                {
+                    string passwordPlanText = CommonHelper.RandomString(credential.UserName.Length);
+                    userSecurity.SecurityKey = passwordPlanText;
+                    userSecurity.Password = CommonHelper.EncryptString(passwordPlanText, credential.Password, initVector);
+                }
+                LogHelper.Info(string.Format("LoginHelper.CreateUserSecurity - End."));
             }
             catch (Exception ex)
             {
                 LogHelper.Error(string.Format("LoginHelper.ReadUserInfo - Exception:{0}", ex.Message));
             }
-            return string.Empty;
-        }        
+            return userSecurity;
+        }
+
+        public static UserCredential GetUserCredential(string userName, UserSecurity userSecurity)
+        {
+            return new UserCredential();
+        }
     }
 }

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace HSchool.Data.Models
 {
-    public class UserAccount : UserSecurity
+    public class UserAccount 
     {
         public int UserId { get; set; }
+
+        public int Title { get; set; }
 
         public string FirstName { get; set; }
 
@@ -22,6 +24,8 @@ namespace HSchool.Data.Models
 
         public DateTime DateOfBirth { get; set; }
 
+        public string PlaceOfBirth { get; set; }
+
         public string BloodGroup { get; set; }
 
         public string Religion { get; set; }
@@ -34,13 +38,9 @@ namespace HSchool.Data.Models
 
         public DateTime CreatedDate { get; set; }
 
-        public DateTime ModifiedDate { get; set; }
+        public DateTime ModifiedDate { get; set; }        
 
-        public string Title { get; set; }
-
-        public string UserName { get; set; }
-
-        public int UserStatusId { get; set; }
+        public int UserStatus { get; set; }
 
         public bool IsVerified { get; set; }
 
@@ -52,10 +52,8 @@ namespace HSchool.Data.Models
 
         public bool NotoficationEnabled { get; set; }
 
-        public int MotherLanguage { get; set; }
+        public int MotherLanguage { get; set; }        
 
-        public bool IsPasswordInsert { get; set; }
-
-        public List<UserGuardian> UserGuardians { get; set; }
+        public DateTime? UserLastLogin { get; set; }
     }
 }

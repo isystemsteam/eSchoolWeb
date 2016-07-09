@@ -9,9 +9,9 @@ namespace HSchool.Business.Models
 {
     public class AdmissionForm
     {
-        public StudentInfo StudentInfo { get; set; }
+        public Student StudentInfo { get; set; }
 
-        public StudentClassInfo StudentClassInfo { get; set; }
+        public StudentClass StudentClass { get; set; }
 
         public List<Classes> FormClasses { get; set; }
 

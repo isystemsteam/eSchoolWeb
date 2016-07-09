@@ -93,10 +93,5 @@ namespace HSchool.WebApi
             var mvcStr = new MvcHtmlString(strBuilder.ToString());
             return mvcStr;
         }
-    }
-
-    public static class CustomHelper
-    {
-
-    }
+    }    
 }

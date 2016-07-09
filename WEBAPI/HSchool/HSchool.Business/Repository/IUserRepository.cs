@@ -9,8 +9,6 @@ namespace HSchool.Business.Repository
 {
     public interface IUserRepository
     {
-        bool ValidateUser(UserCredential credential);
-
         UserAccount GetUserDetailsById(int userId);
 
         int InsertUpdateUser(UserAccount userInfo);
