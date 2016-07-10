@@ -20,13 +20,7 @@
 	@IsLocked bit,
 	@SMSEnabled bit,
 	@EmailEnabled bit,
-	@NotificationEnabled bit,
-	@SecurityKey varchar,
-	@Password varchar(255),
-	@GuardianPassword varchar(255),
-	@PasswordFormat varchar(12),
-	@PasswordQuestion int,
-	@PasswordAnswer varchar(20)		
+	@NotificationEnabled bit	
 )
 AS
 BEGIN

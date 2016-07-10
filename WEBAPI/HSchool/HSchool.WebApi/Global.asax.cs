@@ -12,6 +12,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Bootstrap.AutoMapper;
+using System.Data.Entity;
+using HSchool.Authentication;
 
 namespace HSchool.WebApi
 {
@@ -36,6 +38,7 @@ namespace HSchool.WebApi
             BundleConfig.RegisterBundles(BundleTable.Bundles);            
             log4net.Config.XmlConfigurator.Configure();
             Bootstrap.Bootstrapper.With.AutoMapper().Start();
+            
             LogHelper.Info(string.Format("WebApiApplication.OnApplicationStarted - End"));
         }
 

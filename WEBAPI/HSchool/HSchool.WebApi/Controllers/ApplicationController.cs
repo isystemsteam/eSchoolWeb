@@ -35,6 +35,7 @@ namespace HSchool.WebApi.Controllers
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
             return View(admissionForm);
         }
+               
         #endregion
     }
 }
