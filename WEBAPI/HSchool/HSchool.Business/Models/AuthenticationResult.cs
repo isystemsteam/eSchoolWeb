@@ -16,6 +16,6 @@ namespace HSchool.Business.Models
         public Boolean IsAuthorized { get; set; }
 
         [JsonProperty("userInfo")]
-        public UserInfo UserInfo { get; set; }
+        public UserAccount UserInfo { get; set; }
     }
 }

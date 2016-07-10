@@ -16,5 +16,7 @@ namespace HSchool.Business.Models
         [JsonProperty("sectionName")]
         [DisplayName("Section Name")]
         public string SectionName { get; set; }
+
+        public bool IsSelected { get; set; }
     }
 }

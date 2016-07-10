@@ -15,9 +15,9 @@ namespace HSchool.Common
         public const string StatusFailure = "Failure";
         public const string WwwAuthenticate = "WWW-Authenticate";
         public const string BasicType = "Basic realm='api.local'";
-        public const string SecurityKey = "SecurityKey";       
+        public const string SecurityKey = "SecurityKey";
         public const string StrCommaSeparator = ",";
-        public const string Kb = "KB";        
+        public const string Kb = "KB";
         public const string StrColonSpace = ": ";
         public const string Origin = "Origin";
         public const string AccessControlAllowOrigin = "Access-Control-Allow-Origin";
@@ -64,5 +64,11 @@ namespace HSchool.Common
         public const char CharHyphen = '-';
         public const char CharColon = ':';
         #endregion
+    }
+
+    public class WebConstants
+    {
+        public const string AppSecurityKey = "SecurityKeyApp";
+        public const string SizeOf = "SizeofStudents";
     }
 }

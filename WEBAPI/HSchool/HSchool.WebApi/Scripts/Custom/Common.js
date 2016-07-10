@@ -31,7 +31,29 @@
                     cache: false
                 });
             },
-            post: function (uri, data, successcallback, errorcallback) {
+            post: function (uri, parameters, datatype, successcallback, errorcallback) {
+                debugger
+                var data = $.fn.appCommon.utility.createParameters(parameters);
+                //to show ajax processing
+                $(document).ajaxStart(function () {
+                    $.fn.appCommon.ajax.processing.show();
+                }).ajaxStop(function () {
+                    $.fn.appCommon.ajax.processing.hide();
+                }).ajaxSuccess(function (value, xhr, settings) {
+                    if (xhr != null && xhr.responseText == "true") {
+                    }
+                });
+                debugger
+                //ajax call
+                $.ajax({
+                    url: uri,
+                    type: 'post',
+                    data: data,
+                    dataType: datatype,
+                    success: successcallback,
+                    error: errorcallback,
+                    cache: false
+                });
             },
             //to bind form for ajax call
             bind: function (formName, beforecallback, successcallback, errorcallback, loading) {

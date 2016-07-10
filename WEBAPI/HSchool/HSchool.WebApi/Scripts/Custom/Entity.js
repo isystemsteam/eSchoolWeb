@@ -6,7 +6,11 @@
     editRole: 'EditRole',
     viewRole: 'ViewRole',
     editPrivilege: 'EditPrivileges',
-    rolesPrivilege: 'PrivilegesForModule',
+    rolesPrivilegeForModule: 'PrivilegesForModule',
+    editClassSection: "EditClassSection",
+    viewClassSections: "ViewClassSections",
+    saveClassSections: "SaveClassSections",
+    SaveRolesPrivileges: "SaveRolesPrivileges",
     init: function (keyName) {
         return appService[keyName];
     }

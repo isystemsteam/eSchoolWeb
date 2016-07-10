@@ -37,14 +37,14 @@ namespace HSchool.WebApi.Controllers
             LogHelper.Info(string.Format("UserController.GetUserDetails - Begin. UserId:{0}", id));
             try
             {
-                UserInfo userInfo = _userRepository.GetUserDetailsById(id);
+                UserAccount userInfo = _userRepository.GetUserDetailsById(id);
                 LogHelper.Info(string.Format("UserController.GetUserDetails - End. UserId:{0}", id));
                 return ResponseMessage(userInfo, new ApiResponse { StatusCode = HttpStatusCode.OK, StatusText = ApiConstants.StatusSuccess });
             }
             catch (Exception ex)
             {
                 LogHelper.Error(string.Format("UserController.GetUserDetails - UserId:{0}, Exception:{1}", id, ex.Message), ex);
-                return ResponseMessage(new UserInfo(), new ApiResponse { StatusCode = HttpStatusCode.ExpectationFailed, Reason = ex.Message, StatusText = ApiConstants.StatusFailure });
+                return ResponseMessage(new UserAccount(), new ApiResponse { StatusCode = HttpStatusCode.ExpectationFailed, Reason = ex.Message, StatusText = ApiConstants.StatusFailure });
             }
         }
 

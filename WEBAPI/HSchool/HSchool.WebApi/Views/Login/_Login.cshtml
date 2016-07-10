@@ -1,0 +1,38 @@
+﻿@model HSchool.Business.Models.LoginViewModel
+
+@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @id = "hLoginForm" }))
+{
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.TextBoxFor(login => login.UserName, new { @id = "txtUserName" })
+            <label for="">User Name</label>
+            <i class="fa fa-exclamation-circle" style="display:none"></i>
+            <i class="fa fa-check-circle"></i>
+            <em class="error-msg">Required</em>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.PasswordFor(login => login.Password, new { @Id = "txtPassword" })
+            <label for="">Password</label>
+            <i class="fa fa-exclamation-circle" style="display:none"></i>
+            <i class="fa fa-check-circle"></i>
+            <em class="error-msg">Required</em>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.TextBox("txtRoleName", new { @id = "" })
+            @Html.HiddenFor(login => login.RoleId, new { @Id = "txtRoleId" })
+            <label for="">Login As</label>
+            <i class="fa fa-exclamation-circle" style="display:none"></i>
+            <i class="fa fa-check-circle"></i>
+            <em class="error-msg">Required</em>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <input type="submit" value="Login" class="btn-blue" />
+        </div>
+    </div>
+}

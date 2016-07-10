@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace HSchool.Business.Repository
 {
-    public interface IUserRepository
+    public interface ILoginRepository
     {
         bool ValidateUser(UserCredential credential);
 
-        UserAccount GetUserDetailsById(int userId);
-
-        int InsertUpdateUser(UserAccount userInfo);
+        UserAccount GetLoggedInUserDetails(int userId);
     }
 }
