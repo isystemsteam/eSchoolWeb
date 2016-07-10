@@ -1,9 +1,9 @@
-﻿CREATE TABLE [dbo].[ApplicationPermissions]
+﻿CREATE TABLE [dbo].[RolePrivileges]
 (
-	[ApplicationPermissionId] INT NOT NULL PRIMARY KEY identity, 
+	[RolePrivilegeId] INT NOT NULL PRIMARY KEY identity, 
     [RoleId] INT NOT NULL foreign key references dbo.ApplicationRoles (RoleId), 
     [ModuleId] INT NOT NULL foreign key references dbo.ApplicationModules (ModuleId), 
-    [Privileges] NVARCHAR(50) NULL, 
+    [Privileges] NVARCHAR(50) NOT NULL, 
     [CreatedDate] DATETIME NULL, 
     [ModifiedDate] DATETIME NULL
 )

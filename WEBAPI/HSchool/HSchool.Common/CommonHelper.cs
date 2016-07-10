@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -268,6 +269,85 @@ namespace HSchool.Common
             LogHelper.Debug(string.Format("To get content end"));
             LogHelper.Info(String.Format("CommonHelper.GetContentFromContentString - Begin.Content Length:{0}", tempContent.Length));
             return tempContent;
+        }
+
+        /// <summary>
+        /// Create randam string
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public static string RandomString(int length)
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="plainText"></param>
+        /// <param name="passPhrase"></param>
+        /// <param name="securityKey"></param>
+        /// <param name="initVector"></param>
+        /// <returns></returns>
+        public static string EncryptString(string plainText, string passPhrase, string securityKey, string initVector)
+        {
+            try
+            {
+                int sizeOf = CommonHelper.GetWebConfigValue<int>(WebConstants.SizeOf);
+                byte[] initVectorBytes = Encoding.UTF8.GetBytes(initVector);
+                byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
+                PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null);
+                byte[] keyBytes = password.GetBytes(sizeOf / 8);
+                RijndaelManaged symmetricKey = new RijndaelManaged();
+                symmetricKey.Mode = CipherMode.CBC;
+                ICryptoTransform encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes);
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
+                    {
+                        cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
+                        cryptoStream.FlushFinalBlock();
+                        byte[] cipherTextBytes = memoryStream.ToArray();
+                        memoryStream.Close();
+                        cryptoStream.Close();
+                        return Convert.ToBase64String(cipherTextBytes);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("CommonHelper.EncryptString - Exception:{0}", ex.Message));
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cipherText"></param>
+        /// <param name="passPhrase"></param>
+        /// <param name="initVector"></param>
+        /// <returns></returns>
+        public static string DecryptString(string cipherText, string passPhrase, string initVector)
+        {
+            int sizeOf = CommonHelper.GetWebConfigValue<int>(WebConstants.AppSecurityKey);
+            byte[] initVectorBytes = Encoding.ASCII.GetBytes(initVector);
+            byte[] cipherTextBytes = Convert.FromBase64String(cipherText);
+            PasswordDeriveBytes password = new PasswordDeriveBytes(passPhrase, null);
+            byte[] keyBytes = password.GetBytes(sizeOf / 8);
+            RijndaelManaged symmetricKey = new RijndaelManaged();
+            symmetricKey.Mode = CipherMode.CBC;
+            ICryptoTransform decryptor = symmetricKey.CreateDecryptor(keyBytes, initVectorBytes);
+            MemoryStream memoryStream = new MemoryStream(cipherTextBytes);
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read);
+            byte[] plainTextBytes = new byte[cipherTextBytes.Length];
+            int decryptedByteCount = cryptoStream.Read(plainTextBytes, 0, plainTextBytes.Length);
+            memoryStream.Close();
+            cryptoStream.Close();
+            return Encoding.UTF8.GetString(plainTextBytes, 0, decryptedByteCount);
         }
     }
 }

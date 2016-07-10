@@ -1,6 +1,51 @@
-﻿@model HSchool.Business.Models.Section
-<h1 class="page-head-line" id="headAdminEditText">Add/Edit Section </h1>
-@using (Html.BeginForm("EditSection", "Admin", FormMethod.Post, new { @id = "formSectionEdit" }))
-{
-    
-}
+﻿@model HSchool.Business.Models.ClassSectionForm
+<div class="row">
+    <h1>Classes & Sections</h1>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        @Html.TextBox("txtModuleName", string.Empty, new { @class = "clsTextBox", @id = "txtClassName" })
+        @Html.TextBox("txtClassId", string.Empty, new { @class = "clsTextBox", @id = "txtClassId", @style = "display:none" })
+        <div class="divClassesContainer" style="display:none;position:absolute" id="divClassesContainer">
+            @if (Model != null && Model.ClassCollection.Count > 0)
+            {
+                <ul>
+                    @foreach (var item in Model.ClassCollection)
+                    {
+                        <li classid="@item.ClassId" class="clsAppClassItem">@(item.ClassName)</li>
+                    }
+                </ul>
+            }
+        </div>
+        @Html.Label("lblClassName", "Class Name")
+        <i class="fa fa-exclamation-circle" style="display:none"></i>
+        <i class="fa fa-check-circle"></i>
+        <em class="error-msg">Error Message</em>
+    </div>
+</div>
+
+<script id="tempClassSections" type="text/x-jsrender">
+    <table class="table table-striped table-hover">
+        <thead class="thead-default">
+            <tr>
+                <th>Sections</th>
+                <th>Active</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{for Instance.SectionCollection}}
+            <tr class="clsClassSectionCollection">
+                <td>{{:SectionName}}</td>
+                {{if IsSelected}}
+                <td class="clsEmpty"><input type="checkbox" checked="checked" sectionid="{{:SectionId}}" /></td>
+                {{else}}
+                <td class="clsEmpty"><input type="checkbox" sectionid="{{:SectionId}}" /></td>
+                {{/if}}
+            </tr>
+            {{/for}}
+        </tbody>
+    </table>
+    <div class="row" id="divSubmitContainer">
+        <input type="button" value="Update Changes" id="btnUpdateClassSection" class="btn-blue" />
+    </div>
+</script>

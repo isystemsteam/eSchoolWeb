@@ -29,5 +29,7 @@ namespace HSchool.Business.Models
 
         [JsonProperty("modifiedDate")]
         public DateTime ModifiedDate { get; set; }
+
+        public List<ApplicationPrivilege> Privileges { get; set; }
     }
 }

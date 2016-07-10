@@ -16,9 +16,10 @@ namespace HSchool.Data.Models
 
         public bool IsDeleted { get; set; }
 
-
         public string ClassName { get; set; }
 
         public string SectionName { get; set; }
+
+        public int RowNumber { get; set; }
     }
 }

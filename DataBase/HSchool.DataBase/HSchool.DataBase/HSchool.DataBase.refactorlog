@@ -105,4 +105,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ApplicationPermissionId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="76248839-ba07-45dc-9a1b-98685fa8639a" ChangeDateTime="07/06/2016 18:12:54">
+    <Property Name="ElementName" Value="[dbo].[RolePrivileges].[ApplicationPermissionId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[RolePrivileges]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RolePrivilegeId" />
+  </Operation>
 </Operations>

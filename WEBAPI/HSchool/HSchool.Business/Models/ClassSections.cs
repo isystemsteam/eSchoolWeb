@@ -33,9 +33,7 @@ namespace HSchool.Business.Models
 
         public string SectionName { get; set; }
 
-        public List<Classes> ClassCollection { get; set; }
-
-        public List<Section> SectionCollection { get; set; }
+        public int RowNumber { get; set; }
 
     }
 }

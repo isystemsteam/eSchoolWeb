@@ -31,7 +31,28 @@
                     cache: false
                 });
             },
-            post: function (uri, data, successcallback, errorcallback) {
+            post: function (uri, data, datatype, successcallback, errorcallback) {
+                debugger
+                //to show ajax processing
+                $(document).ajaxStart(function () {
+                    $.fn.AppCommon.ajax.processing.show();
+                }).ajaxStop(function () {
+                    $.fn.AppCommon.ajax.processing.hide();
+                }).ajaxSuccess(function (value, xhr, settings) {
+                    if (xhr != null && xhr.responseText == "true") {
+                    }
+                });
+                debugger
+                //ajax call
+                $.ajax({
+                    url: uri,
+                    type: 'post',
+                    data: data,
+                    dataType: datatype,
+                    success: successcallback,
+                    error: errorcallback,
+                    cache: false
+                });
             },
             //to bind form for ajax call
             bind: function (formName, beforecallback, successcallback, errorcallback, loading) {
