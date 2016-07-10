@@ -24,8 +24,8 @@ namespace HSchool.WebApi.Controllers
         [HttpPost]
         public ActionResult Register(string name)
         {
-            AuthenticationHelper.CreateUser("pariventhan1984@gmail.com","Enter321");
-            AuthenticationHelper.GetUserByEmail("pariventhan1984@gmail.com", "pariventhan1984@gmail.com");
+            AuthenticationHelper.CreateUser("pariventhan1984@gmail.com", "pari1234567", "Enter321", string.Empty, string.Empty);
+            AuthenticationHelper.ValidateUser("pari123456", "pariventhan1984@gmail.com");
             return Json(null, JsonRequestBehavior.AllowGet);
         }
     }

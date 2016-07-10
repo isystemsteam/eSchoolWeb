@@ -7,11 +7,13 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HSchool.Authentication
+namespace HSchool.Authentication.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public int UserId { get; set; }
+        public string PasswordQuestion { get; set; }
+
+        public string PasswordAnswer { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
@@ -27,7 +29,7 @@ namespace HSchool.Authentication
         public ApplicationDbContext()
             : base("HSchoolConnectionString", throwIfV1Schema: false)
         {
-           
+
         }
 
         public static ApplicationDbContext Create()

@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AuthenticationHelper.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\LoginException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

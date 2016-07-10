@@ -11,27 +11,25 @@ using System.Web.Mvc;
 
 namespace HSchool.WebApi.Controllers
 {
-    public class ApplicationController : Controller
+    public class StudentController : Controller
     {
         #region Fields
         private readonly IAdminRepository _adminRepository;
         private readonly IStudentRepository _studentRepository;
         #endregion
 
-        #region Ctor
+        #region Actions
+        // GET: Student
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="adminRepository"></param>
-        public ApplicationController(IAdminRepository adminRepository, IStudentRepository studentRepository)
-        {
-            _adminRepository = adminRepository;
-            _studentRepository = studentRepository;
-        }
-        #endregion
-
-        #region Actions
-        public ActionResult Index()
+        /// <returns></returns>
+        public ActionResult Application()
         {
             LogHelper.Info(string.Format("ApplicationController.Index - Begin"));
             var admissionForm = new AdmissionForm();
@@ -45,24 +43,23 @@ namespace HSchool.WebApi.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public ActionResult StudentRegister(AdmissionForm model)
+        public ActionResult Application(AdmissionForm model)
         {
-            LogHelper.Info(string.Format("ApplicationController.StudentRegister - Begin"));
+            LogHelper.Info(string.Format("ApplicationController.Application - Begin"));
             try
             {
                 var id = _studentRepository.SaveStudentInformation(model.Student);
                 var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
-                LogHelper.Info(string.Format("ApplicationController.StudentRegister - End"));
+                LogHelper.Info(string.Format("ApplicationController.Application - End"));
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                LogHelper.Info(string.Format("ApplicationController.StudentRegister - Exception:{0}", ex.Message));
+                LogHelper.Info(string.Format("ApplicationController.Application - Exception:{0}", ex.Message));
                 var response = new MessageResponse<string>(string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, ex.Message);
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
         }
-
         #endregion
     }
 }

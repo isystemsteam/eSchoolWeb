@@ -1,4 +1,5 @@
-﻿using HSchool.Logging;
+﻿using HSchool.Authentication.Models;
+using HSchool.Logging;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -13,9 +14,11 @@ namespace HSchool.Authentication
 {
     public class AuthenticationHelper
     {
-
+        #region Fields
         private static UserManager<ApplicationUser> _userManager;
+        #endregion
 
+        #region Init
         /// <summary>
         /// To initialize manager
         /// </summary>
@@ -32,15 +35,20 @@ namespace HSchool.Authentication
                 RequireLowercase = true,
                 RequireUppercase = true
             };
+            //make email as unique
+            _userManager.UserValidator = new UserValidator<ApplicationUser>(_userManager) { RequireUniqueEmail = true };
         }
+        #endregion
 
+        #region Authentication
         /// <summary>
-        /// 
+        /// To create user
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
+        /// <param name="email">email</param>
+        /// <param name="userName">user name</param>
+        /// <param name="password">password</param>
         /// <returns></returns>
-        public static bool CreateUser(string userName, string password)
+        public static bool CreateUser(string email, string userName, string password, string passwordQuestion, string passwordAnswer)
         {
             LogHelper.Info(string.Format("AuthenticationHelper.CreateUser - Begin. UserName:{0}", userName));
             try
@@ -51,17 +59,14 @@ namespace HSchool.Authentication
                 }
                 var applicationUser = new ApplicationUser
                 {
-                    Email = userName,
-                    UserName = userName,
-                    UserId = 123456
+                    Email = email,
+                    UserName = userName
                 };
                 var result = _userManager.Create(applicationUser, password);
                 if (result.Errors != null && result.Errors.Any())
                 {
-                    foreach (string error in result.Errors)
-                    {
-                        LogHelper.Error(string.Format("AuthenticationHelper.CreateUser - IdentiyException:{0}", error));
-                    }
+                    string error = result.Errors.FirstOrDefault();
+                    throw new LoginException(error);
                 }
                 LogHelper.Info(string.Format("AuthenticationHelper.CreateUser - End. UserName:{0}", userName));
                 return result.Succeeded;
@@ -79,14 +84,14 @@ namespace HSchool.Authentication
         }
 
         /// <summary>
-        /// 
+        /// validate user name & password
         /// </summary>
-        /// <param name="email"></param>
         /// <param name="userName"></param>
+        /// <param name="password"></param>
         /// <returns></returns>
-        public static ApplicationUser GetUserByEmail(string email, string userName)
+        public static bool ValidateUser(string userName, string password)
         {
-            LogHelper.Info(string.Format("AuthenticationHelper.GetUserByEmail - Begin. UserName:{0}", email));
+            LogHelper.Info(string.Format("AuthenticationHelper.ValidateUser - Begin. UserName:{0}", userName));
             try
             {
                 //to initialize user manager
@@ -94,16 +99,16 @@ namespace HSchool.Authentication
                 {
                     InitializeManager();
                 }
-                var result = _userManager.Find(userName, "Enter323");                
-                var applicationUser = _userManager.FindByEmail(email);
-                LogHelper.Info(string.Format("AuthenticationHelper.GetUserByEmail - End. UserName:{0}", email));
-                return applicationUser;
+                var applicationUser = _userManager.Find(userName, password);
+                LogHelper.Info(string.Format("AuthenticationHelper.ValidateUser - End. UserName:{0}", userName));
+                return applicationUser != null;
             }
             catch (Exception ex)
             {
-                LogHelper.Info(string.Format("AuthenticationHelper.GetUserByEmail - Exception. UserName:{0}", email));
+                LogHelper.Info(string.Format("AuthenticationHelper.ValidateUser - Exception. UserName:{0}", userName));
                 throw ex;
             }
         }
+        #endregion
     }
 }
