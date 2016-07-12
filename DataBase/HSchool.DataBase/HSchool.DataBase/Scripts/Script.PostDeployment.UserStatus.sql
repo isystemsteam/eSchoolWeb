@@ -9,6 +9,7 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+insert into dbo.UserStatus (UserStatus) values ('Registered');
 insert into dbo.UserStatus (UserStatus) values ('Active');
 insert into dbo.UserStatus (UserStatus) values ('InActive');
 insert into dbo.UserStatus (UserStatus) values ('InActiveByAdmin');

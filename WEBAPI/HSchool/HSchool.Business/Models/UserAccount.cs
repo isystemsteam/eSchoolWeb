@@ -31,6 +31,8 @@ namespace HSchool.Business.Models
         [JsonProperty("dateOfBirth")]
         public DateTime DateOfBirth { get; set; }
 
+        public string PlaceOfBirth { get; set; }
+
         [JsonProperty("bloodGroup")]
         public string BloodGroup { get; set; }
 
@@ -79,11 +81,10 @@ namespace HSchool.Business.Models
         [JsonProperty("motherLanguage")]
         public int MotherLanguage { get; set; }
 
-        [JsonProperty("userStatus")]
-        public UserStatus UserStatus { get; set; }
+        public DateTime? UserLastLogin { get; set; }
 
-        [JsonProperty("userGuardians")]
-        public List<UserGuardian> UserGuardians { get; set; }              
+        [JsonProperty("userStatus")]
+        public UserStatusEnum UserStatus { get; set; }                   
         
     }
 }

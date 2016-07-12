@@ -72,7 +72,7 @@
     <Build Include="Tables\MotherLanguages.sql" />
     <Build Include="Tables\CommunityMaster.sql" />
     <Build Include="Tables\Settings.sql" />
-    <Build Include="Tables\UserGuardian.sql" />
+    <Build Include="Tables\StudentGuardians.sql" />
     <Build Include="Tables\UserRelationship.sql" />
     <Build Include="Stored Procedures\SaveApplicationRole.sql" />
     <Build Include="Stored Procedures\SaveUserInformation.sql" />
@@ -109,6 +109,12 @@
     <Build Include="Stored Procedures\SaveRolePrivileges.sql" />
     <Build Include="User-Defined Table Types\TypeRolePrivileges.sql" />
     <Build Include="Stored Procedures\GetRolePrivilegesByModuleId.sql" />
+    <Build Include="Tables\Student.sql" />
+    <Build Include="Tables\StudentImages.sql" />
+    <Build Include="Stored Procedures\SaveStudentInformation.sql" />
+    <Build Include="Tables\StudentGuardianImage.sql" />
+    <Build Include="Tables\StudentClass.sql" />
+    <Build Include="Tables\UserTitles.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
@@ -119,7 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\BaseLine.dacpac" />
-    <None Include="User-Defined Table Types\TypeClassSections.sql" />
+    <Build Include="User-Defined Table Types\TypeClassSections.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Script.PreDeployment.Certificates.sql" />

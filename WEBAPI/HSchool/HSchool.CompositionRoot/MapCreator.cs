@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserInfo = HSchool.Business.Models.UserAccount;
+using UserAccount = HSchool.Business.Models.UserAccount;
 using UserCredential = HSchool.Business.Models.UserCredential;
-using UserGuardian = HSchool.Business.Models.UserGuardian;
-using UserStatus = HSchool.Business.Models.UserStatus;
+using StudentGuardian = HSchool.Business.Models.StudentGuardian;
+using UserStatus = HSchool.Business.Models.UserStatusEnum;
 using UserSecurity = HSchool.Business.Models.UserSecurity;
 using Settings = HSchool.Business.Models.Settings;
 using Classes = HSchool.Business.Models.Classes;
@@ -20,6 +20,8 @@ using ApplicationRole = HSchool.Business.Models.ApplicationRole;
 using ApplicationModule = HSchool.Business.Models.ApplicationModule;
 using RolePrivilege = HSchool.Business.Models.RolePrivilege;
 using ApplicationPrivilege = HSchool.Business.Models.ApplicationPrivilege;
+using StudentImage = HSchool.Business.Models.StudentImage;
+using Student = HSchool.Business.Models.Student;
 
 namespace HSchool.CompositionRoot
 {
@@ -27,11 +29,17 @@ namespace HSchool.CompositionRoot
     {
         public void CreateMap(IProfileExpression mapper)
         {
-            mapper.CreateMap<UserInfo, Data.Models.UserAccount>();
-            mapper.CreateMap<Data.Models.UserAccount, UserInfo>();
+            mapper.CreateMap<UserAccount, Data.Models.UserAccount>();
+            mapper.CreateMap<Data.Models.UserAccount, UserAccount>();
 
-            mapper.CreateMap<UserGuardian, Data.Models.UserGuardian>();
-            mapper.CreateMap<Data.Models.UserGuardian, UserGuardian>();
+            mapper.CreateMap<Student, Data.Models.Student>();
+            mapper.CreateMap<Data.Models.Student, Student>();
+
+            mapper.CreateMap<StudentGuardian, Data.Models.StudentGuardian>();
+            mapper.CreateMap<Data.Models.StudentGuardian, StudentGuardian>();
+
+            mapper.CreateMap<StudentImage, Data.Models.StudentImage>();
+            mapper.CreateMap<Data.Models.StudentImage, StudentImage>();
 
             mapper.CreateMap<UserCredential, Data.Models.UserCredential>();
             mapper.CreateMap<Data.Models.UserCredential, UserCredential>();
@@ -71,9 +79,7 @@ namespace HSchool.CompositionRoot
 
             mapper.CreateMap<ApplicationPrivilege, Data.Models.ApplicationPrivilege>();
             mapper.CreateMap<Data.Models.ApplicationPrivilege, ApplicationPrivilege>();
-
             
-
         }
     }
 }

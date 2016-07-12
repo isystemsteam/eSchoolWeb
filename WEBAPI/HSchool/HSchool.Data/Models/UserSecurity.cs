@@ -12,18 +12,12 @@ namespace HSchool.Data.Models
 
         public string SecurityKey { get; set; }
 
-        public string Password { get; set; }
-
-        public string GuardianPassword { get; set; }
+        public string Password { get; set; }        
 
         public string PasswordFormat { get; set; }
 
         public int PasswordQuestion { get; set; }
 
-        public string PasswordAnswer { get; set; }
-
-        public DateTime? UserLastLogin { get; set; }
-
-        public DateTime? GuardianLastLogin { get; set; }
+        public string PasswordAnswer { get; set; }        
     }
 }

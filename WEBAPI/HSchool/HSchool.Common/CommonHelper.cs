@@ -289,10 +289,9 @@ namespace HSchool.Common
         /// </summary>
         /// <param name="plainText"></param>
         /// <param name="passPhrase"></param>
-        /// <param name="securityKey"></param>
         /// <param name="initVector"></param>
         /// <returns></returns>
-        public static string EncryptString(string plainText, string passPhrase, string securityKey, string initVector)
+        public static string EncryptString(string plainText, string passPhrase, string initVector)
         {
             try
             {

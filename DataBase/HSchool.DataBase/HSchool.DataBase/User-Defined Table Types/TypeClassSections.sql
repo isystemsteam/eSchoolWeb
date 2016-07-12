@@ -1,4 +1,4 @@
-﻿CREATE TYPE [dbo].[TypeClassSections] AS TABLE
+﻿CREATE TYPE dbo.TypeClassSections AS TABLE
 (
 	ClassSectionId int,
 	ClassId int,

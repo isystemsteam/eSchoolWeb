@@ -36,32 +36,32 @@ namespace HSchool.WebApi.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpPost]
-        [ActionName("Authenticate")]
-        public HttpResponseMessage Authenticate(UserCredential credential)
-        {
-            LogHelper.Info(string.Format("AccountController.Authenticate - Begin"));
-            try
-            {
-                AuthenticationResult authenticateResult = new AuthenticationResult
-                {
-                    IsAuthorized = _userRepository.ValidateUser(credential)
-                };
+        //[HttpPost]
+        //[ActionName("Authenticate")]
+        //public HttpResponseMessage Authenticate(UserCredential credential)
+        //{
+        //    LogHelper.Info(string.Format("AccountController.Authenticate - Begin"));
+        //    try
+        //    {
+        //        AuthenticationResult authenticateResult = new AuthenticationResult
+        //        {
+        //            IsAuthorized = _userRepository.ValidateUser(credential)
+        //        };
 
-                if (authenticateResult.IsAuthorized)
-                {
-                    authenticateResult.AuthorizationToken = Authentication.EncodeUserCredentials(credential.UserName, credential.Password);
-                    authenticateResult.UserInfo = new UserAccount();
-                }
-                return ResponseMessage(authenticateResult, new ApiResponse { StatusCode = HttpStatusCode.OK, StatusText = ApiConstants.StatusSuccess });
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Error(string.Format("AccountController.Authenticate - Exception:{0}", ex.Message));
-            }
-            LogHelper.Info(string.Format("AccountController.Authenticate - End"));
-            return new HttpResponseMessage();
-        }       
+        //        if (authenticateResult.IsAuthorized)
+        //        {
+        //            authenticateResult.AuthorizationToken = AuthenticationProvider.EncodeUserCredentials(credential.UserName, credential.Password);
+        //            authenticateResult.UserInfo = new UserAccount();
+        //        }
+        //        return ResponseMessage(authenticateResult, new ApiResponse { StatusCode = HttpStatusCode.OK, StatusText = ApiConstants.StatusSuccess });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogHelper.Error(string.Format("AccountController.Authenticate - Exception:{0}", ex.Message));
+        //    }
+        //    LogHelper.Info(string.Format("AccountController.Authenticate - End"));
+        //    return new HttpResponseMessage();
+        //}       
 
 
         #region Helpers

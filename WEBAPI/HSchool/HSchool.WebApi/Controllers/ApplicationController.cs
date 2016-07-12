@@ -1,9 +1,11 @@
 ﻿using HSchool.Business.Models;
 using HSchool.Business.Repository;
+using HSchool.Common;
 using HSchool.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,6 +15,7 @@ namespace HSchool.WebApi.Controllers
     {
         #region Fields
         private readonly IAdminRepository _adminRepository;
+        private readonly IStudentRepository _studentRepository;
         #endregion
 
         #region Ctor
@@ -20,9 +23,10 @@ namespace HSchool.WebApi.Controllers
         /// 
         /// </summary>
         /// <param name="adminRepository"></param>
-        public ApplicationController(IAdminRepository adminRepository)
+        public ApplicationController(IAdminRepository adminRepository, IStudentRepository studentRepository)
         {
             _adminRepository = adminRepository;
+            _studentRepository = studentRepository;
         }
         #endregion
 
@@ -35,6 +39,30 @@ namespace HSchool.WebApi.Controllers
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
             return View(admissionForm);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public ActionResult StudentRegister(AdmissionForm model)
+        {
+            LogHelper.Info(string.Format("ApplicationController.StudentRegister - Begin"));
+            try
+            {
+                var id = _studentRepository.SaveStudentInformation(model.Student);
+                var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                LogHelper.Info(string.Format("ApplicationController.StudentRegister - End"));
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("ApplicationController.StudentRegister - Exception:{0}", ex.Message));
+                var response = new MessageResponse<string>(string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, ex.Message);
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         #endregion
     }
 }

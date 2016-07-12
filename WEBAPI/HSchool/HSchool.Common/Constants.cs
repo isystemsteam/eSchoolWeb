@@ -68,7 +68,11 @@ namespace HSchool.Common
 
     public class WebConstants
     {
+        public const string StatusSuccess = "Success";
+        public const string StatusFailure = "Failure";
+
         public const string AppSecurityKey = "SecurityKeyApp";
         public const string SizeOf = "SizeofStudents";
+        public const string GuardianCount = "GuardianCount";
     }
 }

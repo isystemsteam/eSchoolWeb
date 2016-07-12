@@ -248,11 +248,12 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\LoginHelper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -365,6 +366,8 @@
     <Content Include="Views\Application\_ApplicationForm.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\_Login.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Student\Application.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -378,6 +381,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HSchool.Authentication\HSchool.Authentication.csproj">
+      <Project>{d62824df-a374-4462-9cfb-5ea1e30f1f39}</Project>
+      <Name>HSchool.Authentication</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HSchool.Business\HSchool.Business.csproj">
       <Project>{8607a432-107a-48c4-b9a0-9b7bcfe1a583}</Project>
       <Name>HSchool.Business</Name>

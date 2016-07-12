@@ -1,0 +1,99 @@
+﻿@model HSchool.Business.Models.AdmissionForm
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-head-line">Student Entry Form </h1>
+    </div>
+</div>
+<div class="">
+    <a class="form-group-collapse-link clearfix"> <span class="pull-left"><i class="fa fa-chevron-right"></i> Student Information</span><i class="pull-right fa fa-plus"></i> </a>
+</div>
+<div class="form-group-expand-div">
+    <div class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.StudentClass.ClassId)
+            @Html.HiddenFor(m => m.Student.StudentClass.ClassId, new { @id = "", @class = "hiddenListBox" })
+            @Html.ListTextBoxFor(m => m.Student.StudentClass.ClassName, Model.ListClasses, null)
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.StudentClass.AcademicYear)
+            @Html.TextBoxFor(m => m.Student.StudentClass.AcademicYear, new { @Id = "txtAcademicYear" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.FirstName)
+            @Html.TextBoxFor(m => m.Student.FirstName, new { @Id = "txtFirstName" })
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.LastName)
+            @Html.TextBoxFor(m => m.Student.LastName, new { @Id = "txtLastName" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.DateOfBirth)
+            @Html.TextBoxFor(m => m.Student.DateOfBirth, new { @Id = "txtDateOfBirth", @class = "dateTimePicker" })
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.PlaceOfBirth)
+            @Html.TextBoxFor(m => m.Student.PlaceOfBirth, new { @Id = "txtPlaceOfBirth" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.Nationality)
+            @Html.TextBoxFor(m => m.Student.Nationality, new { @Id = "txtNationality", @class = "" })
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.Religion)
+            @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.Community)
+            @Html.TextBoxFor(m => m.Student.Community, new { @Id = "txtCommunity", @class = "" })
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.Religion)
+            @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.MotherLanguage)
+            @Html.TextBoxFor(m => m.Student.MotherLanguage, new { @Id = "txtMotherLanguage", @class = "" })
+        </div>
+        <div class="col-lg-6">
+            @Html.LabelFor(m => m.Student.FluencyinOthers)
+            @Html.TextBoxFor(m => m.Student.FluencyinOthers, new { @Id = "txtFluencyinOthers" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.LabelFor(m => m.Student.IsTransportRequired)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            Address for Communication
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            Parent Details
+        </div>
+        @if (Model.Student.StudentGuardians != null)
+        {
+            foreach (var guardian in Model.Student.StudentGuardians)
+            {
+
+            }
+        }
+    </div>
+
+
+

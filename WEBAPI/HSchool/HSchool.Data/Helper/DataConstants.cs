@@ -17,6 +17,8 @@ namespace HSchool.Data
 
         public const string SaveUserInformation = "SaveUserInformation";
 
+        public const string SaveStudentInformation = "SaveStudentInformation";
+
         public const string SaveSettings = "SaveSettings";
 
         public const string SaveClasses = "SaveClasses";
