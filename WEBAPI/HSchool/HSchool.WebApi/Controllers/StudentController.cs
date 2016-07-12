@@ -18,6 +18,14 @@ namespace HSchool.WebApi.Controllers
         private readonly IStudentRepository _studentRepository;
         #endregion
 
+        #region Ctor
+        public StudentController(IAdminRepository adminRepository, IStudentRepository studentRepository)
+        {
+            _adminRepository = adminRepository;
+            _studentRepository = studentRepository;
+        }
+        #endregion
+
         #region Actions
         // GET: Student
         public ActionResult Index()

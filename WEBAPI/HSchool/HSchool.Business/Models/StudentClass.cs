@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace HSchool.Business.Models
         public int StudentClassId { get; set; }
 
         public int StudentId { get; set; }
-
+        [DisplayName("Class Name")]
         public int ClassId { get; set; }
 
         public string ClassName { get; set; }

@@ -1,166 +1,168 @@
 ﻿@model HSchool.Business.Models.AdmissionForm
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="page-head-line">Student Entry Form </h1>
-    </div>
-</div>
-<div class="">
-    <a class="form-group-collapse-link clearfix"> <span class="pull-left"><i class="fa fa-chevron-right"></i> Student Information</span><i class="pull-right fa fa-plus"></i> </a>
-</div>
-<div class="form-group-expand-div">
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.StudentClass.ClassId)
-            @Html.HiddenFor(m => m.Student.StudentClass.ClassId, new { @id = "", @class = "hiddenListBox" })
-            @Html.ListTextBoxFor(m => m.Student.StudentClass.ClassName, Model.ListClasses, null)
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.StudentClass.AcademicYear)
-            @Html.TextBoxFor(m => m.Student.StudentClass.AcademicYear, new { @Id = "txtAcademicYear" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.FirstName)
-            @Html.TextBoxFor(m => m.Student.FirstName, new { @Id = "txtFirstName" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.LastName)
-            @Html.TextBoxFor(m => m.Student.LastName, new { @Id = "txtLastName" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.DateOfBirth)
-            @Html.TextBoxFor(m => m.Student.DateOfBirth, new { @Id = "txtDateOfBirth", @class = "dateTimePicker" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.PlaceOfBirth)
-            @Html.TextBoxFor(m => m.Student.PlaceOfBirth, new { @Id = "txtPlaceOfBirth" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.Nationality)
-            @Html.TextBoxFor(m => m.Student.Nationality, new { @Id = "txtNationality", @class = "" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.Religion)
-            @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.Community)
-            @Html.TextBoxFor(m => m.Student.Community, new { @Id = "txtCommunity", @class = "" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.Religion)
-            @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.MotherLanguage)
-            @Html.TextBoxFor(m => m.Student.MotherLanguage, new { @Id = "txtMotherLanguage", @class = "" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.Student.FluencyinOthers)
-            @Html.TextBoxFor(m => m.Student.FluencyinOthers, new { @Id = "txtFluencyinOthers" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            @Html.LabelFor(m => m.Student.IsTransportRequired)
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            Address for Communication
-        </div>
-    </div>
-    <div class="row">
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            Parent Details
-        </div>
-    </div>
-    @if (Model.Student.StudentGuardians != null)
-    {
-        <div class="row">
-            <div class="col-lg-12">
-                Parent Details
-            </div>
-        </div>
-        for (int sCount = 0; sCount < Model.Student.StudentGuardians.Count; sCount++)
-        {
+<div class="content-wrapper">
+    <div class="container">
+        <form class="admin-form">
             <div class="row">
-                <div class="col-lg-6">
-                    <label for="">Title</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Title, new { @id = "", @class = "" })
+                <div class="col-md-12">
+                    <h1 class="page-head-line">Student Entry Form </h1>
                 </div>
+            </div>
+            <div class="">
+                <a class="form-group-collapse-link clearfix"> <span class="pull-left"><i class="fa fa-chevron-right"></i> Student Information</span><i class="pull-right fa fa-plus"></i> </a>
+            </div>
+            <div class="form-group-expand-div admin-form">
+                <div class="row custom-row clearfix">
+                    <div class="col-lg-6 custom-text">
+                        @Html.LabelFor(m => m.Student.StudentClass.ClassId)
+                        @Html.HiddenFor(m => m.Student.StudentClass.ClassId, new { @id = "", @class = "hiddenListBox" })
+                        @Html.ListTextBoxFor(m => m.Student.StudentClass.ClassName, Model.ListClasses, null)
+                    </div>
+                    <div class="col-lg-6 custom-text">
+                        @Html.LabelFor(m => m.Student.StudentClass.AcademicYear)
+                        @Html.TextBoxFor(m => m.Student.StudentClass.AcademicYear, new { @Id = "txtAcademicYear" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-lg-4 custom-text">
+                        @Html.LabelFor(m => m.Student.Title)
+                        @Html.TextBoxFor(m => m.Student.Title, new { @Id = "txtStudentTitle" })
+                    </div>
+                    <div class="col-lg-4 custom-text">
+                        @Html.LabelFor(m => m.Student.FirstName)
+                        @Html.TextBoxFor(m => m.Student.FirstName, new { @Id = "txtFirstName" })
+                    </div>
+                    <div class="col-lg-4 custom-text">
+                        @Html.LabelFor(m => m.Student.LastName)
+                        @Html.TextBoxFor(m => m.Student.LastName, new { @Id = "txtLastName" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-lg-4 custom-text">
+                        @Html.LabelFor(m => m.Student.DateOfBirth)
+                        @Html.TextBoxFor(m => m.Student.DateOfBirth, new { @Id = "txtDateOfBirth", @class = "dateTimePicker" })
+                    </div>
+                    <div class="col-lg-4 custom-text">
+                        @Html.LabelFor(m => m.Student.PlaceOfBirth)
+                        @Html.TextBoxFor(m => m.Student.PlaceOfBirth, new { @Id = "txtPlaceOfBirth" })
+                    </div>
+                    <div class="col-lg-4 custom-text">
+                        @Html.LabelFor(m => m.Student.MotherLanguage)
+                        @Html.TextBoxFor(m => m.Student.MotherLanguage, new { @Id = "txtMotherLanguage", @class = "" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-lg-4 custom-text">
+                        @Html.LabelFor(m => m.Student.Nationality)
+                        @Html.TextBoxFor(m => m.Student.Nationality, new { @Id = "txtNationality", @class = "" })
+                    </div>
+                    <div class="col-lg-4 custom-text">
+                        @Html.LabelFor(m => m.Student.Religion)
+                        @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
+                    </div>
+                    <div class="col-lg-4 custom-text">
+                        @Html.LabelFor(m => m.Student.Community)
+                        @Html.TextBoxFor(m => m.Student.Community, new { @Id = "txtCommunity", @class = "" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-lg-12 custom-text">
+                        @Html.LabelFor(m => m.Student.Religion)
+                        @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-lg-6 custom-text">
+                        @Html.LabelFor(m => m.Student.FluencyinOthers)
+                        @Html.TextBoxFor(m => m.Student.FluencyinOthers, new { @Id = "txtFluencyinOthers" })
+                    </div>
+                    <div class="col-lg-6 custom-text">
+                        @Html.LabelFor(m => m.Student.IsTransportRequired)
+                    </div>
+                </div>
+                <div class="">
+                    <a class="form-group-collapse-link clearfix"> <span class="pull-left"><i class="fa fa-chevron-right"></i> Address for Communication</span><i class="pull-right fa fa-plus"></i> </a>
+                </div>
+
+                @if (Model.Student.StudentGuardians != null)
+                {
+                    <div class="row custom-row clearfix">
+                        <a class="form-group-collapse-link clearfix"> <span class="pull-left"><i class="fa fa-chevron-right"></i> Parent Details</span><i class="pull-right fa fa-plus"></i> </a>
+                    </div>
+
+                    for (int sCount = 0; sCount < Model.Student.StudentGuardians.Count; sCount++)
+                    {
+                        <div class="row custom-row clearfix">
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Title</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Title, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                <label for="">First Name</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].FirstName, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Last Name</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].LastName, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Gender</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Gender, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Age</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Age, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                <label for="">ReleationShip</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].ReleationShip, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Highest Qualification</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].HighestQualification, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Occupation</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Occupation, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Annual Income</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].AnnualIncome, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Email</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Email, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Mobile Number</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].MobileNumber, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                <label for="">Office Number</label>
+                                @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].OfficeNumber, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-lg-12 custom-text">
+                                <label for="">Primary Guardian</label>
+                                @Html.CheckBoxFor(m => m.Student.StudentGuardians[sCount].PrimaryGuardian, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                    }
+                }
             </div>
             <div class="row">
-                <div class="col-lg-6">
-                    <label for="">First Name</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].FirstName, new { @id = "", @class = "" })
-                </div>
-                <div class="col-lg-6">
-                    <label for="">First Name</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].LastName, new { @id = "", @class = "" })
+                <div class="col-lg-4">
+                    <input type="submit" value="Submit" class="btn-blue" />
+                    <input type="button" value="Cancel" class="btn-blue" />
+                    <input type="button" value="Admit" class="btn-blue" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label for="">Gender</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Gender, new { @id = "", @class = "" })
-                </div>
-                <div class="col-lg-6">
-                    <label for="">Age</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Age, new { @id = "", @class = "" })
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label for="">ReleationShip</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].ReleationShip, new { @id = "", @class = "" })
-                </div>
-                <div class="col-lg-6">
-                    <label for="">Highest Qualification</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].HighestQualification, new { @id = "", @class = "" })
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label for="">Occupation</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Occupation, new { @id = "", @class = "" })
-                </div>
-                <div class="col-lg-6">
-                    <label for="">Annual Income</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].AnnualIncome, new { @id = "", @class = "" })
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label for="">Email</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].Email, new { @id = "", @class = "" })
-                </div>
-                <div class="col-lg-6">
-                    <label for="">Mobile Number</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].MobileNumber, new { @id = "", @class = "" })
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label for="">Office Number</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].OfficeNumber, new { @id = "", @class = "" })
-                </div>
-                <div class="col-lg-6">
-                    <label for="">First Name</label>
-                    @Html.TextBoxFor(m => m.Student.StudentGuardians[sCount].PrimaryGuardian, new { @id = "", @class = "" })
-                </div>
-            </div>
-        }
-    }
+        </form>
+    </div>
 
