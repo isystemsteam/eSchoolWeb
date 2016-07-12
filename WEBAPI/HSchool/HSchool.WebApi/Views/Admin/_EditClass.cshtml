@@ -3,8 +3,8 @@
 <div class="">
     @using (Html.BeginForm("EditClass", "Admin", FormMethod.Post, new { @id = "formClassEdit" }))
     {
-        <div class="row">
-            <div class="col-md-6">
+        <div class="row custom-row clearfix">
+            <div class="col-md-6 custom-text">
                 @Html.TextBoxFor(m => m.ClassName, new { @class = "clsTextBox", @id = "" })
                 @Html.HiddenFor(m => m.ClassId, new { @class = "clsTextBox", @id = "" })
                 @Html.LabelFor(m => m.ClassName)
@@ -12,7 +12,7 @@
                 <i class="fa fa-check-circle"></i>
                 <em class="error-msg">Error Message</em>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 custom-text">
                 @Html.TextBoxFor(m => m.NameInLetter, new { @class = "clsTextBox", @id = "" })
                 @Html.LabelFor(m => m.NameInLetter)
                 <i class="fa fa-exclamation-circle" style="display:none"></i>
@@ -20,17 +20,17 @@
                 <em class="error-msg">Error Message</em>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
+        <div class="row visiblecheck clearfix">            
                 @Html.CheckBoxFor(m => m.IsVisibleToApplication, new { @class = "", @id = "" })
-                @Html.LabelFor(m => m.IsVisibleToApplication, new { @class = "" })
-            </div>
+                @Html.LabelFor(m => m.IsVisibleToApplication, new { @class = "" })       
         </div>
-        <div class="row">
-           
-            <div class="col-md-12">
-                <input type="submit" value="Save" class="btn-blue" />
-            </div>
+
+      
+
+    <div class="btn-wrapper clearfix">
+        <div class="pull-left">
+            <input type="submit" value="Save" class="btn-blue" />
         </div>
+    </div>
     }
 </div>
