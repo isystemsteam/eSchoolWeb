@@ -33,6 +33,13 @@ namespace HSchool.WebApi.Controllers
         {
             LogHelper.Info(string.Format("ApplicationController.Index - Begin"));
             var admissionForm = new AdmissionForm();
+            admissionForm.Student = new Student();
+            admissionForm.Student.StudentGuardians = new List<StudentGuardian>();
+            int guardianCount = CommonHelper.GetWebConfigValue<int>(WebConstants.GuardianCount);
+            for (int studentGurCounter = 0; studentGurCounter < guardianCount; studentGurCounter++)
+            {
+                admissionForm.Student.StudentGuardians.Add(new StudentGuardian());
+            }
             admissionForm.FormClasses = _adminRepository.GetAllClasses(true);
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
             return View(admissionForm);
@@ -43,6 +50,7 @@ namespace HSchool.WebApi.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [HttpPost]
         public ActionResult Application(AdmissionForm model)
         {
             LogHelper.Info(string.Format("ApplicationController.Application - Begin"));

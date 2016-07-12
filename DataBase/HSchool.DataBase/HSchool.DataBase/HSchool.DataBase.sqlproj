@@ -125,7 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\BaseLine.dacpac" />
-    <None Include="User-Defined Table Types\TypeClassSections.sql" />
+    <Build Include="User-Defined Table Types\TypeClassSections.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Script.PreDeployment.Certificates.sql" />

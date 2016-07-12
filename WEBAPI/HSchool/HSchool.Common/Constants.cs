@@ -73,5 +73,6 @@ namespace HSchool.Common
 
         public const string AppSecurityKey = "SecurityKeyApp";
         public const string SizeOf = "SizeofStudents";
+        public const string GuardianCount = "GuardianCount";
     }
 }

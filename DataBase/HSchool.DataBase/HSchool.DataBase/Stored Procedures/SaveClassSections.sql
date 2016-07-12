@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[SaveClassSections]
 (
-	@TableClassSection DBO.TypeClassSections READONLY
+	@TableClassSection TypeClassSections Readonly
 )
 AS
 BEGIN

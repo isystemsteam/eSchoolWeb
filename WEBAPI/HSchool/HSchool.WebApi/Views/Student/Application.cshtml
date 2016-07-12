@@ -72,10 +72,28 @@
     <div class="row">
         <div class="col-lg-12">
             @Html.LabelFor(m => m.Student.IsTransportRequired)
-
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-lg-12">
+            Address for Communication
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            Parent Details
+        </div>
+        @if (Model.Student.StudentGuardians != null)
+        {
+            foreach (var guardian in Model.Student.StudentGuardians)
+            {
+
+            }
+        }
+    </div>
 
 
 
