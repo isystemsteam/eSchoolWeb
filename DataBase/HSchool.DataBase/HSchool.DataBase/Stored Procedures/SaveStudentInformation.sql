@@ -23,6 +23,7 @@
 	@EmailEnabled bit,
 	@NotificationEnabled bit,
 	@StudentImage varbinary(max),
+	@UserRole int,
 
 	@StudentId int,
 	@StudentRollNumber varchar(20),

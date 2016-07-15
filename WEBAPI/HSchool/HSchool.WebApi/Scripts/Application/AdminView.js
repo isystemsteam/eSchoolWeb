@@ -37,6 +37,15 @@ var adminView = {
     },
     handleException: function (xhr, error, messgage) {
     },
+    displayBox: function (isEdit) {
+        if (!isEdit) {
+            $("#" + adminView.editControlId).hide();
+            $("#" + adminView.viewContainerId).show();
+        } else {
+            $("#" + adminView.viewContainerId).hide();
+            $("#" + adminView.editControlId).show();
+        }
+    },
     //Classes
     classes: {
         load: function () {
@@ -46,7 +55,7 @@ var adminView = {
             //load success
             var successcallback = function (result) {
                 $("#" + adminView.editControlId).html(result);
-
+                adminView.displayBox(true);
                 //ajax form before submit call
                 var _beforecallback = function () { };
 
@@ -70,6 +79,7 @@ var adminView = {
         loadGrid: function () {
             var _successcallback = function (result) {
                 $("#" + adminView.viewContainerId).html(result);
+                adminView.displayBox(false);
             };
             $.fn.appCommon.ajax.getForm(appService.viewClass, null, _successcallback, null);
         },
@@ -86,6 +96,7 @@ var adminView = {
             //load success
             var _successcallback = function (result) {
                 $("#" + adminView.editControlId).html(result);
+                adminView.displayBox(true);
 
                 //ajax form before submit call
                 var _beforecallback = function () { };
@@ -110,6 +121,7 @@ var adminView = {
         loadGrid: function () {
             var _successcallback = function (result) {
                 $("#" + adminView.viewContainerId).html(result);
+                adminView.displayBox(false);
             };
             $.fn.appCommon.ajax.getForm(appService.viewSection, null, _successcallback, null);
         },
@@ -125,8 +137,8 @@ var adminView = {
         edit: function (id) {
             //load success
             var successcallback = function (result) {
-                $("#" + adminView.editControlId).html(result);
-
+                $("#" + adminView.editControlId).html(result).show();
+                adminView.displayBox(true);
                 $("#txtClassName").click(function () {
                     $("#divClassesContainer").show();
                 });
@@ -142,6 +154,7 @@ var adminView = {
         loadGrid: function () {
             var _successcallback = function (result) {
                 $("#" + adminView.viewContainerId).html(result);
+                adminView.displayBox(false);
             };
             $.fn.appCommon.ajax.getForm(appService.viewClass, [], _successcallback, null);
         },
@@ -200,7 +213,7 @@ var adminView = {
         edit: function (id) {
             var _successcallback = function (result) {
                 $("#" + adminView.editControlId).html(result);
-
+                adminView.displayBox(true);
                 //ajax form before submit call
                 var _beforecallback = function () { };
 
@@ -224,6 +237,7 @@ var adminView = {
         loadGrid: function () {
             var _successcallback = function (result) {
                 $("#" + adminView.viewContainerId).html(result);
+                adminView.displayBox(false);
             };
             $.fn.appCommon.ajax.getForm(appService.viewRole, null, _successcallback, null);
         },
@@ -238,7 +252,7 @@ var adminView = {
         edit: function () {
             var successcallback = function (result) {
                 $("#" + adminView.editControlId).html(result);
-
+                adminView.displayBox(true);
                 //bind events
                 $(".clsAppModuleItem").click(function () {
                     var moduleId = $(this).attr("moduleid");
@@ -266,16 +280,16 @@ var adminView = {
         },
         loadGrid: function () {
         },
-        saveRolePrivileges: function () {            
+        saveRolePrivileges: function () {
             var jsonObj = [];
             var moduleId = $("#hdnModuleId").val();
             var trRows = $(".trRolesActive");
-            $(trRows).each(function (index, item) {                
+            $(trRows).each(function (index, item) {
                 var privileges = [];
                 var roleId = $(item).find(".hdnRoleId").val();
                 var rowCheckBoxes = $(item).find(".chkRoleEnabled");
                 if (rowCheckBoxes != null && rowCheckBoxes.length > 0) {
-                    for (var roleCheckCounter = 0; roleCheckCounter < rowCheckBoxes.length; roleCheckCounter++) {                        
+                    for (var roleCheckCounter = 0; roleCheckCounter < rowCheckBoxes.length; roleCheckCounter++) {
                         if (rowCheckBoxes[roleCheckCounter].checked) {
                             var privilegeId = $(rowCheckBoxes[roleCheckCounter]).attr("privilegeid");
                             privileges.push(privilegeId);
@@ -285,7 +299,7 @@ var adminView = {
                     jsonObj.push(rolePrivilege);
                 }
             });
-            
+
             //success callback for save
             var successcallback = function (result) {
                 if (result != null) {

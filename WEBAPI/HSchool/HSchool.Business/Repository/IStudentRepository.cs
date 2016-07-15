@@ -9,6 +9,9 @@ namespace HSchool.Business.Repository
 {
     public interface IStudentRepository
     {
+
+        int? SaveApplication(ApplicationForm form);
+
         /// <summary>
         /// 
         /// </summary>

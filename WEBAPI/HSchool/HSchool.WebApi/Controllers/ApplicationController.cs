@@ -34,7 +34,7 @@ namespace HSchool.WebApi.Controllers
         public ActionResult Index()
         {
             LogHelper.Info(string.Format("ApplicationController.Index - Begin"));
-            var admissionForm = new AdmissionForm();
+            var admissionForm = new ApplicationForm();
             admissionForm.FormClasses = _adminRepository.GetAllClasses(true);
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
             return View(admissionForm);
@@ -45,7 +45,7 @@ namespace HSchool.WebApi.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public ActionResult StudentRegister(AdmissionForm model)
+        public ActionResult StudentRegister(ApplicationForm model)
         {
             LogHelper.Info(string.Format("ApplicationController.StudentRegister - Begin"));
             try

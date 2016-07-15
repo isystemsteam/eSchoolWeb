@@ -20,7 +20,7 @@ namespace HSchool.Business.Models
 
         [JsonProperty("nameInLetter")]
         [DisplayName("Name In Letter")]
-        public string NameInLetter { get; set; }
+        public int NameInDigit { get; set; }
 
         [JsonProperty("isVisibleToApplication")]
         [DisplayName("Visible In Application")]

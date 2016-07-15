@@ -10,7 +10,9 @@ namespace HSchool.Data.Models
     {
         public int UserId { get; set; }
 
-        public int Title { get; set; }
+        public string Title { get; set; }
+
+        public string UserName { get; set; }
 
         public string FirstName { get; set; }
 
@@ -20,9 +22,9 @@ namespace HSchool.Data.Models
 
         public string Gender { get; set; }
 
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public string PlaceOfBirth { get; set; }
 
@@ -32,7 +34,7 @@ namespace HSchool.Data.Models
 
         public string Nationality { get; set; }
 
-        public int Community { get; set; }
+        public int? Community { get; set; }
 
         public string MobileNumber { get; set; }
 
@@ -52,8 +54,10 @@ namespace HSchool.Data.Models
 
         public bool NotoficationEnabled { get; set; }
 
-        public int MotherLanguage { get; set; }        
+        public int? MotherLanguage { get; set; }        
 
         public DateTime? UserLastLogin { get; set; }
+
+        public int UserRole { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[SaveClasses]
 	@ClassId int output,
 	@ClassName varchar(20),
-	@NameInLetter varchar(50)
+	@NameInDigit varchar(50)
 AS
 BEGIN
 
@@ -9,13 +9,13 @@ BEGIN
 		-- TO INSERT CLASSES
 		IF NOT EXISTS(SELECT 1 FROM dbo.Classes WHERE ClassId=@ClassId)
 			BEGIN
-				INSERT INTO dbo.Classes (ClassName,NameInLetter) VALUES (@ClassName,@NameInLetter)
+				INSERT INTO dbo.Classes (ClassName,NameInDigit) VALUES (@ClassName,@NameInDigit)
 
 				SET @ClassId=@@IDENTITY
 			END
 		ELSE
 			BEGIN
-				UPDATE dbo.Classes SET  ClassName=@ClassName,NameInLetter=@NameInLetter WHERE ClassId=@ClassId 
+				UPDATE dbo.Classes SET  ClassName=@ClassName,NameInDigit=@NameInDigit WHERE ClassId=@ClassId 
 			END
 	END TRY
 	BEGIN CATCH

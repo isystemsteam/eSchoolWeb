@@ -1,4 +1,5 @@
-﻿using HSchool.Business.Models;
+﻿using HSchool.Authentication;
+using HSchool.Business.Models;
 using HSchool.Business.Repository;
 using HSchool.Common;
 using HSchool.Logging;
@@ -40,15 +41,18 @@ namespace HSchool.WebApi.Controllers
         public ActionResult Application()
         {
             LogHelper.Info(string.Format("ApplicationController.Index - Begin"));
-            var admissionForm = new AdmissionForm();
+            var admissionForm = new ApplicationForm();
             admissionForm.Student = new Student();
             admissionForm.Student.StudentGuardians = new List<StudentGuardian>();
+            admissionForm.Student.Addresses = new List<Address> { new Address() };
             int guardianCount = CommonHelper.GetWebConfigValue<int>(WebConstants.GuardianCount);
             for (int studentGurCounter = 0; studentGurCounter < guardianCount; studentGurCounter++)
             {
                 admissionForm.Student.StudentGuardians.Add(new StudentGuardian());
             }
             admissionForm.FormClasses = _adminRepository.GetAllClasses(true);
+            admissionForm.ActionName = string.Format("{0}", "Application");
+            admissionForm.IsOfficeFormEnabled = false;
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
             return View(admissionForm);
         }
@@ -59,12 +63,51 @@ namespace HSchool.WebApi.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Application(AdmissionForm model)
+        [ValidateAntiForgeryToken]
+        public ActionResult Application(ApplicationForm model)
         {
             LogHelper.Info(string.Format("ApplicationController.Application - Begin"));
             try
             {
-                var id = _studentRepository.SaveStudentInformation(model.Student);
+                int? id = null;
+                if (ModelState.IsValid)
+                {
+                    model.ApplicationType = 1;
+                    id = _studentRepository.SaveApplication(model);
+                }
+                var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                LogHelper.Info(string.Format("ApplicationController.Application - End"));
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("ApplicationController.Application - Exception:{0}", ex.Message));
+                var response = new MessageResponse<string>(string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, ex.Message);
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ApplicationAdmit(ApplicationForm model)
+        {
+            LogHelper.Info(string.Format("ApplicationController.Application - Begin"));
+            try
+            {
+                int? id = null;
+                if (ModelState.IsValid)
+                {
+                    if (AuthenticationHelper.CreateUser(model.Student.Email, model.Student.UserName, string.Empty, string.Empty, string.Empty))
+                    {
+                        model.ApplicationType = 1;
+                        id = _studentRepository.SaveApplication(model);
+                    }
+                }
                 var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
                 LogHelper.Info(string.Format("ApplicationController.Application - End"));
                 return Json(response, JsonRequestBehavior.AllowGet);

@@ -22,6 +22,7 @@ using RolePrivilege = HSchool.Business.Models.RolePrivilege;
 using ApplicationPrivilege = HSchool.Business.Models.ApplicationPrivilege;
 using StudentImage = HSchool.Business.Models.StudentImage;
 using Student = HSchool.Business.Models.Student;
+using ApplicationForm = HSchool.Business.Models.ApplicationForm;
 
 namespace HSchool.CompositionRoot
 {
@@ -79,6 +80,9 @@ namespace HSchool.CompositionRoot
 
             mapper.CreateMap<ApplicationPrivilege, Data.Models.ApplicationPrivilege>();
             mapper.CreateMap<Data.Models.ApplicationPrivilege, ApplicationPrivilege>();
+
+            mapper.CreateMap<ApplicationForm, Data.Models.ApplicationForm>();
+            mapper.CreateMap<Data.Models.ApplicationForm, ApplicationForm>();
             
         }
     }

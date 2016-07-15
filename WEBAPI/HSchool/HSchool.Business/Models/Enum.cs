@@ -12,24 +12,34 @@ namespace HSchool.Business.Models
         Create = 2,
         Edit = 3,
         View = 4,
-        Delete = 5
+        Delete = 5,
+        Approval = 6
     }
 
     public enum UserStatusEnum
     {
-        Registered=1,
-        Active=2,
-        InActive=3,
-        InActiveByAdmin=4,
-        InActiveByTeacher=5,
-        InActiveByGovernment=6,
-        Invited=7,
-        Suspended=8,
-        Deferred=9
+        Registered = 1,
+        Active = 2,
+        InActive = 3,
+        InActiveByAdmin = 4,
+        InActiveByTeacher = 5,
+        InActiveByGovernment = 6,
+        Invited = 7,
+        Suspended = 8,
+        Deferred = 9
     }
 
     public enum StudentStatus
     {
 
+    }
+
+    public enum ApplicationStatus
+    {
+        Submitted = 1,
+        Pending = 2,
+        InProgress = 3,
+        Rejected = 4,
+        Approved = 5
     }
 }

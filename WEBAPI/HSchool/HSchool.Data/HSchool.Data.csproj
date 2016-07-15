@@ -68,6 +68,7 @@
     <Compile Include="Helper\DataConstants.cs" />
     <Compile Include="Helper\SqlDataConnection.cs" />
     <Compile Include="Models\AcademicYear.cs" />
+    <Compile Include="Models\ApplicationForm.cs" />
     <Compile Include="Models\ApplicationModule.cs" />
     <Compile Include="Models\ApplicationPermission.cs" />
     <Compile Include="Models\ApplicationPrivilege.cs" />

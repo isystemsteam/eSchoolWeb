@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace HSchool.Common
 {
@@ -24,6 +25,16 @@ namespace HSchool.Common
             return String.IsNullOrWhiteSpace(ConfigurationManager.AppSettings[name])
                        ? default(T)
                        : (T)Convert.ChangeType(ConfigurationManager.AppSettings[name], typeof(T));
+        }
+
+        public static List<SelectListItem> ConvertEnumToListItem<T>()
+        {
+            var listItem = new List<SelectListItem>();
+            foreach (var item in Enum.GetValues(typeof(T)))
+            {
+                listItem.Add(new SelectListItem { Value = Convert.ToString(item), Text = Enum.GetName(typeof(T), item) });
+            }
+            return listItem;
         }
 
         /// <summary>

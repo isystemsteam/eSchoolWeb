@@ -6,6 +6,7 @@
 	LastName varchar(120),
 	UserName varchar(120) NULL,
 	Email varchar(255) NOT NULL,
+	UserRole int foreign key references dbo.ApplicationRoles (RoleId),
 	Gender varchar(10) NOT NULL,
 	Age int NOT NULL,
 	DateOfBirth datetime,

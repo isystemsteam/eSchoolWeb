@@ -70,5 +70,7 @@ namespace HSchool.Business.Models
 
         [JsonProperty("isDeleted")]
         public bool IsDeleted { get; set; }
+
+        public int Role { get; set; }
     }
 }

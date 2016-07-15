@@ -33,5 +33,7 @@ namespace HSchool.Data.Models
         public bool SMSEnabled { get; set; }
         public bool NotificationEnabled { get; set; }
 
+        public int Role { get; set; }
+
     }
 }

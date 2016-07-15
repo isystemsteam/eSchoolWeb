@@ -8,7 +8,7 @@
                 <tr>
                     <th>#</th>                    
                     <th>Class Name</th>
-                    <th>Name In Text</th>
+                    <th>Name In Digit</th>
                     <th>Visible To Application</th>
                 </tr>
             </thead>
@@ -18,7 +18,7 @@
                 <tr>
                     <td>@(counter++)</td>
                     <td><a href="#" onclick="adminView.classes.edit(@(item.ClassId))">@(item.ClassName)</a></td>                    
-                    <td>@(item.NameInLetter)</td>
+                    <td>@(item.NameInDigit)</td>
                     <td>@(item.IsVisibleToApplication)</td>
                 </tr>
             }

@@ -13,7 +13,7 @@ namespace HSchool.Business.Models
         [JsonProperty("userId")]
         public int UserId { get; set; }
 
-        [JsonProperty("userName")]
+        [JsonProperty("First Name")]
         public string FirstName { get; set; }
 
         [JsonProperty("LastName")]
@@ -26,10 +26,10 @@ namespace HSchool.Business.Models
         public string Gender { get; set; }
 
         [JsonProperty("age")]
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
         [JsonProperty("dateOfBirth")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public string PlaceOfBirth { get; set; }
 
@@ -43,7 +43,7 @@ namespace HSchool.Business.Models
         public string Nationality { get; set; }
 
         [JsonProperty("community")]
-        public int Community { get; set; }
+        public int? Community { get; set; }
 
         [JsonProperty("mobileNumber")]
         public string MobileNumber { get; set; }
@@ -79,12 +79,14 @@ namespace HSchool.Business.Models
         public bool NotoficationEnabled { get; set; }
 
         [JsonProperty("motherLanguage")]
-        public int MotherLanguage { get; set; }
+        public int? MotherLanguage { get; set; }
 
         public DateTime? UserLastLogin { get; set; }
 
         [JsonProperty("userStatus")]
-        public UserStatusEnum UserStatus { get; set; }                   
+        public UserStatusEnum UserStatus { get; set; }
+
+        public int UserRole { get; set; }
         
     }
 }

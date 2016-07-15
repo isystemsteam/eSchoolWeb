@@ -2,11 +2,11 @@
 	@VisibleOnly bit =NULL	
 AS
 BEGIN
-	IF(@VisibleOnly IS NOT NULL)
+	IF(@VisibleOnly IS NULL)
 		BEGIN
-			SELECT ClassId,ClassName,IsVisibleToApplication FROM DBO.Classes
+			SELECT ClassId,ClassName,NameInDigit,IsVisibleToApplication FROM DBO.Classes
 		END
 	ELSE
-		SELECT ClassId,ClassName,IsVisibleToApplication FROM DBO.Classes WHERE IsVisibleToApplication=1
+		SELECT ClassId,ClassName,NameInDigit,IsVisibleToApplication FROM DBO.Classes WHERE IsVisibleToApplication=1
 END
 

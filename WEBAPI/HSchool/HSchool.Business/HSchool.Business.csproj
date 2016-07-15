@@ -64,7 +64,7 @@
   <ItemGroup>
     <Compile Include="Models\AcademicYear.cs" />
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\AdmissionForm.cs" />
+    <Compile Include="Models\ApplicationForm.cs" />
     <Compile Include="Models\ApplicationModule.cs" />
     <Compile Include="Models\ApplicationPermission.cs" />
     <Compile Include="Models\ApplicationPrivilege.cs" />

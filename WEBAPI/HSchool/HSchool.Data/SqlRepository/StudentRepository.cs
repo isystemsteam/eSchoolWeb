@@ -10,11 +10,32 @@ using Insight.Database;
 
 
 using Student = HSchool.Business.Models.Student;
+using ApplicationForm = HSchool.Business.Models.ApplicationForm;
 
 namespace HSchool.Data.SqlRepository
 {
     public class StudentRepository : IStudentRepository
     {
+        public int? SaveApplication(ApplicationForm form)
+        {
+            LogHelper.Info(string.Format("StudentRepository.SaveApplication - Begin"));
+            try
+            {
+                using (var connection = SqlDataConnection.GetSqlConnection())
+                {
+                    var dStudent = Mapper.Map<ApplicationForm, Models.ApplicationForm>(form);
+                    var results = connection.Query<int>(Procedures.SaveApplication, dStudent);
+                    LogHelper.Info(string.Format("StudentRepository.SaveApplication - End"));
+                    return results != null ? results.First() : (int?)null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("StudentRepository.SaveApplication - Exception:{0}", ex.Message));
+                throw ex;
+            }
+        }
+
         /// <summary>
         /// To store student information
         /// </summary>

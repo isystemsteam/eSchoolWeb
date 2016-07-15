@@ -1,7 +1,8 @@
-﻿@model HSchool.Business.Models.AdmissionForm
+﻿@model HSchool.Business.Models.ApplicationForm
 <div class="content-wrapper">
     <div class="container">
-        <form class="admin-form">
+        @using (Html.BeginForm("Application", "Student", FormMethod.Post, new { }))
+        {
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="page-head-line">Student Entry Form </h1>
@@ -79,9 +80,39 @@
                         @Html.LabelFor(m => m.Student.IsTransportRequired)
                     </div>
                 </div>
-                <div class="">
+                <div class="row">
                     <a class="form-group-collapse-link clearfix"> <span class="pull-left"><i class="fa fa-chevron-right"></i> Address for Communication</span><i class="pull-right fa fa-plus"></i> </a>
                 </div>
+                @if (Model.Student.Addresses.Count > 0)
+                {
+                    for (int aCount = 0; aCount < Model.Student.Addresses.Count; aCount++)
+                    {
+                        <div class="row custom-row clearfix">
+                            <div class="col-lg-4 custom-text">
+                                @Html.LabelFor(m => m.Student.Addresses[aCount].AddressLine1)
+                                @Html.TextBoxFor(m => m.Student.Addresses[aCount].AddressLine1, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                @Html.LabelFor(m => m.Student.Addresses[aCount].AddressLine2)
+                                @Html.TextBoxFor(m => m.Student.Addresses[aCount].AddressLine2, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-lg-4 custom-text">
+                                @Html.LabelFor(m => m.Student.Addresses[aCount].District)
+                                @Html.TextBoxFor(m => m.Student.Addresses[aCount].District, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                @Html.LabelFor(m => m.Student.Addresses[aCount].Taluk)
+                                @Html.TextBoxFor(m => m.Student.Addresses[aCount].Taluk, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-lg-4 custom-text">
+                                @Html.LabelFor(m => m.Student.Addresses[aCount].PinCode)
+                                @Html.TextBoxFor(m => m.Student.Addresses[aCount].PinCode, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                    }
+                }
 
                 @if (Model.Student.StudentGuardians != null)
                 {
@@ -155,14 +186,47 @@
                         </div>
                     }
                 }
+                @if (Model.IsOfficeFormEnabled)
+                {
+                    <div class="row custom-row clearfix">
+                        <div class="col-lg-12 custom-text">
+                            For Office Use
+                        </div>
+                    </div>
+                    <div class="row custom-row clearfix">
+                        <div class="col-lg-6 custom-text">
+                            @Html.LabelFor(m => m.ApplicationStatus)
+                            @Html.DropDownListFor(m => m.ApplicationStatus, Model.ApplicationStatuses, new { })
+                        </div>
+                        <div class="col-lg-6 custom-text">
+                            @Html.LabelFor(m => m.AppliedDate)
+                            @Html.DisplayFor(m => m.AppliedDate)
+                        </div>
+                    </div>
+                    <div class="row custom-row clearfix">
+                        <div class="col-lg-6 custom-text">
+                            @Html.LabelFor(m => m.ApprovalDate)
+                            @Html.DisplayFor(m => m.ApprovalDate, new { })
+                        </div>
+                        <div class="col-lg-6 custom-text">
+                            @Html.LabelFor(m => m.ApprovedByText)
+                            @Html.DisplayFor(m => m.ApprovedByText)
+                        </div>
+                    </div>
+                }
             </div>
+
             <div class="row">
                 <div class="col-lg-4">
-                    <input type="submit" value="Submit" class="btn-blue" />                    
+                    <input type="submit" value="Submit" class="btn-blue" />
+                </div>
+                <div class="col-lg-4">
                     <input type="button" value="Admit" class="btn-blue" />
+                </div>
+                <div class="">
                     <input type="button" value="Cancel" class="btn-blue" />
                 </div>
             </div>
-        </form>
+        }
     </div>
 

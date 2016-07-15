@@ -115,19 +115,28 @@
     <Build Include="Tables\StudentGuardianImage.sql" />
     <Build Include="Tables\StudentClass.sql" />
     <Build Include="Tables\UserTitles.sql" />
+    <Build Include="Tables\ApplicationStatus.sql" />
+    <Build Include="Tables\Applications.sql" />
+    <Build Include="Stored Procedures\SaveApplication.sql" />
+    <Build Include="Stored Procedures\GetApplications.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Scripts\Script.PostDeployment.UserStatus.sql" />
-    <None Include="Scripts\Script.PostDeployment.MotherLanguages.sql" />
+    <None Include="Scripts\Script.PostDeployment.UserStatus.sql" />
+    <PostDeploy Include="Scripts\Script.PostDeployment.MotherLanguages.sql" />
+    <None Include="Scripts\Script.ApplicationStatus.sql" />
+    <None Include="Scripts\Script.ApplicationModules.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\BaseLine.dacpac" />
     <Build Include="User-Defined Table Types\TypeClassSections.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\Script.PreDeployment.Certificates.sql" />
+    <PreDeploy Include="Scripts\Script.PreDeployment.Certificates.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Script.Privileges.sql" />
   </ItemGroup>
 </Project>
