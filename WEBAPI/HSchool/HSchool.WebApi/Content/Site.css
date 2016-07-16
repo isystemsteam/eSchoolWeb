@@ -1,7 +1,7 @@
 ﻿body {
     font-family: 'Roboto', sans-serif;
     line-height: 30px;
-    background-color:#ff0000;
+    background-color:#02558c;
 }
 
 /* COMMON */
@@ -196,11 +196,19 @@ footer {
     -webkit-transition: 0.2s ease all;
 }
 
-.custom-text input[type="text"]:focus ~ label, input[type="text"]:valid ~ label {
+/*.custom-text input[type="text"]:focus ~ label, input[type="text"]:valid ~ label {
+    top: 0px;
+    font-size: 10px;
+    color: #a4a4a4;
+}*/
+
+.custom-text input[type="text"]:focus ~ label, .custom-text input[type="password"]:focus ~ label {
     top: 0px;
     font-size: 10px;
     color: #a4a4a4;
 }
+
+
 
 .custom-text i.fa-exclamation-circle, .custom-text i.fa-check-circle {
     position: absolute;
@@ -315,7 +323,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', end
 .custom-check [type="checkbox"]:checked + label > span > span {opacity:1; transform: scale(1); position:relative}
 
 /* Login */
-.login-wrapper {min-height:300px; width:40%; margin:50px auto}
+.login-div {background: url('Images/building.jpg') no-repeat left top; box-shadow:1px 2px 4px 3px rgba(0,0,0,0.4)}
+.login-wrapper {min-height:300px; width:40%; margin:20px auto; padding:50px ; background-color:#fff; border-radius:5px}
 
 /* MEDIA QUERIES */
 @media only screen and (min-width: 768px) {
