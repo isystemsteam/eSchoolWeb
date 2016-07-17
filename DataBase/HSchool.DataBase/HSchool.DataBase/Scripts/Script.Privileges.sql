@@ -9,10 +9,11 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
- 
+SET IDENTITY_INSERT dbo.ApplicationPrivilege ON
 INSERT INTO dbo.ApplicationPrivilege(PrivilegeId,PrivilegeName) values (1,'All')
 INSERT INTO dbo.ApplicationPrivilege(PrivilegeId,PrivilegeName) values (2,'Create')
 INSERT INTO dbo.ApplicationPrivilege(PrivilegeId,PrivilegeName) values (3,'Edit')
 INSERT INTO dbo.ApplicationPrivilege(PrivilegeId,PrivilegeName) values (4,'View')
 INSERT INTO dbo.ApplicationPrivilege(PrivilegeId,PrivilegeName) values (5,'Delete')
 INSERT INTO dbo.ApplicationPrivilege(PrivilegeId,PrivilegeName) values (6,'Approval')
+SET IDENTITY_INSERT dbo.ApplicationPrivilege OFF

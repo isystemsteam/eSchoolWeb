@@ -9,15 +9,12 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-
+SET IDENTITY_INSERT dbo.ApplicationModules ON
 INSERT INTO dbo.ApplicationModules(ModuleId,ModuleName) values (1,'Admin');
-
 INSERT INTO dbo.ApplicationModules(ModuleId,ModuleName) values (2,'Admin Settings');
-
 INSERT INTO dbo.ApplicationModules(ModuleId,ModuleName) values (3,'School Settings');
-
 INSERT INTO dbo.ApplicationModules(ModuleId,ModuleName) values (4,'Applications');
-
 INSERT INTO dbo.ApplicationModules(ModuleId,ModuleName) values (5,'Mark Management');
+SET IDENTITY_INSERT dbo.ApplicationModules OFF
 
 

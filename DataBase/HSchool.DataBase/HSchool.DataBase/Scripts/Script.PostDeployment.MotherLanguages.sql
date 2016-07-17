@@ -9,8 +9,9 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-
+SET IDENTITY_INSERT dbo.MotherLanguages ON
 insert into dbo.MotherLanguages (Name) values ('Tamil');
 insert into dbo.MotherLanguages (Name) values ('English');
 insert into dbo.MotherLanguages (Name) values ('Hindhi');
+SET IDENTITY_INSERT dbo.MotherLanguages OFF
 
