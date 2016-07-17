@@ -14,15 +14,15 @@ namespace HSchool.Data.Models
         public string Title { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int ReleationShip { get; set; }
+        public int? ReleationShip { get; set; }
         public string Occupation { get; set; }
 
         public string HighestQualification { get; set; }
 
         public string Email { get; set; }
 
-        public int Age { get; set; }
-        public double AnnualIncome { get; set; }
+        public int? Age { get; set; }
+        public double? AnnualIncome { get; set; }
         public bool IsSameAsUserAddress { get; set; }
         public string MobileNumber { get; set; }
         public string OfficeNumber { get; set; }

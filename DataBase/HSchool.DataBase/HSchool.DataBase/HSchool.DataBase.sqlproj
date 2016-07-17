@@ -119,6 +119,10 @@
     <Build Include="Tables\Applications.sql" />
     <Build Include="Stored Procedures\SaveApplication.sql" />
     <Build Include="Stored Procedures\GetApplications.sql" />
+    <Build Include="Stored Procedures\SaveAcademicYear.sql" />
+    <Build Include="Stored Procedures\GetActiveAcademicYear.sql" />
+    <Build Include="Stored Procedures\GetAcademicYears.sql" />
+    <Build Include="Stored Procedures\GetAcademicYearById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />

@@ -57,5 +57,13 @@ namespace HSchool.Data
         public const string SaveRolePrivileges = "SaveRolePrivileges";
 
         public const string GetRolePrivilegesByModuleId = "GetRolePrivilegesByModuleId";
+
+        public const string SaveAcademicYear = "SaveAcademicYear";
+
+        public const string GetCurrentAcademicYear = "GetCurrentAcademicYear";
+
+        public const string GetAcademicYearById = "GetAcademicYearById";
+
+        public const string GetAllAcademicYears = "GetAllAcademicYears";
     }
 }
