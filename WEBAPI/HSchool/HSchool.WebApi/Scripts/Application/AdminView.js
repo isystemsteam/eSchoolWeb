@@ -137,8 +137,8 @@ var adminView = {
         edit: function (id) {
             //load success
             var successcallback = function (result) {
-                $("#" + adminView.editControlId).html(result).show();
-               // adminView.displayBox(true);
+                $("#" + adminView.editControlId).html(result);
+                adminView.displayBox(true);
                 $("#txtClassName").click(function () {
                     $("#divClassesContainer").show();
                 });
@@ -153,8 +153,8 @@ var adminView = {
         },
         loadGrid: function () {
             var _successcallback = function (result) {
-                $("#" + adminView.viewContainerId).html(result);
-                adminView.displayBox(false);
+                $("#" + adminView.viewContainerId).html(result).show();
+                //adminView.displayBox(false);
             };
             $.fn.appCommon.ajax.getForm(appService.viewClass, [], _successcallback, null);
         },
@@ -166,7 +166,7 @@ var adminView = {
                 //js render - template 
                 var template = $.templates("#tempClassSections");
                 var htmlOutput = template.render(data);
-                $("#" + adminView.viewContainerId).html(htmlOutput);
+                $("#" + adminView.viewContainerId).html(htmlOutput).show();
                 $("#divClassesContainer").hide();
 
                 //bind events
@@ -200,6 +200,7 @@ var adminView = {
                 if (result != null) {
                     $.fn.appCommon.UI.displayMessage(result.Reason, null);
                 }
+                adminView.displayBox(false);
             };
 
             $.fn.appCommon.ajax.post(appService.saveClassSections, parameters, 'application/json', successcallback, adminView.handleException);

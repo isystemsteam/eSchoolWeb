@@ -5,19 +5,24 @@
 }
 
 /* COMMON */
-header {
-    background-color: #F0677C;
-    color: #fff;
-    padding: 10px;
-    text-align: right;
-}
+header {background-color: #F0677C; color: #fff; padding:10px; text-align: right}
+h1,h2 { text-transform:uppercase;  margin:0}
+h1 {font-size:22px; color:#06c7e8; text-shadow:1px 1px 1px rgba(255,255,255,0.5); padding:20px 0}
+h2 {font-size:16px; color:#333; border:#e3e3e3 1px solid; border-width:1px 1px 0 1px; background-color:#f5f5f5; border-top-left-radius:5px; border-top-right-radius:5px; padding:15px; font-weight:600 }
+.highlight-bg {background-color:#69ace2}
 
 /* CONTAINERS */
 .content-wrapper {background-color:#fff}
 .left-panel {box-shadow:inset -2px -1px 2px 2px rgba(0,0,0,.2);}
 .right-panel {background-color: #fff; padding-bottom:20px}
 .left-menu {list-style: none;  margin:0; padding:0}
+.btn-wrapper { margin-bottom:20px;}
+.form-container {background-color:#f5f5f5; border:#e3e3e3 1px solid; border-bottom-left-radius:5px; border-bottom-right-radius:5px;  padding:15px; margin-bottom:20px}
+ #divEditContainer, #divViewContainer {margin-top:15px}
 
+/*#divEditContainer, #divViewContainer {border-radius:3px; background-color:#f1f1f1; margin-top:15px; padding:15px; border:#ccc 1px solid}*/
+
+/* Left Menu */
 .left-menu li a {
     display: block;
     padding: 8px 5px 8px 20px;
@@ -48,10 +53,8 @@ a.navbar-brand, a.navbar-brand img{outline:none; text-decoration:none}
     font-weight: 900;
 }
 
-#divEditContainer, #divViewContainer {border-radius:3px; background-color:#f1f1f1; margin-top:15px; padding:15px; border:#ccc 1px solid}
-.page-head-line,h1 { padding:0 0 15px 0; text-transform:uppercase;  margin:0}
-h1 {font-size:22px; color:#06c7e8; text-shadow:1px 1px 1px rgba(255,255,255,0.5);}
-h2 {font-size:18px; color:#222;}
+
+
 
 /* USER SETTINGS DIV */
 .user-settings-wrapper {
@@ -156,13 +159,9 @@ footer {
     letter-spacing:1px;
 }
 
-    footer a, footer a:hover {
-        color: #fff;
-        text-decoration: none;
-    }
+footer a, footer a:hover {color: #fff; text-decoration: none;}
 
-
-.custom-row {margin-bottom:30px}
+.custom-row {margin-bottom:20px}
 .custom-text {position:relative}
 .custom-text input[type="text"], .custom-text input[type="password"] {
     color: #575757;
@@ -289,14 +288,6 @@ background: -moz-linear-gradient(top,  rgba(239,239,239,1) 0%, rgba(196,196,196,
 background: -webkit-linear-gradient(top,  rgba(239,239,239,1) 0%,rgba(196,196,196,1) 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom,  rgba(239,239,239,1) 0%,rgba(196,196,196,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#c4c4c4',GradientType=0 ); /* IE6-9 */
-
-
-
-
-}
-
-.btn-wrapper {
-    margin-top:0px;
 }
 
 .table {box-shadow:0px 0px 4px 4px rgba(0,0,0,0.1)}
@@ -311,10 +302,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', end
 }
 
 /* deropdown */
-.custom-list {position:absolute;width:96.9%; z-index:100; margin-top:-2px; background-color:#fff; border:#D5D5D5 1px solid; border-width:0 1px 1px 1px; padding:10px; border-bottom-left-radius:3px; border-bottom-right-radius:3px} 
-.custom-list ul {padding:0; list-style:none}
-.custom-list ul li {padding:5px 10px;}
-.custom-list ul li:hover {background-color:#f1f1f1}
+.custom-list, .ulListBox, .divModulesContainer {position:absolute; z-index:100; margin-top:-2px; background-color:#fff; border:#D5D5D5 1px solid; border-width:0 1px 1px 1px; padding:10px; border-bottom-left-radius:3px; border-bottom-right-radius:3px} 
+.custom-list {width:96.9%;}
+.ulListBox {width:94.9%;}
+.divModulesContainer {width:100%}
+.custom-list ul, ul.ulListBox, .divModulesContainer ul {padding:0; list-style:none}
+.custom-list ul li, ul.ulListBox li, .divModulesContainer ul li {padding:5px 10px;}
+.custom-list ul li:hover, ul.ulListBox li:hover, .divModulesContainer ul li:hover {background-color:#f1f1f1; cursor:pointer}
 
 /* CUSTOM CHEKBOX */
 .custom-check [type="checkbox"]:not(:checked),[type="checkbox"]:checked {opacity:1}

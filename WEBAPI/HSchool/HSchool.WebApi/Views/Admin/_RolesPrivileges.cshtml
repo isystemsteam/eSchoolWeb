@@ -1,9 +1,9 @@
 ﻿@model HSchool.Business.Models.RolePrivilegeForm
-<div class="row">
+
     <h1>Roles & Privilege</h1>
-</div>
-<div class="row">
-    <div class="col-lg-12">
+
+
+    <div class="custom-text">
         @Html.TextBox("txtModuleName", string.Empty, new { @class = "clsTextBox", @id = "txtModuleName", @onclick = "adminView.rolesPrivileges.roleBoxFocus()" })
         @Html.Hidden("hdnModuleId", new { @id = "hdnModuleId" })
         <div class="divModulesContainer" style="display:none;position:absolute">
@@ -22,7 +22,7 @@
         <i class="fa fa-check-circle"></i>
         <em class="error-msg">Error Message</em>
     </div>
-</div>
+
 <div class="row">
     <div id="divRolesPrivilegesContainer">
 
