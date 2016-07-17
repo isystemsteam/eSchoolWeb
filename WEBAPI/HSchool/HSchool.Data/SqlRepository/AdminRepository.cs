@@ -669,14 +669,53 @@ namespace HSchool.Data.SqlRepository
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="academicYearId"></param>
+        /// <returns></returns>
         public AcademicYear GetAcademicYearById(int academicYearId)
         {
-            return new AcademicYear();
+            LogHelper.Info(string.Format("AdminRepository.GetApplicationPermissionById - Begin"));
+            try
+            {
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<Models.AcademicYear>(Procedures.GetRoleById, new { academicYearId });
+                var businessResults = Mapper.Map<IEnumerable<Models.AcademicYear>, IEnumerable<AcademicYear>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.FirstOrDefault() : new AcademicYear();
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetApplicationPermissionById - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetApplicationPermissionById - Exception:{0}", ex.Message), ex);
+                throw;
+            }
         }
 
         public AcademicYear GetActiveAcademicYear()
         {
-            return new AcademicYear();
+            LogHelper.Info(string.Format("AdminRepository.GetApplicationPermissionById - Begin"));
+            try
+            {
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<Models.AcademicYear>(Procedures.GetRoleById);
+                var businessResults = Mapper.Map<IEnumerable<Models.AcademicYear>, IEnumerable<AcademicYear>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.FirstOrDefault() : new AcademicYear();
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetApplicationPermissionById - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetApplicationPermissionById - Exception:{0}", ex.Message), ex);
+                throw;
+            }
         }
 
         public List<AcademicYear> GetAcademicYears()

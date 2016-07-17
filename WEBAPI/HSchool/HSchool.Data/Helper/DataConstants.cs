@@ -60,7 +60,7 @@ namespace HSchool.Data
 
         public const string SaveAcademicYear = "SaveAcademicYear";
 
-        public const string GetCurrentAcademicYear = "GetCurrentAcademicYear";
+        public const string GetCurrentAcademicYear = "GetActivetAcademicYear";
 
         public const string GetAcademicYearById = "GetAcademicYearById";
 
