@@ -115,8 +115,6 @@
     <Build Include="Tables\StudentGuardianImage.sql" />
     <Build Include="Tables\StudentClass.sql" />
     <Build Include="Tables\UserTitles.sql" />
-    <Build Include="Tables\ApplicationStatus.sql" />
-    <Build Include="Tables\Applications.sql" />
     <Build Include="Stored Procedures\SaveAcademicYear.sql" />
     <Build Include="Stored Procedures\GetActiveAcademicYear.sql" />
     <Build Include="Stored Procedures\GetAcademicYears.sql" />
@@ -126,6 +124,8 @@
     <None Include="Scripts\Script.Privileges.sql" />
     <Build Include="Stored Procedures\SaveApplication.sql" />
     <Build Include="Stored Procedures\GetApplications.sql" />
+    <Build Include="Tables\Applications.sql" />
+    <Build Include="Tables\ApplicationStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
