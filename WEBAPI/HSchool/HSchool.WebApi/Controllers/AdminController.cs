@@ -397,5 +397,16 @@ namespace HSchool.WebApi.Controllers
             }
         }
         #endregion
+
+        #region Years
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public int SaveAcademicYear(AcademicYear year)
+        {
+        }
+        #endregion
     }
 }

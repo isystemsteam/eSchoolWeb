@@ -60,5 +60,14 @@ namespace HSchool.Business.Repository
         List<ApplicationPrivilege> GetApplicationPrivileges();
 
         void SaveRolePrivileges(List<RolePrivilege> rolePrivileges);
+
+        int? SaveAcademicYear(AcademicYear year);
+
+        AcademicYear GetAcademicYearById(int academicYearId);
+
+        AcademicYear GetActiveAcademicYear();
+
+        List<AcademicYear> GetAcademicYears();
+
     }
 }

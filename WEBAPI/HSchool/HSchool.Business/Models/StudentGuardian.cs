@@ -28,19 +28,19 @@ namespace HSchool.Business.Models
         [DisplayName("Email")]
         public string Email { get; set; }
 
-        public int Gender { get; set; }
+        public int? Gender { get; set; }
 
         [JsonProperty("releationShip")]
-        public int ReleationShip { get; set; }
+        public int? ReleationShip { get; set; }
 
         [JsonProperty("occupation")]
         public string Occupation { get; set; }
 
         [JsonProperty("age")]
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
         [JsonProperty("annualIncome")]
-        public double AnnualIncome { get; set; }        
+        public double? AnnualIncome { get; set; }        
 
         [JsonProperty("mobileNumber")]
         public string MobileNumber { get; set; }

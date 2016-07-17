@@ -18,6 +18,7 @@ using ApplicationPermission = HSchool.Business.Models.ApplicationPermission;
 using ApplicationModule = HSchool.Business.Models.ApplicationModule;
 using RolePrivilege = HSchool.Business.Models.RolePrivilege;
 using ApplicationPrivilege = HSchool.Business.Models.ApplicationPrivilege;
+using AcademicYear = HSchool.Business.Models.AcademicYear;
 
 namespace HSchool.Data.SqlRepository
 {
@@ -635,6 +636,35 @@ namespace HSchool.Data.SqlRepository
             catch (Exception ex)
             {
                 LogHelper.Error(string.Format("AdminRepository.SaveRolePrivileges - Exception:{0}", ex.Message), ex);
+                throw;
+            }
+        }
+        #endregion
+
+        #region Years
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public int? SaveAcademicYear(AcademicYear year)
+        {
+            LogHelper.Info(string.Format("AdminRepository.SaveAcademicYear - Begin"));
+            try
+            {
+                Models.AcademicYear dYear = Mapper.Map<AcademicYear, Models.AcademicYear>(year);
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<int>(Procedures.SaveAcademicYear, year);
+                return result != null ? result.FirstOrDefault() : (int?)null;
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.SaveAcademicYear - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.SaveAcademicYear - Exception:{0}", ex.Message), ex);
                 throw;
             }
         }
