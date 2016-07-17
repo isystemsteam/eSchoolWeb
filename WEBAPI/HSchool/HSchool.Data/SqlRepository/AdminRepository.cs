@@ -668,6 +668,21 @@ namespace HSchool.Data.SqlRepository
                 throw;
             }
         }
+
+        public AcademicYear GetAcademicYearById(int academicYearId)
+        {
+            return new AcademicYear();
+        }
+
+        public AcademicYear GetActiveAcademicYear()
+        {
+            return new AcademicYear();
+        }
+
+        public List<AcademicYear> GetAcademicYears()
+        {
+            return new List<AcademicYear>();
+        }
         #endregion
     }
 }
