@@ -117,21 +117,22 @@
     <Build Include="Tables\UserTitles.sql" />
     <Build Include="Tables\ApplicationStatus.sql" />
     <Build Include="Tables\Applications.sql" />
-    <Build Include="Stored Procedures\SaveApplication.sql" />
-    <Build Include="Stored Procedures\GetApplications.sql" />
     <Build Include="Stored Procedures\SaveAcademicYear.sql" />
     <Build Include="Stored Procedures\GetActiveAcademicYear.sql" />
     <Build Include="Stored Procedures\GetAcademicYears.sql" />
     <Build Include="Stored Procedures\GetAcademicYearById.sql" />
+    <Build Include="Scripts\Script.ApplicationModules.sql" />
+    <Build Include="Scripts\Script.ApplicationStatus.sql" />
+    <Build Include="Scripts\Script.Privileges.sql" />
+    <Build Include="Stored Procedures\SaveApplication.sql" />
+    <Build Include="Stored Procedures\GetApplications.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\Script.PostDeployment.UserStatus.sql" />
-    <PostDeploy Include="Scripts\Script.PostDeployment.MotherLanguages.sql" />
-    <None Include="Scripts\Script.ApplicationStatus.sql" />
-    <None Include="Scripts\Script.ApplicationModules.sql" />
+    <None Include="Scripts\Script.PostDeployment.MotherLanguages.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Snapshots\BaseLine.dacpac" />
@@ -139,8 +140,5 @@
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Script.PreDeployment.Certificates.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\Script.Privileges.sql" />
   </ItemGroup>
 </Project>
