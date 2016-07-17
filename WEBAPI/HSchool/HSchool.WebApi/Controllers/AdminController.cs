@@ -406,6 +406,7 @@ namespace HSchool.WebApi.Controllers
         /// <returns></returns>
         public int SaveAcademicYear(AcademicYear year)
         {
+            return 0;
         }
         #endregion
     }

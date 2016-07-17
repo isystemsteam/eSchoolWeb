@@ -38,7 +38,7 @@ namespace HSchool.WebApi
             MvcHtmlString inputHtml = new MvcHtmlString(tag.ToString(TagRenderMode.SelfClosing));
 
             StringBuilder strBuilder = new StringBuilder();
-            strBuilder.Append(string.Format("<div class='divListBox' style='display:inline-block'>"));
+            strBuilder.Append(string.Format("<div class='divListBox' >"));
             strBuilder.Append(inputHtml.ToHtmlString());
             strBuilder.Append(string.Format("<ul class='ulListBox' style='display:none' >"));
             foreach (var listItem in models)

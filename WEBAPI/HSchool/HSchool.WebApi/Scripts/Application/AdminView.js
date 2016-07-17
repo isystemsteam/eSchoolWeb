@@ -138,7 +138,7 @@ var adminView = {
             //load success
             var successcallback = function (result) {
                 $("#" + adminView.editControlId).html(result).show();
-                adminView.displayBox(true);
+               // adminView.displayBox(true);
                 $("#txtClassName").click(function () {
                     $("#divClassesContainer").show();
                 });
