@@ -250,7 +250,6 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Filters\ApplicationAutorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -272,6 +271,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\app_name.png" />
+    <Content Include="Content\Images\building.jpg" />
     <Content Include="Content\Images\loading_2.gif" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\user-photo-female.png" />
