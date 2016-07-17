@@ -121,9 +121,9 @@
     <Build Include="Stored Procedures\GetActiveAcademicYear.sql" />
     <Build Include="Stored Procedures\GetAcademicYears.sql" />
     <Build Include="Stored Procedures\GetAcademicYearById.sql" />
-    <Build Include="Scripts\Script.ApplicationModules.sql" />
-    <Build Include="Scripts\Script.ApplicationStatus.sql" />
-    <Build Include="Scripts\Script.Privileges.sql" />
+    <PostDeploy Include="Scripts\Script.ApplicationModules.sql" />
+    <None Include="Scripts\Script.ApplicationStatus.sql" />
+    <None Include="Scripts\Script.Privileges.sql" />
     <Build Include="Stored Procedures\SaveApplication.sql" />
     <Build Include="Stored Procedures\GetApplications.sql" />
   </ItemGroup>
