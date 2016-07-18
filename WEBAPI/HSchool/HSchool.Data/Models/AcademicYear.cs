@@ -10,10 +10,18 @@ namespace HSchool.Data.Models
     {
         public int AcademicYearId { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public bool IsActive { get; set; }
+
+        public string AcademicYearDisplay
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
     }
 }

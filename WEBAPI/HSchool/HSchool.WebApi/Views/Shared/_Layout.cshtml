@@ -17,26 +17,10 @@
     <script src="~/Scripts/Application/AdminView.js"></script>
     <script src="~/Scripts/Application/ApplicationForm.js"></script>
     <script src="~/Scripts/Application/Home.js"></script>
-
-    <script>
-        $(document).ready(function () {
-
-            var highestBox = 0;
-            $('.column').each(function () {
-                if ($(this).height() > highestBox) {
-                    highestBox = $(this).height();
-                }
-            });
-            $('.column').height(highestBox);
-
-        });
-    </script>
 </head>
 <body>
-
     <div class="ribbonErrorMessage" id="ribbonErrorMessage" style="display:none"></div>
     <div class="container-fluid content-wrapper clearfix">
-
         <div class="navbar navbar-inverse set-radius-zero">
             <div class="navbar-header col-md-6">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -48,21 +32,17 @@
                     <img src="~/Content/Images/app_name.png" />
                 </a>
             </div>
-
             <div class="col-md-6">
                 <ul class="user-settings-wrapper">
-                   <li>Welcome </li>
-                   <li id="user-name">Naveendiran</li>
-                   <li id="user-photo"><img src="~/Content/Images/user-photo-male.png" /></li>
+                    <li>Welcome </li>
+                    <li id="user-name">Naveendiran</li>
+                    <li id="user-photo"><img src="~/Content/Images/user-photo-male.png" /></li>
                 </ul>
             </div>
 
+        </div>
 
-        </div>   
-
-
-
-        <section class="menu-section">           
+        <section class="menu-section">
             <div class="col-md-12">
                 <div class="navbar-collapse collapse ">
                     <ul id="menu-top" class="nav navbar-nav navbar-right">
@@ -70,22 +50,17 @@
                         <li><a href="#" class="menu-top-active">Students</a></li>
                         <li><a href="#">Campus</a></li>
                         <li><a href="#">Reports</a></li>
-
                     </ul>
                 </div>
-            </div>          
+            </div>
         </section>
-
         <div class="body-wrapper">
             @RenderBody()
         </div>
-
     </div>
-
     <footer>
         <p>&copy; Hashiny International School @DateTime.Now.Year</p>
     </footer>
-
     <!-- Onvia progress bar -->
     <div id="ajaxProgressLoader" style="display: none;">
         <div class="loadingProgress">
@@ -96,7 +71,6 @@
     <!-- Onvia dialog -->
     <div id="OnviaAdminDialog">
     </div>
-
     @RenderSection("scripts", required: false)
 </body>
 </html>

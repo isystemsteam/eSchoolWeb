@@ -317,6 +317,7 @@
     <Content Include="Scripts\Custom\Common.js" />
     <Content Include="Scripts\Custom\Entity.js" />
     <Content Include="Scripts\Custom\Validation.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -369,6 +370,8 @@
     <Content Include="Views\Login\_Login.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Application.cshtml" />
+    <Content Include="Views\Admin\_EditAcademicYear.cshtml" />
+    <Content Include="Views\Admin\_ViewAcademicYear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

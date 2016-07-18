@@ -10,9 +10,9 @@ namespace HSchool.Business.Models
     {
         public int AcademicYearId { get; set; }
 
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public bool IsActive { get; set; }
 
@@ -20,7 +20,7 @@ namespace HSchool.Business.Models
         {
             get
             {
-                return string.Format("{0}-{1}", StartDate.Year, EndDate.Year);
+                return string.Format("{0}-{1}", StartDate.HasValue ? StartDate.Value.Year : (int?)null, EndDate.HasValue ? EndDate.Value.Year : (int?)null);
             }
         }
     }

@@ -718,9 +718,30 @@ namespace HSchool.Data.SqlRepository
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public List<AcademicYear> GetAcademicYears()
         {
-            return new List<AcademicYear>();
+            LogHelper.Info(string.Format("AdminRepository.GetAcademicYears - Begin"));
+            try
+            {
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<Models.AcademicYear>(Procedures.GetRoleById);
+                var businessResults = Mapper.Map<IEnumerable<Models.AcademicYear>, IEnumerable<AcademicYear>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<AcademicYear>();
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetAcademicYears - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetAcademicYears - Exception:{0}", ex.Message), ex);
+                throw;
+            }
         }
         #endregion
     }

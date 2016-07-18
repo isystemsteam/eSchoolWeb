@@ -1,0 +1,41 @@
+﻿@model HSchool.Business.Models.AcademicYear
+<h2 id="headAdminEditText">Edit Academic Year </h2>
+<div class="form-container">
+    @using (Html.BeginForm("EditAcademicYear", "Admin", FormMethod.Post, new { @id = "formAcademicYear" }))
+    {
+        <div class="row custom-row clearfix">
+            <div class="col-md-4 custom-text">
+                @Html.TextBoxFor(m => m.StartDate, new { @class = "clsTextBox datepicker", @id = "" })
+                @Html.HiddenFor(m => m.AcademicYearId, new { @class = "clsTextBox", @id = "" })
+                @Html.LabelFor(m => m.StartDate)
+                <i class="fa fa-exclamation-circle" style="display:none"></i>
+                <i class="fa fa-check-circle"></i>
+                <em class="error-msg">Error Message</em>
+            </div>
+            <div class="col-md-4 custom-text">
+                @Html.TextBoxFor(m => m.EndDate, new { @class = "clsTextBox datepicker", @id = "" })
+                @Html.LabelFor(m => m.EndDate)
+                <i class="fa fa-exclamation-circle" style="display:none"></i>
+                <i class="fa fa-check-circle"></i>
+                <em class="error-msg">Error Message</em>
+            </div>
+            <div class="col-md-4 custom-text visiblecheck clearfix">
+                @Html.CheckBoxFor(m => m.IsActive, new { @class = "", @id = "" })
+                @Html.LabelFor(m => m.IsActive, new { @class = "" })
+            </div>
+        </div>
+        <div class="row custom-row clearfix">
+            <div class="col-lg-12">
+                @Html.DisplayFor(m => m.AcademicYearDisplay)
+            </div>
+        </div>
+        <div class="btn-wrapper clearfix">
+            <div class="pull-left">
+                <input type="submit" value="Save" class="btn-blue" />
+            </div>
+            <div class="pull-left">
+                <input type="button" value="Cancel" class="btn-blue" />
+            </div>
+        </div>
+    }
+</div>

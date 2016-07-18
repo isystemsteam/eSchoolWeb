@@ -11,6 +11,8 @@
     viewClassSections: "ViewClassSections",
     saveClassSections: "SaveClassSections",
     SaveRolesPrivileges: "SaveRolesPrivileges",
+    editAcademicYear: "EditAcademicYear",    
+    getAcademicYears: "ViewAcademicYear",
     init: function (keyName) {
         return appService[keyName];
     }

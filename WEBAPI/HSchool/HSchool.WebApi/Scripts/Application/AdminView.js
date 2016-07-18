@@ -33,6 +33,9 @@ var adminView = {
             case "8":
                 this.rolesPrivileges.load();
                 break;
+            case "9":
+                this.academicYear.load();
+                break;
         }
     },
     handleException: function (xhr, error, messgage) {
@@ -45,6 +48,7 @@ var adminView = {
             $("#" + adminView.viewContainerId).hide();
             $("#" + adminView.editControlId).show();
         }
+        $('.datepicker').datepicker({ format: 'mm/dd/yyyy', startDate: '-3d' });
     },
     //Classes
     classes: {
@@ -279,8 +283,6 @@ var adminView = {
             parameters.push(new ajaxParam("moduleId", moduleId));
             $.fn.appCommon.ajax.getForm(appService.rolesPrivilegeForModule, parameters, successcallback, null);
         },
-        loadGrid: function () {
-        },
         saveRolePrivileges: function () {
             var jsonObj = [];
             var moduleId = $("#hdnModuleId").val();
@@ -328,6 +330,43 @@ var adminView = {
         },
         roleBoxBlur: function () {
             $(".divModulesContainer").hide();
+        }
+    },
+    //academic years
+    academicYear: {
+        load: function () {
+            this.loadGrid();
+        },
+        edit: function (id) {
+            var _successcallback = function (result) {
+                $("#" + adminView.editControlId).html(result);
+                adminView.displayBox(true);
+                //ajax form before submit call
+                var _beforecallback = function () { };
+
+                //ajax form success callback
+                var _successcallback = function (result) {
+                    if (result != null && result.IsSuccess) {
+                        adminView.academicYear.loadGrid();
+                    }
+                    jQuery.fn.appCommon.UI.displayMessage(result.Message, 3);
+                };
+
+                //ajax form errorcallback
+                var _errorcallback = function () { };
+                //bind ajax form
+                $.fn.appCommon.ajax.bind("formAcademicYear", _beforecallback, _successcallback, _errorcallback);
+            };
+            var parameters = [];
+            parameters.push(new ajaxParam("id", id));
+            $.fn.appCommon.ajax.getForm(appService.init("editAcademicYear"), parameters, _successcallback, null);
+        },
+        loadGrid: function () {
+            var _successcallback = function (result) {
+                $("#" + adminView.viewContainerId).html(result);
+                adminView.displayBox(false);
+            };
+            $.fn.appCommon.ajax.getForm(appService.init("getAcademicYears"), null, _successcallback, null);
         }
     },
     //settings

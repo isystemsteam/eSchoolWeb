@@ -2,6 +2,6 @@
 	@id int = 0	
 AS
 BEGIN
-	SELECT ClassId,ClassName,IsVisibleToApplication FROM DBO.Classes WHERE ClassId=@ID;
+	SELECT ClassId,ClassName,NameInDigit,IsVisibleToApplication FROM DBO.Classes WHERE ClassId=@ID;
 END
 

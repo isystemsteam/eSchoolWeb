@@ -399,14 +399,76 @@ namespace HSchool.WebApi.Controllers
         #endregion
 
         #region Years
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditAcademicYear(int id)
+        {
+            LogHelper.Info(string.Format("AdminController.EditAcademicYear[HttpGet] - Begin. Id:{0}", id));
+            var academicYear = new AcademicYear();
+            try
+            {
+                if (id != 0)
+                {
+                    academicYear = _adminRepository.GetAcademicYearById(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminController.EditAcademicYear[HttpGet] - Exception:{0}", ex.Message), ex);
+                return PartialView("_Error", ex.Message);
+            }
+            LogHelper.Info(string.Format("AdminController.EditAcademicYear[HttpGet] - End. Id:{0}", id));
+            return PartialView("_EditAcademicYear", academicYear);
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
-        //public int SaveAcademicYear(AcademicYear year)
-        //{
-        //}
+        [HttpPost]
+        public JsonResult EditAcademicYear(AcademicYear year)
+        {
+            LogHelper.Info(string.Format("AdminController.EditAcademicYear[HttpPost] - Begin"));
+            var response = new Response();
+            try
+            {
+                _adminRepository.SaveAcademicYear(year);
+                response.IsSuccess = true;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminController.EditAcademicYear[HttpPost] - Exception:{0}", ex.Message), ex);
+                response = new Response { IsSuccess = false, Message = ex.Message, StatusCode = 503 };
+            }
+            LogHelper.Info(string.Format("AdminController.EditAcademicYear[HttpPost] - End"));
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ViewAcademicYear()
+        {
+            LogHelper.Info(string.Format("AdminController.ViewAcademicYear - Begin"));
+            var allYears = new List<AcademicYear>();
+            try
+            {
+                allYears = _adminRepository.GetAcademicYears();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("AdminController.ViewAcademicYear - Exception:{0}", ex.Message));
+                return PartialView("_Error", ex.Message);
+            }
+            LogHelper.Info(string.Format("AdminController.ViewAcademicYear - End"));
+            return PartialView("_ViewAcademicYear", allYears);
+        }
         #endregion
     }
 }
