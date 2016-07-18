@@ -19,6 +19,7 @@ using ApplicationModule = HSchool.Business.Models.ApplicationModule;
 using RolePrivilege = HSchool.Business.Models.RolePrivilege;
 using ApplicationPrivilege = HSchool.Business.Models.ApplicationPrivilege;
 using AcademicYear = HSchool.Business.Models.AcademicYear;
+using CommunityMaster = HSchool.Business.Models.CommunityMaster;
 
 namespace HSchool.Data.SqlRepository
 {
@@ -680,7 +681,7 @@ namespace HSchool.Data.SqlRepository
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                var result = connection.Query<Models.AcademicYear>(Procedures.GetRoleById, new { academicYearId });
+                var result = connection.Query<Models.AcademicYear>(Procedures.GetAcademicYearById, new { academicYearId });
                 var businessResults = Mapper.Map<IEnumerable<Models.AcademicYear>, IEnumerable<AcademicYear>>(result);
                 return businessResults != null && businessResults.Any() ? businessResults.FirstOrDefault() : new AcademicYear();
             }
@@ -702,7 +703,7 @@ namespace HSchool.Data.SqlRepository
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                var result = connection.Query<Models.AcademicYear>(Procedures.GetRoleById);
+                var result = connection.Query<Models.AcademicYear>(Procedures.GetActiveAcademicYear);
                 var businessResults = Mapper.Map<IEnumerable<Models.AcademicYear>, IEnumerable<AcademicYear>>(result);
                 return businessResults != null && businessResults.Any() ? businessResults.FirstOrDefault() : new AcademicYear();
             }
@@ -728,7 +729,7 @@ namespace HSchool.Data.SqlRepository
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                var result = connection.Query<Models.AcademicYear>(Procedures.GetRoleById);
+                var result = connection.Query<Models.AcademicYear>(Procedures.GetAcademicYears);
                 var businessResults = Mapper.Map<IEnumerable<Models.AcademicYear>, IEnumerable<AcademicYear>>(result);
                 return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<AcademicYear>();
             }
@@ -740,6 +741,34 @@ namespace HSchool.Data.SqlRepository
             catch (Exception ex)
             {
                 LogHelper.Error(string.Format("AdminRepository.GetAcademicYears - Exception:{0}", ex.Message), ex);
+                throw;
+            }
+        }
+        #endregion
+
+        #region Community
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<CommunityMaster> GetCommunities()
+        {
+            LogHelper.Info(string.Format("AdminRepository.GetCommunities - Begin"));
+            try
+            {
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<Models.CommunityMaster>(Procedures.GetCommunities);
+                var businessResults = Mapper.Map<IEnumerable<Models.CommunityMaster>, IEnumerable<CommunityMaster>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<CommunityMaster>();
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetCommunities - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetCommunities - Exception:{0}", ex.Message), ex);
                 throw;
             }
         }

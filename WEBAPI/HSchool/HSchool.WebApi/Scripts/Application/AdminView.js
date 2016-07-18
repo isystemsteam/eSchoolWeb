@@ -26,6 +26,7 @@ var adminView = {
             case "5":
                 break;
             case "6":
+                this.academicYear.load();
                 break;
             case "7":
                 this.roles.load();
@@ -34,7 +35,6 @@ var adminView = {
                 this.rolesPrivileges.load();
                 break;
             case "9":
-                this.academicYear.load();
                 break;
         }
     },
@@ -48,7 +48,7 @@ var adminView = {
             $("#" + adminView.viewContainerId).hide();
             $("#" + adminView.editControlId).show();
         }
-        $('.datepicker').datepicker({ format: 'mm/dd/yyyy', startDate: '-3d' });
+        $('.datepicker').datepicker({ format: 'dd/mm/yyyy', startDate: '-3d' });
     },
     //Classes
     classes: {
@@ -89,6 +89,9 @@ var adminView = {
         },
         saveClass: function () {
             $('#formClassEdit').submit();
+        },
+        cancel: function () {
+            adminView.classes.loadGrid();
         }
     },
     //Sections
@@ -131,6 +134,9 @@ var adminView = {
         },
         saveSections: function () {
             $('#formSectionEdit').submit();
+        },
+        cancel: function () {
+            adminView.sections.loadGrid();
         }
     },
     //Class Sections
@@ -208,7 +214,7 @@ var adminView = {
             };
 
             $.fn.appCommon.ajax.post(appService.saveClassSections, parameters, 'application/json', successcallback, adminView.handleException);
-        }
+        }        
     },
     //Roles
     roles: {
@@ -248,6 +254,9 @@ var adminView = {
         },
         saveApplicationRole: function () {
             $('#formApplicationRoleEdit').submit();
+        },
+        cancel: function () {
+            this.loadGrid();
         }
     },
     rolesPrivileges: {
@@ -367,6 +376,9 @@ var adminView = {
                 adminView.displayBox(false);
             };
             $.fn.appCommon.ajax.getForm(appService.init("getAcademicYears"), null, _successcallback, null);
+        },
+        cancel: function () {
+            this.loadGrid();
         }
     },
     //settings

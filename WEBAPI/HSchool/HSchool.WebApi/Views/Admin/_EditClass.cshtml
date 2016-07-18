@@ -20,20 +20,20 @@
                 <em class="error-msg">Error Message</em>
             </div>
         </div>
-        <div class="row visiblecheck clearfix">            
-                @Html.CheckBoxFor(m => m.IsVisibleToApplication, new { @class = "", @id = "" })
-                @Html.LabelFor(m => m.IsVisibleToApplication, new { @class = "" })       
+        <div class="row visiblecheck clearfix">
+            @Html.CheckBoxFor(m => m.IsVisibleToApplication, new { @class = "", @id = "" })
+            @Html.LabelFor(m => m.IsVisibleToApplication, new { @class = "" })
         </div>
 
-      
 
-    <div class="btn-wrapper clearfix">
-        <div class="pull-right">
-            <input type="submit" value="Save" class="btn-blue" />
-        </div>
+
+        <div class="btn-wrapper clearfix">
             <div class="pull-right">
-                <input type="button" value="Cancel" class="btn-blue" />
+                <input type="button" value="Cancel" class="btn-grey" />
             </div>
-    </div>
+            <div class="pull-right">
+                <input type="submit" value="Save" class="btn-blue" />
+            </div>
+        </div>
     }
 </div>

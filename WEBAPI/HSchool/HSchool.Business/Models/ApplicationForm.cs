@@ -57,6 +57,23 @@ namespace HSchool.Business.Models
         public bool IsOfficeFormEnabled { get; set; }
 
         public string ActionName { get; set; }
-        
+
+        public AcademicYear AcademicYear { get; set; }
+
+        public List<CommunityMaster> Communities { get; set; }
+
+        public List<SelectListItem> ListCommunities
+        {
+            get
+            {
+                List<SelectListItem> items = new List<SelectListItem>();
+                if (this.Communities != null && this.Communities.Count > 0)
+                {
+                    items.AddRange(this.Communities.Select(s => new SelectListItem { Text = s.CommunityName, Value = s.CommunityId.ToString() }));
+                }
+                return items;
+            }
+        }
+
     }
 }

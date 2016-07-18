@@ -7,5 +7,5 @@
         }
     });
     $('.column').height(highestBox);    
-    $('.datepicker').datepicker({ format: 'mm/dd/yyyy', startDate: '-3d' });
+    $('.datepicker').datepicker({ format: 'dd/mm/yyyy', startDate: '-3d' });
 });

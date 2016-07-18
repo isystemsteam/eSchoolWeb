@@ -1,42 +1,41 @@
 ﻿@model HSchool.Business.Models.ApplicationRole
 <h2 id="headAdminEditText">Add/Edit Section </h2>
 <div class="form-container">
-@using (Html.BeginForm("EditRole", "Admin", FormMethod.Post, new { @id = "formApplicationRoleEdit" }))
-{
+    @using (Html.BeginForm("EditRole", "Admin", FormMethod.Post, new { @id = "formApplicationRoleEdit" }))
+    {
 
-    <div class="row">
-        <div class="col-md-4">
-            @Html.TextBoxFor(m => m.RoleName, new { @class = "clsTextBox", @id = "" })
-            @Html.HiddenFor(m => m.RoleId, new { @class = "clsTextBox", @id = "" })
-            @Html.LabelFor(m => m.RoleName)
-            <i class="fa fa-exclamation-circle" style="display:none"></i>
-            <i class="fa fa-check-circle"></i>
-            <em class="error-msg">Error Message</em>
+        <div class="row">
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.RoleName, new { @class = "clsTextBox", @id = "" })
+                @Html.HiddenFor(m => m.RoleId, new { @class = "clsTextBox", @id = "" })
+                @Html.LabelFor(m => m.RoleName)
+                <i class="fa fa-exclamation-circle" style="display:none"></i>
+                <i class="fa fa-check-circle"></i>
+                <em class="error-msg">Error Message</em>
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBoxFor(m => m.IsActive, new { @class = "clsTextBox", @id = "" })
+                @Html.LabelFor(m => m.IsActive)
+                <i class="fa fa-exclamation-circle" style="display:none"></i>
+                <i class="fa fa-check-circle"></i>
+                <em class="error-msg">Error Message</em>
+            </div>
+            <div class="col-md-4">
+                @Html.CheckBoxFor(m => m.VisibleToLogin, new { @class = "clsTextBox", @id = "" })
+                @Html.LabelFor(m => m.VisibleToLogin)
+                <i class="fa fa-exclamation-circle" style="display:none"></i>
+                <i class="fa fa-check-circle"></i>
+                <em class="error-msg">Error Message</em>
+            </div>
         </div>
-        <div class="col-md-4">
-            @Html.CheckBoxFor(m => m.IsActive, new { @class = "clsTextBox", @id = "" })
-            @Html.LabelFor(m => m.IsActive)
-            <i class="fa fa-exclamation-circle" style="display:none"></i>
-            <i class="fa fa-check-circle"></i>
-            <em class="error-msg">Error Message</em>
-        </div>
-        <div class="col-md-4">
-            @Html.CheckBoxFor(m => m.VisibleToLogin, new { @class = "clsTextBox", @id = "" })
-            @Html.LabelFor(m => m.VisibleToLogin)
-            <i class="fa fa-exclamation-circle" style="display:none"></i>
-            <i class="fa fa-check-circle"></i>
-            <em class="error-msg">Error Message</em>
-        </div>
-    </div>
 
-    <div class="btn-wrapper clearfix">
+        <div class="btn-wrapper clearfix">
             <div class="pull-right">
-            <input class="btn-blue" type="submit" value="Save" />
+                <input type="button" value="Cancel" class="btn-grey" onclick="" />
+            </div>
+            <div class="pull-right">
+                <input class="btn-blue" type="submit" value="Save" />
+            </div>
         </div>
-        <div class="pull-right">
-            <input type="button" value="Cancel" class="btn-blue" onclick="" />
-        </div>
-    </div>
-
-        }
+    }
 </div>

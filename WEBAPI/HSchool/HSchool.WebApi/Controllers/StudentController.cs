@@ -50,8 +50,15 @@ namespace HSchool.WebApi.Controllers
             {
                 admissionForm.Student.StudentGuardians.Add(new StudentGuardian());
             }
-            admissionForm.FormClasses = _adminRepository.GetAllClasses(true);
+            admissionForm.Student.StudentClass = new StudentClass();
+            admissionForm.AcademicYear = _adminRepository.GetActiveAcademicYear();
+            if (admissionForm.AcademicYear != null)
+            {
+                admissionForm.Student.StudentClass.AcademicYear = admissionForm.AcademicYear.AcademicYearId;
+            }
+            admissionForm.FormClasses = _adminRepository.GetAllClasses(false);
             admissionForm.ActionName = string.Format("{0}", "Application");
+            admissionForm.Communities = _adminRepository.GetCommunities();
             admissionForm.IsOfficeFormEnabled = false;
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
             return View(admissionForm);

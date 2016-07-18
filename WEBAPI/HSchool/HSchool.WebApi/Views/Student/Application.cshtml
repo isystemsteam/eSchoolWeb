@@ -1,90 +1,89 @@
 ﻿@model HSchool.Business.Models.ApplicationForm
 
-    <div class="container">
-        @using (Html.BeginForm("Application", "Student", FormMethod.Post, new { }))
-        {
-                      
-            <h1>Student Entry Form </h1>                
-                     
-                       
-            <div class="form-group-expand-div admin-form">
-                <h2>Student Information</h2>
-                <div class="form-container">                    
-                    <div class="row custom-row clearfix">
-                        <div class="col-md-6 custom-text">
-                            @Html.LabelFor(m => m.Student.StudentClass.ClassId)
-                            @Html.HiddenFor(m => m.Student.StudentClass.ClassId, new { @id = "", @class = "hiddenListBox" })
-                            @Html.ListTextBoxFor(m => m.Student.StudentClass.ClassName, Model.ListClasses, null)
-                        </div>
-                        <div class="col-md-6 custom-text">
-                            @Html.LabelFor(m => m.Student.StudentClass.AcademicYear)
-                            @Html.TextBoxFor(m => m.Student.StudentClass.AcademicYear, new { @Id = "txtAcademicYear" })
-                        </div>
+<div class="container">
+    @using (Html.BeginForm("Application", "Student", FormMethod.Post, new { }))
+    {
+
+        <h1>Student Entry Form </h1>
+        <div class="form-group-expand-div admin-form">
+            <h2>Student Information</h2>
+            <div class="form-container">
+                <div class="row custom-row clearfix">
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.Student.StudentClass.ClassId)
+                        @Html.HiddenFor(m => m.Student.StudentClass.ClassId, new { @id = "", @class = "hiddenListBox" })
+                        @Html.ListTextBoxFor(m => m.Student.StudentClass.ClassName, Model.ListClasses, null)
                     </div>
-                    <div class="row custom-row clearfix">
-                        <div class="col-md-4 custom-text">
-                            @Html.LabelFor(m => m.Student.Title)
-                            @Html.TextBoxFor(m => m.Student.Title, new { @Id = "txtStudentTitle" })
-                        </div>
-                        <div class="col-md-4 custom-text">
-                            @Html.LabelFor(m => m.Student.FirstName)
-                            @Html.TextBoxFor(m => m.Student.FirstName, new { @Id = "txtFirstName" })
-                        </div>
-                        <div class="col-md-4 custom-text">
-                            @Html.LabelFor(m => m.Student.LastName)
-                            @Html.TextBoxFor(m => m.Student.LastName, new { @Id = "txtLastName" })
-                        </div>
-                    </div>
-                    <div class="row custom-row clearfix">
-                        <div class="col-md-4 custom-text">
-                            @Html.LabelFor(m => m.Student.DateOfBirth)
-                            @Html.TextBoxFor(m => m.Student.DateOfBirth, new { @Id = "txtDateOfBirth", @class = "dateTimePicker" })
-                        </div>
-                        <div class="col-md-4 custom-text">
-                            @Html.LabelFor(m => m.Student.PlaceOfBirth)
-                            @Html.TextBoxFor(m => m.Student.PlaceOfBirth, new { @Id = "txtPlaceOfBirth" })
-                        </div>
-                        <div class="col-md-4 custom-text">
-                            @Html.LabelFor(m => m.Student.MotherLanguage)
-                            @Html.TextBoxFor(m => m.Student.MotherLanguage, new { @Id = "txtMotherLanguage", @class = "" })
-                        </div>
-                    </div>
-                    <div class="row custom-row clearfix">
-                        <div class="col-md-4 custom-text">
-                            @Html.LabelFor(m => m.Student.Nationality)
-                            @Html.TextBoxFor(m => m.Student.Nationality, new { @Id = "txtNationality", @class = "" })
-                        </div>
-                        <div class="col-md-4 custom-text">
-                            @Html.LabelFor(m => m.Student.Religion)
-                            @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
-                        </div>
-                        <div class="col-md-4 custom-text">
-                            @Html.LabelFor(m => m.Student.Community)
-                            @Html.TextBoxFor(m => m.Student.Community, new { @Id = "txtCommunity", @class = "" })
-                        </div>
-                    </div>
-                    <div class="row custom-row clearfix">
-                        <div class="col-md-12 custom-text">
-                            @Html.LabelFor(m => m.Student.Religion)
-                            @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
-                        </div>
-                    </div>
-                    <div class="row custom-row clearfix">
-                        <div class="col-md-6 custom-text">
-                            @Html.LabelFor(m => m.Student.FluencyinOthers)
-                            @Html.TextBoxFor(m => m.Student.FluencyinOthers, new { @Id = "txtFluencyinOthers" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.CheckBoxFor(m => m.Student.IsTransportRequired)
-                             @Html.LabelFor(m => m.Student.IsTransportRequired)
-                        </div>
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.Student.StudentClass.AcademicYear)
+                        @Html.DisplayFor(m => m.AcademicYear.AcademicYearDisplay)
+                        @Html.HiddenFor(m => m.Student.StudentClass.AcademicYear, new { @Id = "txtAcademicYear" })
                     </div>
                 </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Student.Title)
+                        @Html.TextBoxFor(m => m.Student.Title, new { @Id = "txtStudentTitle" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Student.FirstName)
+                        @Html.TextBoxFor(m => m.Student.FirstName, new { @Id = "txtFirstName" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Student.LastName)
+                        @Html.TextBoxFor(m => m.Student.LastName, new { @Id = "txtLastName" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Student.DateOfBirth)
+                        @Html.TextBoxFor(m => m.Student.DateOfBirth, new { @Id = "txtDateOfBirth", @class = "dateTimePicker" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Student.PlaceOfBirth)
+                        @Html.TextBoxFor(m => m.Student.PlaceOfBirth, new { @Id = "txtPlaceOfBirth" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Student.MotherLanguage)
+                        @Html.TextBoxFor(m => m.Student.MotherLanguage, new { @Id = "txtMotherLanguage", @class = "" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Student.Nationality)
+                        @Html.TextBoxFor(m => m.Student.Nationality, new { @Id = "txtNationality", @class = "" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Student.Religion)
+                        @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Student.Community)
+                        @Html.DropDownTextBoxFor(m => m.Student.Community, Model.ListCommunities, null)
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-12 custom-text">
+                        @Html.LabelFor(m => m.Student.Religion)
+                        @Html.TextBoxFor(m => m.Student.Religion, new { @Id = "txtReligion" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.Student.FluencyinOthers)
+                        @Html.TextBoxFor(m => m.Student.FluencyinOthers, new { @Id = "txtFluencyinOthers" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.CheckBoxFor(m => m.Student.IsTransportRequired)
+                        @Html.LabelFor(m => m.Student.IsTransportRequired)
+                    </div>
+                </div>
+            </div>
 
-                <h2>Address for Communication</h2>
-                <div class="form-container">
+            <h2>Address for Communication</h2>
+            <div class="form-container">
 
-                    @if (Model.Student.Addresses.Count > 0)
+                @if (Model.Student.Addresses.Count > 0)
                 {
                     for (int aCount = 0; aCount < Model.Student.Addresses.Count; aCount++)
                     {
@@ -114,15 +113,12 @@
                         </div>
                     }
                 }
-                </div>
-                
-                <h2>Parent Details</h2>
-                <div class="form-container">
-                    @if (Model.Student.StudentGuardians != null)
+            </div>
+
+            <h2>Parent Details</h2>
+            <div class="form-container">
+                @if (Model.Student.StudentGuardians != null)
                 {
-
-                       
-
 
                     for (int sCount = 0; sCount < Model.Student.StudentGuardians.Count; sCount++)
                     {
@@ -190,59 +186,59 @@
                         </div>
                     }
                 }
-</div>
-                <h2 class="highlight-bg">For Office Use</h2>
-                <div class="form-container">
+            </div>
+            <h2 class="highlight-bg">For Office Use</h2>
+            <div class="form-container">
 
-                    @if (!Model.IsOfficeFormEnabled)
+                @if (!Model.IsOfficeFormEnabled)
                 {
 
 
-                        <div class="row custom-row clearfix">
-                            <div class="col-md-6">
-                                @Html.LabelFor(m => m.ApplicationStatus)
-                              
-                                <!-- bootstrap dropdown -->
-                                <div class="dropdown">
-                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        Select the status
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#">Submitted</a></li>
-                                        <li><a href="#">Pending</a></li>
-                                        <li><a href="#">Inprogress</a></li>
-                                        <li><a href="#">Rejected</a></li>
-                                        <li role="separator" class="divider"></li>
-                                        <li><a href="#">Approved</a></li>
-                                    </ul>
-                                </div>
-                                <!-- bootstrap dropdown -->
-                            </div>
-                            <div class="col-md-6 custom-text">
-                                @Html.LabelFor(m => m.AppliedDate)
-                                @Html.DisplayFor(m => m.AppliedDate)
-                            </div>
-                        </div>
-                        <div class="row custom-row clearfix">
-                            <div class="col-md-6 custom-text">
-                                @Html.LabelFor(m => m.ApprovalDate)
-                                @Html.DisplayFor(m => m.ApprovalDate, new { })
-                            </div>
-                            <div class="col-md-6 custom-text">
-                                @Html.LabelFor(m => m.ApprovedByText)
-                                @Html.DisplayFor(m => m.ApprovedByText)
-                            </div>
-                        </div>
-                }
-                </div>
-                </div>
+                    <div class="row custom-row clearfix">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.ApplicationStatus)
 
-    <div class="btn-wrapper pull-right">
-        <input type="submit" value="Submit" class="btn-blue" />
-        <input type="button" value="Admit" class="btn-blue" />
-        <input type="button" value="Cancel" class="btn-blue" />
-    </div>
-        }
-    </div>
+                            <!-- bootstrap dropdown -->
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Select the status
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#">Submitted</a></li>
+                                    <li><a href="#">Pending</a></li>
+                                    <li><a href="#">Inprogress</a></li>
+                                    <li><a href="#">Rejected</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Approved</a></li>
+                                </ul>
+                            </div>
+                            <!-- bootstrap dropdown -->
+                        </div>
+                        <div class="col-md-6 custom-text">
+                            @Html.LabelFor(m => m.AppliedDate)
+                            @Html.DisplayFor(m => m.AppliedDate)
+                        </div>
+                    </div>
+                    <div class="row custom-row clearfix">
+                        <div class="col-md-6 custom-text">
+                            @Html.LabelFor(m => m.ApprovalDate)
+                            @Html.DisplayFor(m => m.ApprovalDate, new { })
+                        </div>
+                        <div class="col-md-6 custom-text">
+                            @Html.LabelFor(m => m.ApprovedByText)
+                            @Html.DisplayFor(m => m.ApprovedByText)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="btn-wrapper pull-right">
+            <input type="submit" value="Submit" class="btn-blue" />
+            <input type="button" value="Admit" class="btn-blue" />
+            <input type="button" value="Cancel" class="btn-blue" />
+        </div>
+    }
+</div>
 

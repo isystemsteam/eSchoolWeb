@@ -69,5 +69,7 @@ namespace HSchool.Business.Repository
 
         List<AcademicYear> GetAcademicYears();
 
+        List<CommunityMaster> GetCommunities();
+
     }
 }
