@@ -201,7 +201,23 @@
                         <div class="row custom-row clearfix">
                             <div class="col-md-6">
                                 @Html.LabelFor(m => m.ApplicationStatus)
-                                @Html.DropDownListFor(m => m.ApplicationStatus, Model.ApplicationStatuses, new { })
+                              
+                                <!-- bootstrap dropdown -->
+                                <div class="dropdown">
+                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Select the status
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#">Submitted</a></li>
+                                        <li><a href="#">Pending</a></li>
+                                        <li><a href="#">Inprogress</a></li>
+                                        <li><a href="#">Rejected</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Approved</a></li>
+                                    </ul>
+                                </div>
+                                <!-- bootstrap dropdown -->
                             </div>
                             <div class="col-md-6 custom-text">
                                 @Html.LabelFor(m => m.AppliedDate)

@@ -1,5 +1,6 @@
 ﻿@model HSchool.Business.Models.ApplicationRole
-<h1 id="headAdminEditText">Add/Edit Section </h1>
+<h2 id="headAdminEditText">Add/Edit Section </h2>
+<div class="form-container">
 @using (Html.BeginForm("EditRole", "Admin", FormMethod.Post, new { @id = "formApplicationRoleEdit" }))
 {
 
@@ -29,12 +30,13 @@
     </div>
 
     <div class="btn-wrapper clearfix">
-        <div class="pull-left">
+            <div class="pull-right">
             <input class="btn-blue" type="submit" value="Save" />
         </div>
-        <div class="pull-left">
+        <div class="pull-right">
             <input type="button" value="Cancel" class="btn-blue" onclick="" />
         </div>
     </div>
 
         }
+</div>

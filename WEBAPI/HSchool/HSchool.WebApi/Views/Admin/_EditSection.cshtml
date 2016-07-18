@@ -1,5 +1,6 @@
 ﻿@model HSchool.Business.Models.Section
-<h1 class="page-head-line" id="headAdminEditText">Add/Edit Section </h1>
+<h2 id="headAdminEditText">Add/Edit Section </h2>
+<div class="form-container">
 @using (Html.BeginForm("EditSection", "Admin", FormMethod.Post, new { @id = "formSectionEdit" }))
 {
 
@@ -13,13 +14,14 @@
         </div>
     </div>
 
-    <div class="btn-wrapper clearfix">
-        <div class="pull-left">
-            <input class="btn-blue" type="submit" value="Save" />
-        </div>
-        <div class="pull-left">
+        <div class="btn-wrapper clearfix">
+            <div class="pull-right">
+                <input class="btn-blue" type="submit" value="Save" />
+            </div>
+        <div class="pull-right">
             <input type="button" value="Cancel" class="btn-blue" onclick=""/>
         </div>
-    </div>
-
+        </div>
+   
 }
+</div>
