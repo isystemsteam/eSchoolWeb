@@ -21,7 +21,8 @@ namespace HSchool.Data.Models
 
         public string Email { get; set; }
 
-        public int? Age { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+
         public double? AnnualIncome { get; set; }
         public bool IsSameAsUserAddress { get; set; }
         public string MobileNumber { get; set; }

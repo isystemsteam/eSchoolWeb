@@ -20,6 +20,8 @@ using RolePrivilege = HSchool.Business.Models.RolePrivilege;
 using ApplicationPrivilege = HSchool.Business.Models.ApplicationPrivilege;
 using AcademicYear = HSchool.Business.Models.AcademicYear;
 using CommunityMaster = HSchool.Business.Models.CommunityMaster;
+using MotherLanguages = HSchool.Business.Models.MotherLanguages;
+using UserRelationship = HSchool.Business.Models.UserRelationship;
 
 namespace HSchool.Data.SqlRepository
 {
@@ -769,6 +771,62 @@ namespace HSchool.Data.SqlRepository
             catch (Exception ex)
             {
                 LogHelper.Error(string.Format("AdminRepository.GetCommunities - Exception:{0}", ex.Message), ex);
+                throw;
+            }
+        }
+        #endregion
+
+        #region MotherLanguages
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<MotherLanguages> GetMotherLanguages()
+        {
+            LogHelper.Info(string.Format("AdminRepository.GetMotherLanguages - Begin"));
+            try
+            {
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<Models.MotherLanguages>(Procedures.GetMotherLanguages);
+                var businessResults = Mapper.Map<IEnumerable<Models.MotherLanguages>, IEnumerable<MotherLanguages>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<MotherLanguages>();
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetMotherLanguages - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetMotherLanguages - Exception:{0}", ex.Message), ex);
+                throw;
+            }
+        }
+        #endregion
+
+        #region Relationships
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<UserRelationship> GetRelationships()
+        {
+            LogHelper.Info(string.Format("AdminRepository.GetRelationships - Begin"));
+            try
+            {
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<Models.UserRelationship>(Procedures.GetRelationships);
+                var businessResults = Mapper.Map<IEnumerable<Models.UserRelationship>, IEnumerable<UserRelationship>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<UserRelationship>();
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetRelationships - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetRelationships - Exception:{0}", ex.Message), ex);
                 throw;
             }
         }

@@ -10,7 +10,7 @@
 	Occupation varchar(255),
 	Gender varchar(15),
 	Email varchar(255),	
-	Age int,
+	DateOfBirth datetime,
 	PrimaryGuardian bit,
 	AnnualIncome varchar(120),
 	HighestQualification varchar(50),

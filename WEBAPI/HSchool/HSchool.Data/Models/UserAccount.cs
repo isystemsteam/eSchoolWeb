@@ -52,12 +52,14 @@ namespace HSchool.Data.Models
 
         public bool EmailEnabled { get; set; }
 
-        public bool NotoficationEnabled { get; set; }
+        public bool NotificationEnabled { get; set; }
 
         public int? MotherLanguage { get; set; }        
 
         public DateTime? UserLastLogin { get; set; }
 
         public int UserRole { get; set; }
+
+        public byte[] UserImage { get; set; }
     }
 }

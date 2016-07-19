@@ -12,6 +12,8 @@ namespace HSchool.Data.Models
 
         public int StudentId { get; set; }
 
+        public int ClassId { get; set; }
+
         public string ClassName { get; set; }
 
         public Int32 SectionId { get; set; }

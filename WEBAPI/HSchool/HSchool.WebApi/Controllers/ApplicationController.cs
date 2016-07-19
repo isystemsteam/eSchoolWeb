@@ -16,6 +16,7 @@ namespace HSchool.WebApi.Controllers
         #region Fields
         private readonly IAdminRepository _adminRepository;
         private readonly IStudentRepository _studentRepository;
+        private readonly IApplicationRepository _applicationRepository;
         #endregion
 
         #region Ctor
@@ -23,21 +24,47 @@ namespace HSchool.WebApi.Controllers
         /// 
         /// </summary>
         /// <param name="adminRepository"></param>
-        public ApplicationController(IAdminRepository adminRepository, IStudentRepository studentRepository)
+        public ApplicationController(IAdminRepository adminRepository, IStudentRepository studentRepository, IApplicationRepository applicationRepository)
         {
             _adminRepository = adminRepository;
             _studentRepository = studentRepository;
+            _applicationRepository = applicationRepository;
         }
         #endregion
 
         #region Actions
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             LogHelper.Info(string.Format("ApplicationController.Index - Begin"));
-            var admissionForm = new ApplicationForm();
-            admissionForm.FormClasses = _adminRepository.GetAllClasses(true);
+            var applicationForm = new ApplicationForm();
+            applicationForm.StudentClass = new List<StudentClass> { new StudentClass() };
+            applicationForm.StudentGuardians = new List<StudentGuardian>();
+            applicationForm.Addresses = new List<Address> { new Address() };
+
+            int guardianCount = CommonHelper.GetWebConfigValue<int>(WebConstants.GuardianCount);
+            for (int studentGurCounter = 0; studentGurCounter < guardianCount; studentGurCounter++)
+            {
+                applicationForm.StudentGuardians.Add(new StudentGuardian());
+            }
+
+            applicationForm.AcademicYear = _adminRepository.GetActiveAcademicYear();
+            if (applicationForm.AcademicYear != null)
+            {
+                applicationForm.StudentClass[0].AcademicYear = applicationForm.AcademicYear.AcademicYearId;
+            }
+            applicationForm.FormClasses = _adminRepository.GetAllClasses(false);
+            applicationForm.Communities = _adminRepository.GetCommunities();
+            applicationForm.RelationShips = _adminRepository.GetRelationships();
+            applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>();
+            applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>();
+            applicationForm.IsOfficeFormEnabled = false;
+            applicationForm.ActionName = string.Format("{0}", "Application");
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
-            return View(admissionForm);
+            return View(applicationForm);
         }
 
         /// <summary>
@@ -45,12 +72,18 @@ namespace HSchool.WebApi.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public ActionResult StudentRegister(ApplicationForm model)
+        [HttpPost]
+        public ActionResult Edit(ApplicationForm model)
         {
             LogHelper.Info(string.Format("ApplicationController.StudentRegister - Begin"));
             try
             {
-                var id = _studentRepository.SaveStudentInformation(model.Student);
+                if (ModelState.IsValid)
+                {
+                    model.IsStudentUpdate = true;
+                    model.UserStatus = (int)UserStatusEnum.Registered;
+                }
+                var id = _applicationRepository.SaveApplication(model);
                 var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
                 LogHelper.Info(string.Format("ApplicationController.StudentRegister - End"));
                 return Json(response, JsonRequestBehavior.AllowGet);

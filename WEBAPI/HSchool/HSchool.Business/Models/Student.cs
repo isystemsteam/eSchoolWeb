@@ -18,7 +18,10 @@ namespace HSchool.Business.Models
         [DisplayName("Transport Facility Required")]
         public bool IsTransportRequired { get; set; }
 
-        public StudentClass StudentClass { get; set; }
+        public List<StudentClass> StudentClass { get; set; }
+
+        [DisplayName("Visible Mark")]
+        public bool VisibleMark { get; set; }
 
         [JsonProperty("userGuardians")]
         public List<StudentGuardian> StudentGuardians { get; set; }

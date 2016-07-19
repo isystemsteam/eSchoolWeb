@@ -49,7 +49,7 @@ namespace HSchool.Data.SqlRepository
                 using (var connection = SqlDataConnection.GetSqlConnection())
                 {
                     var dStudent = Mapper.Map<Student, Models.Student>(student);
-                    var results = connection.Query<int>(Procedures.SaveStudentInformation, dStudent);
+                    var results = connection.Query<int>(Procedures.SaveApplication, dStudent);
                     LogHelper.Info(string.Format("StudentRepository.SaveStudentInformation - End"));
                     return results != null ? results.First() : (int?)null;
                 }

@@ -24,6 +24,9 @@ using StudentImage = HSchool.Business.Models.StudentImage;
 using Student = HSchool.Business.Models.Student;
 using ApplicationForm = HSchool.Business.Models.ApplicationForm;
 using AcademicYear = HSchool.Business.Models.AcademicYear;
+using UserRelationship = HSchool.Business.Models.UserRelationship;
+using ApplicationFormSearch = HSchool.Business.Models.ApplicationFormSearch;
+using StudentClass = HSchool.Business.Models.StudentClass;
 
 namespace HSchool.CompositionRoot
 {
@@ -86,7 +89,16 @@ namespace HSchool.CompositionRoot
             mapper.CreateMap<Data.Models.ApplicationForm, ApplicationForm>();
 
             mapper.CreateMap<AcademicYear, Data.Models.AcademicYear>();
-            mapper.CreateMap<Data.Models.AcademicYear, AcademicYear>();            
+            mapper.CreateMap<Data.Models.AcademicYear, AcademicYear>();
+
+            mapper.CreateMap<UserRelationship, Data.Models.UserRelationship>();
+            mapper.CreateMap<Data.Models.UserRelationship, UserRelationship>();
+
+            mapper.CreateMap<ApplicationFormSearch, Data.Models.ApplicationFormSearch>();
+            mapper.CreateMap<Data.Models.ApplicationFormSearch, ApplicationFormSearch>();
+
+            mapper.CreateMap<StudentClass, Data.Models.StudentClass>();
+            mapper.CreateMap<Data.Models.StudentClass, StudentClass>(); 
         }
     }
 }

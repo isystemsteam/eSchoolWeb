@@ -12,7 +12,7 @@
                     <div class="col-md-6 custom-text">
                         @Html.LabelFor(m => m.Student.StudentClass.ClassId)
                         @Html.HiddenFor(m => m.Student.StudentClass.ClassId, new { @id = "", @class = "hiddenListBox" })
-                        @Html.ListTextBoxFor(m => m.Student.StudentClass.ClassName, Model.ListClasses, null)
+                        @Html.DropDownListFor(m => m.Student.StudentClass.ClassId, Model.ListClasses, new { @id = "", @class = "selectpicker show-tick" })                        
                     </div>
                     <div class="col-md-6 custom-text">
                         @Html.LabelFor(m => m.Student.StudentClass.AcademicYear)
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.Student.Community)
-                        @Html.DropDownTextBoxFor(m => m.Student.Community, Model.ListCommunities, null)
+                        @Html.DropDownListFor(m => m.Student.Community, Model.ListCommunities, new { @id = "", @class = "selectpicker show-tick" })                        
                     </div>
                 </div>
                 <div class="row custom-row clearfix">
@@ -241,4 +241,3 @@
         </div>
     }
 </div>
-

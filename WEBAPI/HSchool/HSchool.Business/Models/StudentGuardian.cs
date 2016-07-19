@@ -37,7 +37,7 @@ namespace HSchool.Business.Models
         public string Occupation { get; set; }
 
         [JsonProperty("age")]
-        public int? Age { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [JsonProperty("annualIncome")]
         public double? AnnualIncome { get; set; }        

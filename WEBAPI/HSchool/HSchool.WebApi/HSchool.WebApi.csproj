@@ -266,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\bootstrap-select.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -285,6 +286,7 @@
     <Content Include="Scripts\Application\ApplicationForm.js" />
     <Content Include="Scripts\Application\Home.js" />
     <Content Include="Scripts\Application\LoginView.js" />
+    <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -314,6 +316,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Custom\AppCommon.js" />
+    <Content Include="Scripts\Custom\AppEvents.js" />
     <Content Include="Scripts\Custom\Common.js" />
     <Content Include="Scripts\Custom\Entity.js" />
     <Content Include="Scripts\Custom\Validation.js" />

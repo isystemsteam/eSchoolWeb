@@ -16,7 +16,11 @@ namespace HSchool.Data.Models
 
         public bool IsTransportRequired { get; set; }
 
-        public StudentClass StudentClassInfo { get; set; }
+        public bool VisibleMark { get; set; }
+
+        public List<StudentClass> StudentClass { get; set; }
+
+        public byte[] StudentImage { get; set; }
 
         public List<StudentGuardian> StudentGuardians { get; set; }
     }

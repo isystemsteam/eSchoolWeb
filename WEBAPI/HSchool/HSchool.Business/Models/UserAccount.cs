@@ -61,7 +61,7 @@ namespace HSchool.Business.Models
         public string UserName { get; set; }
 
         [JsonProperty("userStatusId")]
-        public int UserStatusId { get; set; }
+        public int UserStatus { get; set; }
 
         [JsonProperty("isVerified")]
         public bool IsVerified { get; set; }
@@ -75,18 +75,17 @@ namespace HSchool.Business.Models
         [JsonProperty("emailEnabled")]
         public bool EmailEnabled { get; set; }
 
-        [JsonProperty("notoficationEnabled")]
-        public bool NotoficationEnabled { get; set; }
+        [JsonProperty("notificationEnabled")]
+        public bool NotificationEnabled { get; set; }
 
         [JsonProperty("motherLanguage")]
         public int? MotherLanguage { get; set; }
 
         public DateTime? UserLastLogin { get; set; }
 
-        [JsonProperty("userStatus")]
-        public UserStatusEnum UserStatus { get; set; }
-
         public int UserRole { get; set; }
-        
+
+        public byte[] UserImage { get; set; }
+
     }
 }

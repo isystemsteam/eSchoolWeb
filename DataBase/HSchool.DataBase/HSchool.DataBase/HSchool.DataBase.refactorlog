@@ -119,4 +119,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="NameInDigit" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="ac008fe0-d5bc-4adb-aec7-2e6c1785a4b4" ChangeDateTime="07/19/2016 20:44:19">
+    <Property Name="ElementName" Value="[dbo].[Student].[EnableMarkView]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Student]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="VisibleMark" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="07b91cac-79e1-4f3d-a6a3-93f6ee10ef88" ChangeDateTime="07/19/2016 21:54:58">
+    <Property Name="ElementName" Value="[dbo].[StudentGuardians].[Age]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[StudentGuardians]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateOfBirth" />
+  </Operation>
 </Operations>

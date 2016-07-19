@@ -5,8 +5,7 @@
 	@FirstName varchar(120),
 	@LastName varchar(120),
 	@Email varchar(255),
-	@Gender varchar(10),
-	@Age int,
+	@Gender varchar(10),	
 	@DateOfBirth datetime,
 	@PlaceOfBirth varchar(120),
 	@BloodGroup varchar(12),
@@ -24,8 +23,8 @@
 )
 AS
 BEGIN
-	BEGIN TRY
-	BEGIN TRANSACTION H_INSERTUPDATEUSER
+	
+	BEGIN TRY	
 
 	IF NOT EXISTS(SELECT 1 FROM dbo.UserAccounts WHERE UserId=@UserId)
 		BEGIN
@@ -34,8 +33,7 @@ BEGIN
 				,FirstName
 				,LastName
 				,Email
-				,Gender
-				,Age
+				,Gender				
 				,DateOfBirth
 				,PlaceOfBirth
 				,BloodGroup
@@ -58,8 +56,7 @@ BEGIN
 					@FirstName
 					,@LastName
 					,@Email
-					,@Gender
-					,@Age
+					,@Gender					
 					,@DateOfBirth
 					,@PlaceOfBirth
 					,@BloodGroup
@@ -85,8 +82,7 @@ BEGIN
 				FirstName=@FirstName,
 				LastName=@LastName,
 				Email=@Email,
-				Gender=@Gender,
-				Age=@Age,
+				Gender=@Gender,				
 				DateOfBirth=@DateOfBirth,
 				PlaceOfBirth=@PlaceOfBirth,
 				BloodGroup=@BloodGroup,
@@ -103,13 +99,11 @@ BEGIN
 				ModifiedDate=GETDATE()
 			WHERE UserId =@UserId
 		END
-		--https://msdn.microsoft.com/en-us/library/bb675163(v=vs.110).aspx			
-
-		COMMIT TRANSACTION H_INSERTUPDATEUSER
-	
+		--https://msdn.microsoft.com/en-us/library/bb675163(v=vs.110).aspx	
+		
 	END TRY
 	BEGIN CATCH 
-		ROLLBACK TRANSACTION H_INSERTUPDATEUSER
+		
 		DECLARE @ErrorMessage NVARCHAR(4000);
 		DECLARE @ErrorSeverity INT;
 		DECLARE @ErrorState INT;

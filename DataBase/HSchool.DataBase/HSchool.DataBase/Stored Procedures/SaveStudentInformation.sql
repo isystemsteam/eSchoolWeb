@@ -6,8 +6,7 @@
 	@LastName varchar(120),
 	@UserName varchar(120),
 	@Email varchar(255),
-	@Gender varchar(10),
-	@Age int,
+	@Gender varchar(10),	
 	@DateOfBirth datetime,
 	@PlaceOfBirth varchar(120),
 	@BloodGroup varchar(10),
@@ -22,17 +21,13 @@
 	@SMSEnabled bit,
 	@EmailEnabled bit,
 	@NotificationEnabled bit,
-	@StudentImage varbinary(max),
-	@UserRole int,
-
-	@StudentId int,
-	@StudentRollNumber varchar(20),
-	@ClassId int,
-	@SectionId int,
-	@IsActive bit,
+	@UserImage varbinary(max),
+	@UserRole int,	
 	@FluencyinOthers varchar(120),
 	@IsTransportRequired bit,
-	@AcademicYear int,
+	@StudentId int,
+	@VisibleMark bit,
+	@StudentClass TypeStudentClass Readonly,
 	@StudentGuardians TypeStudentGuardian Readonly
 )
 AS
@@ -41,7 +36,7 @@ BEGIN
 		BEGIN TRANSACTION H_INSERTUPDATESTUDENT
 
 		--EXECUTE THE SAVE USER INFORMATION
-		EXEC DBO.SaveUserInformation @UserId,@Title,@FirstName,@LastName,@Email,@Gender,@Age,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled
+		EXEC DBO.SaveUserInformation @UserId,@Title,@FirstName,@LastName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled
 		--GET THE STUDENT ID
 		IF(@UserId IS NULL OR @UserId=0)
 			BEGIN
@@ -54,7 +49,7 @@ BEGIN
 				INSERT INTO dbo.Student
 					(UserId,StudentRollNumber,FluencyinOthers,IsTransportRequired)
 					VALUES
-					(@UserId,@StudentRollNumber,@FluencyinOthers,@IsTransportRequired)
+					(@UserId,null,@FluencyinOthers,@IsTransportRequired)
 
 				SET @StudentId=@@IDENTITY
 			END
@@ -64,15 +59,23 @@ BEGIN
 			END
 		
 		-- SAVE STUDENT CLASS INFO
-		IF EXISTS(SELECT 1 FROM DBO.StudentClass WHERE  StudentId=@StudentId AND ClassId=@ClassId AND SectionId=@SectionId AND AcademicYear=@AcademicYear)
-			BEGIN
-				UPDATE dbo.StudentClass SET IsActive=@IsActive WHERE ClassId=@ClassId AND SectionId=@SectionId AND AcademicYear=@AcademicYear
-			END
-		ELSE
-			BEGIN
-				INSERT INTO dbo.StudentClass (StudentId,ClassId,SectionId,AcademicYear,IsActive)
-					VALUES (@StudentId,@ClassId,@SectionId,@AcademicYear,@IsActive)
-			END
+		
+				UPDATE dbo.StudentClass 
+					SET IsActive=TS.IsActive FROM dbo.StudentClass SC INNER JOIN 
+						@StudentClass TS ON SC.ClassId=TS.ClassId AND SC.SectionId=TS.SectionId AND SC.AcademicYear=TS.AcademicYear
+			
+				INSERT INTO dbo.StudentClass 
+					(
+						StudentId,
+						ClassId,
+						SectionId,
+						AcademicYear,
+						IsActive
+					)					
+					SELECT @StudentId,TS.ClassId,TS.SectionId,TS.AcademicYear,TS.IsActive 
+						FROM @StudentClass TS
+							WHERE ClassId!=TS.ClassId AND SectionId!=TS.SectionId AND AcademicYear!=TS.AcademicYear
+			
 
 		--TO INSERT & UPDATE STUDENT GURDIANS INFORMATION
 
@@ -86,7 +89,7 @@ BEGIN
 			Email=UG.Email,
 			ReleationShip=UG.ReleationShip,
 			Occupation=UG.Occupation,
-			Age=UG.Age,
+			DateOfBirth=UG.DateOfBirth,
 			PrimaryGuardian=UG.PrimaryGuardian,
 			AnnualIncome=UG.AnnualIncome,
 			IsSameAsUserAddress=UG.IsSameAsUserAddress,
@@ -106,7 +109,7 @@ BEGIN
 				Email,
 				ReleationShip,
 				Occupation,
-				Age,
+				DateOfBirth,
 				PrimaryGuardian,
 				AnnualIncome,
 				IsSameAsUserAddress,
@@ -115,14 +118,14 @@ BEGIN
 				IsDeleted
 			) 
 		SELECT @StudentId,
-			Title=IUG.Title,
+			IUG.Title,
 			IUG.FirstName,
 			IUG.LastName,
 			IUG.Gender,
 			IUG.Email,
 			IUG.ReleationShip,
 			IUG.Occupation,
-			IUG.Age,
+			IUG.DateOfBirth,
 			IUG.PrimaryGuardian,
 			IUG.AnnualIncome,
 			IUG.IsSameAsUserAddress,IUG.MobileNumber,IUG.OfficeNumber,IUG.IsDeleted FROM @StudentGuardians IUG WHERE IUG.GuardianId=0

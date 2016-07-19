@@ -29,19 +29,14 @@
 	@SMSEnabled bit,
 	@EmailEnabled bit,
 	@NotificationEnabled bit,
-	@StudentImage varbinary(max),
+	@UserImage varbinary(max),
 	@UserRole int,
-
-	@StudentId int,
-	@StudentRollNumber varchar(20),
-	@ClassId int,
-	@SectionId int,
-	@IsActive bit,
 	@FluencyinOthers varchar(120),
 	@IsTransportRequired bit,
-	@AcademicYear int,
+	@StudentId int,	
+	@VisibleMark bit,
+	@StudentClass TypeStudentClass Readonly,
 	@StudentGuardians TypeStudentGuardian Readonly,
-
 	@IsStudentUpdate bit
 )
 AS
@@ -50,7 +45,7 @@ BEGIN
 		
 		IF(@IsStudentUpdate=1)
 			BEGIN
-				EXEC @UserId= dbo.SavestSaveStudentInformation @UserId,@Title,@FirstName, @LastName,@UserName,@Email,@Gender,@Age,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,	@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled,	@StudentImage,@UserRole,@StudentId,@StudentRollNumber,@ClassId,@SectionId,@IsActive,@FluencyinOthers,@IsTransportRequired,@AcademicYear,@StudentGuardians
+				EXEC @UserId= dbo.SaveStudentInformation @UserId,@Title,@FirstName, @LastName,@UserName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,	@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled,	@UserImage,@UserRole,@FluencyinOthers,@IsTransportRequired,@StudentId,@VisibleMark,@StudentClass,@StudentGuardians
 			END	
 
 		IF EXISTS(SELECT 1 FROM dbo.Applications where ApplicationId=@ApplicationId)

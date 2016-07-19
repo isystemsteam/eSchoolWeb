@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HSchool.Data.Models
 {
-    public class ApplicationForm
+    public class ApplicationForm : Student
     {
         public int ApplicationId { get; set; }
 
@@ -14,7 +14,7 @@ namespace HSchool.Data.Models
 
         public DateTime? AppliedDate { get; set; }
 
-        public DateTime? ApprovalDate { get; set; }
+        public DateTime? ApprovedDate { get; set; }
 
         public int? ApplicationType { get; set; }
 
@@ -23,5 +23,7 @@ namespace HSchool.Data.Models
         public string ApprovedByText { get; set; }
 
         public Student Student { get; set; }
+
+        public bool IsStudentUpdate { get; set; }
     }
 }

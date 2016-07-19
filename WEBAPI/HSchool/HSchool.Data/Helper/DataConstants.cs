@@ -67,5 +67,9 @@ namespace HSchool.Data
         public const string GetAcademicYears = "GetAcademicYears";
 
         public const string GetCommunities = "GetCommunities";
+
+        public const string GetMotherLanguages = "GetMotherLanguages";
+
+        public const string GetRelationships = "GetRelationships";
     }
 }

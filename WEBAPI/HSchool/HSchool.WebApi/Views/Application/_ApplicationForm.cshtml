@@ -1,76 +1,232 @@
-﻿@model HSchool.Business.Models.AdmissionForm
-<div class="row">
-    <div class="col-md-12">
-        <h1>Student Entry Form </h1>
-    </div>
-</div>
-<h2>Student Information</h2>
-<div class="form-group-expand-div">
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentClassInfo.ClassId)
-            @Html.HiddenFor(m => m.StudentClassInfo.ClassId, new { @id = "", @class = "hiddenListBox" })
-            @Html.ListTextBoxFor(m => m.StudentClassInfo.ClassName, Model.ListClasses, null)
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentClassInfo.AcademicYear)
-            @Html.TextBoxFor(m => m.StudentClassInfo.AcademicYear, new { @Id = "txtAcademicYear" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.FirstName)
-            @Html.TextBoxFor(m => m.StudentInfo.FirstName, new { @Id = "txtFirstName" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.LastName)
-            @Html.TextBoxFor(m => m.StudentInfo.LastName, new { @Id = "txtLastName" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.DateOfBirth)
-            @Html.TextBoxFor(m => m.StudentInfo.DateOfBirth, new { @Id = "txtDateOfBirth", @class = "dateTimePicker" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.PlaceOfBirth)
-            @Html.TextBoxFor(m => m.StudentInfo.PlaceOfBirth, new { @Id = "txtPlaceOfBirth" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.Nationality)
-            @Html.TextBoxFor(m => m.StudentInfo.Nationality, new { @Id = "txtNationality", @class = "" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.Religion)
-            @Html.TextBoxFor(m => m.StudentInfo.Religion, new { @Id = "txtReligion" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.Community)
-            @Html.TextBoxFor(m => m.StudentInfo.Community, new { @Id = "txtCommunity", @class = "" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.Religion)
-            @Html.TextBoxFor(m => m.StudentInfo.Religion, new { @Id = "txtReligion" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.MotherLanguage)
-            @Html.TextBoxFor(m => m.StudentInfo.MotherLanguage, new { @Id = "txtMotherLanguage", @class = "" })
-        </div>
-        <div class="col-lg-6">
-            @Html.LabelFor(m => m.StudentInfo.FluencyinOthers)
-            @Html.TextBoxFor(m => m.StudentInfo.FluencyinOthers, new { @Id = "txtFluencyinOthers" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            @Html.LabelFor(m => m.StudentInfo.IsTransportRequired)
+﻿@model HSchool.Business.Models.ApplicationForm
 
+<div class="container">
+    @using (Html.BeginForm("Edit", "Application", FormMethod.Post, new { }))
+    {
+        @Html.AntiForgeryToken()
+        <h1>Student Entry Form </h1>
+        <div class="form-group-expand-div admin-form">
+            <h2>Student Information</h2>
+            <div class="form-container">
+                <div class="row custom-row clearfix">
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.StudentClass[0].ClassId)
+                        @Html.HiddenFor(m => m.StudentClass[0].ClassId, new { @id = "", @class = "hiddenListBox" })
+                        @Html.DropDownListFor(m => m.StudentClass[0].ClassId, Model.ListClasses, new { @id = "", @class = "selectpicker show-tick" })
+                    </div>
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.StudentClass[0].AcademicYear)
+                        @Html.DisplayFor(m => m.AcademicYear.AcademicYearDisplay)
+                        @Html.HiddenFor(m => m.StudentClass[0].AcademicYear, new { @Id = "txtAcademicYear" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Title)
+                        @Html.DropDownListFor(m => m.Title, Model.ListTitles, new { @id = "", @class = "selectpicker show-tick" })
+
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.FirstName)
+                        @Html.TextBoxFor(m => m.FirstName, new { @Id = "txtFirstName" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.LastName)
+                        @Html.TextBoxFor(m => m.LastName, new { @Id = "txtLastName" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Gender)
+                        @Html.DropDownListFor(m => m.Gender, Model.ListGender, new { @id = "", @class = "selectpicker show-tick" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.DateOfBirth)
+                        @Html.TextBoxFor(m => m.DateOfBirth, new { @Id = "txtDateOfBirth", @class = "dateTimePicker" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.PlaceOfBirth)
+                        @Html.TextBoxFor(m => m.PlaceOfBirth, new { @Id = "txtPlaceOfBirth" })
+                    </div>
+
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.MotherLanguage)
+                        @Html.DropDownListFor(m => m.MotherLanguage, Model.ListLanguages, new { @id = "", @class = "selectpicker show-tick" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Nationality)
+                        @Html.TextBoxFor(m => m.Nationality, new { @Id = "txtNationality", @class = "" })
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Religion)
+                        @Html.TextBoxFor(m => m.Religion, new { @Id = "txtReligion" })
+                    </div>
+
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.Community)
+                        @Html.DropDownListFor(m => m.Community, Model.ListCommunities, new { @id = "", @class = "selectpicker show-tick" })
+                    </div>
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.Religion)
+                        @Html.TextBoxFor(m => m.Religion, new { @Id = "txtReligion" })
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.FluencyinOthers)
+                        @Html.TextBoxFor(m => m.FluencyinOthers, new { @Id = "txtFluencyinOthers" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.CheckBoxFor(m => m.IsTransportRequired)
+                        @Html.LabelFor(m => m.IsTransportRequired)
+                    </div>
+                </div>
+            </div>
+
+            <h2>Address for Communication</h2>
+            <div class="form-container">
+
+                @if (Model.Addresses.Count > 0)
+                {
+                    for (int aCount = 0; aCount < Model.Addresses.Count; aCount++)
+                    {
+                        <div class="row custom-row clearfix">
+                            <div class="col-md-4 custom-text">
+                                @Html.LabelFor(m => m.Addresses[aCount].AddressLine1)
+                                @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine1, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                @Html.LabelFor(m => m.Addresses[aCount].AddressLine2)
+                                @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine2, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-md-4 custom-text">
+                                @Html.LabelFor(m => m.Addresses[aCount].District)
+                                @Html.TextBoxFor(m => m.Addresses[aCount].District, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                @Html.LabelFor(m => m.Addresses[aCount].Taluk)
+                                @Html.TextBoxFor(m => m.Addresses[aCount].Taluk, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                @Html.LabelFor(m => m.Addresses[aCount].PinCode)
+                                @Html.TextBoxFor(m => m.Addresses[aCount].PinCode, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+            <h2>Parent Details</h2>
+            <div class="form-container">
+                @if (Model.StudentGuardians != null)
+                {
+
+                    for (int sCount = 0; sCount < Model.StudentGuardians.Count; sCount++)
+                    {
+                        <div class="row custom-row clearfix">
+                            <div class="col-md-4 custom-text">
+                                <label for="">Title</label>
+                                @Html.DropDownListFor(m => m.StudentGuardians[sCount].Title, Model.ListTitles, new { @id = "", @class = "selectpicker show-tick" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                <label for="">First Name</label>
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].FirstName, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                <label for="">Last Name</label>
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].LastName, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-md-4 custom-text">
+                                <label for="">Gender</label>
+                                @Html.DropDownListFor(m => m.StudentGuardians[sCount].Gender, Model.ListGender, new { @id = "", @class = "selectpicker show-tick" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                <label for="">Age</label>
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].DateOfBirth, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                <label for="">ReleationShip</label>
+                                @Html.DropDownListFor(m => m.StudentGuardians[sCount].ReleationShip, Model.ListRelationShips, new { @id = "", @class = "selectpicker show-tick" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-md-4 custom-text">
+                                <label for="">Highest Qualification</label>
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].HighestQualification, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                <label for="">Occupation</label>
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].Occupation, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                <label for="">Annual Income</label>
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].AnnualIncome, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-md-4 custom-text">
+                                <label for="">Email</label>
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].Email, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                <label for="">Mobile Number</label>
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].MobileNumber, new { @id = "", @class = "" })
+                            </div>
+                            <div class="col-md-4 custom-text">
+                                <label for="">Office Number</label>
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].OfficeNumber, new { @id = "", @class = "" })
+                            </div>
+                        </div>
+                        <div class="row custom-row clearfix">
+                            <div class="col-md-12">
+                                @Html.CheckBoxFor(m => m.StudentGuardians[sCount].PrimaryGuardian, new { @id = "", @class = "" })
+                                <label for="">Primary Guardian</label>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+            <h2 class="highlight-bg">For Office Use</h2>
+            <div class="form-container">
+
+                @if (!Model.IsOfficeFormEnabled)
+                {
+                    <div class="row custom-row clearfix">
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.ApplicationStatus)
+                            @Html.DropDownListFor(m => m.ApplicationStatus, Model.ApplicationStatuses, new { @id = "", @class = "selectpicker show-tick" })
+                        </div>
+                        <div class="col-md-6 custom-text">
+                            @Html.LabelFor(m => m.AppliedDate)
+                            @Html.DisplayFor(m => m.AppliedDate)
+                        </div>
+                    </div>
+                    <div class="row custom-row clearfix">
+                        <div class="col-md-6 custom-text">
+                            @Html.LabelFor(m => m.ApprovedDate)
+                            @Html.DisplayFor(m => m.ApprovedDate, new { })
+                        </div>
+                        <div class="col-md-6 custom-text">
+                            @Html.LabelFor(m => m.ApprovedByText)
+                            @Html.DisplayFor(m => m.ApprovedByText)
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
-    </div>
+
+        <div class="btn-wrapper pull-right">
+            <input type="submit" value="Apply" class="btn-blue" />
+            <input type="button" value="Admit" class="btn-blue" />
+            <input type="button" value="Cancel" class="btn-blue" />
+        </div>
+    }
 </div>

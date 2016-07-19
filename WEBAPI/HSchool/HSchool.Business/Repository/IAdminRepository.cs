@@ -71,5 +71,8 @@ namespace HSchool.Business.Repository
 
         List<CommunityMaster> GetCommunities();
 
+        List<MotherLanguages> GetMotherLanguages();
+
+        List<UserRelationship> GetRelationships();
     }
 }

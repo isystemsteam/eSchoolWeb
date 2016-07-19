@@ -30,11 +30,17 @@ namespace HSchool.Common
         public static List<SelectListItem> ConvertEnumToListItem<T>()
         {
             var listItem = new List<SelectListItem>();
+            listItem.Add(new SelectListItem { Text = "Select", Value = "0" });
             foreach (var item in Enum.GetValues(typeof(T)))
             {
-                listItem.Add(new SelectListItem { Value = Convert.ToString(item), Text = Enum.GetName(typeof(T), item) });
+                listItem.Add(new SelectListItem { Value = Convert.ToString((int)(item)), Text = Enum.GetName(typeof(T), item) });
             }
             return listItem;
+        }
+
+        public static SelectListItem GetFirstListItem()
+        {
+            return new SelectListItem { Text = "Select", Value = "0" };
         }
 
         /// <summary>

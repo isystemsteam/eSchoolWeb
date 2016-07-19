@@ -42,24 +42,7 @@ namespace HSchool.WebApi.Controllers
         {
             LogHelper.Info(string.Format("ApplicationController.Index - Begin"));
             var admissionForm = new ApplicationForm();
-            admissionForm.Student = new Student();
-            admissionForm.Student.StudentGuardians = new List<StudentGuardian>();
-            admissionForm.Student.Addresses = new List<Address> { new Address() };
-            int guardianCount = CommonHelper.GetWebConfigValue<int>(WebConstants.GuardianCount);
-            for (int studentGurCounter = 0; studentGurCounter < guardianCount; studentGurCounter++)
-            {
-                admissionForm.Student.StudentGuardians.Add(new StudentGuardian());
-            }
-            admissionForm.Student.StudentClass = new StudentClass();
-            admissionForm.AcademicYear = _adminRepository.GetActiveAcademicYear();
-            if (admissionForm.AcademicYear != null)
-            {
-                admissionForm.Student.StudentClass.AcademicYear = admissionForm.AcademicYear.AcademicYearId;
-            }
-            admissionForm.FormClasses = _adminRepository.GetAllClasses(false);
-            admissionForm.ActionName = string.Format("{0}", "Application");
-            admissionForm.Communities = _adminRepository.GetCommunities();
-            admissionForm.IsOfficeFormEnabled = false;
+            
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
             return View(admissionForm);
         }
@@ -109,7 +92,7 @@ namespace HSchool.WebApi.Controllers
                 int? id = null;
                 if (ModelState.IsValid)
                 {
-                    if (AuthenticationHelper.CreateUser(model.Student.Email, model.Student.UserName, string.Empty, string.Empty, string.Empty))
+                    if (AuthenticationHelper.CreateUser(model.Email, model.UserName, string.Empty, string.Empty, string.Empty))
                     {
                         model.ApplicationType = 1;
                         id = _studentRepository.SaveApplication(model);

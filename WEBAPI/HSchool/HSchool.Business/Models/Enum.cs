@@ -42,4 +42,17 @@ namespace HSchool.Business.Models
         Rejected = 4,
         Approved = 5
     }
+
+    public enum Titles
+    {
+        Mr = 1,
+        Miss = 2,
+        Mrs = 3
+    }
+
+    public enum Gender
+    {
+        Male = 1,
+        FeMale = 2
+    }
 }
