@@ -127,6 +127,7 @@
     <Build Include="Stored Procedures\GetCommunities.sql" />
     <Build Include="Stored Procedures\GetMotherLanguages.sql" />
     <Build Include="Stored Procedures\GetRelationships.sql" />
+    <Build Include="User-Defined Table Types\TypeStudentClass.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
@@ -134,7 +135,6 @@
   <ItemGroup>
     <None Include="Snapshots\BaseLine.dacpac" />
     <Build Include="User-Defined Table Types\TypeClassSections.sql" />
-    <Build Include="User-Defined Table Types\TypeStudentClass.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Script.PreDeployment.sql" />

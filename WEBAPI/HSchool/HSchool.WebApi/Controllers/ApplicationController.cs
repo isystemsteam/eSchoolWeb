@@ -59,8 +59,9 @@ namespace HSchool.WebApi.Controllers
             applicationForm.FormClasses = _adminRepository.GetAllClasses(false);
             applicationForm.Communities = _adminRepository.GetCommunities();
             applicationForm.RelationShips = _adminRepository.GetRelationships();
-            applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>();
-            applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>();
+            applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles");
+            applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender");
+            applicationForm.Languages = _adminRepository.GetMotherLanguages();
             applicationForm.IsOfficeFormEnabled = false;
             applicationForm.ActionName = string.Format("{0}", "Application");
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
@@ -82,6 +83,7 @@ namespace HSchool.WebApi.Controllers
                 {
                     model.IsStudentUpdate = true;
                     model.UserStatus = (int)UserStatusEnum.Registered;
+                    model.RollNumber = "123456";
                 }
                 var id = _applicationRepository.SaveApplication(model);
                 var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);

@@ -38,9 +38,25 @@ namespace HSchool.Common
             return listItem;
         }
 
+        public static List<SelectListItem> ConvertEnumToListItem<T>(string defaultValue)
+        {
+            var listItem = new List<SelectListItem>();
+            listItem.Add(new SelectListItem { Text = defaultValue, Value = "0" });
+            foreach (var item in Enum.GetValues(typeof(T)))
+            {
+                listItem.Add(new SelectListItem { Value = Convert.ToString((int)(item)), Text = Enum.GetName(typeof(T), item) });
+            }
+            return listItem;
+        }
+
         public static SelectListItem GetFirstListItem()
         {
             return new SelectListItem { Text = "Select", Value = "0" };
+        }
+
+        public static SelectListItem GetListItem(string value)
+        {
+            return new SelectListItem { Text = value, Value = "0" };
         }
 
         /// <summary>

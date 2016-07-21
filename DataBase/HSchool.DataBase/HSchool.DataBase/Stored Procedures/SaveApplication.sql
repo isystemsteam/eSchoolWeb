@@ -8,6 +8,7 @@
 	@ApprovedBy int,
 
 	@UserId int,
+	@RollNumber varchar(20),
 	@Title varchar(6),
 	@FirstName varchar(120),
 	@LastName varchar(120),
@@ -35,6 +36,7 @@
 	@IsTransportRequired bit,
 	@StudentId int,	
 	@VisibleMark bit,
+	@LoginEnabled bit,
 	@StudentClass TypeStudentClass Readonly,
 	@StudentGuardians TypeStudentGuardian Readonly,
 	@IsStudentUpdate bit
@@ -45,7 +47,7 @@ BEGIN
 		
 		IF(@IsStudentUpdate=1)
 			BEGIN
-				EXEC @UserId= dbo.SaveStudentInformation @UserId,@Title,@FirstName, @LastName,@UserName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,	@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled,	@UserImage,@UserRole,@FluencyinOthers,@IsTransportRequired,@StudentId,@VisibleMark,@StudentClass,@StudentGuardians
+				EXEC @UserId= dbo.SaveStudentInformation @UserId,@RollNumber,@Title,@FirstName, @LastName,@UserName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,	@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled,	@UserImage,@UserRole,@FluencyinOthers,@IsTransportRequired,@StudentId,@VisibleMark,@LoginEnabled,@StudentClass,@StudentGuardians
 			END	
 
 		IF EXISTS(SELECT 1 FROM dbo.Applications where ApplicationId=@ApplicationId)

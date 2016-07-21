@@ -60,7 +60,7 @@ namespace HSchool.Business.Models
             get
             {
                 List<SelectListItem> items = new List<SelectListItem>();
-                items.Add(CommonHelper.GetFirstListItem());
+                items.Add(CommonHelper.GetListItem("Class"));
                 if (this.FormClasses != null && this.FormClasses.Count() > 0)
                 {
                     items.AddRange(this.FormClasses.Select(s => new SelectListItem { Text = s.ClassName, Value = s.ClassId.ToString() }));
@@ -74,7 +74,7 @@ namespace HSchool.Business.Models
             get
             {
                 List<SelectListItem> items = new List<SelectListItem>();
-                items.Add(CommonHelper.GetFirstListItem());
+                items.Add(CommonHelper.GetListItem("Community"));
                 if (this.Communities != null && this.Communities.Count() > 0)
                 {
                     items.AddRange(this.Communities.Select(s => new SelectListItem { Text = s.CommunityName, Value = s.CommunityId.ToString() }));
@@ -90,7 +90,7 @@ namespace HSchool.Business.Models
             get
             {
                 List<SelectListItem> items = new List<SelectListItem>();
-                items.Add(CommonHelper.GetFirstListItem());
+                items.Add(CommonHelper.GetListItem("Mother Language"));
                 if (this.Languages != null && this.Languages.Count() > 0)
                 {
                     items.AddRange(this.Languages.Select(s => new SelectListItem { Text = s.Name, Value = s.LanguageId.ToString() }));
@@ -104,7 +104,7 @@ namespace HSchool.Business.Models
             get
             {
                 List<SelectListItem> items = new List<SelectListItem>();
-                items.Add(CommonHelper.GetFirstListItem());
+                items.Add(CommonHelper.GetListItem("Relationship"));
                 if (this.RelationShips != null && this.RelationShips.Count() > 0)
                 {
                     items.AddRange(this.RelationShips.Select(s => new SelectListItem { Text = s.Name, Value = s.RelationshipId.ToString() }));

@@ -18,6 +18,10 @@ namespace HSchool.Business.Models
         [DisplayName("Transport Facility Required")]
         public bool IsTransportRequired { get; set; }
 
+        public string RollNumber { get; set; }
+
+        public bool LoginEnabled { get; set; }
+
         public List<StudentClass> StudentClass { get; set; }
 
         [DisplayName("Visible Mark")]

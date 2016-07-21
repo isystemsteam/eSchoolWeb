@@ -18,6 +18,10 @@ namespace HSchool.Data.Models
 
         public bool VisibleMark { get; set; }
 
+        public string RollNumber { get; set; }
+
+        public bool LoginEnabled { get; set; }
+
         public List<StudentClass> StudentClass { get; set; }
 
         public byte[] StudentImage { get; set; }

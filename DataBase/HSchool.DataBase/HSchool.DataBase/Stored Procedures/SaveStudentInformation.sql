@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[SaveStudentInformation]
 (
 	@UserId int,
+	@RollNumber varchar(20),
 	@Title varchar(6),
 	@FirstName varchar(120),
 	@LastName varchar(120),
@@ -27,6 +28,7 @@
 	@IsTransportRequired bit,
 	@StudentId int,
 	@VisibleMark bit,
+	@LoginEnabled bit,
 	@StudentClass TypeStudentClass Readonly,
 	@StudentGuardians TypeStudentGuardian Readonly
 )
@@ -47,15 +49,15 @@ BEGIN
 		IF (@StudentId IS NULL OR @StudentId=0)
 			BEGIN
 				INSERT INTO dbo.Student
-					(UserId,StudentRollNumber,FluencyinOthers,IsTransportRequired)
+					(UserId,RollNumber,FluencyinOthers,IsTransportRequired,LoginEnabled)
 					VALUES
-					(@UserId,null,@FluencyinOthers,@IsTransportRequired)
+					(@UserId,@RollNumber,@FluencyinOthers,@IsTransportRequired,@LoginEnabled)
 
 				SET @StudentId=@@IDENTITY
 			END
 		ELSE
 			BEGIN
-				UPDATE dbo.Student SET FluencyinOthers=@FluencyinOthers,IsTransportRequired=@IsTransportRequired WHERE StudentId=@StudentId
+				UPDATE dbo.Student SET FluencyinOthers=@FluencyinOthers,IsTransportRequired=@IsTransportRequired,LoginEnabled=@LoginEnabled WHERE StudentId=@StudentId
 			END
 		
 		-- SAVE STUDENT CLASS INFO
@@ -129,6 +131,8 @@ BEGIN
 			IUG.PrimaryGuardian,
 			IUG.AnnualIncome,
 			IUG.IsSameAsUserAddress,IUG.MobileNumber,IUG.OfficeNumber,IUG.IsDeleted FROM @StudentGuardians IUG WHERE IUG.GuardianId=0
+
+		SELECT @UserId
 
 		COMMIT TRANSACTION H_INSERTUPDATESTUDENT
 	END TRY
