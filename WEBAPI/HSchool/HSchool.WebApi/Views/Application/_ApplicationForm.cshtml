@@ -10,8 +10,7 @@
             <div class="form-container">
                 <div class="row custom-row clearfix">
                     <div class="col-md-6 custom-text">
-                        @Html.LabelFor(m => m.StudentClass[0].ClassId)
-                        @Html.HiddenFor(m => m.StudentClass[0].ClassId, new { @id = "", @class = "hiddenListBox" })
+                        @Html.LabelFor(m => m.StudentClass[0].ClassId)                        
                         @Html.DropDownListFor(m => m.StudentClass[0].ClassId, Model.ListClasses, new { @id = "", @class = "selectpicker show-tick" })
                     </div>
                     <div class="col-md-6 custom-text">

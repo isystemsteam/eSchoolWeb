@@ -124,10 +124,10 @@
     <Build Include="Stored Procedures\GetApplications.sql" />
     <Build Include="Tables\Applications.sql" />
     <Build Include="Tables\ApplicationStatus.sql" />
+    <Build Include="User-Defined Table Types\TypeStudentClass.sql" />
     <Build Include="Stored Procedures\GetCommunities.sql" />
     <Build Include="Stored Procedures\GetMotherLanguages.sql" />
     <Build Include="Stored Procedures\GetRelationships.sql" />
-    <Build Include="User-Defined Table Types\TypeStudentClass.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
