@@ -18,6 +18,7 @@ namespace HSchool.Business.Models
         [JsonProperty("title")]
         public string Title { get; set; }
 
+        [DisplayName("First Name")]
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
 
@@ -36,16 +37,20 @@ namespace HSchool.Business.Models
         [JsonProperty("occupation")]
         public string Occupation { get; set; }
 
-        [JsonProperty("age")]
+        [JsonProperty("Date Of Birth")]
+        [DisplayName("Date Of Birth")]
         public DateTime? DateOfBirth { get; set; }
 
+        [DisplayName("Annual Income")]
         [JsonProperty("annualIncome")]
-        public double? AnnualIncome { get; set; }        
+        public double? AnnualIncome { get; set; }
 
+        [DisplayName("Mobile Number")]
         [JsonProperty("mobileNumber")]
         public string MobileNumber { get; set; }
 
         [JsonProperty("officeNumber")]
+        [DisplayName("Office Number")]
         public string OfficeNumber { get; set; }  
 
         [JsonProperty("primaryGuardian")]

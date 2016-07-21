@@ -21,6 +21,7 @@ namespace HSchool.Business.Models
 
         public string SectionName { get; set; }
 
+        [DisplayName("Academic Year")]
         public int AcademicYear { get; set; }
 
         public DateTime? StartDateYear { get; set; }

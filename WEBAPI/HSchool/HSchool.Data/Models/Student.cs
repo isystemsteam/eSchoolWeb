@@ -27,5 +27,7 @@ namespace HSchool.Data.Models
         public byte[] StudentImage { get; set; }
 
         public List<StudentGuardian> StudentGuardians { get; set; }
+
+        public List<Address> Addresses { get; set; }
     }
 }

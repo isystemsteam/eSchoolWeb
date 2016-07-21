@@ -30,7 +30,7 @@ namespace HSchool.Data.SqlRepository
                     var dStudent = Mapper.Map<ApplicationForm, Models.ApplicationForm>(form);
                     var results = connection.Query<int>(Procedures.SaveApplication, dStudent);
                     LogHelper.Info(string.Format("ApplicationRepository.SaveApplication - End"));
-                    return results != null ? results.First() : (int?)null;
+                    return results != null && results.Any() ? results.First() : (int?)null;
                 }
             }
             catch (Exception ex)

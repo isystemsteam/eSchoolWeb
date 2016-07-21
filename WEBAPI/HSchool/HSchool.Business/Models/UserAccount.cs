@@ -14,14 +14,18 @@ namespace HSchool.Business.Models
         public int UserId { get; set; }
 
         [JsonProperty("First Name")]
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
 
         [JsonProperty("LastName")]
+        [DisplayName("Last Name")]
         public string LastName { get; set; }
 
+        [DisplayName("Email")]
         [JsonProperty("email")]
         public string Email { get; set; }
 
+        [DisplayName("Gender")]
         [JsonProperty("gender")]
         public string Gender { get; set; }
 
@@ -29,15 +33,20 @@ namespace HSchool.Business.Models
         public int? Age { get; set; }
 
         [JsonProperty("dateOfBirth")]
+        [DisplayName("Date Of Birth")]
         public DateTime? DateOfBirth { get; set; }
 
+        [DisplayName("Place Of Birth")]
         public string PlaceOfBirth { get; set; }
 
         [JsonProperty("bloodGroup")]
+        [DisplayName("Place Of Birth")]
         public string BloodGroup { get; set; }
 
         [JsonProperty("religion")]
         public string Religion { get; set; }
+
+        public string Caste { get; set; }
 
         [JsonProperty("nationality")]
         public string Nationality { get; set; }

@@ -84,6 +84,7 @@ namespace HSchool.WebApi.Controllers
                     model.IsStudentUpdate = true;
                     model.UserStatus = (int)UserStatusEnum.Registered;
                     model.RollNumber = "123456";
+                    model.VisibleMark = false;
                 }
                 var id = _applicationRepository.SaveApplication(model);
                 var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
