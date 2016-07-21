@@ -119,7 +119,6 @@
     <Build Include="Stored Procedures\GetActiveAcademicYear.sql" />
     <Build Include="Stored Procedures\GetAcademicYears.sql" />
     <Build Include="Stored Procedures\GetAcademicYearById.sql" />
-    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
     <Build Include="Stored Procedures\SaveApplication.sql" />
     <Build Include="Stored Procedures\GetApplications.sql" />
     <Build Include="Tables\Applications.sql" />
@@ -138,5 +137,8 @@
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Script.PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>
