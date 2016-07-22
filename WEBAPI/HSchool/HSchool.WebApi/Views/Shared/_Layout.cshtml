@@ -20,6 +20,26 @@
     <script src="~/Scripts/Application/AdminView.js"></script>
     <script src="~/Scripts/Application/ApplicationForm.js"></script>
     <script src="~/Scripts/Application/Home.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+          // Text box placeholder focus effect
+            $('.custom-text input[type="text"]').focusin(function () {               
+                $(this).prev('label').addClass('top-placeholder-text');
+            });
+
+            $('.custom-text input[type="text"]').focusout(function () {             
+                if ($(this).val() == '' || $(this).val == null) {
+                    $(this).prev('label').removeClass('top-placeholder-text');
+                }
+            });
+
+            // append span for custom checkbox 
+            //$(".custom-check label").append($("span"));
+          
+        });
+    </script>
 </head>
 <body>
     <div class="ribbonErrorMessage" id="ribbonErrorMessage" style="display:none"></div>

@@ -9,12 +9,12 @@
             <h2>Student Information</h2>
             <div class="form-container">
                 <div class="row custom-row clearfix">
-                    <div class="col-md-6 custom-text">
-                        @Html.LabelFor(m => m.StudentClass[0].ClassId)
+                    <div class="col-md-4 custom-text">
+                       
                         @Html.DropDownListFor(m => m.StudentClass[0].ClassId, Model.ListClasses, new { @id = "", @class = "selectpicker show-tick required" })
                     </div>
-                    <div class="col-md-6 custom-text">
-                        @Html.LabelFor(m => m.StudentClass[0].AcademicYear)
+                    <div class="col-md-8 academic">
+                        @Html.LabelFor(m => m.StudentClass[0].AcademicYear) :
                         @Html.DisplayFor(m => m.AcademicYear.AcademicYearDisplay)
                         @Html.HiddenFor(m => m.StudentClass[0].AcademicYear, new { @Id = "txtAcademicYear" })
                     </div>
@@ -28,6 +28,9 @@
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.FirstName)
                         @Html.TextBoxFor(m => m.FirstName, new { @Id = "txtFirstName", @class = "required" })
+                        <i class="fa fa-exclamation-circle"></i>
+                        <i class="fa fa-check-circle" style="display:none"></i>
+                        <span class="error-msg">validation</span>	
                     </div>
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.LastName)
@@ -38,6 +41,9 @@
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.Gender)
                         @Html.DropDownListFor(m => m.Gender, Model.ListGender, new { @id = "", @class = "selectpicker show-tick required" })
+                        <i class="fa fa-exclamation-circle"></i>
+                        <i class="fa fa-check-circle" style="display:none"></i>
+                        <span class="error-msg">validation</span>
                     </div>
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.DateOfBirth)
@@ -75,13 +81,15 @@
                     </div>
                 </div>
                 <div class="row custom-row clearfix">
-                    <div class="col-md-6 custom-text">
+                    <div class="col-md-6 custom-text ">
                         @Html.LabelFor(m => m.FluencyinOthers)
                         @Html.TextBoxFor(m => m.FluencyinOthers, new { @Id = "txtFluencyinOthers" })
                     </div>
-                    <div class="col-md-6">
-                        @Html.CheckBoxFor(m => m.IsTransportRequired)
-                        @Html.LabelFor(m => m.IsTransportRequired)
+                    <div class="col-md-6 custom-check ">
+                        <div class="cstom-check-margin">
+                        <input id="documents" type="checkbox">
+                        <label for="documents"><span><span><i class="fa fa-check"></i></span></span>Documents</label>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -189,7 +197,7 @@
                             </div>
                         </div>
                         <div class="row custom-row clearfix">
-                            <div class="col-md-12">
+                            <div class="col-md-12 ">
                                 @Html.CheckBoxFor(m => m.StudentGuardians[sCount].PrimaryGuardian, new { @id = "", @class = "" })
                                 <label for="">Primary Guardian</label>
                             </div>
@@ -226,18 +234,14 @@
             </div>
         </div>
 
-        <div class="btn-wrapper pull-right">
-            <div class="row custom-row clearfix">
-                <div class="col-md-12">
-                    <input type="submit" value="Apply" class="btn-blue" />
-                </div>
-                <div class="col-md-12">
-                    <input type="button" value="Admit" class="btn-blue" />
-                </div>
-                <div class="col-md-12">
-                    <input type="button" value="Cancel" class="btn-grey" />
-                </div>                
-            </div>
+        <div class="btn-wrapper pull-right">           
+              
+                    <input type="submit" value="Apply" class="btn-blue" />          
+              
+                    <input type="button" value="Admit" class="btn-blue" />             
+                
+                    <input type="button" value="Cancel" class="btn-grey" />                           
+           
             
         </div>
     }
