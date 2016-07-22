@@ -6,7 +6,7 @@
 	[AppliedDate] datetime,
 	[ApprovedDate] datetime,
 	[ApplicationType] datetime,
-	[ApprovedBy] INT foreign key references dbo.UserAccounts (UserId),
+	[ApprovedBy] INT NULL,
 	IsVerified bit,
 	[CreatedDate] datetime,
 	[ModifiedDate] datetime,

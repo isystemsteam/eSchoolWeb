@@ -1,4 +1,4 @@
-﻿ALTER PROCEDURE [dbo].[SaveApplication]
+﻿CREATE PROCEDURE [dbo].[SaveApplication]
 (		
 	@ApplicationId int,
 	@ApplicationStatus int,

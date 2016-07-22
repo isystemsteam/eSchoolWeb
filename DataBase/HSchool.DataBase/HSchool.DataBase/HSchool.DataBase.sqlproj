@@ -127,13 +127,13 @@
     <Build Include="Stored Procedures\GetCommunities.sql" />
     <Build Include="Stored Procedures\GetMotherLanguages.sql" />
     <Build Include="Stored Procedures\GetRelationships.sql" />
-    <Build Include="Tables\Address.sql" />
-    <Build Include="User-Defined Table Types\TypeAddress.sql" />
-    <Build Include="Stored Procedures\SaveAddress.sql" />
     <Build Include="Tables\UserAddress.sql" />
-    <Build Include="Stored Procedures\SaveStudentClass.sql" />
+    <Build Include="Tables\Address.sql" />
     <Build Include="Stored Procedures\SaveStudent.sql" />
+    <Build Include="Stored Procedures\SaveStudentClass.sql" />
     <Build Include="Stored Procedures\SaveStudentGuardian.sql" />
+    <Build Include="Stored Procedures\SaveAddress.sql" />
+    <Build Include="User-Defined Table Types\TypeAddress.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
