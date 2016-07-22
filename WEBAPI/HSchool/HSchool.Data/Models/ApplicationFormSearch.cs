@@ -8,7 +8,7 @@ namespace HSchool.Data.Models
 {
     public class ApplicationFormSearch
     {
-        public int? ApplicationFormId { get; set; }
+        public int? ApplicationId { get; set; }
 
         public DateTime AppliedDate { get; set; }
 
@@ -16,6 +16,18 @@ namespace HSchool.Data.Models
 
         public string LastName { get; set; }
 
-        public string ClassName { get; set; }
+        public string ClassId { get; set; }
+
+        public int AcademicYear { get; set; }
+
+        public int ApplicationStatus { get; set; }
+
+        public int StartRow { get; set; }
+
+        public int EndRow { get; set; }
+
+        public string SortOn { get; set; }
+
+        public string SortOrder { get; set; }
     }
 }

@@ -56,7 +56,18 @@
                 });
             },
             //to bind form for ajax call
-            bind: function (formName, beforecallback, successcallback, errorcallback, loading) {
+            bind: function (formName, beforecallback, successcallback, errorcallback, loadingForm, loadingText) {
+
+                //to show ajax loading
+                $(document).ajaxStart(function () {
+                    $.fn.appCommon.ajax.processing.show(loadingForm, loadingText);
+                }).ajaxStop(function () {
+                    $.fn.appCommon.ajax.processing.hide(loadingForm);
+                }).ajaxSuccess(function (value, xhr, settings) {
+                    if (xhr != null && xhr.responseText == "true") {
+                    }
+                });
+                //form sumbit
                 $("#" + formName).ajaxForm({
                     beforeSubmit: function () {
                     },
@@ -73,18 +84,32 @@
             },
             //ajax processing
             processing: {
-                show: function (control) {
-                    $.blockUI({ message: null });
-                    $('#ajaxProgressLoader')
-                        .css("position", "absolute")
-                        .css("z-index", "10000")
-                        .css("top", ($(window).height() - $('#ajaxProgressLoader').height()) / 2 + $(window).scrollTop() + "px")
-                        .css("left", ($(window).width() - $('#ajaxProgressLoader').width()) / 2 + $(window).scrollLeft() + "px");
-                    $('#ajaxProgressLoader').show();
+                show: function (control, loadingText) {
+                    if (control != null) {
+                        var loaderDiv = "<div class='loadingProgress'>";
+                        loaderDiv += "<img src='~/Content/Images/loading_2.gif' alt='processing..' class='loadingImage' />";
+                        loaderDiv += "<span id='additionalLoadingMessage'></span><span id='loadingMessage'>Loading...</span></div>";
+                        $("#" + control).block({
+                            message: loaderDiv,
+                            css: { border: '1px solid #000' }
+                        });
+                    } else {
+                        $.blockUI({ message: null });
+                        $('#ajaxProgressLoader')
+                            .css("position", "absolute")
+                            .css("z-index", "10000")
+                            .css("top", ($(window).height() - $('#ajaxProgressLoader').height()) / 2 + $(window).scrollTop() + "px")
+                            .css("left", ($(window).width() - $('#ajaxProgressLoader').width()) / 2 + $(window).scrollLeft() + "px");
+                        $('#ajaxProgressLoader').show();
+                    }
                 },
                 hide: function (control) {
-                    $.unblockUI();
-                    $('#ajaxProgressLoader').hide();
+                    if (control != null) {
+                        $("#" + control).unblock();
+                    } else {
+                        $.unblockUI();
+                        $('#ajaxProgressLoader').hide();
+                    }
                 }
             }
         },

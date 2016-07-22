@@ -29,6 +29,7 @@ using ApplicationFormSearch = HSchool.Business.Models.ApplicationFormSearch;
 using StudentClass = HSchool.Business.Models.StudentClass;
 using MotherLanguages = HSchool.Business.Models.MotherLanguages;
 using Address = HSchool.Business.Models.Address;
+using ApplicationFormResponse = HSchool.Business.Models.ApplicationFormResponse;
 
 namespace HSchool.CompositionRoot
 {
@@ -94,10 +95,7 @@ namespace HSchool.CompositionRoot
             mapper.CreateMap<Data.Models.AcademicYear, AcademicYear>();
 
             mapper.CreateMap<UserRelationship, Data.Models.UserRelationship>();
-            mapper.CreateMap<Data.Models.UserRelationship, UserRelationship>();
-
-            mapper.CreateMap<ApplicationFormSearch, Data.Models.ApplicationFormSearch>();
-            mapper.CreateMap<Data.Models.ApplicationFormSearch, ApplicationFormSearch>();
+            mapper.CreateMap<Data.Models.UserRelationship, UserRelationship>();            
 
             mapper.CreateMap<StudentClass, Data.Models.StudentClass>();
             mapper.CreateMap<Data.Models.StudentClass, StudentClass>();
@@ -106,7 +104,13 @@ namespace HSchool.CompositionRoot
             mapper.CreateMap<Data.Models.MotherLanguages, MotherLanguages>();
 
             mapper.CreateMap<Address, Data.Models.Address>();
-            mapper.CreateMap<Data.Models.Address, Address>(); 
+            mapper.CreateMap<Data.Models.Address, Address>();
+
+            mapper.CreateMap<ApplicationFormSearch, Data.Models.ApplicationFormSearch>();
+            mapper.CreateMap<Data.Models.ApplicationFormSearch, ApplicationFormSearch>();
+
+            mapper.CreateMap<ApplicationFormResponse, Data.Models.ApplicationFormResponse>();
+            mapper.CreateMap<Data.Models.ApplicationFormResponse, ApplicationFormResponse>();
         }
     }
 }

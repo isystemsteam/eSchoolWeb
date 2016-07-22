@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Insight.Database;
+using System.Data.SqlClient;
 
 using ApplicationForm = HSchool.Business.Models.ApplicationForm;
 using ApplicationFormSearch = HSchool.Business.Models.ApplicationFormSearch;
+using ApplicationFormResponse = HSchool.Business.Models.ApplicationFormResponse;
 
 namespace HSchool.Data.SqlRepository
 {
@@ -41,24 +43,27 @@ namespace HSchool.Data.SqlRepository
         }
 
         /// <summary>
-        /// 
+        /// Search applications
         /// </summary>
         /// <param name="formSearch"></param>
         /// <returns></returns>
-        public List<ApplicationForm> GetApplications(ApplicationFormSearch formSearch)
+        public List<ApplicationFormResponse> SearchApplications(ApplicationFormSearch formSearch)
         {
-            LogHelper.Info(string.Format("ApplicationRepository.GetApplications - Begin"));
+            LogHelper.Info(string.Format("ApplicationRepository.SearchApplications - Begin"));
             try
             {
                 using (var connection = SqlDataConnection.GetSqlConnection())
                 {
-                    LogHelper.Info(string.Format("ApplicationRepository.GetApplications - End"));
-                    return new List<ApplicationForm>();
+                    LogHelper.Info(string.Format("ApplicationRepository.SearchApplications - End"));
+                    Models.ApplicationFormSearch dFormSearch = Mapper.Map<ApplicationFormSearch, Models.ApplicationFormSearch>(formSearch);
+                    var result = connection.Query<Models.ApplicationFormResponse>(Procedures.SearchApplications, dFormSearch);
+                    var businessResults = Mapper.Map<IEnumerable<Models.ApplicationFormResponse>, IEnumerable<ApplicationFormResponse>>(result);
+                    return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<ApplicationFormResponse>();
                 }
             }
             catch (Exception ex)
             {
-                LogHelper.Error(string.Format("ApplicationRepository.GetApplications - Exception:{0}", ex.Message));
+                LogHelper.Error(string.Format("ApplicationRepository.SearchApplications - Exception:{0}", ex.Message));
                 throw ex;
             }
         }

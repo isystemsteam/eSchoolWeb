@@ -99,6 +99,32 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
+
+        public ActionResult Search()
+        {
+            LogHelper.Info(string.Format("ApplicationController.Search - Begin"));
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("ApplicationController.Search - Exception:{0}", ex.Message));                
+            }
+        }
+
+        public ActionResult SearchApplications(ApplicationFormSearch formSearch)
+        {
+            LogHelper.Info(string.Format("ApplicationController.SearchApplications - Begin"));
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("ApplicationController.SearchApplications - Exception:{0}", ex.Message));
+            }
+        }
         #endregion
     }
 }

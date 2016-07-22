@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,14 +9,32 @@ namespace HSchool.Business.Models
 {
     public class ApplicationFormSearch
     {
-        public int? ApplicationFormId { get; set; }
+        [DisplayName("Application #")]
+        public int? ApplicationId { get; set; }
 
+        [DisplayName("Applied Date")]
         public DateTime AppliedDate { get; set; }
 
+        [DisplayName("User Name")]
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        public string ClassName { get; set; }
+        [DisplayName("Class")]
+        public string ClassId { get; set; }
+
+        [DisplayName("Academic Year")]
+        public int AcademicYear { get; set; }
+
+        [DisplayName("Application Status")]
+        public int ApplicationStatus { get; set; }
+
+        public int StartRow { get; set; }
+
+        public int EndRow { get; set; }
+
+        public string SortOn { get; set; }
+
+        public string SortOrder { get; set; }
     }
 }

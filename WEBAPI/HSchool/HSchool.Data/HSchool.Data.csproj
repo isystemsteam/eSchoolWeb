@@ -70,6 +70,7 @@
     <Compile Include="Models\AcademicYear.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ApplicationForm.cs" />
+    <Compile Include="Models\ApplicationFormResponse.cs" />
     <Compile Include="Models\ApplicationFormSearch.cs" />
     <Compile Include="Models\ApplicationModule.cs" />
     <Compile Include="Models\ApplicationPermission.cs" />

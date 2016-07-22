@@ -71,5 +71,7 @@ namespace HSchool.Data
         public const string GetMotherLanguages = "GetMotherLanguages";
 
         public const string GetRelationships = "GetRelationships";
+
+        public const string SearchApplications = "SearchApplications";
     }
 }
