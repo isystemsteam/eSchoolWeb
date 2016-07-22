@@ -321,6 +321,11 @@
                 return months <= 0 ? 0 : months;
             }
         },
+        route: {
+            redirect: function (uri) {
+                window.location.href = applicationRootUrl + uri;
+            }
+        },
         //utility end
         //controls add and remove attribute, add and remove classes
         controls: {

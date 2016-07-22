@@ -15,7 +15,7 @@ var applicationForm = {
 
         var _successCallback = function (result) {
             if (result != null && result.Instance != null && result.Instance != '') {
-                window.location.href = "/success/" + result.Instance;
+                jQuery.fn.appCommon.route.redirect("application/success/" + result.Instance);
             }
         };
 
