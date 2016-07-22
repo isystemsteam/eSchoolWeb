@@ -73,5 +73,7 @@ namespace HSchool.Data
         public const string GetRelationships = "GetRelationships";
 
         public const string SearchApplications = "SearchApplications";
+
+        public const string GetApplicationStatus = "GetApplicationStatus";
     }
 }

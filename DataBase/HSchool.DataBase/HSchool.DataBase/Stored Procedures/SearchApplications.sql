@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[SearchApplications]
+﻿CREATE PROCEDURE [dbo].[SearchApplicationS] --0,10,null,null,null,null,null,null,null,null
 (
 	@StartRow int,
 	@EndRow int,
@@ -15,7 +15,7 @@ AS
 BEGIN
 	BEGIN TRY
 		DECLARE @querystring NVARCHAR(MAX);
-		SET @querystring=N'select  COUNT(1) OVER () TotalRows, ROW_NUMBER() OVER (ORDER BY AP.CreateDate  DESC) as RowNum
+		SET @querystring=N'select  COUNT(1) OVER () TotalRows, ROW_NUMBER() OVER (ORDER BY AP.CreatedDate  DESC) as RowNum, 
 				AP.ApplicationId,
 				AP.UserId,
 				AT.ApplicationStatus,
@@ -25,17 +25,18 @@ BEGIN
 				AP.IsVerified,
 				UA.FirstName,
 				UA.LastName,
-				CL.ClassName	
+				CL.ClassName,
+				AP.CreatedDate	
 			into #TempApplications 
 				FROM dbo.Applications AP 
 				JOIN dbo.UserAccounts UA ON UA.UserId=AP.UserId  
 				JOIN dbo.Student ST ON ST.UserId = AP.UserId 
 				JOIN dbo.StudentClass SC ON ST.StudentId=SC.StudentId 
 				JOIN dbo.Classes CL ON CL.ClassId=SC.ClassId 
-				JOIN dbo.ApplicationStatus AT ON AT.ApplicationStatus=AP.ApplicationStatus 
+				JOIN dbo.ApplicationStatus AT ON AT.ApplicationStatusId=AP.ApplicationStatus 
 
-			WHERE CreatedDate IS NOT NULL'
-
+			WHERE AP.CreatedDate IS NOT NULL'
+		
 		-- APPLICATION ID
 			IF (@ApplicationId IS NOT NULL OR @ApplicationId !=0)
 				BEGIN
@@ -53,7 +54,7 @@ BEGIN
 				END
 
 		set @querystring+='; select * from #TempApplications  where RowNum > '+str(@StartRow)+' AND RowNum <='+str(@EndRow)+' order by CreatedDate DESC; delete #TempApplications ';
-
+		print @querystring
 		EXECUTE sp_executesql @querystring
 	END TRY
 	BEGIN CATCH

@@ -11,8 +11,10 @@ namespace HSchool.Business.Repository
     {
         int? SaveApplication(ApplicationForm form);
 
-        List<ApplicationForm> SearchApplications(ApplicationFormSearch formSearch);
+        List<ApplicationFormResponse> SearchApplications(ApplicationFormSearch formSearch);
 
         ApplicationForm GetApplicationById(int id);
+
+        int? GetApplicationStatus(int id, DateTime? dateOfBirth);
     }
 }

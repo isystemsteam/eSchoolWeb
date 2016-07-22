@@ -376,6 +376,9 @@
     <Content Include="Views\Admin\_EditAcademicYear.cshtml" />
     <Content Include="Views\Admin\_ViewAcademicYear.cshtml" />
     <Content Include="Views\Application\Search.cshtml" />
+    <Content Include="Views\Application\_StudentClass.cshtml" />
+    <Content Include="Views\Application\Status.cshtml" />
+    <Content Include="Views\Application\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

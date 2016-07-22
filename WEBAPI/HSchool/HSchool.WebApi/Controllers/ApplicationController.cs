@@ -76,30 +76,69 @@ namespace HSchool.WebApi.Controllers
         [HttpPost]
         public ActionResult Edit(ApplicationForm model)
         {
-            LogHelper.Info(string.Format("ApplicationController.StudentRegister - Begin"));
+            LogHelper.Info(string.Format("ApplicationController.Edit - Begin"));
             try
             {
+                int? id = null;
+                MessageResponse response = null;
                 if (ModelState.IsValid)
                 {
                     model.IsStudentUpdate = true;
                     model.UserStatus = (int)UserStatusEnum.Registered;
                     model.RollNumber = "123456";
                     model.VisibleMark = false;
+                    model.ApplicationStatus = (int)ApplicationStatus.Submitted;
+                    id = _applicationRepository.SaveApplication(model);
+                    response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
                 }
-                var id = _applicationRepository.SaveApplication(model);
-                var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
-                LogHelper.Info(string.Format("ApplicationController.StudentRegister - End"));
+                else
+                {
+                    response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, "Invalid Request. Please validate the mandatory fields.");
+                }
+                LogHelper.Info(string.Format("ApplicationController.Edit - End"));
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                LogHelper.Info(string.Format("ApplicationController.StudentRegister - Exception:{0}", ex.Message));
-                var response = new MessageResponse<string>(string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, ex.Message);
+                LogHelper.Info(string.Format("ApplicationController.Edit - Exception:{0}", ex.Message));
+                var response = new MessageResponse<string>(string.Empty, WebConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
         }
 
+        public ActionResult Success(int id)
+        {
+            LogHelper.Info(string.Format("ApplicationController.Success - Begin"));
+            try
+            {
+                return View(id);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("ApplicationController.Success - Exception:{0}", ex.Message));
+                return View();
+            }
+        }
 
+        public ActionResult Status()
+        {
+            LogHelper.Info(string.Format("ApplicationController.Status - Begin"));
+            return View();
+        }
+
+        public ActionResult GetOnlineApplicationStatus(int id, DateTime dateOfBirth)
+        {
+            LogHelper.Info(string.Format("ApplicationController.Status - Begin"));
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("ApplicationController.Status - Exception:{0}", ex.Message));
+                return View();
+            }
+        }
         public ActionResult Search()
         {
             LogHelper.Info(string.Format("ApplicationController.Search - Begin"));
@@ -109,7 +148,8 @@ namespace HSchool.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                LogHelper.Info(string.Format("ApplicationController.Search - Exception:{0}", ex.Message));                
+                LogHelper.Info(string.Format("ApplicationController.Search - Exception:{0}", ex.Message));
+                return View();
             }
         }
 
@@ -118,11 +158,12 @@ namespace HSchool.WebApi.Controllers
             LogHelper.Info(string.Format("ApplicationController.SearchApplications - Begin"));
             try
             {
-
+                return Json(null, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 LogHelper.Info(string.Format("ApplicationController.SearchApplications - Exception:{0}", ex.Message));
+                return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
         #endregion

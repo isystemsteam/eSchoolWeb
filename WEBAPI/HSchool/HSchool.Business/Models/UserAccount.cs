@@ -14,7 +14,7 @@ namespace HSchool.Business.Models
         public int UserId { get; set; }
 
         [JsonProperty("First Name")]
-        [DisplayName("First Name")]
+        [DisplayName("First Name")]        
         public string FirstName { get; set; }
 
         [JsonProperty("LastName")]
@@ -40,7 +40,7 @@ namespace HSchool.Business.Models
         public string PlaceOfBirth { get; set; }
 
         [JsonProperty("bloodGroup")]
-        [DisplayName("Place Of Birth")]
+        [DisplayName("Blood Group")]
         public string BloodGroup { get; set; }
 
         [JsonProperty("religion")]

@@ -22,8 +22,8 @@ jQuery.fn.Validation = new function ($) {
                 var re = /^\d{1,2}\/\d{1,2}\/\d{4}$/;
                 if (re.test(value)) {
                     var adata = value.split('/');
-                    var mm = parseInt(adata[0], 10);
-                    var dd = parseInt(adata[1], 10);
+                    var dd = parseInt(adata[0], 10);
+                    var mm = parseInt(adata[1], 10);
                     var yyyy = parseInt(adata[2], 10);
                     var xdata = new Date(yyyy, mm - 1, dd);
                     if ((xdata.getFullYear() == yyyy) && (xdata.getMonth() == mm - 1) && (xdata.getDate() == dd))
@@ -86,6 +86,7 @@ jQuery.fn.Validation = new function ($) {
                 return result;
             },
             selectFieldMandatory: function (value) {
+                debugger
                 var result = true;
                 if (value == null || value == '' || value == '0') {
                     result = false;
@@ -155,65 +156,68 @@ jQuery.fn.Validation = new function ($) {
         validateForm: function (formName) {
             //to validate mandatory fields
             var validationResult = true;
-            var mandatoryControls = $("#" + formName).find('input[required="True"]');
+            var mandatoryControls = $("#" + formName).find('input.required'); //$("#" + formName).find('input[required="True"]');
             if (mandatoryControls != null) {
                 for (var m = 0; m < mandatoryControls.length; m++) {
                     var mandatoryControl = mandatoryControls[m];
                     if (!jQuery.fn.Validation.validate.mandatoryText($(mandatoryControl).val())) {
-                        $(mandatoryControl).addClass("validationerror");
+                        $(mandatoryControl).addClass("validationerror").next(".validationResult").addClass("fa-exclamation-circle");
                         validationResult = false;
 
                         //to bind change validation
                         $(mandatoryControl).change(function () {
                             if (jQuery.fn.Validation.validate.mandatoryText($(this).val())) {
-                                $(this).removeClass("validationerror");
+                                $(this).removeClass("validationerror").next(".validationResult").removeClass("fa-exclamation-circle").addClass("fa-check-circle");
                             }
                             else {
-                                $(this).addClass("validationerror");
+                                $(this).addClass("validationerror").next(".validationResult").addClass("fa-exclamation-circle").removeClass("fa-check-circle");
                             }
                         });
                     }
                 }
             }
 
-            var selectMandatoryFields = $("#" + formName).find('select[required="True"]');
+            var selectMandatoryFields = $("#" + formName).find('select.required'); //$("#" + formName).find('select[required="True"]');
             if (selectMandatoryFields != null) {
                 for (var m = 0; m < selectMandatoryFields.length; m++) {
                     var selectMandatory = selectMandatoryFields[m];
                     if (!jQuery.fn.Validation.validate.selectFieldMandatory($(selectMandatory).val())) {
-                        $(selectMandatory).attr('style', 'border:red 1px solid');
+                        $(selectMandatory).addClass("validationerror").parent().next(".validationResult").addClass("fa-exclamation-circle");
+                        //$(selectMandatory).attr('style', 'border:red 1px solid');
                         validationResult = false;
                     } else {
-                        $(selectMandatory).attr('style', '');
+                        //$(selectMandatory).attr('style', '');
                     }
 
                     $(selectMandatory).change(function () {
-                        if (!jQuery.fn.Validation.validate.selectFieldMandatory($(this).val())) {
-                            $(this).attr('style', 'border:red 1px solid');
+                        if (jQuery.fn.Validation.validate.selectFieldMandatory($(this).val())) {
+                            //$(this).attr('style', 'border:red 1px solid');
+                            $(this).removeClass("validationerror").parent().next(".validationResult").removeClass("fa-exclamation-circle").addClass("fa-check-circle");
                         } else {
-                            $(this).attr('style', '');
+                            //$(this).attr('style', '');
+                            $(this).addClass("validationerror").parent().next(".validationResult").addClass("fa-exclamation-circle").removeClass("fa-check-circle");
                         }
                     });
                 }
             }
 
             //to validate date controls
-            var dateControls = $("#" + formName).find(".datePicker");
+            var dateControls = $("#" + formName).find(".datepicker");
             if (dateControls != null) {
                 for (var d = 0; d < dateControls.length; d++) {
                     var dateControl = dateControls[d];
                     if (!jQuery.fn.Validation.validate.dateField($(dateControl).val())) {
-                        $(dateControl).addClass("validationerror");
+                        $(dateControl).addClass("validationerror").next(".validationResult").addClass("fa-exclamation-circle");
                         validationResult = false;
                     }
 
                     //to bind change validation
                     $(dateControl).change(function () {
                         if (jQuery.fn.Validation.validate.dateField($(this).val())) {
-                            $(this).removeClass("validationerror");
+                            $(this).removeClass("validationerror").next(".validationResult").removeClass("fa-exclamation-circle").addClass("fa-check-circle");
                         }
                         else {
-                            $(this).addClass("validationerror");
+                            $(this).addClass("validationerror").next(".validationResult").addClass("fa-exclamation-circle").removeClass("fa-check-circle");
                         }
                     });
                 }
@@ -245,16 +249,16 @@ jQuery.fn.Validation = new function ($) {
             if (decimalControls != null) {
                 $(decimalControls).each(function (index) {
                     if (!jQuery.fn.Validation.validate.decimalField($(this).val())) {
-                        $(dateTimeControl).addClass("validationerror");
+                        $(dateTimeControl).addClass("validationerror").next(".validationResult").addClass("fa-exclamation-circle");
                         validationResult = false;
                     }
 
                     $(this).change(function () {
                         if (jQuery.fn.Validation.validate.decimalField($(this).val())) {
-                            $(this).removeClass("validationerror");
+                            $(this).removeClass("validationerror").next(".validationResult").removeClass("fa-exclamation-circle").addClass("fa-check-circle");
                         }
                         else {
-                            $(this).addClass("validationerror");
+                            $(this).addClass("validationerror").next(".validationResult").addClass("fa-exclamation-circle").removeClass("fa-check-circle");
                         }
                     });
                 });

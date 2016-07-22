@@ -90,5 +90,30 @@ namespace HSchool.Data.SqlRepository
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dateOfBirth"></param>
+        /// <returns></returns>
+        public int? GetApplicationStatus(int id, DateTime? dateOfBirth)
+        {
+            LogHelper.Info(string.Format("ApplicationRepository.GetApplicationById - Begin"));
+            try
+            {
+                using (var connection = SqlDataConnection.GetSqlConnection())
+                {
+                    LogHelper.Info(string.Format("ApplicationRepository.GetApplicationById - End"));
+                    var result = connection.Query<int>(Procedures.GetApplicationStatus, new { @ApplicationId = id, @dateofbirth = dateOfBirth });
+                    return result != null && result.Any() ? result.First() : (int?)null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("ApplicationRepository.GetApplicationById - Exception:{0}", ex.Message));
+                throw ex;
+            }
+        }
     }
 }
