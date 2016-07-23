@@ -77,6 +77,7 @@
     <Compile Include="Models\ClassSections.cs" />
     <Compile Include="Models\CommunityMaster.cs" />
     <Compile Include="Models\Enum.cs" />
+    <Compile Include="Models\GridViewData.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MessageResponse.cs" />
     <Compile Include="Models\ApiResponse.cs" />

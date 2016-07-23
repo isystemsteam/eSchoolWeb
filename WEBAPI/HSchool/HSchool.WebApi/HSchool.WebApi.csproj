@@ -282,6 +282,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Resources\Components\log4net.dll" />
+    <Content Include="Resources\Templates\GridView.html" />
     <Content Include="Scripts\Application\AdminView.js" />
     <Content Include="Scripts\Application\ApplicationForm.js" />
     <Content Include="Scripts\Application\ApplicationSearch.js" />
@@ -386,7 +387,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\Templates\" />
     <Folder Include="Views\Common\" />
   </ItemGroup>
   <ItemGroup>

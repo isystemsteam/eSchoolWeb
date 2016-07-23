@@ -10,15 +10,17 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/Custom/Entity.js")
     @Scripts.Render("~/Scripts/jquery.form.js")
-    @Scripts.Render("~/Scripts/Custom/Common.js")
     @Scripts.Render("~/Scripts/jquery.blockUI.js")
     @Scripts.Render("~/Scripts/jsrender.min.js")
-    <script src="~/Scripts/Custom/Validation.js"></script>
+    @Scripts.Render("~/bundles/custom")
+    @Scripts.Render("~/bundles/application")
+
     <script src="~/Scripts/Application/AdminView.js"></script>
     <script src="~/Scripts/Application/ApplicationForm.js"></script>
+    <script src="~/Scripts/Application/ApplicationSearch.js"></script>
     <script src="~/Scripts/Application/Home.js"></script>
+    
     <script type="text/javascript">
         var applicationRootUrl = "@(Url.Content("~/"))";
         $(document).ready(function () {

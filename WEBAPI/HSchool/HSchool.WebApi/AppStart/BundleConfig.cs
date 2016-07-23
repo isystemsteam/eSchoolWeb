@@ -22,6 +22,16 @@ namespace HSchool.WebApi
                       "~/Scripts/bootstrap-select.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/application").Include(
+                      "~/Scripts/Application/ApplicationSearch.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                      "~/Scripts/Custom/Common.js",
+                      "~/Scripts/Custom/Validation.js",
+                      "~/Scripts/Custom/Entity.js",
+                      "~/Scripts/Custom/TableView.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-select.css",

@@ -250,7 +250,7 @@
                     }
                 }
             </div>
-            @if (Model.IsOfficeFormEnabled)
+            @if (!Model.IsOfficeFormEnabled)
             {
                 <h2 class="highlight-bg">For Office Use</h2>
                 <div class="form-container">
@@ -262,7 +262,7 @@
                     <div class="row custom-row clearfix">
                         <div class="col-md-4 custom-text">
                             <label for="">Applied Date</label>
-                            @Html.TextBoxFor(m => m.AppliedDate)
+                            @Html.DisplayFor(m => m.AppliedDate, new { })
                         </div>
                         <div class="col-md-4 custom-text">
                             @Html.LabelFor(m => m.ApprovedDate)

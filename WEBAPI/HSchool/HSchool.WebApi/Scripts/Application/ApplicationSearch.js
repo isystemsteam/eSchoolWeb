@@ -5,9 +5,10 @@ var applicationSearch = {
     init: function () {
 
     },
-    handleException:function(xhr,message,error){
+    handleException: function (xhr, message, error) {
     },
     searchApplication: function () {
+        debugger
         var searchRequest = {
             ApplicationId: $("#txtApplicationId").val() != null && $("#txtApplicationId").val() != '' ? $("#txtApplicationId").val() : null,
             AppliedDate: $("#txtAppliedDate").val() != null && $("#txtAppliedDate").val() != '' ? $("#txtAppliedDate").val() : null,
@@ -17,9 +18,18 @@ var applicationSearch = {
             LastName: $("#txtLastName").val() != '' ? $("#txtLastName").val() : null,
         };
 
-        var _successCallBack = function (result) {
-        };
-
-        jQuery.fn.appCommon.ajax.get(appService.init(),searchRequest,_successCallBack,applicationSearch.handleException)
+        var rows = [
+                { Cells: [{ Value: "Pariventhan" }, { Value: "31" }] },
+                { Cells: [{ Value: "Poonguzhali" }, { Value: "23" }] },
+                { Cells: [{ Value: "Pagalavan" }, { Value: "0.9" }] }
+        ];
+        $("#divSearchResult").GridView({
+            data: { Columns: [{ Name: "Name" }, { Name: "Age" }], Rows: rows },
+            postData: searchRequest,
+            templateName: "gridViewTemplate",
+            dataType: "application\json",
+            uri: "ApplicationSearch",
+            isLocalData: false
+        });
     }
 };

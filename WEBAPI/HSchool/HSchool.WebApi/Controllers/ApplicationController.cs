@@ -140,6 +140,38 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
+        [HttpPost]
+        public JsonResult ApplicationSearch(ApplicationFormSearch formSearch)
+        {
+            LogHelper.Info(string.Format("ApplicationController.ApplicationSearch - Begin"));
+            try
+            {
+                var result = _applicationRepository.SearchApplications(formSearch);
+                var response = new GridViewTable
+                {
+                    Columns = new List<string> { "Application Id", "Application Status", "Applied Date" },
+                    Rows = new List<GridViewRow> { }
+                };
+
+                var rows = new List<GridViewRow>();
+                foreach (var item in result)
+                {
+                    var cells = new List<GridViewCell>();
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.ApplicationId) });
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.ApplicationStatus) });
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.AppliedDate) });
+                    rows.Add(new GridViewRow { Cells = cells });
+                }
+                response.Rows = rows;
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("ApplicationController.ApplicationSearch - Exception:{0}", ex.Message));
+                return Json(null, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public ActionResult Search()
         {
             LogHelper.Info(string.Format("ApplicationController.Search - Begin"));
@@ -157,19 +189,7 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
-        public ActionResult SearchApplications(ApplicationFormSearch formSearch)
-        {
-            LogHelper.Info(string.Format("ApplicationController.SearchApplications - Begin"));
-            try
-            {
-                return Json(null, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Info(string.Format("ApplicationController.SearchApplications - Exception:{0}", ex.Message));
-                return Json(null, JsonRequestBehavior.AllowGet);
-            }
-        }
+        
         #endregion
     }
 }

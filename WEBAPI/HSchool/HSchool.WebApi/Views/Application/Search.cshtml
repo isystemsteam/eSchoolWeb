@@ -42,15 +42,36 @@
             </div>
             <div class="row custom-row clearfix">
                 <div class="col-md-12 custom-text">
-                    <input type="button" value="Search" />
+                    <input type="button" value="Search" onclick="applicationSearch.searchApplication()" />
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="divSearchResult" >
-        <div class="row">
+    <div id="divSearchResult">
 
-        </div>
     </div>
 </div>
+<script type="text/x-jsrender" id="gridViewTemplate">
+    <div class="">
+        <table class="table">
+            <thead>
+                <tr>
+                    {{for Columns}}
+                    <th class="">{{:Name}}</th>
+                    {{/for}}
+                </tr>
+            </thead>
+
+            {{for Rows}}
+            <tr>
+                {{for Cells}}
+                <td class="">
+                    {{:Value}}
+                </td>
+                {{/for}}
+            </tr>
+            {{/for}}
+        </table>
+    </div>
+</script>
