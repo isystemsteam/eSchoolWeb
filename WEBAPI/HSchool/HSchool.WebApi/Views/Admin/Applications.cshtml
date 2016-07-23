@@ -8,16 +8,15 @@
                 <div class="col-md-12 custom-text">
                     <label for="">Application Id</label>
                     @Html.TextBoxFor(m => m.ApplicationId, new { @id = "txtApplicationId" })
-                    <i class="fa validationResult"></i>
                 </div>
             </div>
             <div class="row custom-row clearfix">
                 <div class="col-md-6 custom-text">
-                    @Html.DropDownListFor(m => m.ApplicationStatus, Model.ListApplicationStatus, new { @id = "ddlApplicationStatus", @class = "selectpicker show-tick required" })
+                    @Html.DropDownListFor(m => m.ClassId, Model.ListApplicationStatus, new { @id = "", @class = "selectpicker show-tick required" })
                     <i class="fa validationResult"></i>
                 </div>
                 <div class="col-md-6 custom-text">
-                    @Html.DropDownListFor(m => m.ClassId, Model.ListClasses, new { @id = "ddlClass", @class = "selectpicker show-tick required" })
+                    @Html.DropDownListFor(m => m.ClassId, Model.ListClasses, new { @id = "", @class = "selectpicker show-tick required" })
                     <i class="fa validationResult"></i>
                 </div>
             </div>
@@ -25,32 +24,19 @@
                 <div class="col-md-6 custom-text">
                     <label for="">Applied Date</label>
                     @Html.TextBoxFor(m => m.AppliedDate, new { @id = "txtAppliedDate", @class = "datepicker" })
-                    <i class="fa validationResult"></i>
                 </div>
             </div>
             <div class="row custom-row clearfix">
                 <div class="col-md-6 custom-text">
                     <label for="">First Name</label>
                     @Html.TextBoxFor(m => m.FirstName, new { @id = "txtFirstName", @class = "" })
-                    <i class="fa validationResult"></i>
                 </div>
                 <div class="col-md-6 custom-text">
                     <label for="">Last Name</label>
                     @Html.TextBoxFor(m => m.LastName, new { @id = "txtFirstName", @class = "" })
-                    <i class="fa validationResult"></i>
-                </div>
-            </div>
-            <div class="row custom-row clearfix">
-                <div class="col-md-12 custom-text">
-                    <input type="button" value="Search" />
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="divSearchResult" >
-        <div class="row">
-
-        </div>
-    </div>
 </div>

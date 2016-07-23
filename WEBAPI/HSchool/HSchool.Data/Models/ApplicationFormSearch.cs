@@ -10,17 +10,17 @@ namespace HSchool.Data.Models
     {
         public int? ApplicationId { get; set; }
 
-        public DateTime AppliedDate { get; set; }
+        public DateTime? AppliedDate { get; set; }
 
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        public string ClassId { get; set; }
+        public int? ClassId { get; set; }
 
         public int AcademicYear { get; set; }
 
-        public int ApplicationStatus { get; set; }
+        public int? ApplicationStatus { get; set; }
 
         public int StartRow { get; set; }
 

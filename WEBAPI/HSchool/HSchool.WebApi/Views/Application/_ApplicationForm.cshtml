@@ -26,17 +26,17 @@
                 <div class="row custom-row clearfix">
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.Title)
-                        @Html.DropDownListFor(m => m.Title, Model.ListTitles, new { @id = "", @class = "selectpicker show-tick required" })
+                        @Html.DropDownListFor(m => m.Title, Model.ListTitles, new { @id = "ddlApplicationStatus", @class = "selectpicker show-tick required" })
                         <i class="fa validationResult"></i>
                     </div>
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.FirstName)
-                        @Html.TextBoxFor(m => m.FirstName, new { @Id = "txtFirstName", @class = "required", @maxlength = "2" })
+                        @Html.TextBoxFor(m => m.FirstName, new { @Id = "txtFirstName", @class = "required", @maxlength = "120" })
                         <i class="fa validationResult"></i>
                     </div>
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.LastName)
-                        @Html.TextBoxFor(m => m.LastName, new { @Id = "txtLastName", @class = "required" })
+                        @Html.TextBoxFor(m => m.LastName, new { @Id = "txtLastName", @class = "required", @maxlength = "120" })
                         <i class="fa validationResult"></i>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.PlaceOfBirth)
-                        @Html.TextBoxFor(m => m.PlaceOfBirth, new { @Id = "txtPlaceOfBirth required" })
+                        @Html.TextBoxFor(m => m.PlaceOfBirth, new { @Id = "txtPlaceOfBirth required", @maxlength = "120" })
                         <i class="fa validationResult"></i>
                     </div>
                 </div>
@@ -68,19 +68,19 @@
                     </div>
                     <div class="col-md-6 custom-text ">
                         @Html.LabelFor(m => m.FluencyinOthers)
-                        @Html.TextBoxFor(m => m.FluencyinOthers, new { @Id = "txtFluencyinOthers" })
+                        @Html.TextBoxFor(m => m.FluencyinOthers, new { @Id = "txtFluencyinOthers", @maxlength = "120" })
                         <i class="fa validationResult"></i>
                     </div>
                 </div>
                 <div class="row custom-row clearfix">
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.Nationality)
-                        @Html.TextBoxFor(m => m.Nationality, new { @Id = "txtNationality", @class = "required" })
+                        @Html.TextBoxFor(m => m.Nationality, new { @Id = "txtNationality", @class = "required", @maxlength = "50" })
                         <i class="fa validationResult"></i>
                     </div>
                     <div class="col-md-4 custom-text">
                         @Html.LabelFor(m => m.Religion)
-                        @Html.TextBoxFor(m => m.Religion, new { @Id = "txtReligion", @class = "required" })
+                        @Html.TextBoxFor(m => m.Religion, new { @Id = "txtReligion", @class = "required", @maxlength = "50" })
                         <i class="fa validationResult"></i>
                     </div>
                     <div class="col-md-4 custom-text">
@@ -92,14 +92,14 @@
                 <div class="row custom-row clearfix">
                     <div class="col-md-12 custom-text">
                         @Html.LabelFor(m => m.Caste)
-                        @Html.TextBoxFor(m => m.Caste, new { @Id = "txtCaste", @class = "required" })
+                        @Html.TextBoxFor(m => m.Caste, new { @Id = "txtCaste", @class = "required", @maxlength = "120" })
                         <i class="fa validationResult"></i>
                     </div>
                 </div>
                 <div class="row custom-row clearfix">
                     <div class="col-md-6 custom-text">
                         @Html.LabelFor(m => m.BloodGroup)
-                        @Html.TextBoxFor(m => m.BloodGroup, new { @Id = "txtBloodGroup", @class = "required" })
+                        @Html.TextBoxFor(m => m.BloodGroup, new { @Id = "txtBloodGroup", @class = "required", @maxlength = "10" })
                         <i class="fa validationResult"></i>
                     </div>
                     <div class="col-md-6 custom-check ">
@@ -118,7 +118,6 @@
 
             <h2>Address for Communication</h2>
             <div class="form-container">
-
                 @if (Model.Addresses.Count > 0)
                 {
                     for (int aCount = 0; aCount < Model.Addresses.Count; aCount++)
@@ -126,36 +125,36 @@
                         <div class="row custom-row clearfix">
                             <div class="col-md-6 custom-text">
                                 @Html.LabelFor(m => m.Addresses[aCount].DoorNo)
-                                @Html.TextBoxFor(m => m.Addresses[aCount].DoorNo, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.Addresses[aCount].DoorNo, new { @id = "", @class = "required", @maxlength = "10" })
                                 <i class="fa validationResult"></i>
                             </div>
                         </div>
                         <div class="row custom-row clearfix">
                             <div class="col-md-6 custom-text">
                                 @Html.LabelFor(m => m.Addresses[aCount].AddressLine1)
-                                @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine1, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine1, new { @id = "", @class = "required", @maxlength = "120" })
                                 <i class="fa validationResult"></i>
                             </div>
                             <div class="col-md-6 custom-text">
                                 @Html.LabelFor(m => m.Addresses[aCount].AddressLine2)
-                                @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine2, new { @id = "", @class = "" })
+                                @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine2, new { @id = "", @class = "", @maxlength = "120" })
                                 <i class="fa validationResult"></i>
                             </div>
                         </div>
                         <div class="row custom-row clearfix">
                             <div class="col-md-4 custom-text">
                                 @Html.LabelFor(m => m.Addresses[aCount].District)
-                                @Html.TextBoxFor(m => m.Addresses[aCount].District, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.Addresses[aCount].District, new { @id = "", @class = "required", @maxlength = "120" })
                                 <i class="fa validationResult"></i>
                             </div>
                             <div class="col-md-4 custom-text">
                                 @Html.LabelFor(m => m.Addresses[aCount].Taluk)
-                                @Html.TextBoxFor(m => m.Addresses[aCount].Taluk, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.Addresses[aCount].Taluk, new { @id = "", @class = "required", @maxlength = "120" })
                                 <i class="fa validationResult"></i>
                             </div>
                             <div class="col-md-4 custom-text">
                                 @Html.LabelFor(m => m.Addresses[aCount].PinCode)
-                                @Html.TextBoxFor(m => m.Addresses[aCount].PinCode, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.Addresses[aCount].PinCode, new { @id = "", @class = "required", @maxlength = "6" })
                                 <i class="fa validationResult"></i>
                             </div>
                         </div>
@@ -178,19 +177,19 @@
                             </div>
                             <div class="col-md-4 custom-text">
                                 <label for="">First Name</label>
-                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].FirstName, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].FirstName, new { @id = "", @class = "required", @maxlength = "120" })
                                 <i class="fa validationResult"></i>
                             </div>
                             <div class="col-md-4 custom-text">
                                 <label for="">Last Name</label>
-                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].LastName, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].LastName, new { @id = "", @class = "required", @maxlength = "120" })
                                 <i class="fa validationResult"></i>
                             </div>
                         </div>
                         <div class="row custom-row clearfix">
                             <div class="col-md-12 custom-text">
                                 <label for="">Email</label>
-                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].Email, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].Email, new { @id = "", @class = "required", @maxlength = "255" })
                                 <i class="fa validationResult"></i>
                             </div>
                         </div>
@@ -214,24 +213,24 @@
                         <div class="row custom-row clearfix">
                             <div class="col-md-6 custom-text">
                                 <label for="">Mobile Number</label>
-                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].MobileNumber, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].MobileNumber, new { @id = "", @class = "required", @maxlength = "15" })
                                 <i class="fa validationResult"></i>
                             </div>
                             <div class="col-md-6 custom-text">
                                 <label for="">Office Number</label>
-                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].OfficeNumber, new { @id = "", @class = "" })
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].OfficeNumber, new { @id = "", @class = "", @maxlength = "12" })
                                 <i class="fa validationResult"></i>
                             </div>
                         </div>
                         <div class="row custom-row clearfix">
                             <div class="col-md-4 custom-text">
                                 <label for="">Highest Qualification</label>
-                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].HighestQualification, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].HighestQualification, new { @id = "", @class = "required", @maxlength = "50" })
                                 <i class="fa validationResult"></i>
                             </div>
                             <div class="col-md-4 custom-text">
                                 <label for="">Occupation</label>
-                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].Occupation, new { @id = "", @class = "required" })
+                                @Html.TextBoxFor(m => m.StudentGuardians[sCount].Occupation, new { @id = "", @class = "required", @maxlength = "120" })
                                 <i class="fa validationResult"></i>
                             </div>
                             <div class="col-md-4 custom-text">
@@ -251,33 +250,39 @@
                     }
                 }
             </div>
-            <h2 class="highlight-bg">For Office Use</h2>
-            <div class="form-container">
-
-                @if (!Model.IsOfficeFormEnabled)
-                {
+            @if (Model.IsOfficeFormEnabled)
+            {
+                <h2 class="highlight-bg">For Office Use</h2>
+                <div class="form-container">
                     <div class="row custom-row clearfix">
-                        <div class="col-md-6 custom-text">
+                        <div class="col-md-12 custom-text">
                             @Html.DropDownListFor(m => m.ApplicationStatus, Model.ApplicationStatuses, new { @id = "", @class = "selectpicker show-tick required" })
-
-                        </div>
-                        <div class="col-md-6 custom-text">
-                            @Html.LabelFor(m => m.AppliedDate)
-                            @Html.DisplayFor(m => m.AppliedDate)
                         </div>
                     </div>
                     <div class="row custom-row clearfix">
-                        <div class="col-md-6 custom-text">
+                        <div class="col-md-4 custom-text">
+                            <label for="">Applied Date</label>
+                            @Html.TextBoxFor(m => m.AppliedDate)
+                        </div>
+                        <div class="col-md-4 custom-text">
                             @Html.LabelFor(m => m.ApprovedDate)
                             @Html.DisplayFor(m => m.ApprovedDate, new { })
                         </div>
-                        <div class="col-md-6 custom-text">
+                        <div class="col-md-4 custom-text">
                             @Html.LabelFor(m => m.ApprovedByText)
                             @Html.DisplayFor(m => m.ApprovedByText)
                         </div>
                     </div>
-                }
-            </div>
+                    <div class="row custom-row clearfix">
+                        <div class="col-md-6 custom-check ">
+                            <div class="cstom-check-margin">
+                                <input type="checkbox" checked="@(Model.LoginEnabled)" name="LoginEnabled" id="LoginEnabled" />
+                                <label for="LoginEnabled"><span><span><i class="fa fa-check"></i></span></span>Login Enabled</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
 
         <div class="btn-wrapper pull-right">

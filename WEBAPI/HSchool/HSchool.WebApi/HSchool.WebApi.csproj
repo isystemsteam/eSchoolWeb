@@ -284,6 +284,7 @@
     <Content Include="Resources\Components\log4net.dll" />
     <Content Include="Scripts\Application\AdminView.js" />
     <Content Include="Scripts\Application\ApplicationForm.js" />
+    <Content Include="Scripts\Application\ApplicationSearch.js" />
     <Content Include="Scripts\Application\Home.js" />
     <Content Include="Scripts\Application\LoginView.js" />
     <Content Include="Scripts\bootstrap-select.js" />
@@ -319,6 +320,7 @@
     <Content Include="Scripts\Custom\AppEvents.js" />
     <Content Include="Scripts\Custom\Common.js" />
     <Content Include="Scripts\Custom\Entity.js" />
+    <Content Include="Scripts\Custom\TableView.js" />
     <Content Include="Scripts\Custom\Validation.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -379,9 +381,12 @@
     <Content Include="Views\Application\_StudentClass.cshtml" />
     <Content Include="Views\Application\Status.cshtml" />
     <Content Include="Views\Application\Success.cshtml" />
+    <Content Include="Views\Admin\Applications.cshtml" />
+    <Content Include="Views\Admin\_Applications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Resources\Templates\" />
     <Folder Include="Views\Common\" />
   </ItemGroup>
   <ItemGroup>

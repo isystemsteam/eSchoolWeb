@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace HSchool.Business.Models
 {
@@ -13,7 +14,7 @@ namespace HSchool.Business.Models
         public int? ApplicationId { get; set; }
 
         [DisplayName("Applied Date")]
-        public DateTime AppliedDate { get; set; }
+        public DateTime? AppliedDate { get; set; }
 
         [DisplayName("User Name")]
         public string FirstName { get; set; }
@@ -21,13 +22,13 @@ namespace HSchool.Business.Models
         public string LastName { get; set; }
 
         [DisplayName("Class")]
-        public string ClassId { get; set; }
+        public int? ClassId { get; set; }
 
         [DisplayName("Academic Year")]
         public int AcademicYear { get; set; }
 
         [DisplayName("Application Status")]
-        public int ApplicationStatus { get; set; }
+        public int? ApplicationStatus { get; set; }
 
         public int StartRow { get; set; }
 
@@ -36,5 +37,11 @@ namespace HSchool.Business.Models
         public string SortOn { get; set; }
 
         public string SortOrder { get; set; }
+
+        public List<SelectListItem> ListClasses { get; set; }
+
+        public List<SelectListItem> ListApplicationStatus { get; set; }
+
+
     }
 }

@@ -11,10 +11,19 @@
     viewClassSections: "ViewClassSections",
     saveClassSections: "SaveClassSections",
     SaveRolesPrivileges: "SaveRolesPrivileges",
-    editAcademicYear: "EditAcademicYear",    
+    editAcademicYear: "EditAcademicYear",
     getAcademicYears: "ViewAcademicYear",
+    searchApplications: "application/SearchApplications",
     init: function (keyName) {
-        return appService[keyName];
+        return applicationRootUrl + appService[keyName];
+    }
+};
+
+//For application services
+var applicationService = {
+    searchApplication: "application/SearchApplications",
+    get: function (keyName) {
+        return applicationRootUrl + this[keyName];
     }
 };
 

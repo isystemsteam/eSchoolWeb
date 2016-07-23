@@ -139,12 +139,16 @@ namespace HSchool.WebApi.Controllers
                 return View();
             }
         }
+
         public ActionResult Search()
         {
             LogHelper.Info(string.Format("ApplicationController.Search - Begin"));
             try
             {
-                return View();
+                var applicationSearch = new ApplicationFormSearch();
+                applicationSearch.ListApplicationStatus = CommonHelper.ConvertEnumToListItem<ApplicationStatus>("Application Status");
+                applicationSearch.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_adminRepository.GetAllClasses(false), "Class", "ClassId", "ClassName");
+                return View(applicationSearch);
             }
             catch (Exception ex)
             {

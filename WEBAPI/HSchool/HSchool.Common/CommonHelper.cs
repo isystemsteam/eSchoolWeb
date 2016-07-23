@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,6 +46,19 @@ namespace HSchool.Common
             foreach (var item in Enum.GetValues(typeof(T)))
             {
                 listItem.Add(new SelectListItem { Value = Convert.ToString((int)(item)), Text = Enum.GetName(typeof(T), item) });
+            }
+            return listItem;
+        }
+
+        public static List<SelectListItem> ConvertListToSelectList<T>(List<T> source, string defaultValue, string valueProp, string textProp)
+        {
+            var listItem = new List<SelectListItem>();
+            listItem.Add(new SelectListItem { Text = defaultValue, Value = "0" });
+            foreach (var item in source)
+            {
+                PropertyInfo textProperty = item.GetType().GetProperty(textProp);
+                PropertyInfo valueProperty = item.GetType().GetProperty(valueProp);
+                listItem.Add(new SelectListItem { Value = Convert.ToString(valueProperty.GetValue(item, null)), Text = (string)textProperty.GetValue(item, null) });
             }
             return listItem;
         }

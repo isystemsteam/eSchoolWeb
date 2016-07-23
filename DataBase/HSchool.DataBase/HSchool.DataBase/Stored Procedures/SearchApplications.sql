@@ -53,6 +53,11 @@ BEGIN
 					set @querystring=@querystring+' and AP.ApplicationStatus = '+CAST(@ApplicationStatus AS NVARCHAR(10))
 				END
 
+			IF (@FirstName IS NOT NULL OR @FirstName !='')
+			BEGIN
+				set @querystring=@querystring+' and UA.FirstName = '''+@FirstName+''
+			END
+
 		set @querystring+='; select * from #TempApplications  where RowNum > '+str(@StartRow)+' AND RowNum <='+str(@EndRow)+' order by CreatedDate DESC; delete #TempApplications ';
 		print @querystring
 		EXECUTE sp_executesql @querystring
