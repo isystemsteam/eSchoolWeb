@@ -141,15 +141,17 @@ namespace HSchool.WebApi.Controllers
         }
 
         [HttpPost]
-        public JsonResult ApplicationSearch(ApplicationFormSearch formSearch)
+        public ActionResult SearchApplications(ApplicationFormSearch formSearch)
         {
-            LogHelper.Info(string.Format("ApplicationController.ApplicationSearch - Begin"));
+            LogHelper.Info(string.Format("ApplicationController.SearchApplications - Begin"));
             try
             {
+                formSearch.StartRow = 0;
+                formSearch.EndRow = 10;
                 var result = _applicationRepository.SearchApplications(formSearch);
                 var response = new GridViewTable
                 {
-                    Columns = new List<string> { "Application Id", "Application Status", "Applied Date" },
+                    Columns = new List<GridColumn> { new GridColumn { ColumnName = "Application Id" }, new GridColumn { ColumnName = "Application Status" }, new GridColumn { ColumnName = "Applied Date" } },
                     Rows = new List<GridViewRow> { }
                 };
 
@@ -167,7 +169,7 @@ namespace HSchool.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                LogHelper.Info(string.Format("ApplicationController.ApplicationSearch - Exception:{0}", ex.Message));
+                LogHelper.Info(string.Format("ApplicationController.SearchApplications - Exception:{0}", ex.Message));
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
@@ -189,7 +191,7 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
-        
+
         #endregion
     }
 }

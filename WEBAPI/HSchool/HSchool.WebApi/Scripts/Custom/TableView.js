@@ -4,7 +4,7 @@ $.fn.GridView = function (options) {
     var settings = $.extend({
         data: null,
         templateName: null,
-        uri: "applicationSearch",
+        url: "applicationSearch",
         pageSize: 10,
         pageIndex: 1,
         postData: null,
@@ -16,7 +16,7 @@ $.fn.GridView = function (options) {
         debugger
         var _component = $(this);
         //to bind template
-        var _bindTemplate = function (data) {
+        var _bindTemplate = function (data) {            
             try {
                 var template = $.templates("#" + settings.templateName);
                 var htmlOutput = template.render(data);
@@ -30,20 +30,20 @@ $.fn.GridView = function (options) {
 
         //to bind error on the controls
         var _errorBind = function (xhr, message, error) {
+            alert(xhr.statusText + message + error)
             _component.html(xhr.message);
             return this;
         };
 
         if (!settings.isLocalData) {
-            //ajax call to get values
-            alert(settings.uri);
+            //ajax call to get values            
             $.ajax({
-                uri: settings.uri,
+                url: settings.url,
                 data: settings.postData,
                 type: 'POST',
                 dataType: settings.dataType,
-                successCallback: _bindTemplate,
-                errorCallback: _errorBind
+                success: _bindTemplate,
+                error: _errorBind
             });
         } else {
             _bindTemplate(settings.data);

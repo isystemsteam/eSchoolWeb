@@ -27,8 +27,8 @@ var applicationSearch = {
             data: { Columns: [{ Name: "Name" }, { Name: "Age" }], Rows: rows },
             postData: searchRequest,
             templateName: "gridViewTemplate",
-            dataType: "application\json",
-            uri: "ApplicationSearch",
+            dataType: "json",
+            url: "/application/SearchApplications",
             isLocalData: false
         });
     }

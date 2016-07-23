@@ -10,7 +10,7 @@ namespace HSchool.Business.Models
     public class GridViewTable
     {
         [JsonProperty("Columns")]
-        public List<string> Columns { get; set; }
+        public List<GridColumn> Columns { get; set; }
 
         [JsonProperty("Rows")]
         public List<GridViewRow> Rows { get; set; }
@@ -43,5 +43,11 @@ namespace HSchool.Business.Models
         [JsonProperty("Value")]
         public string Value { get; set; }
 
+    }
+
+    public class GridColumn
+    {
+        [JsonProperty("ColumnName")]
+        public string ColumnName { get; set; }
     }
 }
