@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace HSchool.Business.Models
 {
@@ -20,6 +21,6 @@ namespace HSchool.Business.Models
 
         public int RoleId { get; set; }
 
-        public List<ApplicationRole> Roles { get; set; }
+        public List<SelectListItem> Roles { get; set; }
     }
 }

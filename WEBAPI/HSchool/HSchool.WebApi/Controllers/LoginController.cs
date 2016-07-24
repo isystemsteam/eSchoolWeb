@@ -1,5 +1,6 @@
 ﻿using HSchool.Business.Models;
 using HSchool.Business.Repository;
+using HSchool.Common;
 using HSchool.Logging;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace HSchool.WebApi.Controllers
             try
             {
                 var loginModel = new LoginViewModel();
-                loginModel.Roles = _adminRepository.GetAllRoles(true);
+                loginModel.Roles = CommonHelper.ConvertListToSelectList<ApplicationRole>(_adminRepository.GetAllRoles(true), "Login As", "RoleId", "RoleName"); 
                 LogHelper.Info(string.Format("LoginController.Index - End"));
                 return View(loginModel);
             }

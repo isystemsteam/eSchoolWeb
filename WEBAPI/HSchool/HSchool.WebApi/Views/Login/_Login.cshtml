@@ -4,47 +4,27 @@
 {
     <div class="login-div clearfix">
         <div class="login-wrapper">
+            <h2>Login</h2>
+
             <div class="row custom-row">
                 <div class="col-lg-12 custom-text">
-                    @Html.TextBoxFor(login => login.UserName, new { @id = "txtUserName" })
-                    <label for="">User Name</label>
-                    <i class="fa fa-exclamation-circle" style="display:none"></i>
-                    <i class="fa fa-check-circle"></i>
-                    <em class="error-msg">Required</em>
+                    <label for="">User Name</label>    
+                    @Html.TextBoxFor(login => login.UserName, new { @id = "txtUserName" })                                 
+                    <i class="fa fa-user"></i>                  
                 </div>
             </div>
             <div class="row custom-row">
                 <div class="col-lg-12 custom-text">
-                    @Html.PasswordFor(login => login.Password, new { @Id = "txtPassword" })
-                    <label for="">Password</label>
-                    <i class="fa fa-exclamation-circle" style="display:none"></i>
-                    <i class="fa fa-check-circle"></i>
-                    <em class="error-msg">Required</em>
+                    <label for="">Password</label>  
+                    @Html.PasswordFor(login => login.Password, new { @Id = "txtPassword" })                                    
+                    <i class="fa fa-lock"></i>                 
                 </div>
             </div>
             <div class="row custom-row">
-                <div class="col-lg-12  custom-text">
-                    <!-- @Html.TextBox("txtRoleName", new { @id = "" })
-                    @Html.HiddenFor(login => login.RoleId, new { @Id = "txtRoleId" })
-                    <label for="">Login As</label>
-                    <i class="fa fa-exclamation-circle" style="display:none"></i>
-                    <i class="fa fa-check-circle"></i>
-                    <em class="error-msg">Required</em>-->
-                    <!-- bootstrap dropdown -->
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Select the status
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">Administrator</a></li>
-                            <li><a href="#">Teachers</a></li>
-                            <li><a href="#">Parent</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Management</a></li>
-                        </ul>
-                    </div>
-                    <!-- bootstrap dropdown -->
+                <div class="col-lg-12  custom-text">                    
+                    @Html.DropDownListFor(m => m.RoleId, Model.Roles, new { @id = "", @class = "selectpicker show-tick required" })
+               
+                    
                 </div>
 
             </div>
