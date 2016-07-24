@@ -136,6 +136,7 @@
     <Build Include="User-Defined Table Types\TypeAddress.sql" />
     <Build Include="Stored Procedures\SearchApplications.sql" />
     <Build Include="Stored Procedures\GetApplicationStatus.sql" />
+    <Build Include="Stored Procedures\GetApplicationById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />

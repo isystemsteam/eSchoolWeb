@@ -25,5 +25,8 @@ var applicationForm = {
         if (jQuery.fn.Validation.validateForm(this.formName)) {
             $("#" + this.formName).submit();
         }
+    },
+    reset: function () {
+        $("#" + this.formName).find('input').resetInput();
     }
 };

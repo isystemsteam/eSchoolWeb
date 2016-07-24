@@ -10,7 +10,7 @@ namespace HSchool.Data.Models
     {
         public int UserId { get; set; }
 
-        public string Title { get; set; }
+        public int? Title { get; set; }
 
         public string UserName { get; set; }
 
@@ -36,6 +36,8 @@ namespace HSchool.Data.Models
 
         public int? Community { get; set; }
 
+        public string CommunityName { get; set; }
+
         public string MobileNumber { get; set; }
 
         public DateTime CreatedDate { get; set; }
@@ -54,12 +56,16 @@ namespace HSchool.Data.Models
 
         public bool NotificationEnabled { get; set; }
 
-        public int? MotherLanguage { get; set; }        
+        public int? MotherLanguage { get; set; }
+
+        public string MotherLanguagetDisplay { get; set; }
 
         public DateTime? UserLastLogin { get; set; }
 
         public int UserRole { get; set; }
 
         public byte[] UserImage { get; set; }
+
+        public string CommunityInDetails { get; set; }
     }
 }

@@ -62,7 +62,7 @@ namespace HSchool.WebApi.Controllers
                 int? id = null;
                 if (ModelState.IsValid)
                 {
-                    model.ApplicationType = 1;
+                    //model.ApplicationType = 1;
                     id = _studentRepository.SaveApplication(model);
                 }
                 var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
@@ -94,7 +94,7 @@ namespace HSchool.WebApi.Controllers
                 {
                     if (AuthenticationHelper.CreateUser(model.Email, model.UserName, string.Empty, string.Empty, string.Empty))
                     {
-                        model.ApplicationType = 1;
+                        //model.ApplicationType = 1;
                         id = _studentRepository.SaveApplication(model);
                     }
                 }

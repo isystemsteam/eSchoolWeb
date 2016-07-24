@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HSchool.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace HSchool.Business.Models
         public int UserId { get; set; }
 
         [JsonProperty("First Name")]
-        [DisplayName("First Name")]        
+        [DisplayName("First Name")]
         public string FirstName { get; set; }
 
         [JsonProperty("LastName")]
@@ -27,7 +28,16 @@ namespace HSchool.Business.Models
 
         [DisplayName("Gender")]
         [JsonProperty("gender")]
-        public string Gender { get; set; }
+        public int? Gender { get; set; }
+
+        [DisplayName("Gender")]
+        public string GenderDisplay
+        {
+            get
+            {
+                return CommonHelper.GetEnumText<Gender>(this.Gender);
+            }
+        }
 
         [JsonProperty("age")]
         public int? Age { get; set; }
@@ -46,13 +56,16 @@ namespace HSchool.Business.Models
         [JsonProperty("religion")]
         public string Religion { get; set; }
 
-        public string Caste { get; set; }
+        [DisplayName("Community Details")]
+        public string CommunityInDetails { get; set; }
 
         [JsonProperty("nationality")]
         public string Nationality { get; set; }
 
         [JsonProperty("community")]
         public int? Community { get; set; }
+
+        public string CommunityName { get; set; }
 
         [JsonProperty("mobileNumber")]
         public string MobileNumber { get; set; }
@@ -64,8 +77,16 @@ namespace HSchool.Business.Models
         public DateTime ModifiedDate { get; set; }
 
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public int? Title { get; set; }
 
+        [DisplayName("Title")]
+        public string TitleDisplay
+        {
+            get
+            {
+                return CommonHelper.GetEnumText<Titles>(this.Title);
+            }
+        }
         [JsonProperty("userName")]
         public string UserName { get; set; }
 
@@ -90,11 +111,16 @@ namespace HSchool.Business.Models
         [JsonProperty("motherLanguage")]
         public int? MotherLanguage { get; set; }
 
+        [DisplayName("Mother Language")]
+        public string MotherLanguagetDisplay { get; set; }
+
         public DateTime? UserLastLogin { get; set; }
 
         public int UserRole { get; set; }
 
         public byte[] UserImage { get; set; }
+
+
 
     }
 }

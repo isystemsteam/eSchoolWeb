@@ -25,7 +25,7 @@ namespace HSchool.Business.Models
         [DisplayName("Approved Date")]
         public DateTime? ApprovedDate { get; set; }
 
-        public int ApplicationType { get; set; }
+        public DateTime? ApplicationType { get; set; }
 
         public int? ApprovedBy { get; set; }
 
@@ -118,7 +118,11 @@ namespace HSchool.Business.Models
 
         public List<SelectListItem> ListGender { get; set; }
 
-        public bool IsEditable { get; set; }
+        public bool IsEditable { get; set; }        
+
+        public bool IsStudentGuardianUpdate { get; set; }
+
+        public bool IsStudentAddressUpdate { get; set; }
 
     }
 }

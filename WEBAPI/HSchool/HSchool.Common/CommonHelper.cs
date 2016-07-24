@@ -31,7 +31,7 @@ namespace HSchool.Common
         }
         #endregion
 
-        #region EnumConverts
+        #region Enum Helpers
         /// <summary>
         /// 
         /// </summary>
@@ -87,11 +87,18 @@ namespace HSchool.Common
             return listItem;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string GetEnumText<T>(int? value)
+        {
+            return value.HasValue ? Enum.GetName(typeof(T), value.Value) : string.Empty;
+        }
         #endregion
 
-        #region Html Helpers
-
-        #endregion
         public static SelectListItem GetFirstListItem()
         {
             return new SelectListItem { Text = "Select", Value = "0" };

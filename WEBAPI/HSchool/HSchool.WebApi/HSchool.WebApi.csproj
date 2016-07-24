@@ -321,6 +321,7 @@
     <Content Include="Scripts\Custom\AppCommon.js" />
     <Content Include="Scripts\Custom\AppEvents.js" />
     <Content Include="Scripts\Custom\Common.js" />
+    <Content Include="Scripts\Custom\CustomPlugin.js" />
     <Content Include="Scripts\Custom\Entity.js" />
     <Content Include="Scripts\Custom\TableView.js" />
     <Content Include="Scripts\Custom\Validation.js" />
@@ -388,6 +389,7 @@
     <Content Include="Views\Application\_OfficeForm.cshtml" />
     <Content Include="Views\Application\OfficeForm.cshtml" />
     <Content Include="Views\Application\Edit.cshtml" />
+    <Content Include="Views\Application\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

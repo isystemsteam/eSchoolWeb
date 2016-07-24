@@ -1,6 +1,6 @@
 ﻿@model HSchool.Business.Models.ApplicationForm
 @{string disableControl = Model.IsEditable ? string.Empty : " disableField";}
-<h1>Student Entry Form </h1>
+
 <div class="form-group-expand-div admin-form">
     <h2>Class Information</h2>
     <div class="form-container">
@@ -13,6 +13,7 @@
                 }
                 else
                 {
+                    <label>Class</label>
                     @Html.TextBoxFor(m => m.StudentClass[0].ClassName, new { @class = disableControl })
                 }
             </div>
@@ -28,9 +29,16 @@
     <div class="form-container">
         <div class="row custom-row clearfix">
             <div class="col-md-4 custom-text">
-                @Html.LabelFor(m => m.Title)
-                @Html.DropDownListFor(m => m.Title, Model.ListTitles, new { @id = "ddlApplicationStatus", @class = "selectpicker show-tick required " + disableControl })
-                <i class="fa validationResult"></i>
+                @if (Model.IsEditable)
+                {
+                    @Html.DropDownListFor(m => m.Title, Model.ListTitles, new { @id = "ddlApplicationStatus", @class = "selectpicker show-tick required " + disableControl })
+                    <i class="fa validationResult"></i>
+                }
+                else
+                {
+                    <label>Title</label>
+                    @Html.TextBoxFor(m => m.TitleDisplay, new { @class = disableControl })
+                }
             </div>
             <div class="col-md-4 custom-text">
                 @Html.LabelFor(m => m.FirstName)
@@ -45,9 +53,16 @@
         </div>
         <div class="row custom-row clearfix">
             <div class="col-md-4 custom-text">
-                @Html.LabelFor(m => m.Gender)
-                @Html.DropDownListFor(m => m.Gender, Model.ListGender, new { @id = "", @class = "selectpicker show-tick required" })
-                <i class="fa validationResult"></i>
+                @if (Model.IsEditable)
+                {
+                    @Html.DropDownListFor(m => m.Gender, Model.ListGender, new { @id = "", @class = "selectpicker show-tick required" })
+                    <i class="fa validationResult"></i>
+                }
+                else
+                {
+                    <label>Gender</label>
+                    @Html.TextBoxFor(m => m.GenderDisplay, new { @class = disableControl })
+                }
             </div>
             <div class="col-md-4 custom-text">
                 @Html.LabelFor(m => m.DateOfBirth)
@@ -62,9 +77,16 @@
         </div>
         <div class="row custom-row clearfix">
             <div class="col-md-6 custom-text">
-                @Html.LabelFor(m => m.MotherLanguage)
-                @Html.DropDownListFor(m => m.MotherLanguage, Model.ListLanguages, new { @id = "", @class = "selectpicker show-tick required" })
-                <i class="fa validationResult"></i>
+                @if (Model.IsEditable)
+                {
+                    @Html.DropDownListFor(m => m.MotherLanguage, Model.ListLanguages, new { @id = "", @class = "selectpicker show-tick required" })
+                    <i class="fa validationResult"></i>
+                }
+                else
+                {
+                    <label>Mother Language</label>
+                    @Html.TextBoxFor(m => m.MotherLanguagetDisplay, new { @class = disableControl })
+                }
             </div>
             <div class="col-md-6 custom-text ">
                 @Html.LabelFor(m => m.FluencyinOthers)
@@ -84,15 +106,22 @@
                 <i class="fa validationResult"></i>
             </div>
             <div class="col-md-4 custom-text">
-                @Html.LabelFor(m => m.Community)
-                @Html.DropDownListFor(m => m.Community, Model.ListCommunities, new { @id = "", @class = "selectpicker show-tick required" })
-                <i class="fa validationResult"></i>
+                @if (Model.IsEditable)
+                {
+                    @Html.DropDownListFor(m => m.Community, Model.ListCommunities, new { @id = "", @class = "selectpicker show-tick required" })
+                    <i class="fa validationResult"></i>
+                }
+                else
+                {
+                    <label>Community</label>
+                    @Html.TextBoxFor(m => m.CommunityName, new { @class = disableControl })
+                }
             </div>
         </div>
         <div class="row custom-row clearfix">
             <div class="col-md-12 custom-text">
-                @Html.LabelFor(m => m.Caste)
-                @Html.TextBoxFor(m => m.Caste, new { @Id = "txtCaste", @class = "required" + disableControl, @maxlength = "120" })
+                @Html.LabelFor(m => m.CommunityInDetails)
+                @Html.TextBoxFor(m => m.CommunityInDetails, new { @Id = "txtCaste", @class = "required" + disableControl, @maxlength = "120" })
                 <i class="fa validationResult"></i>
             </div>
         </div>
@@ -122,42 +151,42 @@
         {
             for (int aCount = 0; aCount < Model.Addresses.Count; aCount++)
             {
-        <div class="row custom-row clearfix">
-            <div class="col-md-6 custom-text">
-                @Html.LabelFor(m => m.Addresses[aCount].DoorNo)
-                @Html.TextBoxFor(m => m.Addresses[aCount].DoorNo, new { @id = "", @class = "required" + disableControl, @maxlength = "10" })
-                <i class="fa validationResult"></i>
-            </div>
-        </div>
-        <div class="row custom-row clearfix">
-            <div class="col-md-6 custom-text">
-                @Html.LabelFor(m => m.Addresses[aCount].AddressLine1)
-                @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine1, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-6 custom-text">
-                @Html.LabelFor(m => m.Addresses[aCount].AddressLine2)
-                @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine2, new { @id = "", @class = "" + disableControl, @maxlength = "120" })
-                <i class="fa validationResult"></i>
-            </div>
-        </div>
-        <div class="row custom-row clearfix">
-            <div class="col-md-4 custom-text">
-                @Html.LabelFor(m => m.Addresses[aCount].District)
-                @Html.TextBoxFor(m => m.Addresses[aCount].District, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-4 custom-text">
-                @Html.LabelFor(m => m.Addresses[aCount].Taluk)
-                @Html.TextBoxFor(m => m.Addresses[aCount].Taluk, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-4 custom-text">
-                @Html.LabelFor(m => m.Addresses[aCount].PinCode)
-                @Html.TextBoxFor(m => m.Addresses[aCount].PinCode, new { @id = "", @class = "required" + disableControl, @maxlength = "6" })
-                <i class="fa validationResult"></i>
-            </div>
-        </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.Addresses[aCount].DoorNo)
+                        @Html.TextBoxFor(m => m.Addresses[aCount].DoorNo, new { @id = "", @class = "required" + disableControl, @maxlength = "10" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.Addresses[aCount].AddressLine1)
+                        @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine1, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                    <div class="col-md-6 custom-text">
+                        @Html.LabelFor(m => m.Addresses[aCount].AddressLine2)
+                        @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine2, new { @id = "", @class = "" + disableControl, @maxlength = "120" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Addresses[aCount].District)
+                        @Html.TextBoxFor(m => m.Addresses[aCount].District, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Addresses[aCount].Taluk)
+                        @Html.TextBoxFor(m => m.Addresses[aCount].Taluk, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @Html.LabelFor(m => m.Addresses[aCount].PinCode)
+                        @Html.TextBoxFor(m => m.Addresses[aCount].PinCode, new { @id = "", @class = "required" + disableControl, @maxlength = "6" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                </div>
             }
         }
     </div>
@@ -169,84 +198,105 @@
 
             for (int sCount = 0; sCount < Model.StudentGuardians.Count; sCount++)
             {
-        <div class="row custom-row clearfix">
-            <div class="col-md-4 custom-text">
-                <label for="">Title</label>
-                @Html.DropDownListFor(m => m.StudentGuardians[sCount].Title, Model.ListTitles, new { @id = "", @class = "selectpicker show-tick required" })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-4 custom-text">
-                <label for="">First Name</label>
-                @Html.TextBoxFor(m => m.StudentGuardians[sCount].FirstName, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-4 custom-text">
-                <label for="">Last Name</label>
-                @Html.TextBoxFor(m => m.StudentGuardians[sCount].LastName, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
-                <i class="fa validationResult"></i>
-            </div>
-        </div>
-        <div class="row custom-row clearfix">
-            <div class="col-md-12 custom-text">
-                <label for="">Email</label>
-                @Html.TextBoxFor(m => m.StudentGuardians[sCount].Email, new { @id = "", @class = "required" + disableControl, @maxlength = "255" })
-                <i class="fa validationResult"></i>
-            </div>
-        </div>
-        <div class="row custom-row clearfix">
-            <div class="col-md-4 custom-text">
-                <label for="">Gender</label>
-                @Html.DropDownListFor(m => m.StudentGuardians[sCount].Gender, Model.ListGender, new { @id = "", @class = "selectpicker show-tick required" })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-4 custom-text">
-                <label for="">Date Of Birth</label>
-                @Html.TextBoxFor(m => m.StudentGuardians[sCount].DateOfBirth, new { @id = "", @class = "required datepicker" + disableControl })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-4 custom-text">
-                <label for="">ReleationShip</label>
-                @Html.DropDownListFor(m => m.StudentGuardians[sCount].ReleationShip, Model.ListRelationShips, new { @id = "", @class = "selectpicker show-tick required" })
-                <i class="fa validationResult"></i>
-            </div>
-        </div>
-        <div class="row custom-row clearfix">
-            <div class="col-md-6 custom-text">
-                <label for="">Mobile Number</label>
-                @Html.TextBoxFor(m => m.StudentGuardians[sCount].MobileNumber, new { @id = "", @class = "required" + disableControl, @maxlength = "15" })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-6 custom-text">
-                <label for="">Office Number</label>
-                @Html.TextBoxFor(m => m.StudentGuardians[sCount].OfficeNumber, new { @id = "", @class = "" + disableControl, @maxlength = "12" })
-                <i class="fa validationResult"></i>
-            </div>
-        </div>
-        <div class="row custom-row clearfix">
-            <div class="col-md-4 custom-text">
-                <label for="">Highest Qualification</label>
-                @Html.TextBoxFor(m => m.StudentGuardians[sCount].HighestQualification, new { @id = "", @class = "required" + disableControl, @maxlength = "50" })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-4 custom-text">
-                <label for="">Occupation</label>
-                @Html.TextBoxFor(m => m.StudentGuardians[sCount].Occupation, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
-                <i class="fa validationResult"></i>
-            </div>
-            <div class="col-md-4 custom-text">
-                <label for="">Annual Income</label>
-                @Html.TextBoxFor(m => m.StudentGuardians[sCount].AnnualIncome, new { @id = "", @class = "decimalField" + disableControl })
-                <i class="fa validationResult"></i>
-            </div>
-        </div>
-        <div class="row custom-row clearfix">
-            <div class="col-md-12 custom-check">
-                <div class="cstom-check-margin">
-                    <input type="checkbox" checked="@Model.StudentGuardians[sCount].PrimaryGuardian" name="PrimaryGuardian_@sCount" id="PrimaryGuardian_@sCount" class="@disableControl" />
-                    <label for="PrimaryGuardian_@sCount"><span><span><i class="fa fa-check"></i></span></span>Primary Guardian</label>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        @if (Model.IsEditable)
+                        {
+                            @Html.DropDownListFor(m => m.StudentGuardians[sCount].Title, Model.ListTitles, new { @id = "", @class = "selectpicker show-tick required" })
+                            <i class="fa validationResult"></i>
+                        }
+                        else
+                        {
+                            <label>Title</label>
+                            @Html.TextBoxFor(m => m.StudentGuardians[sCount].TitleDisplay, new { @class = disableControl })
+                        }
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        <label for="">First Name</label>
+                        @Html.TextBoxFor(m => m.StudentGuardians[sCount].FirstName, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        <label for="">Last Name</label>
+                        @Html.TextBoxFor(m => m.StudentGuardians[sCount].LastName, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
+                        <i class="fa validationResult"></i>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-12 custom-text">
+                        <label for="">Email</label>
+                        @Html.TextBoxFor(m => m.StudentGuardians[sCount].Email, new { @id = "", @class = "required" + disableControl, @maxlength = "255" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        @if (Model.IsEditable)
+                        {
+                            @Html.DropDownListFor(m => m.StudentGuardians[sCount].Gender, Model.ListGender, new { @id = "", @class = "selectpicker show-tick required" })
+                            <i class="fa validationResult"></i>
+                        }
+                        else
+                        {
+                            <label>Gender</label>
+                            @Html.TextBoxFor(m => m.StudentGuardians[sCount].GenderDisplay, new { @class = disableControl })
+                        }
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        <label for="">Date Of Birth</label>
+                        @Html.TextBoxFor(m => m.StudentGuardians[sCount].DateOfBirth, new { @id = "", @class = "required datepicker" + disableControl })
+                        <i class="fa validationResult"></i>
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        @if (Model.IsEditable)
+                        {
+                            @Html.DropDownListFor(m => m.StudentGuardians[sCount].ReleationShip, Model.ListRelationShips, new { @id = "", @class = "selectpicker show-tick required" })
+                            <i class="fa validationResult"></i>
+                        }
+                        else
+                        {
+                            <label>Relationship</label>
+                            @Html.TextBoxFor(m => m.StudentGuardians[sCount].ReleationShipName, new { @class = disableControl })
+                        }
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-6 custom-text">
+                        <label for="">Mobile Number</label>
+                        @Html.TextBoxFor(m => m.StudentGuardians[sCount].MobileNumber, new { @id = "", @class = "required" + disableControl, @maxlength = "15" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                    <div class="col-md-6 custom-text">
+                        <label for="">Office Number</label>
+                        @Html.TextBoxFor(m => m.StudentGuardians[sCount].OfficeNumber, new { @id = "", @class = "" + disableControl, @maxlength = "12" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-4 custom-text">
+                        <label for="">Highest Qualification</label>
+                        @Html.TextBoxFor(m => m.StudentGuardians[sCount].HighestQualification, new { @id = "", @class = "required" + disableControl, @maxlength = "50" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        <label for="">Occupation</label>
+                        @Html.TextBoxFor(m => m.StudentGuardians[sCount].Occupation, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
+                        <i class="fa validationResult"></i>
+                    </div>
+                    <div class="col-md-4 custom-text">
+                        <label for="">Annual Income</label>
+                        @Html.TextBoxFor(m => m.StudentGuardians[sCount].AnnualIncome, new { @id = "", @class = "decimalField" + disableControl })
+                        <i class="fa validationResult"></i>
+                    </div>
+                </div>
+                <div class="row custom-row clearfix">
+                    <div class="col-md-12 custom-check">
+                        <div class="cstom-check-margin">
+                            <input type="checkbox" checked="@Model.StudentGuardians[sCount].PrimaryGuardian" name="PrimaryGuardian_@sCount" id="PrimaryGuardian_@sCount" class="@disableControl" />
+                            <label for="PrimaryGuardian_@sCount"><span><span><i class="fa fa-check"></i></span></span>Primary Guardian</label>
+                        </div>
+                    </div>
+                </div>
             }
         }
     </div>

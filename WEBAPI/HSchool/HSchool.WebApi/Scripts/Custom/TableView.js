@@ -1,6 +1,5 @@
 ﻿
-$.fn.GridView = function (options) {
-    debugger
+$.fn.GridView = function (options) {    
     var settings = $.extend({
         data: null,
         templateName: null,
@@ -12,8 +11,7 @@ $.fn.GridView = function (options) {
         isLocalData: false,
     }, options);
 
-    return this.each(function () {
-        debugger
+    return this.each(function () {        
         var _component = $(this);
         //to bind template
         var _bindTemplate = function (data) {            

@@ -14,6 +14,7 @@
 	Religion varchar(50),
 	Nationality varchar(50),
 	Community int foreign key references dbo.CommunityMaster (CommunityId),
+	CommunityInDetails varchar(255),
 	MobileNumber varchar(15),
 	UserStatus int foreign key references dbo.UserStatus (StatusId),
 	MotherLanguage int foreign key references dbo.MotherLanguages (LanguageId),

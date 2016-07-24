@@ -22,6 +22,7 @@
 	@Religion varchar(50),
 	@Nationality varchar(50),
 	@Community int,
+	@CommunityInDetails varchar(255),
 	@MobileNumber varchar(15),
 	@UserStatus int,
 	@MotherLanguage int,
@@ -41,7 +42,9 @@
 	@StudentClass TypeStudentClass Readonly,
 	@StudentGuardians TypeStudentGuardian Readonly,
 	@Addresses TypeAddress Readonly,
-	@IsStudentUpdate bit
+	@IsStudentUpdate bit,
+	@IsStudentGuardianUpdate bit,
+	@IsStudentAddressUpdate bit
 )
 AS
 BEGIN
@@ -65,7 +68,7 @@ BEGIN
 				DECLARE @IsActive INT;
 
 				-- SAVE USER
-				EXEC @UserId=DBO.SaveUserInformation @UserId,@Title,@FirstName,@LastName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled
+				EXEC @UserId=DBO.SaveUserInformation @UserId,@Title,@FirstName,@LastName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled,@CommunityInDetails
 
 				-- SAVE STUDENT
 				EXEC @StudentId= dbo.SaveStudent @StudentId,@UserId,@RollNumber,@FluencyinOthers,@IsTransportRequired,@LoginEnabled,@VisibleMark,@GuardianLoginEnabled

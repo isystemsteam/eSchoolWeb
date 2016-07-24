@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Insight.Database;
 using System.Data.SqlClient;
+using HSchool.Data.Models;
 
 using ApplicationForm = HSchool.Business.Models.ApplicationForm;
 using ApplicationFormSearch = HSchool.Business.Models.ApplicationFormSearch;
 using ApplicationFormResponse = HSchool.Business.Models.ApplicationFormResponse;
-using HSchool.Data.Models;
+using StudentGuardian = HSchool.Business.Models.StudentGuardian;
+using Address = HSchool.Business.Models.Address;
+using StudentClass = HSchool.Business.Models.StudentClass;
 
 namespace HSchool.Data.SqlRepository
 {
@@ -81,10 +84,32 @@ namespace HSchool.Data.SqlRepository
             {
                 using (var connection = SqlDataConnection.GetSqlConnection())
                 {
-                    var dataResults = connection.QueryResults<ApplicationForm, StudentClass, StudentGuardian, Address>(Procedures.GetUserDetailsById, new { });
+                    var dataResults = connection.QueryResults<Models.ApplicationForm, Models.StudentClass, Models.StudentGuardian, Models.Address>(Procedures.GetApplicationById, new { @ApplicationId = id });
+                    var dApplicationForm = dataResults.Set1.Any() ? dataResults.Set1.FirstOrDefault() : new Models.ApplicationForm();
+                    var application = Mapper.Map<Models.ApplicationForm, ApplicationForm>(dApplicationForm);
+
+                    //SET 2                    
+                    var dStudentClass = dataResults.Set2.Any() ? dataResults.Set2 : new List<Models.StudentClass>();
+                    var bStudentClass = Mapper.Map<IEnumerable<Models.StudentClass>, IEnumerable<StudentClass>>(dStudentClass);
+
+                    //SET 3
+                    var dStudentGuardian = dataResults.Set3.Any() ? dataResults.Set3 : new List<Models.StudentGuardian>();
+                    var bStudentGuardian = Mapper.Map<IEnumerable<Models.StudentGuardian>, IEnumerable<StudentGuardian>>(dStudentGuardian);
+
+                    var dStudentAddress = dataResults.Set4.Any() ? dataResults.Set4 : new List<Models.Address>();
+                    var bStudentAddress = Mapper.Map<IEnumerable<Models.Address>, IEnumerable<Address>>(dStudentAddress);
+
+                    application.Addresses = bStudentAddress.ToList();
+                    application.StudentGuardians = bStudentGuardian.ToList();
+                    application.StudentClass = bStudentClass.ToList();
                     LogHelper.Info(string.Format("ApplicationRepository.GetApplicationById - End"));
-                    return new ApplicationForm();
+                    return application;
                 }
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("ApplicationRepository.GetApplicationById - SqlException:{0}", ex.Message));
+                throw ex;
             }
             catch (Exception ex)
             {

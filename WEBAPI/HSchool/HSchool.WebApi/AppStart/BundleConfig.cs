@@ -30,7 +30,8 @@ namespace HSchool.WebApi
                       "~/Scripts/Custom/Common.js",
                       "~/Scripts/Custom/Validation.js",
                       "~/Scripts/Custom/Entity.js",
-                      "~/Scripts/Custom/TableView.js"));
+                      "~/Scripts/Custom/TableView.js",
+                      "~/Scripts/Custom/CustomPlugin.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

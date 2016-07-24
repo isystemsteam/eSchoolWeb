@@ -16,7 +16,7 @@ namespace HSchool.Data.Models
 
         public DateTime? ApprovedDate { get; set; }
 
-        public int? ApplicationType { get; set; }
+        public DateTime? ApplicationType { get; set; }
 
         public int ApprovedBy { get; set; }
 
@@ -25,5 +25,9 @@ namespace HSchool.Data.Models
         public Student Student { get; set; }
 
         public bool IsStudentUpdate { get; set; }
+
+        public bool IsStudentGuardianUpdate { get; set; }
+
+        public bool IsStudentAddressUpdate { get; set; }
     }
 }

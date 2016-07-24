@@ -11,18 +11,17 @@ namespace HSchool.Data.Models
         public int StudentId { get; set; }
         public int GuardianId { get; set; }
         public int UserId { get; set; }
-        public string Title { get; set; }
+        public int Title { get; set; }        
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int? ReleationShip { get; set; }
+
+        public string ReleationShipName { get; set; }
+
         public string Occupation { get; set; }
-
         public string HighestQualification { get; set; }
-
         public string Email { get; set; }
-
         public DateTime? DateOfBirth { get; set; }
-
         public double? AnnualIncome { get; set; }
         public bool IsSameAsUserAddress { get; set; }
         public string MobileNumber { get; set; }
@@ -35,6 +34,8 @@ namespace HSchool.Data.Models
         public bool NotificationEnabled { get; set; }
 
         public int Role { get; set; }
+
+
 
     }
 }

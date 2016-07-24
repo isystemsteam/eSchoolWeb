@@ -22,20 +22,16 @@
     <script src="~/Scripts/Application/ApplicationForm.js"></script>
     <script src="~/Scripts/Application/ApplicationSearch.js"></script>
     <script src="~/Scripts/Application/Home.js"></script>
-    
+
     <script type="text/javascript">
         var applicationRootUrl = "@(Url.Content("~/"))";
         $(document).ready(function () {
-            // Text box placeholder focus effect
-            $('.custom-text input[type="text"], .custom-text input[type="password"]').focusin(function () {
-                $(this).prev('label').addClass('top-placeholder-text');
-            });
+            
+            //disabled the field
+            $(".disableField").disabled();
 
-            $('.custom-text input[type="text"], .custom-text input[type="password"]').focusout(function () {
-                if ($(this).val() == '' || $(this).val == null) {
-                    $(this).prev('label').removeClass('top-placeholder-text');
-                }
-            });
+            //Text Box Edit Animation
+            $('.custom-text input[type="text"], .custom-text input[type="password"]').editAnimate();
         });
     </script>
 </head>

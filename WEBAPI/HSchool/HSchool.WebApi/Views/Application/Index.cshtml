@@ -1,5 +1,6 @@
 ﻿@model HSchool.Business.Models.ApplicationForm
 <div class="container">
+    <h1>Online Application</h1>
     @using (Html.BeginForm("Edit", "Application", FormMethod.Post, new { @name = "formOnlineApplication", @id = "formOnlineApplication" }))
     {
         @Html.AntiForgeryToken()
@@ -7,7 +8,7 @@
 
         <div class="btn-wrapper pull-right">
             <input type="button" value="Apply" class="btn-blue" onclick="applicationForm.saveApplication()" />
-            <input type="button" value="Reset" class="btn-grey" />
+            <input type="reset" value="Reset" class="btn-grey" />
         </div>
     }
 </div>

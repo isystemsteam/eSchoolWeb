@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HSchool.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,12 +12,21 @@ namespace HSchool.Business.Models
     public class StudentGuardian
     {
         public int StudentId { get; set; }
-        
+
         [JsonProperty("guardianId")]
         public int GuardianId { get; set; }
 
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public int Title { get; set; }
+
+        [DisplayName("Title")]
+        public string TitleDisplay
+        {
+            get
+            {
+                return CommonHelper.GetEnumText<Titles>(this.Title);
+            }
+        }
 
         [DisplayName("First Name")]
         [JsonProperty("firstName")]
@@ -31,8 +41,20 @@ namespace HSchool.Business.Models
 
         public int? Gender { get; set; }
 
+        [DisplayName("Gender")]
+        public string GenderDisplay
+        {
+            get
+            {
+                return CommonHelper.GetEnumText<Gender>(this.Gender);
+            }
+        }
+
         [JsonProperty("releationShip")]
         public int? ReleationShip { get; set; }
+
+        [DisplayName("ReleationShip")]
+        public string ReleationShipName { get; set; }
 
         [JsonProperty("occupation")]
         public string Occupation { get; set; }
@@ -51,7 +73,7 @@ namespace HSchool.Business.Models
 
         [JsonProperty("officeNumber")]
         [DisplayName("Office Number")]
-        public string OfficeNumber { get; set; }  
+        public string OfficeNumber { get; set; }
 
         [JsonProperty("primaryGuardian")]
         public bool PrimaryGuardian { get; set; }
@@ -77,5 +99,7 @@ namespace HSchool.Business.Models
         public bool IsDeleted { get; set; }
 
         public int Role { get; set; }
+
+
     }
 }

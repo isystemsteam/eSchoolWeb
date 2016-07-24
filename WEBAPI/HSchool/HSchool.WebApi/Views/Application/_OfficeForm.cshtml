@@ -1,9 +1,9 @@
 ﻿@model HSchool.Business.Models.ApplicationForm
-
-@using (Html.BeginForm("", "", FormMethod.Post, new { }))
+@if (Model.IsOfficeFormEnabled)
 {
-    @if (Model.IsOfficeFormEnabled)
+    using (Html.BeginForm("EditOfficeForm", "Application", FormMethod.Post, new { @id = "", @name = "" }))
     {
+
         <h2 class="highlight-bg">For Office Use</h2>
         <div class="form-container">
             <div class="row custom-row clearfix">

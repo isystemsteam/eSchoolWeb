@@ -63,23 +63,27 @@ namespace HSchool.WebApi.Controllers
             applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender");
             applicationForm.Languages = _adminRepository.GetMotherLanguages();
             applicationForm.IsOfficeFormEnabled = false;
+            applicationForm.IsStudentAddressUpdate = true;
+            applicationForm.IsStudentGuardianUpdate = true;
+            applicationForm.IsEditable = true;
             applicationForm.ActionName = string.Format("{0}", "Application");
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
             return View(applicationForm);
         }
 
-        public ActionResult OfficeForm()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Details(int id)
         {
             LogHelper.Info(string.Format("ApplicationController.OfficeForm - Begin"));
             try
             {
-                var applicationForm = new ApplicationForm();
-                applicationForm.FormClasses = _adminRepository.GetAllClasses(false);
-                applicationForm.Communities = _adminRepository.GetCommunities();
-                applicationForm.RelationShips = _adminRepository.GetRelationships();
-                applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles");
-                applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender");
-                applicationForm.Languages = _adminRepository.GetMotherLanguages();
+                var applicationForm = _applicationRepository.GetApplicationById(id);
+                applicationForm.IsEditable = false;
                 LogHelper.Info(string.Format("ApplicationController.OfficeForm - End"));
                 return View(applicationForm);
             }
@@ -95,13 +99,53 @@ namespace HSchool.WebApi.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Edit(ApplicationForm model)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(ApplicationForm model, FormCollection collection)
         {
             LogHelper.Info(string.Format("ApplicationController.Edit - Begin"));
             try
             {
                 int? id = null;
                 MessageResponse response = null;
+                //if (ModelState.IsValid)
+                //{
+                model.IsStudentUpdate = true;
+                model.UserStatus = (int)UserStatusEnum.Registered;
+                model.RollNumber = "123456";
+                model.VisibleMark = false;
+                model.ApplicationStatus = (int)ApplicationStatus.Submitted;
+                id = _applicationRepository.SaveApplication(model);
+                response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                //}
+                //else
+                //{
+                //    response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, "Invalid Request. Please validate the mandatory fields.");
+                //}
+                LogHelper.Info(string.Format("ApplicationController.Edit - End"));
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("ApplicationController.Edit - Exception:{0}", ex.Message));
+                var response = new MessageResponse<string>(string.Empty, WebConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="collection"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditOfficeForm(ApplicationForm model, FormCollection collection)
+        {
+            LogHelper.Info(string.Format("ApplicationController.Edit - Begin"));
+            MessageResponse response = null;
+            try
+            {
+                int? id = null;
                 if (ModelState.IsValid)
                 {
                     model.IsStudentUpdate = true;
@@ -121,12 +165,17 @@ namespace HSchool.WebApi.Controllers
             }
             catch (Exception ex)
             {
-                LogHelper.Info(string.Format("ApplicationController.Edit - Exception:{0}", ex.Message));
-                var response = new MessageResponse<string>(string.Empty, WebConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
+                response = new MessageResponse<string>(ex.Message, WebConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Success(int id)
         {
             LogHelper.Info(string.Format("ApplicationController.Success - Begin"));
@@ -141,12 +190,24 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Status()
         {
             LogHelper.Info(string.Format("ApplicationController.Status - Begin"));
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dateOfBirth"></param>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult GetOnlineApplicationStatus(int id, DateTime dateOfBirth)
         {
             LogHelper.Info(string.Format("ApplicationController.Status - Begin"));
@@ -161,6 +222,11 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="formSearch"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SearchApplications(ApplicationFormSearch formSearch)
         {
@@ -172,7 +238,14 @@ namespace HSchool.WebApi.Controllers
                 var result = _applicationRepository.SearchApplications(formSearch);
                 var response = new GridViewTable
                 {
-                    Columns = new List<GridColumn> { new GridColumn { ColumnName = "Application Id" }, new GridColumn { ColumnName = "Application Status" }, new GridColumn { ColumnName = "Applied Date" } },
+                    Columns = new List<GridColumn> { 
+                        new GridColumn { ColumnName = "Application Id" }, 
+                        new GridColumn { ColumnName = "Application Status" }, 
+                        new GridColumn { ColumnName = "Applied Date" },
+                        new GridColumn { ColumnName = "First Name" },
+                        new GridColumn { ColumnName = "Last Name" },
+                        new GridColumn { ColumnName = "Class" } 
+                    },
                     Rows = new List<GridViewRow> { }
                 };
 
@@ -180,9 +253,13 @@ namespace HSchool.WebApi.Controllers
                 foreach (var item in result)
                 {
                     var cells = new List<GridViewCell>();
-                    cells.Add(new GridViewCell { Value = Convert.ToString(item.ApplicationId) });
+                    string id = Convert.ToString(item.ApplicationId);
+                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag(id, id) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.ApplicationStatus) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.AppliedDate) });
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.FirstName) });
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.LastName) });
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.ClassName) });
                     rows.Add(new GridViewRow { Cells = cells });
                 }
                 response.Rows = rows;
@@ -195,6 +272,11 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult Search()
         {
             LogHelper.Info(string.Format("ApplicationController.Search - Begin"));
@@ -212,18 +294,17 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
-
         #endregion
 
         #region Private
 
-        private string CreateActionEditTag(string innerText, string id)
+        private string CreateApplicationDetailsTag(string innerText, string id)
         {
             var tagBuilder = new TagBuilder("a");
             tagBuilder.MergeAttribute("id", id);
-            tagBuilder.MergeAttribute("href", Url.Action("index", "Application", new { id }));
+            tagBuilder.MergeAttribute("href", Url.Action("Details", "Application", new { id }));
             tagBuilder.MergeAttribute("class", "");
-            tagBuilder.MergeAttribute("title", "Click here to edit application");
+            tagBuilder.MergeAttribute("title", "Click here to view application");
             tagBuilder.SetInnerText(innerText);
             return tagBuilder.ToString();
         }

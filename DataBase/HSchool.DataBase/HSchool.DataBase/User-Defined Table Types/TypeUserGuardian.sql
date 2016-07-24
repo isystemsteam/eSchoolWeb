@@ -3,7 +3,7 @@
 	GuardianId INT,
 	StudentId int,
 	UserId int,
-	Title varchar(12),
+	Title int,
 	FirstName varchar(120),
 	LastName varchar(120),
 	ReleationShip int,
