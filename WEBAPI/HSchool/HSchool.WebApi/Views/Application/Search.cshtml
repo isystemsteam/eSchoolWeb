@@ -1,15 +1,22 @@
 ﻿@model HSchool.Business.Models.ApplicationFormSearch
 
-<div class="container">
+<div class="col-md-12 body-padding">
     <div class="form-group-expand-div admin-form">
         <h2>Search Applications</h2>
         <div class="form-container">
             <div class="row custom-row clearfix">
-                <div class="col-md-12 custom-text">
+                <div class="col-md-6 custom-text">
                     <label for="">Application Id</label>
                     @Html.TextBoxFor(m => m.ApplicationId, new { @id = "txtApplicationId" })
                     <i class="fa validationResult"></i>
                 </div>
+
+                <div class="col-md-6 custom-text">
+                    <label for="">Applied Date</label>
+                    @Html.TextBoxFor(m => m.AppliedDate, new { @id = "txtAppliedDate", @class = "datepicker" })
+                    <i class="fa validationResult"></i>
+                </div>
+
             </div>
             <div class="row custom-row clearfix">
                 <div class="col-md-6 custom-text">
@@ -21,13 +28,7 @@
                     <i class="fa validationResult"></i>
                 </div>
             </div>
-            <div class="row custom-row clearfix">
-                <div class="col-md-6 custom-text">
-                    <label for="">Applied Date</label>
-                    @Html.TextBoxFor(m => m.AppliedDate, new { @id = "txtAppliedDate", @class = "datepicker" })
-                    <i class="fa validationResult"></i>
-                </div>
-            </div>
+           
             <div class="row custom-row clearfix">
                 <div class="col-md-6 custom-text">
                     <label for="">First Name</label>
@@ -40,9 +41,10 @@
                     <i class="fa validationResult"></i>
                 </div>
             </div>
-            <div class="row custom-row clearfix">
-                <div class="col-md-12 custom-text">
-                    <input type="button" value="Search" onclick="applicationSearch.searchApplication()" />
+
+            <div class="btn-wrapper">
+                <div class="pull-right">
+                    <input type="button" value="Search" class="btn btn-blue" onclick="applicationSearch.searchApplication()" />
                 </div>
             </div>
         </div>

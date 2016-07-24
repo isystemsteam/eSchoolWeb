@@ -11,8 +11,8 @@
     viewClassSections: "ViewClassSections",
     saveClassSections: "SaveClassSections",
     SaveRolesPrivileges: "SaveRolesPrivileges",
-    editAcademicYear: "EditAcademicYear",
-    getAcademicYears: "ViewAcademicYear",
+    editAcademicYear: "admin/EditAcademicYear",
+    getAcademicYears: "admin/ViewAcademicYear",
     searchApplications: "application/SearchApplications",
     init: function (keyName) {
         return applicationRootUrl + appService[keyName];
