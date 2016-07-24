@@ -15,6 +15,8 @@ namespace HSchool.Common
 {
     public static class CommonHelper
     {
+
+        #region Config
         /// <summary>
         /// to get web config values
         /// </summary>
@@ -27,7 +29,14 @@ namespace HSchool.Common
                        ? default(T)
                        : (T)Convert.ChangeType(ConfigurationManager.AppSettings[name], typeof(T));
         }
+        #endregion
 
+        #region EnumConverts
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static List<SelectListItem> ConvertEnumToListItem<T>()
         {
             var listItem = new List<SelectListItem>();
@@ -39,6 +48,12 @@ namespace HSchool.Common
             return listItem;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
         public static List<SelectListItem> ConvertEnumToListItem<T>(string defaultValue)
         {
             var listItem = new List<SelectListItem>();
@@ -50,6 +65,15 @@ namespace HSchool.Common
             return listItem;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="valueProp"></param>
+        /// <param name="textProp"></param>
+        /// <returns></returns>
         public static List<SelectListItem> ConvertListToSelectList<T>(List<T> source, string defaultValue, string valueProp, string textProp)
         {
             var listItem = new List<SelectListItem>();
@@ -63,6 +87,11 @@ namespace HSchool.Common
             return listItem;
         }
 
+        #endregion
+
+        #region Html Helpers
+
+        #endregion
         public static SelectListItem GetFirstListItem()
         {
             return new SelectListItem { Text = "Select", Value = "0" };

@@ -1,0 +1,51 @@
+﻿@model HSchool.Business.Models.ApplicationForm
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { }))
+{
+    @if (Model.IsOfficeFormEnabled)
+    {
+        <h2 class="highlight-bg">For Office Use</h2>
+        <div class="form-container">
+            <div class="row custom-row clearfix">
+                <div class="col-md-12 custom-text">
+                    @Html.DropDownListFor(m => m.ApplicationStatus, Model.ApplicationStatuses, new { @id = "", @class = "selectpicker show-tick required" })
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-4 custom-text">
+                    <label for="">Applied Date</label>
+                    @Html.DisplayFor(m => m.AppliedDate, new { })
+                </div>
+                <div class="col-md-4 custom-text">
+                    @Html.LabelFor(m => m.ApprovedDate)
+                    @Html.DisplayFor(m => m.ApprovedDate, new { })
+                </div>
+                <div class="col-md-4 custom-text">
+                    @Html.LabelFor(m => m.ApprovedByText)
+                    @Html.DisplayFor(m => m.ApprovedByText)
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-6 custom-check ">
+                    <div class="cstom-check-margin">
+                        <input type="checkbox" checked="@(Model.LoginEnabled)" name="LoginEnabled" id="LoginEnabled" />
+                        <label for="LoginEnabled"><span><span><i class="fa fa-check"></i></span></span>Student Login Enabled</label>
+                    </div>
+                </div>
+                <div class="col-md-6 custom-check ">
+                    <div class="cstom-check-margin">
+                        <input type="checkbox" checked="@(Model.GuardianLoginEnabled)" name="LoginEnabled" id="LoginEnabled" />
+                        <label for="LoginEnabled"><span><span><i class="fa fa-check"></i></span></span>Guardian Login Enabled</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row custom-row clearfix">
+            <div class="col-md-6 custom-check ">
+                <div class="cstom-check-margin">
+                    <input type="button" value="Save" />
+                </div>
+            </div>
+        </div>
+    }
+}

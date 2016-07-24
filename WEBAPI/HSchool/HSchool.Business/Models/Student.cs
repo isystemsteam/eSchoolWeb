@@ -22,6 +22,8 @@ namespace HSchool.Business.Models
 
         public bool LoginEnabled { get; set; }
 
+        public bool GuardianLoginEnabled { get; set; }
+
         public List<StudentClass> StudentClass { get; set; }
 
         [DisplayName("Visible Mark")]

@@ -16,6 +16,9 @@ namespace HSchool.Business.Models
         [DisplayName("Application Status")]
         public int ApplicationStatus { get; set; }
 
+        [DisplayName("Application Status")]
+        public string ApplicationStatusText { get; set; }
+
         [DisplayName("Applied Date")]
         public DateTime? AppliedDate { get; set; }
 
@@ -114,6 +117,8 @@ namespace HSchool.Business.Models
         }
 
         public List<SelectListItem> ListGender { get; set; }
+
+        public bool IsEditable { get; set; }
 
     }
 }

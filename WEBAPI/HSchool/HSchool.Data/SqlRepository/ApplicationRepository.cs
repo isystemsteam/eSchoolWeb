@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 using ApplicationForm = HSchool.Business.Models.ApplicationForm;
 using ApplicationFormSearch = HSchool.Business.Models.ApplicationFormSearch;
 using ApplicationFormResponse = HSchool.Business.Models.ApplicationFormResponse;
+using HSchool.Data.Models;
 
 namespace HSchool.Data.SqlRepository
 {
@@ -80,6 +81,7 @@ namespace HSchool.Data.SqlRepository
             {
                 using (var connection = SqlDataConnection.GetSqlConnection())
                 {
+                    var dataResults = connection.QueryResults<ApplicationForm, StudentClass, StudentGuardian, Address>(Procedures.GetUserDetailsById, new { });
                     LogHelper.Info(string.Format("ApplicationRepository.GetApplicationById - End"));
                     return new ApplicationForm();
                 }

@@ -22,6 +22,8 @@ namespace HSchool.Data.Models
 
         public bool LoginEnabled { get; set; }
 
+        public bool GuardianLoginEnabled { get; set; }
+
         public List<StudentClass> StudentClass { get; set; }
 
         public byte[] StudentImage { get; set; }

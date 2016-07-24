@@ -6,9 +6,8 @@
         @Html.Partial("_ApplicationForm", Model)
 
         <div class="btn-wrapper pull-right">
-            <input type="button" value="Apply" class="btn-blue" onclick="applicationForm.saveApplication()" />
-            <input type="button" value="Reset" class="btn-grey" />
+            <input type="button" value="Save" class="btn-blue" onclick="applicationForm.saveApplication()" />
+            <input type="button" value="Cancel" class="btn-grey" />
         </div>
     }
 </div>
-@Scripts.Render("~/Scripts/Application/ApplicationForm.js")

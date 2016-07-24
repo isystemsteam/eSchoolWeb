@@ -68,6 +68,27 @@ namespace HSchool.WebApi.Controllers
             return View(applicationForm);
         }
 
+        public ActionResult OfficeForm()
+        {
+            LogHelper.Info(string.Format("ApplicationController.OfficeForm - Begin"));
+            try
+            {
+                var applicationForm = new ApplicationForm();
+                applicationForm.FormClasses = _adminRepository.GetAllClasses(false);
+                applicationForm.Communities = _adminRepository.GetCommunities();
+                applicationForm.RelationShips = _adminRepository.GetRelationships();
+                applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles");
+                applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender");
+                applicationForm.Languages = _adminRepository.GetMotherLanguages();
+                LogHelper.Info(string.Format("ApplicationController.OfficeForm - End"));
+                return View(applicationForm);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -192,6 +213,20 @@ namespace HSchool.WebApi.Controllers
         }
 
 
+        #endregion
+
+        #region Private
+
+        private string CreateActionEditTag(string innerText, string id)
+        {
+            var tagBuilder = new TagBuilder("a");
+            tagBuilder.MergeAttribute("id", id);
+            tagBuilder.MergeAttribute("href", Url.Action("index", "Application", new { id }));
+            tagBuilder.MergeAttribute("class", "");
+            tagBuilder.MergeAttribute("title", "Click here to edit application");
+            tagBuilder.SetInnerText(innerText);
+            return tagBuilder.ToString();
+        }
         #endregion
     }
 }

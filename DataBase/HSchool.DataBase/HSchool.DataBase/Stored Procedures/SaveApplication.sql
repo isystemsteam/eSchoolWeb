@@ -37,6 +37,7 @@
 	@StudentId int,	
 	@VisibleMark bit,
 	@LoginEnabled bit,
+	@GuardianLoginEnabled bit,
 	@StudentClass TypeStudentClass Readonly,
 	@StudentGuardians TypeStudentGuardian Readonly,
 	@Addresses TypeAddress Readonly,
@@ -67,7 +68,7 @@ BEGIN
 				EXEC @UserId=DBO.SaveUserInformation @UserId,@Title,@FirstName,@LastName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled
 
 				-- SAVE STUDENT
-				EXEC @StudentId= dbo.SaveStudent @StudentId,@UserId,@RollNumber,@FluencyinOthers,@IsTransportRequired,@LoginEnabled,@VisibleMark
+				EXEC @StudentId= dbo.SaveStudent @StudentId,@UserId,@RollNumber,@FluencyinOthers,@IsTransportRequired,@LoginEnabled,@VisibleMark,@GuardianLoginEnabled
 
 				-- SAVE STUDENT GUARDIAN
 				EXEC SaveStudentGuardian @StudentId,@StudentGuardians

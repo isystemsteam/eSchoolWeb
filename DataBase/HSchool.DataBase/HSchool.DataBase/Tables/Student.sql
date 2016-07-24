@@ -6,5 +6,6 @@
 	IsTransportRequired bit not null,
 	FluencyinOthers VARCHAR(120),
 	[VisibleMark] bit, 
-    [LoginEnabled] BIT NULL
+    [LoginEnabled] BIT NOT NULL, 
+    [GuardianLoginEnabled] BIT NOT NULL
 )

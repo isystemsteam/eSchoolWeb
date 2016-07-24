@@ -6,16 +6,17 @@
 	@FluencyinOthers varchar(120),
 	@IsTransportRequired bit,
 	@LoginEnabled bit,
-	@VisibleMark bit
+	@VisibleMark bit,
+	@GuardianLoginEnabled bit
 )
 AS
 BEGIN
 	IF (@StudentId IS NULL OR @StudentId=0)
 			BEGIN
 				INSERT INTO dbo.Student
-					(UserId,RollNumber,FluencyinOthers,IsTransportRequired,LoginEnabled)
+					(UserId,RollNumber,FluencyinOthers,IsTransportRequired,LoginEnabled,GuardianLoginEnabled)
 					VALUES
-					(@UserId,@RollNumber,@FluencyinOthers,@IsTransportRequired,@LoginEnabled)
+					(@UserId,@RollNumber,@FluencyinOthers,@IsTransportRequired,@LoginEnabled,@GuardianLoginEnabled)
 
 				SET @StudentId=@@IDENTITY
 			END
