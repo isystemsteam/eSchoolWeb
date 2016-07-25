@@ -7,6 +7,7 @@
     <link href='https://fonts.googleapis.com/css?family=Orbitron:400,500,700,900' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -33,6 +34,12 @@
             //Text Box Edit Animation
             $('.custom-text input[type="text"], .custom-text input[type="password"]').editAnimate();
         });
+
+        // Left menu expand collapse
+        $('btn-expand').click(function () {
+            $('.left-panel').toggleClass('left-panel')
+        });
+
     </script>
 </head>
 <body>
