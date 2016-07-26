@@ -40,33 +40,11 @@ namespace HSchool.WebApi.Controllers
         public ActionResult Index()
         {
             LogHelper.Info(string.Format("ApplicationController.Index - Begin"));
-            var applicationForm = new ApplicationForm();
-            applicationForm.StudentClass = new List<StudentClass> { new StudentClass() };
-            applicationForm.StudentGuardians = new List<StudentGuardian>();
-            applicationForm.Addresses = new List<Address> { new Address() };
-
-            int guardianCount = CommonHelper.GetWebConfigValue<int>(WebConstants.GuardianCount);
-            for (int studentGurCounter = 0; studentGurCounter < guardianCount; studentGurCounter++)
-            {
-                applicationForm.StudentGuardians.Add(new StudentGuardian());
-            }
-
-            applicationForm.AcademicYear = _adminRepository.GetActiveAcademicYear();
-            if (applicationForm.AcademicYear != null)
-            {
-                applicationForm.StudentClass[0].AcademicYear = applicationForm.AcademicYear.AcademicYearId;
-            }
-            applicationForm.FormClasses = _adminRepository.GetAllClasses(false);
-            applicationForm.Communities = _adminRepository.GetCommunities();
-            applicationForm.RelationShips = _adminRepository.GetRelationships();
-            applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles");
-            applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender");
-            applicationForm.Languages = _adminRepository.GetMotherLanguages();
+            var applicationForm = CreateApplicationForm(null, true);
             applicationForm.IsOfficeFormEnabled = false;
             applicationForm.IsStudentAddressUpdate = true;
             applicationForm.IsStudentGuardianUpdate = true;
             applicationForm.IsEditable = true;
-            applicationForm.ActionName = string.Format("{0}", "Application");
             LogHelper.Info(string.Format("ApplicationController.Index - End"));
             return View(applicationForm);
         }
@@ -130,6 +108,12 @@ namespace HSchool.WebApi.Controllers
                 var response = new MessageResponse<string>(string.Empty, WebConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
+        }
+
+
+        public ActionResult EditOfficeForm(int id)
+        {
+            return View();
         }
 
         /// <summary>
@@ -297,6 +281,57 @@ namespace HSchool.WebApi.Controllers
         #endregion
 
         #region Private
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="isEditable"></param>
+        /// <returns></returns>
+        private ApplicationForm CreateApplicationForm(int? id, bool isEditable)
+        {
+            LogHelper.Info(string.Format("ApplicationController.CreateApplicationForm - Begin - Id.{0}", id));
+            try
+            {
+                var applicationForm = new ApplicationForm();
+                if (id != null)
+                {
+                    applicationForm = _applicationRepository.GetApplicationById(id.Value);
+                }
+                else
+                {
+                    applicationForm.StudentClass = new List<StudentClass> { new StudentClass() };
+                    applicationForm.StudentGuardians = new List<StudentGuardian>();
+                    applicationForm.Addresses = new List<Address> { new Address() };
+
+                    int guardianCount = CommonHelper.GetWebConfigValue<int>(WebConstants.GuardianCount);
+                    for (int studentGurCounter = 0; studentGurCounter < guardianCount; studentGurCounter++)
+                    {
+                        applicationForm.StudentGuardians.Add(new StudentGuardian());
+                    }
+
+                    applicationForm.AcademicYear = _adminRepository.GetActiveAcademicYear();
+                    if (applicationForm.AcademicYear != null)
+                    {
+                        applicationForm.StudentClass[0].AcademicYear = applicationForm.AcademicYear.AcademicYearId;
+                    }
+                }
+                if (isEditable)
+                {
+                    applicationForm.FormClasses = _adminRepository.GetAllClasses(false);
+                    applicationForm.Communities = _adminRepository.GetCommunities();
+                    applicationForm.RelationShips = _adminRepository.GetRelationships();
+                    applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles");
+                    applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender");
+                    applicationForm.Languages = _adminRepository.GetMotherLanguages();
+                }
+                return applicationForm;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         private string CreateApplicationDetailsTag(string innerText, string id)
         {
