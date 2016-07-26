@@ -33,12 +33,18 @@
 
             //Text Box Edit Animation
             $('.custom-text input[type="text"], .custom-text input[type="password"]').editAnimate();
+
+
+            // Left menu expand collapse
+            //$('.btn-expand-collapse').html('<i class="fa fa-angle-left></i>');
+            $('.btn-expand-collapse').click(function () {
+                $(this).find('i').toggleClass('fa-angle-left fa-angle-right');                   
+                $('.left-panel').toggleClass('left-panel-expand');
+            });
+
         });
 
-        // Left menu expand collapse
-        $('btn-expand').click(function () {
-            $('.left-panel').toggleClass('left-panel')
-        });
+       
 
     </script>
 </head>
