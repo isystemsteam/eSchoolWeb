@@ -17,9 +17,9 @@
                     @Html.TextBoxFor(m => m.StudentClass[0].ClassName, new { @class = disableControl })
                 }
             </div>
-            <div class="col-md-6 academic">
-                @Html.LabelFor(m => m.StudentClass[0].AcademicYear) :
-                @Html.DisplayFor(m => m.AcademicYear.AcademicYearDisplay)
+            <div class="col-md-6 custom-text">
+                @Html.LabelFor(m => m.StudentClass[0].AcademicYear)
+                @Html.TextBoxFor(m => m.AcademicYear.AcademicYearDisplay, new { @class = "disableField" })
                 @Html.HiddenFor(m => m.StudentClass[0].AcademicYear, new { @Id = "txtAcademicYear" })
             </div>
         </div>

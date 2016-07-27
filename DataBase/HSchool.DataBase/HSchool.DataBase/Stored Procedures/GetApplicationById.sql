@@ -18,6 +18,7 @@ BEGIN
 		S.FluencyinOthers,
 		S.IsTransportRequired,
 		S.LoginEnabled,
+		S.GuardianLoginEnabled,
 		S.RollNumber,
 		S.StudentId,
 		S.VisibleMark,

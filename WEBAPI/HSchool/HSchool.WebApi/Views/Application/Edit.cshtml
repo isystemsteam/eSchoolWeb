@@ -1,13 +1,16 @@
 ﻿@model HSchool.Business.Models.ApplicationForm
 <div class="container">
-    @using (Html.BeginForm("Edit", "Application", FormMethod.Post, new { @name = "formOnlineApplication", @id = "formOnlineApplication" }))
+    @using (Html.BeginForm("EditOfficeForm", "Application", FormMethod.Post, new { @name = "formOnlineApplication", @id = "formOnlineApplication" }))
     {
         @Html.AntiForgeryToken()
         @Html.Partial("_ApplicationForm", Model)
-
-        <div class="btn-wrapper pull-right">
-            <input type="button" value="Save" class="btn-blue" onclick="applicationForm.saveApplication()" />
-            <input type="button" value="Cancel" class="btn-grey" />
-        </div>
+        @Html.Partial("_OfficeForm", Model)
+        if (Model.IsEditable)
+        {
+            <div class="btn-wrapper pull-right">
+                <input type="button" value="Save" class="btn-blue" onclick="applicationForm.saveApplication()" />
+                <input type="button" value="Cancel" class="btn-grey" />
+            </div>
+        }
     }
 </div>

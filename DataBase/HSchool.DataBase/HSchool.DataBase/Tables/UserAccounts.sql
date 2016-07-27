@@ -24,6 +24,7 @@
 	EmailEnabled bit,
 	NotificationEnabled bit,
 	UserLastLogin datetime,
+	LoginEnabled bit,
 	IsDeleted bit,
 	CreatedDate datetime,	
 	ModifiedDate datetime	

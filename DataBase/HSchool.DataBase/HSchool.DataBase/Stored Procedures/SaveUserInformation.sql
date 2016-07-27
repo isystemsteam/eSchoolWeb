@@ -20,7 +20,8 @@
 	@SMSEnabled bit,
 	@EmailEnabled bit,
 	@NotificationEnabled bit,
-	@CommunityInDetails	varchar(255)
+	@CommunityInDetails	varchar(255),
+	@LoginEnabled bit
 )
 AS
 BEGIN
@@ -51,7 +52,8 @@ BEGIN
 				,NotificationEnabled
 				,CreatedDate
 				,ModifiedDate
-				,CommunityInDetails) 
+				,CommunityInDetails
+				,LoginEnabled) 
 			VALUES 
 					(
 					@Title,
@@ -75,7 +77,8 @@ BEGIN
 					,@NotificationEnabled
 					,GETDATE()
 					,GETDATE()
-					,@CommunityInDetails)
+					,@CommunityInDetails
+					,@LoginEnabled)
 			SET @UserId=@@IDENTITY
 		END
 	ELSE
@@ -100,7 +103,8 @@ BEGIN
 				EmailEnabled=@EmailEnabled,
 				NotificationEnabled=@NotificationEnabled,
 				ModifiedDate=GETDATE(),
-				CommunityInDetails=@CommunityInDetails
+				CommunityInDetails=@CommunityInDetails,
+				LoginEnabled=@LoginEnabled 
 			WHERE UserId =@UserId
 		END
 		--https://msdn.microsoft.com/en-us/library/bb675163(v=vs.110).aspx	

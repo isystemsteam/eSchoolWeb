@@ -40,13 +40,21 @@ namespace HSchool.WebApi.Controllers
         public ActionResult Index()
         {
             LogHelper.Info(string.Format("ApplicationController.Index - Begin"));
-            var applicationForm = CreateApplicationForm(null, true);
-            applicationForm.IsOfficeFormEnabled = false;
-            applicationForm.IsStudentAddressUpdate = true;
-            applicationForm.IsStudentGuardianUpdate = true;
-            applicationForm.IsEditable = true;
-            LogHelper.Info(string.Format("ApplicationController.Index - End"));
-            return View(applicationForm);
+            try
+            {
+                var applicationForm = CreateApplicationForm(null, true);
+                applicationForm.IsOfficeFormEnabled = false;
+                applicationForm.IsStudentAddressUpdate = true;
+                applicationForm.IsStudentGuardianUpdate = true;
+                applicationForm.IsEditable = true;
+                LogHelper.Info(string.Format("ApplicationController.Index - End"));
+                return View(applicationForm);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("ApplicationController.Index - Exception:{0}", ex.Message));
+                return View("Error", ex.Message);
+            }
         }
 
         /// <summary>
@@ -57,13 +65,60 @@ namespace HSchool.WebApi.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            LogHelper.Info(string.Format("ApplicationController.OfficeForm - Begin"));
+            LogHelper.Info(string.Format("ApplicationController.Details - Begin"));
             try
             {
                 var applicationForm = _applicationRepository.GetApplicationById(id);
                 applicationForm.IsEditable = false;
-                LogHelper.Info(string.Format("ApplicationController.OfficeForm - End"));
+                LogHelper.Info(string.Format("ApplicationController.Details - End"));
                 return View(applicationForm);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }
+        }
+
+        /// <summary>
+        /// To edit student information
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            LogHelper.Info(string.Format("ApplicationController.Edit - Begin"));
+            try
+            {
+                var applicationForm = _applicationRepository.GetApplicationById(id);
+                applicationForm.IsEditable = true;
+                applicationForm.IsOfficeFormEnabled = false;
+                LogHelper.Info(string.Format("ApplicationController.Edit - End"));
+                return View(applicationForm);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }
+        }
+
+        /// <summary>
+        /// To edit office form only
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("Application/OfficeUse")]
+        public ActionResult EditOfficeForm(int id)
+        {
+            LogHelper.Info(string.Format("ApplicationController.EditOfficeForm - Begin"));
+            try
+            {
+                var applicationForm = _applicationRepository.GetApplicationById(id);
+                applicationForm.IsEditable = false;
+                applicationForm.IsOfficeFormEnabled = true;
+                LogHelper.Info(string.Format("ApplicationController.EditOfficeForm - End"));
+                return View("Edit", applicationForm);
             }
             catch (Exception ex)
             {
@@ -110,12 +165,6 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
-
-        public ActionResult EditOfficeForm(int id)
-        {
-            return View();
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -130,20 +179,14 @@ namespace HSchool.WebApi.Controllers
             try
             {
                 int? id = null;
-                if (ModelState.IsValid)
-                {
-                    model.IsStudentUpdate = true;
-                    model.UserStatus = (int)UserStatusEnum.Registered;
-                    model.RollNumber = "123456";
-                    model.VisibleMark = false;
-                    model.ApplicationStatus = (int)ApplicationStatus.Submitted;
-                    id = _applicationRepository.SaveApplication(model);
-                    response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
-                }
-                else
-                {
-                    response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, "Invalid Request. Please validate the mandatory fields.");
-                }
+                bool userLoginEnabled = collection["LoginEnabled"] != null && !string.IsNullOrWhiteSpace(collection["LoginEnabled"]) && string.Compare(collection["LoginEnabled"], "on") == 0 ? true : false;
+                bool guardianLogin = collection["GuardianLoginEnabled"] != null && !string.IsNullOrWhiteSpace(collection["GuardianLoginEnabled"]) && string.Compare(collection["GuardianLoginEnabled"], "on") == 0 ? true : false;
+                model.IsStudentUpdate = false;
+                model.UserStatus = (int)UserStatusEnum.Registered;
+                model.VisibleMark = false;
+                id = _applicationRepository.SaveApplication(model);
+                response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+
                 LogHelper.Info(string.Format("ApplicationController.Edit - End"));
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
@@ -209,6 +252,28 @@ namespace HSchool.WebApi.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Search()
+        {
+            LogHelper.Info(string.Format("ApplicationController.Search - Begin"));
+            try
+            {
+                var applicationSearch = new ApplicationFormSearch();
+                applicationSearch.ListApplicationStatus = CommonHelper.ConvertEnumToListItem<ApplicationStatus>("Application Status");
+                applicationSearch.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_adminRepository.GetAllClasses(false), "Class", "ClassId", "ClassName");
+                return View(applicationSearch);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("ApplicationController.Search - Exception:{0}", ex.Message));
+                return View();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="formSearch"></param>
         /// <returns></returns>
         [HttpPost]
@@ -228,7 +293,9 @@ namespace HSchool.WebApi.Controllers
                         new GridColumn { ColumnName = "Applied Date" },
                         new GridColumn { ColumnName = "First Name" },
                         new GridColumn { ColumnName = "Last Name" },
-                        new GridColumn { ColumnName = "Class" } 
+                        new GridColumn { ColumnName = "Class" },
+                        new GridColumn { ColumnName = "Edit" },
+                        new GridColumn { ColumnName = "Office Use" }
                     },
                     Rows = new List<GridViewRow> { }
                 };
@@ -238,12 +305,14 @@ namespace HSchool.WebApi.Controllers
                 {
                     var cells = new List<GridViewCell>();
                     string id = Convert.ToString(item.ApplicationId);
-                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag(id, id) });
+                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag(id, id, "Details", "View Application Details") });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.ApplicationStatus) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.AppliedDate) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.FirstName) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.LastName) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.ClassName) });
+                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag("<i class='icon-edit'></i>", id, "Edit", "Edit Application") });
+                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag("<i class='icon-edit'></i>", id, "EditOfficeForm", "Edit Office Use") });
                     rows.Add(new GridViewRow { Cells = cells });
                 }
                 response.Rows = rows;
@@ -253,28 +322,6 @@ namespace HSchool.WebApi.Controllers
             {
                 LogHelper.Info(string.Format("ApplicationController.SearchApplications - Exception:{0}", ex.Message));
                 return Json(null, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult Search()
-        {
-            LogHelper.Info(string.Format("ApplicationController.Search - Begin"));
-            try
-            {
-                var applicationSearch = new ApplicationFormSearch();
-                applicationSearch.ListApplicationStatus = CommonHelper.ConvertEnumToListItem<ApplicationStatus>("Application Status");
-                applicationSearch.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_adminRepository.GetAllClasses(false), "Class", "ClassId", "ClassName");
-                return View(applicationSearch);
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Info(string.Format("ApplicationController.Search - Exception:{0}", ex.Message));
-                return View();
             }
         }
 
@@ -333,13 +380,13 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
-        private string CreateApplicationDetailsTag(string innerText, string id)
+        private string CreateApplicationDetailsTag(string innerText, string id, string actionName, string title)
         {
             var tagBuilder = new TagBuilder("a");
             tagBuilder.MergeAttribute("id", id);
-            tagBuilder.MergeAttribute("href", Url.Action("Details", "Application", new { id }));
+            tagBuilder.MergeAttribute("href", Url.Action(actionName, "Application", new { id }));
             tagBuilder.MergeAttribute("class", "");
-            tagBuilder.MergeAttribute("title", "Click here to view application");
+            tagBuilder.MergeAttribute("title", title);
             tagBuilder.SetInnerText(innerText);
             return tagBuilder.ToString();
         }

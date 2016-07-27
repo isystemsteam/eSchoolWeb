@@ -68,7 +68,7 @@ BEGIN
 				DECLARE @IsActive INT;
 
 				-- SAVE USER
-				EXEC @UserId=DBO.SaveUserInformation @UserId,@Title,@FirstName,@LastName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled,@CommunityInDetails
+				EXEC @UserId=DBO.SaveUserInformation @UserId,@Title,@FirstName,@LastName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled,@CommunityInDetails,@LoginEnabled
 
 				-- SAVE STUDENT
 				EXEC @StudentId= dbo.SaveStudent @StudentId,@UserId,@RollNumber,@FluencyinOthers,@IsTransportRequired,@LoginEnabled,@VisibleMark,@GuardianLoginEnabled
@@ -99,13 +99,30 @@ BEGIN
 						INSERT INTO dbo.UserAddress (UserId,AddressId) values (@UserId,@AddressId)
 					END
 
-			END		
+			END	
+		ELSE
+			BEGIN
+				SELECT @UserId=UserId FROM dbo.Applications WHERE ApplicationId=@ApplicationId
+				-- TO UPDATE USER LOGIN FLAG
+				IF(@LoginEnabled=1)
+					BEGIN
+						EXEC UpdateUserLoginFlag @UserId,@LoginEnabled
+
+						SELECT @StudentId=StudentId FROM dbo.Student S 
+							 WHERE S.UserId=@UserId
+
+						EXEC UpdateStudentLogin @StudentId,@LoginEnabled,@GuardianLoginEnabled
+					END				
+			END	
 
 		-- SAVE APPLICATIONS
 		IF EXISTS(SELECT 1 FROM dbo.Applications where ApplicationId=@ApplicationId)
 			BEGIN
 				UPDATE dbo.Applications SET 
-					ApplicationStatus=@ApplicationStatus,ApplicationType=@ApplicationType,ApprovedBy=@ApprovedBy,ApprovedDate=@ApprovedDate,ModifiedDate=GETDATE() 
+					ApplicationStatus=@ApplicationStatus,					
+					ApprovedBy=@ApprovedBy,
+					ApprovedDate=@ApprovedDate,
+					ModifiedDate=GETDATE() 
 				WHERE ApplicationId=@ApplicationId
 			END
 		ELSE
