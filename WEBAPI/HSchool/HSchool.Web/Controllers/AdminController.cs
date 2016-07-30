@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace HSchool.Web.Controllers
 {
+    [CustomAuthentication]
     public class AdminController : Controller
     {
 
