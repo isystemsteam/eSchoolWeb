@@ -1,0 +1,40 @@
+﻿@model HSchool.Business.Models.ApplicationRole
+<h2 id="headAdminEditText">Add/Edit Section </h2>
+<div class="form-group-expand-div admin-form">
+    <div class="form-container">
+        @using (Html.BeginForm("EditRole", "Admin", FormMethod.Post, new { @id = "formApplicationRoleEdit" }))
+        {
+            <div class="row custom-row clearfix">
+                <div class="col-md-12 custom-text">
+                    @Html.HiddenFor(m => m.RoleId, new { @class = "clsTextBox", @id = "" })
+                    @Html.LabelFor(m => m.RoleName)
+                    @Html.TextBoxFor(m => m.RoleName, new { @class = "clsTextBox required", @id = "" })
+                    <i class="fa validationResult"></i>
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-6 custom-check ">
+                    <div class="cstom-check-margin">
+                        <input type="checkbox" checked="@Model.IsActive" name="IsActive" id="IsActive" />
+                        <label for="IsActive"><span><span><i class="fa fa-check"></i></span></span>Active</label>
+                    </div>
+                </div>
+                <div class="col-md-6 custom-check">
+                    <div class="cstom-check-margin">
+                        <input type="checkbox" checked="@Model.VisibleToLogin" name="VisibleToLogin" id="VisibleToLogin" />
+                        <label for="VisibleToLogin"><span><span><i class="fa fa-check"></i></span></span>Visible To Login</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-wrapper clearfix">
+                <div class="pull-right">
+                    <input type="button" value="Cancel" class="btn-grey" onclick="adminView.roles.editCancel()" />
+                </div>
+                <div class="pull-right">
+                    <input class="btn-blue" type="button" value="Save" onclick="adminView.roles.saveApplicationRole()" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

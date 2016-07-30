@@ -22,6 +22,9 @@ namespace HSchool.Business.Models
         [DisplayName("Last Name")]
         public string LastName { get; set; }
 
+
+        public string Password { get; set; }
+
         [DisplayName("Email")]
         [JsonProperty("email")]
         public string Email { get; set; }

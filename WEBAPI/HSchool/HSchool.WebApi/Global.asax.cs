@@ -14,6 +14,9 @@ using System.Web.Routing;
 using Bootstrap.AutoMapper;
 using System.Data.Entity;
 using HSchool.Authentication;
+using Microsoft.AspNet.Identity;
+using HSchool.WebApi.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HSchool.WebApi
 {
@@ -52,6 +55,9 @@ namespace HSchool.WebApi
                     .Load("HSchool.Data"),
                 Assembly
                     .Load("HSchool.CompositionRoot"), Assembly.Load("HSchool.Common"));
+
+            kernel.Bind<IUserStore<ApplicationUser>>().To<UserStore<ApplicationUser>>();
+            kernel.Bind<UserManager<ApplicationUser>>().ToSelf();
 
             return kernel;
         }

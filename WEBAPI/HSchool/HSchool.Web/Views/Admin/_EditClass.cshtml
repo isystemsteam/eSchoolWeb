@@ -1,0 +1,38 @@
+﻿@model HSchool.Business.Models.Classes
+<h2 id="headAdminEditText">Edit Class </h2>
+<div class="form-group-expand-div admin-form">
+    <div class="form-container">
+        @using (Html.BeginForm("EditClass", "Admin", FormMethod.Post, new { @id = "formClassEdit", @name = "formClassEdit" }))
+        {
+            <div class="row custom-row clearfix">
+                <div class="col-md-6 custom-text">
+                    @Html.HiddenFor(m => m.ClassId, new { @class = "clsTextBox", @id = "" })
+                    @Html.LabelFor(m => m.ClassName)
+                    @Html.TextBoxFor(m => m.ClassName, new { @class = "clsTextBox required", @id = "" })
+                    <i class="fa validationResult"></i>
+                </div>
+                <div class="col-md-6 custom-text">
+                    @Html.LabelFor(m => m.NameInDigit)
+                    @Html.TextBoxFor(m => m.NameInDigit, new { @class = "clsTextBox required", @id = "" })
+                    <i class="fa validationResult"></i>
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-lg-12 custom-check">
+                    <div class="cstom-check-margin">
+                        <input type="checkbox" checked="@Model.IsVisibleToApplication" name="IsVisibleToApplication" id="IsVisibleToApplication" />
+                        <label for="IsVisibleToApplication"><span><span><i class="fa fa-check"></i></span></span>Visible To Application</label>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-wrapper clearfix">
+                <div class="pull-right">
+                    <input type="button" value="Cancel" class="btn-grey" onclick="adminView.classes.editCancel()"/>
+                </div>
+                <div class="pull-right">
+                    <input type="button" value="Save" onclick="adminView.classes.saveClass()" class="btn-blue" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

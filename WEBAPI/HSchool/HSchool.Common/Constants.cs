@@ -74,5 +74,13 @@ namespace HSchool.Common
         public const string AppSecurityKey = "SecurityKeyApp";
         public const string SizeOf = "SizeofStudents";
         public const string GuardianCount = "GuardianCount";
+        public const string PasswordDefaultQuestion = "PasswordDefaultQuestion";
+
+        #region Messages
+
+        public const string LoginInvalidMessage = "Invalid Attempt. Please try again.";
+        public const string AccountLocked = "Account Locked. Please contact Admin.";
+        public const string LoginFailed = "Invalid login attempt.";
+        #endregion
     }
 }

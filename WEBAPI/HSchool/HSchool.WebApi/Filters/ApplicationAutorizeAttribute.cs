@@ -12,6 +12,11 @@ namespace HSchool.WebApi.Filters
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             base.OnAuthorization(filterContext);
+            if (filterContext.HttpContext == null || filterContext.HttpContext.User == null)
+            {
+                filterContext.Result = new ViewResult { ViewName = "~/Views/Login/Index.cshtml" };
+                return;
+            }
 
             if (filterContext.HttpContext.User.Identity.IsAuthenticated)
             {

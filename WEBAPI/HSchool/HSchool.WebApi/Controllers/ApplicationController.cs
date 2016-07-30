@@ -1,11 +1,15 @@
-﻿using HSchool.Business.Models;
+﻿using HSchool.Authentication;
+using HSchool.Business.Models;
 using HSchool.Business.Repository;
 using HSchool.Common;
 using HSchool.Logging;
+using HSchool.WebApi.Filters;
+using HSchool.WebApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,18 +21,44 @@ namespace HSchool.WebApi.Controllers
         private readonly IAdminRepository _adminRepository;
         private readonly IStudentRepository _studentRepository;
         private readonly IApplicationRepository _applicationRepository;
+        private ApplicationUserManager _userManager;
         #endregion
 
+        #region Properties
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().Get<ApplicationUserManager>("dev");
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+        #endregion
         #region Ctor
         /// <summary>
         /// 
         /// </summary>
+        public ApplicationController()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userManager"></param>
         /// <param name="adminRepository"></param>
-        public ApplicationController(IAdminRepository adminRepository, IStudentRepository studentRepository, IApplicationRepository applicationRepository)
+        /// <param name="studentRepository"></param>
+        /// <param name="applicationRepository"></param>
+        public ApplicationController(ApplicationUserManager userManager, IAdminRepository adminRepository, IStudentRepository studentRepository, IApplicationRepository applicationRepository)
         {
             _adminRepository = adminRepository;
             _studentRepository = studentRepository;
             _applicationRepository = applicationRepository;
+            UserManager = userManager;
         }
         #endregion
 
@@ -63,6 +93,7 @@ namespace HSchool.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        [CustomAuthentication]
         public ActionResult Details(int id)
         {
             LogHelper.Info(string.Format("ApplicationController.Details - Begin"));
@@ -83,7 +114,7 @@ namespace HSchool.WebApi.Controllers
         /// To edit student information
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns></returns>        
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -108,8 +139,7 @@ namespace HSchool.WebApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("Application/OfficeUse")]
-        public ActionResult EditOfficeForm(int id)
+        public ActionResult OfficeForm(int id)
         {
             LogHelper.Info(string.Format("ApplicationController.EditOfficeForm - Begin"));
             try
@@ -144,9 +174,9 @@ namespace HSchool.WebApi.Controllers
                 //{
                 model.IsStudentUpdate = true;
                 model.UserStatus = (int)UserStatusEnum.Registered;
-                model.RollNumber = "123456";
                 model.VisibleMark = false;
                 model.ApplicationStatus = (int)ApplicationStatus.Submitted;
+                model.IsTransportRequired = collection.GetFormValue<bool>("IsTransportRequired");
                 id = _applicationRepository.SaveApplication(model);
                 response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
                 //}
@@ -172,22 +202,38 @@ namespace HSchool.WebApi.Controllers
         /// <param name="collection"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditOfficeForm(ApplicationForm model, FormCollection collection)
         {
-            LogHelper.Info(string.Format("ApplicationController.Edit - Begin"));
+            LogHelper.Info(string.Format("ApplicationController.EditOfficeForm - Begin"));
             MessageResponse response = null;
             try
             {
-                int? id = null;
-                bool userLoginEnabled = collection["LoginEnabled"] != null && !string.IsNullOrWhiteSpace(collection["LoginEnabled"]) && string.Compare(collection["LoginEnabled"], "on") == 0 ? true : false;
-                bool guardianLogin = collection["GuardianLoginEnabled"] != null && !string.IsNullOrWhiteSpace(collection["GuardianLoginEnabled"]) && string.Compare(collection["GuardianLoginEnabled"], "on") == 0 ? true : false;
-                model.IsStudentUpdate = false;
-                model.UserStatus = (int)UserStatusEnum.Registered;
-                model.VisibleMark = false;
-                id = _applicationRepository.SaveApplication(model);
-                response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                if (ModelState.IsValid)
+                {
+                    bool userLoginEnabled = collection.GetFormValue<bool>("LoginEnabled");
+                    //bool guardianLoginEnabled = collection.GetFormValue<bool>("GuardianLoginEnabled");                    
+                    model.IsStudentUpdate = false;
 
-                LogHelper.Info(string.Format("ApplicationController.Edit - End"));
+                    //user details
+                    if (userLoginEnabled)
+                    {
+                        model.Email = model.StudentGuardians.FirstOrDefault().Email;
+                        model.Password = CommonHelper.CreateDefaultPassword(model.UserName, model.StudentGuardians.FirstOrDefault().DateOfBirth);
+                        var result = CreateUser(model);
+                    }
+
+                    //guardian details
+                    //if (guardianLoginEnabled)
+                    //{
+
+                    //    var result = AuthenticationHelper.CreateUser(email, model.UserName, password, string.Empty, string.Empty);
+                    //}
+
+                    var applicationId = _applicationRepository.SaveApplication(model);
+                    response = new MessageResponse<string>(string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                }
+                LogHelper.Info(string.Format("ApplicationController.EditOfficeForm - End"));
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -254,6 +300,7 @@ namespace HSchool.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [CustomAuthentication]
         public ActionResult Search()
         {
             LogHelper.Info(string.Format("ApplicationController.Search - Begin"));
@@ -311,8 +358,8 @@ namespace HSchool.WebApi.Controllers
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.FirstName) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.LastName) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.ClassName) });
-                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag("<i class='icon-edit'></i>", id, "Edit", "Edit Application") });
-                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag("<i class='icon-edit'></i>", id, "EditOfficeForm", "Edit Office Use") });
+                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag("<i class='fa fa-pencil-square-o'></i>", id, "Edit", "Edit Application") });
+                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag("<i class='fa fa-pencil-square-o'></i>", id, "OfficeForm", "Edit Office Use") });
                     rows.Add(new GridViewRow { Cells = cells });
                 }
                 response.Rows = rows;
@@ -323,6 +370,16 @@ namespace HSchool.WebApi.Controllers
                 LogHelper.Info(string.Format("ApplicationController.SearchApplications - Exception:{0}", ex.Message));
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [ChildActionOnly]
+        public async Task<bool> CreateUser(UserAccount account)
+        {
+            LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
+            ApplicationUser user = new ApplicationUser { UserName = account.UserName, Email = account.Email };
+            var result = await UserManager.CreateAsync(user, account.Password);
+            LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
+            return result.Succeeded;
         }
 
         #endregion
@@ -380,6 +437,14 @@ namespace HSchool.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="innerText"></param>
+        /// <param name="id"></param>
+        /// <param name="actionName"></param>
+        /// <param name="title"></param>
+        /// <returns></returns>
         private string CreateApplicationDetailsTag(string innerText, string id, string actionName, string title)
         {
             var tagBuilder = new TagBuilder("a");
@@ -387,7 +452,7 @@ namespace HSchool.WebApi.Controllers
             tagBuilder.MergeAttribute("href", Url.Action(actionName, "Application", new { id }));
             tagBuilder.MergeAttribute("class", "");
             tagBuilder.MergeAttribute("title", title);
-            tagBuilder.SetInnerText(innerText);
+            tagBuilder.InnerHtml = innerText;
             return tagBuilder.ToString();
         }
         #endregion

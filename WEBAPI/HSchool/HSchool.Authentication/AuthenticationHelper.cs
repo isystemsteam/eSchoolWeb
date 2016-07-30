@@ -100,6 +100,10 @@ namespace HSchool.Authentication
                     InitializeManager();
                 }
                 var applicationUser = _userManager.Find(userName, password);
+                if(applicationUser!=null)
+                {
+
+                }
                 LogHelper.Info(string.Format("AuthenticationHelper.ValidateUser - End. UserName:{0}", userName));
                 return applicationUser != null;
             }

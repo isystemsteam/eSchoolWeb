@@ -124,5 +124,7 @@ namespace HSchool.Business.Models
 
         public bool IsStudentAddressUpdate { get; set; }
 
+        public string ReasonMessage { get; set; }
+
     }
 }

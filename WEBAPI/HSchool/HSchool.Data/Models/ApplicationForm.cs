@@ -29,5 +29,7 @@ namespace HSchool.Data.Models
         public bool IsStudentGuardianUpdate { get; set; }
 
         public bool IsStudentAddressUpdate { get; set; }
+
+        public string ReasonMessage { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace HSchool.Data.Models
 
         public string ClassName { get; set; }
 
-        public int NameInDigit { get; set; }
+        public int? NameInDigit { get; set; }
 
         public bool IsVisibleToApplication { get; set; }
     }

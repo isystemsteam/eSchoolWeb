@@ -30,8 +30,8 @@ namespace HSchool.WebApi.Controllers
             LogHelper.Info(string.Format("LoginController.Index - Begin"));
             try
             {
-                var loginModel = new LoginViewModel();
-                loginModel.Roles = CommonHelper.ConvertListToSelectList<ApplicationRole>(_adminRepository.GetAllRoles(true), "Login As", "RoleId", "RoleName"); 
+                var loginModel = new LoginViewModelTest();
+                //loginModel.Roles = CommonHelper.ConvertListToSelectList<ApplicationRole>(_adminRepository.GetAllRoles(true), "Login As", "RoleId", "RoleName"); 
                 LogHelper.Info(string.Format("LoginController.Index - End"));
                 return View(loginModel);
             }
@@ -48,7 +48,7 @@ namespace HSchool.WebApi.Controllers
         /// <param name="credential"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult Login(LoginViewModel model, string returnUrl)
+        public JsonResult Login(LoginViewModelTest model, string returnUrl)
         {
             LogHelper.Info(string.Format("LoginController.Login - Begin"));
             LogHelper.Info(string.Format("LoginController.Login - End"));

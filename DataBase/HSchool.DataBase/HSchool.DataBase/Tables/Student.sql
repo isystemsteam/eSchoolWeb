@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Student]
 (
 	[StudentId] INT NOT NULL PRIMARY KEY identity,
-	[RollNumber] varchar(20) NOT null,
+	[RollNumber] varchar(20) null,
 	[UserId] int not null foreign key references dbo.UserAccounts(UserId),	
 	IsTransportRequired bit not null,
 	FluencyinOthers VARCHAR(120),

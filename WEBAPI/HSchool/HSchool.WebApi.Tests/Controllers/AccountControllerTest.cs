@@ -11,7 +11,7 @@ namespace HSchool.WebApi.Tests.Controllers
         public void CreateTest()
         {
             AccountController controller = new AccountController();
-            controller.Register("pariventhan");
+            //controller.Register("pariventhan");
         }
     }
 }

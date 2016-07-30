@@ -39,6 +39,7 @@
 	@VisibleMark bit,
 	@LoginEnabled bit,
 	@GuardianLoginEnabled bit,
+	@ReasonMessage varchar(2000),
 	@StudentClass TypeStudentClass Readonly,
 	@StudentGuardians TypeStudentGuardian Readonly,
 	@Addresses TypeAddress Readonly,
@@ -122,6 +123,7 @@ BEGIN
 					ApplicationStatus=@ApplicationStatus,					
 					ApprovedBy=@ApprovedBy,
 					ApprovedDate=@ApprovedDate,
+					ReasonMessage=@ReasonMessage,
 					ModifiedDate=GETDATE() 
 				WHERE ApplicationId=@ApplicationId
 			END

@@ -8,6 +8,7 @@
 	[ApplicationType] datetime,
 	[ApprovedBy] INT NULL,
 	IsVerified bit,
+	ReasonMessage varchar(2000) NULL,
 	[CreatedDate] datetime,
 	[ModifiedDate] datetime,
 	[IsDeleted] bit,

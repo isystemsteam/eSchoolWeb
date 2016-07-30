@@ -1,0 +1,42 @@
+﻿@model HSchool.Business.Models.ApplicationFormSearch
+
+<div class="container">
+    <div class="form-group-expand-div admin-form">
+        <h2>Search Applications</h2>
+        <div class="form-container">
+            <div class="row custom-row clearfix">
+                <div class="col-md-12 custom-text">
+                    <label for="">Application Id</label>
+                    @Html.TextBoxFor(m => m.ApplicationId, new { @id = "txtApplicationId" })
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-6 custom-text">
+                    @Html.DropDownListFor(m => m.ClassId, Model.ListApplicationStatus, new { @id = "", @class = "selectpicker show-tick required" })
+                    <i class="fa validationResult"></i>
+                </div>
+                <div class="col-md-6 custom-text">
+                    @Html.DropDownListFor(m => m.ClassId, Model.ListClasses, new { @id = "", @class = "selectpicker show-tick required" })
+                    <i class="fa validationResult"></i>
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-6 custom-text">
+                    <label for="">Applied Date</label>
+                    @Html.TextBoxFor(m => m.AppliedDate, new { @id = "txtAppliedDate", @class = "datepicker" })
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-6 custom-text">
+                    <label for="">First Name</label>
+                    @Html.TextBoxFor(m => m.FirstName, new { @id = "txtFirstName", @class = "" })
+                </div>
+                <div class="col-md-6 custom-text">
+                    <label for="">Last Name</label>
+                    @Html.TextBoxFor(m => m.LastName, new { @id = "txtFirstName", @class = "" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

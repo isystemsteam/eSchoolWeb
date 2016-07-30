@@ -15,6 +15,7 @@ BEGIN
 		AP.ApprovedDate,
 		AP.IsVerified,
 		AP.CreatedDate,
+		AP.ReasonMessage,
 		S.FluencyinOthers,
 		S.IsTransportRequired,
 		S.LoginEnabled,

@@ -99,6 +99,20 @@ namespace HSchool.Common
         }
         #endregion
 
+        #region Password
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public static string CreateDefaultPassword(string userName, DateTime? dateTime)
+        {
+            LogHelper.Info(string.Format("CommonHelper.CreateDefaultPassword - Begin. UserName:{0}", userName));
+            string dateString = dateTime.HasValue ? dateTime.Value.ToString("ddMMyyy") : string.Empty;
+            return string.Format("{0}_{1}", userName.Substring(0, 4), dateString);
+        }
+        #endregion
         public static SelectListItem GetFirstListItem()
         {
             return new SelectListItem { Text = "Select", Value = "0" };

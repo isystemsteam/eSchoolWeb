@@ -50,6 +50,7 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -78,6 +79,7 @@
     <Compile Include="Models\CommunityMaster.cs" />
     <Compile Include="Models\Enum.cs" />
     <Compile Include="Models\GridViewData.cs" />
+    <Compile Include="Models\LoginResponse.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MessageResponse.cs" />
     <Compile Include="Models\ApiResponse.cs" />

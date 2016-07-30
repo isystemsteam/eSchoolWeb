@@ -1,0 +1,37 @@
+﻿@model HSchool.Business.Models.ClassSections
+<div class="">
+    <div class="row">
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.ClassId, new { @class = "clsTextBox", @id = "" })
+            @Html.LabelFor(m => m.ClassId)
+            <i class="fa fa-exclamation-circle" style="display:none"></i>
+            <i class="fa fa-check-circle"></i>
+            <em class="error-msg">Error Message</em>
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.SectionId, new { @class = "clsTextBox", @id = "" })
+            @Html.LabelFor(m => m.SectionId)
+            <i class="fa fa-exclamation-circle" style="display:none"></i>
+            <i class="fa fa-check-circle"></i>
+            <em class="error-msg">Error Message</em>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.CheckBoxFor(m => m.IsActive, new { @class = "", @id = "" })
+            @Html.LabelFor(m => m.IsActive, new { @class = "" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.CheckBoxFor(m => m.IsDeleted, new { @class = "", @id = "" })
+            @Html.LabelFor(m => m.IsDeleted, new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            <input type="submit" value="Save" />
+        </div>
+        <div class="pull-left">
+            <input type="button" value="Cancel" class="btn-blue" onclick="" />
+        </div>
+    </div>
+</div>
