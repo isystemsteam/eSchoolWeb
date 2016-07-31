@@ -1,0 +1,16 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <ul id="menu-top" class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Home", "Index", "Home", new { }, new { })</li>
+        <li><a href="#">Manage</a></li>
+        <li>@Html.ActionLink("Application", "Index", "Application", new { }, new { })</li>
+        <li>@Html.ActionLink("Admin", "Index", "Admin", new { }, new { })</li>
+    </ul>
+}
+else
+{
+    <ul id="menu-top" class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Home", "Index", "Home", new { }, new { })</li>
+        <li>@Html.ActionLink("Application", "Index", "Application", new { }, new { })</li>
+    </ul>
+}
