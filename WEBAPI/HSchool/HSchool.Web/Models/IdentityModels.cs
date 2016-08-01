@@ -40,7 +40,7 @@ namespace HSchool.Web.Models
     /// <summary>
     /// 
     /// </summary>
-    public class SchoolDBInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    public class SchoolDBInitializer : DropCreateDatabaseIfModelChanges<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {

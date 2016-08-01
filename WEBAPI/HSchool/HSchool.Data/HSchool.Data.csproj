@@ -88,6 +88,8 @@
     <Compile Include="Models\StudentClass.cs" />
     <Compile Include="Models\StudentGuardianImage.cs" />
     <Compile Include="Models\StudentImage.cs" />
+    <Compile Include="Models\StudentSearch.cs" />
+    <Compile Include="Models\StudentSearchResponse.cs" />
     <Compile Include="Models\UserCredential.cs" />
     <Compile Include="Models\StudentGuardian.cs" />
     <Compile Include="Models\UserAccount.cs" />

@@ -33,5 +33,6 @@ namespace HSchool.Business.Models
         public List<StudentGuardian> StudentGuardians { get; set; }
 
         public List<Address> Addresses { get; set; }
+        
     }
 }

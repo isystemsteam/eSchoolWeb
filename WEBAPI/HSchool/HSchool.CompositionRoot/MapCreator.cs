@@ -30,6 +30,7 @@ using StudentClass = HSchool.Business.Models.StudentClass;
 using MotherLanguages = HSchool.Business.Models.MotherLanguages;
 using Address = HSchool.Business.Models.Address;
 using ApplicationFormResponse = HSchool.Business.Models.ApplicationFormResponse;
+using StudentSearch = HSchool.Business.Models.StudentSearch;
 
 namespace HSchool.CompositionRoot
 {
@@ -111,6 +112,9 @@ namespace HSchool.CompositionRoot
 
             mapper.CreateMap<ApplicationFormResponse, Data.Models.ApplicationFormResponse>();
             mapper.CreateMap<Data.Models.ApplicationFormResponse, ApplicationFormResponse>();
+
+            mapper.CreateMap<StudentSearch, Data.Models.StudentSearch>();
+            mapper.CreateMap<Data.Models.StudentSearch, StudentSearch>();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace HSchool.Business.Repository
     public interface IStudentRepository
     {
 
-        int? SaveApplication(ApplicationForm form);
+        List<StudentSearchResponse> SearchStudents(StudentSearch search);
 
         /// <summary>
         /// 

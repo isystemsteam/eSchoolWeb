@@ -8,30 +8,37 @@ using System.Text;
 using System.Threading.Tasks;
 using Insight.Database;
 
-
 using Student = HSchool.Business.Models.Student;
 using ApplicationForm = HSchool.Business.Models.ApplicationForm;
+using StudentSearch = HSchool.Business.Models.StudentSearch;
+using StudentSearchResponse = HSchool.Business.Models.StudentSearchResponse;
 
 namespace HSchool.Data.SqlRepository
 {
     public class StudentRepository : IStudentRepository
     {
-        public int? SaveApplication(ApplicationForm form)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns></returns>
+        public List<StudentSearchResponse> SearchStudents(StudentSearch search)
         {
-            LogHelper.Info(string.Format("StudentRepository.SaveApplication - Begin"));
+            LogHelper.Info(string.Format("StudentRepository.SearchStudents - Begin"));
             try
             {
                 using (var connection = SqlDataConnection.GetSqlConnection())
                 {
-                    var dStudent = Mapper.Map<ApplicationForm, Models.ApplicationForm>(form);
-                    var results = connection.Query<int>(Procedures.SaveApplication, dStudent);
-                    LogHelper.Info(string.Format("StudentRepository.SaveApplication - End"));
-                    return results != null ? results.First() : (int?)null;
+                    var dStudentSearch = Mapper.Map<StudentSearch, Models.StudentSearch>(search);
+                    var results = connection.Query<Models.StudentSearchResponse>(Procedures.SearchStudents, dStudentSearch);
+                    var dStudentResponse = Mapper.Map<IEnumerable<Models.StudentSearchResponse>, IEnumerable<StudentSearchResponse>>(results);
+                    LogHelper.Info(string.Format("StudentRepository.SearchStudents - End"));
+                    return dStudentResponse != null ? dStudentResponse.ToList() : new List<StudentSearchResponse>();
                 }
             }
             catch (Exception ex)
             {
-                LogHelper.Error(string.Format("StudentRepository.SaveApplication - Exception:{0}", ex.Message));
+                LogHelper.Error(string.Format("StudentRepository.SearchStudents - Exception:{0}", ex.Message));
                 throw ex;
             }
         }

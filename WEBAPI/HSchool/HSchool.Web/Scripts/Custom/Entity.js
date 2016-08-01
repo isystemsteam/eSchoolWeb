@@ -1,6 +1,6 @@
 ﻿var appService = {
-    editClass: 'EditClass',
-    viewClass: 'ViewClass',
+    editClass: 'admin/EditClass',
+    viewClass: 'admin/ViewClass',
     viewSection: 'ViewSection',
     editSection: 'EditSection',
     editRole: 'EditRole',

@@ -63,7 +63,7 @@ namespace HSchool.WebApi.Controllers
                 if (ModelState.IsValid)
                 {
                     //model.ApplicationType = 1;
-                    id = _studentRepository.SaveApplication(model);
+                    id = 1;
                 }
                 var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
                 LogHelper.Info(string.Format("ApplicationController.Application - End"));
@@ -95,7 +95,7 @@ namespace HSchool.WebApi.Controllers
                     if (AuthenticationHelper.CreateUser(model.Email, model.UserName, string.Empty, string.Empty, string.Empty))
                     {
                         //model.ApplicationType = 1;
-                        id = _studentRepository.SaveApplication(model);
+                        id = 1; //_studentRepository.SaveApplication(model);
                     }
                 }
                 var response = new MessageResponse<string>(id.HasValue ? id.ToString() : string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
@@ -108,6 +108,19 @@ namespace HSchool.WebApi.Controllers
                 var response = new MessageResponse<string>(string.Empty, WebConstants.StatusSuccess, (int)HttpStatusCode.OK, ex.Message);
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
+        }
+        #endregion
+
+        #region Private
+        private string CreateApplicationDetailsTag(string innerText, string id, string actionName, string title)
+        {
+            var tagBuilder = new TagBuilder("a");
+            tagBuilder.MergeAttribute("id", id);
+            tagBuilder.MergeAttribute("href", Url.Action(actionName, "Student", new { id }));
+            tagBuilder.MergeAttribute("class", "");
+            tagBuilder.MergeAttribute("title", title);
+            tagBuilder.InnerHtml = innerText;
+            return tagBuilder.ToString();
         }
         #endregion
     }

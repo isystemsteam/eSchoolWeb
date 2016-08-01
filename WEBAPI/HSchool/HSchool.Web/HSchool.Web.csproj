@@ -207,6 +207,7 @@
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Filters\CustomAuthenticationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -246,6 +247,7 @@
     <Content Include="Scripts\Application\Home.js" />
     <Content Include="Scripts\Application\LoginView.js" />
     <Content Include="Scripts\Application\OfficeForm.js" />
+    <Content Include="Scripts\Application\StudentAdmin.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -343,6 +345,8 @@
     <Content Include="Views\Shared\_Error.cshtml" />
     <Content Include="Views\Shared\_MenuView.cshtml" />
     <Content Include="Views\Admin\Management.cshtml" />
+    <Content Include="Views\Student\Index.cshtml" />
+    <Content Include="Views\Shared\_GridView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

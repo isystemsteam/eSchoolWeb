@@ -1,0 +1,26 @@
+﻿<script type="text/x-jsrender" id="gridViewTemplate">
+    <div class="">
+        <table class="table">
+            <thead>
+                <tr>
+                    {{for Columns}}
+                    <th class="">{{:ColumnName}}</th>
+                    {{/for}}
+                </tr>
+            </thead>
+
+            {{for Rows}}
+            <tr>
+                {{for Cells}}
+                <td class="">
+                    {{:Value}}
+                </td>
+                {{/for}}
+            </tr>
+            {{/for}}
+        </table>
+    </div>
+    <div class="pager">
+
+    </div>
+</script>

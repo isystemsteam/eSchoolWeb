@@ -77,5 +77,7 @@ namespace HSchool.Data
         public const string GetApplicationStatus = "GetApplicationStatus";
 
         public const string GetApplicationById = "GetApplicationById";
+
+        public const string SearchStudents = "SearchStudents";
     }
 }
