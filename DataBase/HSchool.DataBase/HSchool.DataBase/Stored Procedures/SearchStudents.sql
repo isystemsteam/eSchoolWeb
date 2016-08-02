@@ -1,4 +1,4 @@
-﻿ALTER PROCEDURE [dbo].[SearchStudents] --0,10,null,null,'P',null,null,null,null,null,null,null
+﻿CREATE PROCEDURE [dbo].[SearchStudents] --0,10,null,null,null,null,null,null,null,null,null,null
 (
 	@StartRow int,
 	@EndRow int,
