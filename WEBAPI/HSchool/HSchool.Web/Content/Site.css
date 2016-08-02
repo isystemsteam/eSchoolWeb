@@ -17,6 +17,8 @@ h1 {font-family: 'Lobster', cursive;font-size:36px; background-color:#16b0d4; co
 h2 {font-size:16px; color:#f1f4f5; font-family: 'Orbitron', sans-serif; font-weight:400; text-shadow:1px 1px 5px rgba(0,0,0,0.5); letter-spacing:2px; margin-top:20px; margin-bottom:10px }
 :focus{outline:0}
 .body-padding {padding-top:50px !important; padding-bottom:50px !important}
+.loadingProgress {background-color:#0a89a6; border-radius:3px; padding:20px; width:300px; opacity:0.7}
+#loadingMessage {position: absolute; top: 30px; left: 85px; font-size: 18px; letter-spacing:5px}
 
 
 .visiblecheck {margin:30px 0 10px 0}
@@ -52,10 +54,12 @@ a.navbar-brand, a.navbar-brand img{outline:none; text-decoration:none}
 
 /* USER SETTINGS DIV */
 .user-settings-wrapper {margin-top: 10px; color:#fff; font-size:16px; padding:0;}
-.user-settings-wrapper li {display: inline-block;}
+.user-settings-wrapper li {display: inline-block;padding:0 10px; }
+.user-settings-wrapper li:first-child {border-right:#fff 1px solid}
+.user-settings-wrapper li a, .user-settings-wrapper a {color:#fff; font-weight:500}
 .user-settings-wrapper img {height: 64px; width: 64px; border: 1px solid #000000;}
 #user-photo {margin-left:10px}
-#user-photo img {border:#476a7d 1px solid; border-radius:100px;)}
+#user-photo img {border:#fff 1px solid; border-radius:3px}
 
 /* Form */
 .custom-row {margin-bottom:5px}
@@ -119,6 +123,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#56c6ef', end
 .dropdown-menu>li>a:hover {background-color:#5eb9cc}
 
 /* CUSTOM CHEKBOX */
+.custom-check {position:relative}
 .custom-check [type="checkbox"]:not(:checked),[type="checkbox"]:checked {opacity:0}
 .custom-check [type="checkbox"] + label { margin-bottom:0; color:#2bd7ff; font-size:16px; letter-spacing:1px; font-weight:normal}
 .custom-check [type="checkbox"]:not(:checked) + label > span, [type="checkbox"]:checked + label > span {}
@@ -152,7 +157,8 @@ footer a, footer a:hover {color: #fff; text-decoration: none;}
 
 /* MEDIA QUERIES */
 @media only screen and (min-width: 768px) {
-    .body-wrapper {padding-bottom:50px; min-height:350px}
+    .body-wrapper {padding-bottom:50px; }
+    .right-panel {min-height:350px}
     .user-settings-wrapper {float: right}
     .login-wrapper {width:30%}
     .btn-expand-collapse {display:none}
