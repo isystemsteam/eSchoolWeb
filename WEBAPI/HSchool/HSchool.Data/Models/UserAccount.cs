@@ -67,5 +67,9 @@ namespace HSchool.Data.Models
         public byte[] UserImage { get; set; }
 
         public string CommunityInDetails { get; set; }
+
+        public int? UserProofType { get; set; }
+
+        public string UserProofNumber { get; set; }
     }
 }

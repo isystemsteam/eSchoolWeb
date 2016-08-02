@@ -208,6 +208,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\CustomAuthenticationAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -347,6 +348,9 @@
     <Content Include="Views\Admin\Management.cshtml" />
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Shared\_GridView.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\_CreateEditUser.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

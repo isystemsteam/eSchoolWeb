@@ -18,6 +18,7 @@ namespace HSchool.Business.Models
 
     public enum UserStatusEnum
     {
+        
         Registered = 1,
         Active = 2,
         InActive = 3,
@@ -54,5 +55,11 @@ namespace HSchool.Business.Models
     {
         Male = 1,
         FeMale = 2
+    }
+
+    public enum ProofTypes
+    {
+        BirthCertificate = 1,
+        Licence = 2
     }
 }

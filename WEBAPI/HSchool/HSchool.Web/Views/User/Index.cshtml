@@ -1,44 +1,33 @@
-﻿@model HSchool.Business.Models.StudentSearch
+﻿@model HSchool.Business.Models.UserSearch
 <div class="container">
     <div class="col-md-12 body-padding">
         <div class="form-group-expand-div admin-form clearfix">
-            <h2>Search Students</h2>
+            <h2>Search Users</h2>
             <div class="form-container">
                 <div class="row custom-row clearfix">
-                    <div class="col-md-12 custom-text">
-                        <label for="">Roll Number</label>
-                        @Html.TextBoxFor(m => m.RollNumber, new { @id = "txtRollNumber" })
+                    <div class="col-md-4 custom-text">
+                        <label for="">User Id</label>
+                        @Html.TextBoxFor(m => m.UserId, new { @id = "txtRollNumber" })
                         <i class="fa validationResult"></i>
                     </div>
-                </div>
-                <div class="row custom-row clearfix">
-                    <div class="col-md-6 custom-text">
+
+                    <div class="col-md-4 custom-text">
                         <label for="">First Name</label>
                         @Html.TextBoxFor(m => m.FirstName, new { @id = "txtFirstName", @class = "" })
                     </div>
-                    <div class="col-md-6 custom-text">
+                    <div class="col-md-4 custom-text">
                         <label for="">Last Name</label>
                         @Html.TextBoxFor(m => m.LastName, new { @id = "txtLastName", @class = "" })
                         <i class="fa validationResult"></i>
                     </div>
                 </div>
-
                 <div class="row custom-row clearfix">
-                    <div class="col-md-3 custom-text">
-                        @Html.DropDownListFor(m => m.ClassId, Model.ListClasses, new { @id = "ddlClass", @class = "selectpicker show-tick required" })
+                    <div class="col-md-6 custom-text">
+                        @Html.DropDownListFor(m => m.ApplicationRole, Model.ListRoles, new { @id = "ddlClass", @class = "selectpicker show-tick required" })
                         <i class="fa validationResult"></i>
                     </div>
-                    <div class="col-md-3 custom-text">
-                        @Html.DropDownListFor(m => m.SectionId, Model.ListSections, new { @id = "ddlSections", @class = "selectpicker show-tick required" })
-                        <i class="fa validationResult"></i>
-                    </div>
-                    <div class="col-md-3 custom-text">
+                    <div class="col-md-6 custom-text">
                         @Html.DropDownListFor(m => m.Gender, Model.ListGender, new { @id = "ddlGender", @class = "selectpicker show-tick required" })
-                        <i class="fa validationResult"></i>
-                    </div>
-                    <div class="col-md-3 custom-text">
-                        <label for="">DOB</label>
-                        @Html.TextBoxFor(m => m.DateOfBirth, new { @id = "txtDateOfBirth", @class = "datepicker" })
                         <i class="fa validationResult"></i>
                     </div>
                 </div>
@@ -57,3 +46,7 @@
     </div>
 </div>
 @Html.Partial("_GridView")
+
+
+
+

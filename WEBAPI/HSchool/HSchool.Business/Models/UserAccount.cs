@@ -22,7 +22,6 @@ namespace HSchool.Business.Models
         [DisplayName("Last Name")]
         public string LastName { get; set; }
 
-
         public string Password { get; set; }
 
         [DisplayName("Email")]
@@ -90,6 +89,7 @@ namespace HSchool.Business.Models
                 return CommonHelper.GetEnumText<Titles>(this.Title);
             }
         }
+
         [JsonProperty("userName")]
         public string UserName { get; set; }
 
@@ -123,7 +123,11 @@ namespace HSchool.Business.Models
 
         public byte[] UserImage { get; set; }
 
+        [DisplayName("Proof Type")]
+        public int? UserProofType { get; set; }
 
+        [DisplayName("Proof Number")]
+        public string UserProofNumber { get; set; }
 
     }
 }

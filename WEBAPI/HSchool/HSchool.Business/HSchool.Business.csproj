@@ -98,10 +98,12 @@
     <Compile Include="Models\StudentSearch.cs" />
     <Compile Include="Models\StudentSearchResponse.cs" />
     <Compile Include="Models\Transport.cs" />
+    <Compile Include="Models\UserCreateModel.cs" />
     <Compile Include="Models\UserCredential.cs" />
     <Compile Include="Models\StudentGuardian.cs" />
     <Compile Include="Models\UserAccount.cs" />
     <Compile Include="Models\UserRelationship.cs" />
+    <Compile Include="Models\UserSearch.cs" />
     <Compile Include="Models\UserSecurity.cs" />
     <Compile Include="Models\UserStatus.cs" />
     <Compile Include="Models\WebResponse.cs" />

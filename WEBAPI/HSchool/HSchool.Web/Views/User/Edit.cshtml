@@ -1,0 +1,15 @@
+﻿@model HSchool.Business.Models.UserCreateModel
+<div class="col-md-12 container">
+    @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @Id = "formUser", @name = "formUser" }))
+    {
+        <h2>Create Internal User</h2>
+        @Html.Partial("_CreateEditUser", Model)
+        <div class="row custom-row clearfix">
+            <div class="col-md-12 custom-text">
+                <input type="button" value="Save" class="btn-blue">
+            </div>
+        </div>
+    }
+</div>
+
+
