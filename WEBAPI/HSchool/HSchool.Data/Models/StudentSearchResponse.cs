@@ -27,5 +27,11 @@ namespace HSchool.Data.Models
         public string IsTransportRequired { get; set; }
 
         public bool LoginEnabled { get; set; }
+
+        public int? Gender { get; set; }
+
+        public DateTime? DateOfBirth { get; set; }
+
+        public string BloodGroup { get; set; }
     }
 }

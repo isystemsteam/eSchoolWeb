@@ -26,10 +26,31 @@ namespace HSchool.Business.Models
 
         public DateTime? DOB { get; set; }
 
+        public int? Gender { get; set; }
+
+        public string GenderText
+        {
+            get
+            {
+                return this.Gender.HasValue ? Enum.GetName(typeof(Gender), Gender.Value) : string.Empty;
+            }
+        }
+
         public string IsTransportRequired { get; set; }
 
         public bool LoginEnabled { get; set; }
 
-        
+        public DateTime? DateOfBirth { get; set; }
+
+        public string DOBString
+        {
+            get
+            {
+                return this.DateOfBirth.HasValue ? this.DateOfBirth.Value.ToString("dd/MM/yyyy") : string.Empty;
+            }
+        }
+
+        public string BloodGroup { get; set; }
+
     }
 }

@@ -67,7 +67,8 @@ namespace HSchool.Web.Controllers
                         new GridColumn { ColumnName = "Class" },
                         new GridColumn { ColumnName = "Section" },
                         new GridColumn { ColumnName = "Transport Required" },
-                        new GridColumn { ColumnName = "Guardian Name" }                        
+                        new GridColumn { ColumnName = "Guardian Name" },
+                        new GridColumn { ColumnName = "Blood Group" }
                     },
                     Rows = new List<GridViewRow> { }
                 };
@@ -77,15 +78,16 @@ namespace HSchool.Web.Controllers
                 {
                     var cells = new List<GridViewCell>();
                     string id = Convert.ToString(item.StudentId);
-                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag(id, item.RollNumber, "Details", "View Student Details") });
-                    cells.Add(new GridViewCell { Value = Convert.ToString(item.RollNumber) });
+                    cells.Add(new GridViewCell { Value = CreateApplicationDetailsTag(id, item.RollNumber, "Details", "View Student Details") });                    
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.FirstName) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.LastName) });
-                    cells.Add(new GridViewCell { Value = Convert.ToString(item.ClassName) });
-                    cells.Add(new GridViewCell { Value = Convert.ToString(item.ClassName) });
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.GenderText) });
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.DOBString) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.ClassName) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.SectionName) });
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.IsTransportRequired) });
                     cells.Add(new GridViewCell { Value = Convert.ToString(item.GuardianName) });
+                    cells.Add(new GridViewCell { Value = Convert.ToString(item.BloodGroup) });
                     rows.Add(new GridViewRow { Cells = cells });
                 }
                 response.Rows = rows;

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[SearchStudents] --0,10,null,null,null,null,null,null,null,null,null,null
+﻿ALTER PROCEDURE [dbo].[SearchStudents] --0,10,null,null,'P',null,null,null,null,null,null,null
 (
 	@StartRow int,
 	@EndRow int,
@@ -24,6 +24,7 @@ BEGIN
 				UA.UserName,
 				UA.DateOfBirth,
 				UA.BloodGroup,
+				UA.Gender,
 				ST.StudentId,
 				ST.IsTransportRequired,
 				ST.LoginEnabled,
@@ -36,12 +37,12 @@ BEGIN
 				JOIN dbo.StudentClass SC ON ST.StudentId=SC.StudentId 
 				JOIN dbo.Classes CL ON CL.ClassId=SC.ClassId
 				LEFT OUTER JOIN dbo.Sections SS ON SS.SectionId =SC.SectionId
-			WHERE UA.IsDeleted=0 '
+			WHERE UA.IsDeleted IS NULL '
 		
 		-- APPLICATION ID
 			IF (@ClassId IS NOT NULL OR @ClassId !=0)
 				BEGIN
-					set @querystring=@querystring+' and ST.ClassId = '+CAST(@ClassId AS NVARCHAR(10))
+					set @querystring=@querystring+' and SC.ClassId = '+CAST(@ClassId AS NVARCHAR(10))
 				END
 
 			IF (@SectionId IS NOT NULL OR @SectionId !=0)
@@ -56,21 +57,21 @@ BEGIN
 
 			IF (@RollNumber IS NOT NULL OR @RollNumber !='')
 				BEGIN
-					set @querystring=@querystring+' and ST.RollNumber = '''+@RollNumber+''
+					set @querystring=@querystring+' and ST.RollNumber = '''+@RollNumber+''''
 				END
 
 			IF (@FirstName IS NOT NULL OR @FirstName !='')
 				BEGIN
-					set @querystring=@querystring+' and UA.FirstName = '''+@FirstName+''
+					set @querystring=@querystring+' and UA.FirstName like ''%'+@FirstName+'%'''
 				END
 
 			IF (@LastName IS NOT NULL OR @LastName !='')
 				BEGIN
-					set @querystring=@querystring+' and UA.LastName = '''+@LastName+''
+					set @querystring=@querystring+' and UA.LastName like ''%'+@LastName+'%'''
 				END
-
+			SET @querystring+=' '
 			set @querystring+='; select * from #TempStudents  where RowNum > '+str(@StartRow)+' AND RowNum <='+str(@EndRow)+' order by CreatedDate DESC; delete #TempStudents ';
-		
+		print @querystring
 			EXECUTE sp_executesql @querystring
 	END TRY
 	BEGIN CATCH

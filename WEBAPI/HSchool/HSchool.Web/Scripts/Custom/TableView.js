@@ -9,6 +9,7 @@ $.fn.GridView = function (options) {
         postData: null,
         dataType: null,
         isLocalData: false,
+        method:'GET'
     }, options);
 
     return this.each(function () {        
@@ -38,7 +39,7 @@ $.fn.GridView = function (options) {
             $.ajax({
                 url: settings.url,
                 data: settings.postData,
-                type: 'POST',
+                type: settings.method,
                 dataType: settings.dataType,
                 success: _bindTemplate,
                 error: _errorBind

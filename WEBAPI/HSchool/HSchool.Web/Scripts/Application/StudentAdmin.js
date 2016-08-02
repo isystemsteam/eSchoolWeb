@@ -20,7 +20,7 @@ var studentAdmin = {
         };
 
         $("#divSearchResult").GridView({
-            data: { Columns: [{ Name: "Name" }, { Name: "Age" }], Rows: rows },
+            data: { Columns: [{ Name: "Name" }, { Name: "Age" }], Rows: [] },
             postData: searchRequest,
             templateName: "gridViewTemplate",
             dataType: "json",

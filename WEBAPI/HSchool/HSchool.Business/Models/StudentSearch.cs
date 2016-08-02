@@ -32,6 +32,8 @@ namespace HSchool.Business.Models
 
         public DateTime? DateOfBirth { get; set; }
 
+        public int? AcademicYear { get; set; }
+
         #region DropDown Properties
         public List<SelectListItem> ListClasses { get; set; }
 

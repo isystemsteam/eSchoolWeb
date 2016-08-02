@@ -29,5 +29,7 @@ namespace HSchool.Data.Models
         public string Gender { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
+
+        public int? AcademicYear { get; set; }
     }
 }
