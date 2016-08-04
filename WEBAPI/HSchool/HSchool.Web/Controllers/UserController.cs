@@ -22,6 +22,7 @@ namespace HSchool.Web.Controllers
         private readonly IStudentRepository _studentRepository;
         private readonly IApplicationRepository _applicationRepository;
         private ApplicationUserManager _userManager;
+        private readonly IUserRepository _userRepository;
         #endregion
 
         #region Properties
@@ -46,11 +47,12 @@ namespace HSchool.Web.Controllers
         /// <param name="adminRepository"></param>
         /// <param name="studentRepository"></param>
         /// <param name="applicationRepository"></param>
-        public UserController(IAdminRepository adminRepository, IStudentRepository studentRepository, IApplicationRepository applicationRepository)
+        public UserController(IAdminRepository adminRepository, IStudentRepository studentRepository, IApplicationRepository applicationRepository, IUserRepository userRepository)
         {
             _adminRepository = adminRepository;
             _studentRepository = studentRepository;
             _applicationRepository = applicationRepository;
+            _userRepository = userRepository;
         }
         #endregion
 
@@ -66,6 +68,7 @@ namespace HSchool.Web.Controllers
             () => { model.ListRoles = CommonHelper.ConvertListToSelectList<ApplicationRole>(_adminRepository.GetAllRoles(false), "Roles", "RoleId", "RoleName"); },
             () => { model.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender"); }
                 );
+
             }
             catch (Exception ex)
             {
@@ -94,6 +97,7 @@ namespace HSchool.Web.Controllers
             () => { model.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles"); },
             () => { model.ListProofTypes = CommonHelper.ConvertEnumToListItem<ProofTypes>("Proof Type"); }
                 );
+                model.Addresses = new List<Address> { new Address() };
                 model.IsEditable = true;
             }
             catch (Exception ex)
@@ -101,6 +105,31 @@ namespace HSchool.Web.Controllers
                 LogHelper.Error(string.Format("UserController.Edit - Exception.{0}", ex.Message));
             }
             LogHelper.Info(string.Format("UserController.Edit - End. Id:{0}", id));
+            return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult Edit(UserCreateModel model)
+        {
+            LogHelper.Info(string.Format("UserController.Edit[HTTPPOST] - Begin."));
+            try
+            {
+                if (model.UserId == 0 && model.LoginEnabled)
+                {
+
+                }
+                var id = _userRepository.SaveUser(model);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("UserController.Edit[HTTPPOST] - Exception.{0}", ex.Message));
+            }
+            LogHelper.Info(string.Format("UserController.Edit[HTTPPOST] - End."));
             return View(model);
         }
         #endregion

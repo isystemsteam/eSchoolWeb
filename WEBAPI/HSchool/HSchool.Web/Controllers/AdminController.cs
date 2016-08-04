@@ -17,12 +17,14 @@ namespace HSchool.Web.Controllers
 
         #region Fields
         private readonly IAdminRepository _adminRepository;
+        private readonly IRolePrivilegeRepository _rolePrivilegeRepository;
         #endregion
 
         #region Ctor
-        public AdminController(IAdminRepository adminRepository)
+        public AdminController(IAdminRepository adminRepository, IRolePrivilegeRepository rolePrivilegeRepository)
         {
             _adminRepository = adminRepository;
+            _rolePrivilegeRepository = rolePrivilegeRepository;
         }
         #endregion
 
@@ -332,32 +334,33 @@ namespace HSchool.Web.Controllers
         /// </summary>
         /// <param name="moduleId"></param>
         /// <returns></returns>
-        public JsonResult PrivilegesForModule(int moduleId)
+        public JsonResult RolePrivilegesForModule(int roleId)
         {
-            LogHelper.Info(string.Format("AdminController.PrivilegesForModule - Begin"));
+            LogHelper.Info(string.Format("AdminController.RolePrivilegesForModule - Begin"));
             try
             {
                 ModuleRolePrivilege modulePrivileges = new ModuleRolePrivilege();
                 var privileges = _adminRepository.GetApplicationPrivileges();
-                var rolePrivileges = _adminRepository.GetRolePrivilegesByModuleId(moduleId);
+                var rolePrivileges = _rolePrivilegeRepository.GetModulePrivilegesByRoleId(roleId);
                 modulePrivileges.Roles = _adminRepository.GetAllRoles(false);
                 modulePrivileges.Privileges = privileges;
-                foreach (ApplicationRole roleItem in modulePrivileges.Roles)
+                modulePrivileges.Modules = _adminRepository.GetAllModules();
+                foreach (ApplicationModule moduleItem in modulePrivileges.Modules)
                 {
-                    roleItem.Privileges = new List<ApplicationPrivilege>();
+                    moduleItem.Privileges = new List<ApplicationPrivilege>();
                     foreach (var pItem in privileges)
                     {
-                        roleItem.Privileges.Add(new ApplicationPrivilege { PrivilegeId = pItem.PrivilegeId, PrivilegeName = pItem.PrivilegeName });
+                        moduleItem.Privileges.Add(new ApplicationPrivilege { PrivilegeId = pItem.PrivilegeId, PrivilegeName = pItem.PrivilegeName });
                     }
 
                     if (privileges != null && rolePrivileges != null)
                     {
-                        var rolePrivilege = rolePrivileges.Where(rp => rp.RoleId == roleItem.RoleId).FirstOrDefault();
+                        var rolePrivilege = rolePrivileges.Where(rp => rp.ModuleId == moduleItem.ModuleId).FirstOrDefault();
                         if (rolePrivilege != null)
                         {
                             foreach (var privilegeId in rolePrivilege.PrivilegeCollection)
                             {
-                                var item = roleItem.Privileges.Where(p => p.PrivilegeId == privilegeId).FirstOrDefault();
+                                var item = moduleItem.Privileges.Where(p => p.PrivilegeId == privilegeId).FirstOrDefault();
                                 if (item != null)
                                 {
                                     item.IsChecked = true;
@@ -368,13 +371,13 @@ namespace HSchool.Web.Controllers
                 }
 
                 var response = new MessageResponse<ModuleRolePrivilege>(modulePrivileges, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
-                LogHelper.Info(string.Format("AdminController.PrivilegesForModule - End"));
+                LogHelper.Info(string.Format("AdminController.RolePrivilegesForModule - End"));
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 var response = new MessageResponse(ApiConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
-                LogHelper.Error(string.Format("AdminController.EditPrivileges - Exception:{0}", ex.Message));
+                LogHelper.Error(string.Format("AdminController.RolePrivilegesForModule - Exception:{0}", ex.Message));
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
         }

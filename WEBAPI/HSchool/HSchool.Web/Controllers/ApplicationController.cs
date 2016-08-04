@@ -62,7 +62,7 @@ namespace HSchool.Web.Controllers
         {
             _adminRepository = adminRepository;
             _studentRepository = studentRepository;
-            _applicationRepository = applicationRepository;            
+            _applicationRepository = applicationRepository;
         }
         #endregion
 
@@ -243,7 +243,7 @@ namespace HSchool.Web.Controllers
                 return Json(response, JsonRequestBehavior.AllowGet);
             }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -432,12 +432,14 @@ namespace HSchool.Web.Controllers
                 }
                 if (isEditable)
                 {
-                    applicationForm.FormClasses = _adminRepository.GetAllClasses(false);
-                    applicationForm.Communities = _adminRepository.GetCommunities();
-                    applicationForm.RelationShips = _adminRepository.GetRelationships();
-                    applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles");
-                    applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender");
-                    applicationForm.Languages = _adminRepository.GetMotherLanguages();
+                    System.Threading.Tasks.Parallel.Invoke(
+                        () => { applicationForm.FormClasses = _adminRepository.GetAllClasses(false); },
+                        () => { applicationForm.Communities = _adminRepository.GetCommunities(); },
+                        () => { applicationForm.RelationShips = _adminRepository.GetRelationships(); },
+                        () => { applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles"); },
+                        () => { applicationForm.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender"); },
+                        () => { applicationForm.Languages = _adminRepository.GetMotherLanguages(); }
+                    );
                 }
                 return applicationForm;
             }

@@ -79,5 +79,9 @@ namespace HSchool.Data
         public const string GetApplicationById = "GetApplicationById";
 
         public const string SearchStudents = "SearchStudents";
+
+        #region Privilege
+        public const string GetModulePrivilegesByRoleId = "GetModulePrivilegesByRoleId";
+        #endregion
     }
 }

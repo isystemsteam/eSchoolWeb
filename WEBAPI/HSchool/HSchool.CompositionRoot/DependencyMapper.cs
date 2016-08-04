@@ -19,6 +19,7 @@ namespace HSchool.CompositionRoot
             Bind<IAdminRepository>().To<AdminRepository>();
             Bind<IStudentRepository>().To<StudentRepository>();
             Bind<IApplicationRepository>().To<ApplicationRepository>();
+            Bind<IRolePrivilegeRepository>().To<RolePrivilegeRepository>();
         }
 
         //public static IUnityContainer BuildUnityContainer()

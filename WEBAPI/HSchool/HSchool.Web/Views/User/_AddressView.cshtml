@@ -1,0 +1,48 @@
+﻿@model HSchool.Business.Models.UserCreateModel
+@{string disableControl = Model.IsEditable ? string.Empty : " disableField";}
+<h2>Address for Communication</h2>
+<div class="form-container">
+    @if (Model.Addresses.Count > 0)
+    {
+        for (int aCount = 0; aCount < Model.Addresses.Count; aCount++)
+        {
+            <div class="row custom-row clearfix">
+                <div class="col-md-6 custom-text">
+                    @Html.LabelFor(m => m.Addresses[aCount].DoorNo)
+                    @Html.TextBoxFor(m => m.Addresses[aCount].DoorNo, new { @id = "", @class = "required" + disableControl, @maxlength = "10" })
+                    <i class="fa validationResult"></i>
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-6 custom-text">
+                    @Html.LabelFor(m => m.Addresses[aCount].AddressLine1)
+                    @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine1, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
+                    <i class="fa validationResult"></i>
+                </div>
+                <div class="col-md-6 custom-text">
+                    @Html.LabelFor(m => m.Addresses[aCount].AddressLine2)
+                    @Html.TextBoxFor(m => m.Addresses[aCount].AddressLine2, new { @id = "", @class = "" + disableControl, @maxlength = "120" })
+                    <i class="fa validationResult"></i>
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-4 custom-text">
+                    @Html.LabelFor(m => m.Addresses[aCount].District)
+                    @Html.TextBoxFor(m => m.Addresses[aCount].District, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
+                    <i class="fa validationResult"></i>
+                </div>
+                <div class="col-md-4 custom-text">
+                    @Html.LabelFor(m => m.Addresses[aCount].Taluk)
+                    @Html.TextBoxFor(m => m.Addresses[aCount].Taluk, new { @id = "", @class = "required" + disableControl, @maxlength = "120" })
+                    <i class="fa validationResult"></i>
+                </div>
+                <div class="col-md-4 custom-text">
+                    @Html.LabelFor(m => m.Addresses[aCount].PinCode)
+                    @Html.TextBoxFor(m => m.Addresses[aCount].PinCode, new { @id = "", @class = "required" + disableControl, @maxlength = "6" })
+                    <i class="fa validationResult"></i>
+                </div>
+            </div>
+        }
+    }
+</div>
+

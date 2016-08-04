@@ -310,9 +310,9 @@ var adminView = {
                 var htmlOutput = template.render(data);
                 $("#divRolesPrivilegesContainer").html(htmlOutput);
             };
-            $("#hdnModuleId").val(moduleId);
+            //$("#hdnModuleId").val(moduleId);
             var parameters = [];
-            parameters.push(new ajaxParam("moduleId", moduleId));
+            parameters.push(new ajaxParam("roleId", roleId));
             $.fn.appCommon.ajax.getForm(appService.rolesPrivilegeForModule, parameters, successcallback, null);
         },
         saveRolePrivileges: function () {

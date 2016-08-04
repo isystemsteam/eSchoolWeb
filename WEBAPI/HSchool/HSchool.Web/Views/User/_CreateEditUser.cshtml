@@ -116,6 +116,13 @@
         </div>
     </div>
     <div class="row custom-row clearfix">
+        <div class="col-md-6 custom-text">
+            @Html.LabelFor(m => m.MobileNumber)
+            @Html.TextBoxFor(m => m.MobileNumber, new { @Id = "txtMobileNumber", @class = "required" + disableControl, @maxlength = "12" })
+            <i class="fa validationResult"></i>
+        </div>
+    </div>
+    <div class="row custom-row clearfix">
         <div class="col-md-12 custom-text">
             <input type="file" style="display: block;">
         </div>

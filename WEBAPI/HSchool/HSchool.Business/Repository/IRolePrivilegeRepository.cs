@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace HSchool.Business.Repository
 {
-    public interface IUserRepository
+    public interface IRolePrivilegeRepository
     {
-        UserAccount GetUserDetailsById(int userId);
-
-        int SaveUser(UserCreateModel userInfo);
+        List<RolePrivilege> GetModulePrivilegesByRoleId(int roleId);
     }
 }

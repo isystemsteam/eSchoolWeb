@@ -7,15 +7,15 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Insight.Database;
-
 using Models = HSchool.Business.Models;
-using UserCredential = HSchool.Business.Models.UserCredential;
-using UserAccount = HSchool.Business.Models.UserAccount;
 using AutoMapper;
 using System.Security.Cryptography;
 using HSchool.Data;
+
+using UserCredential = HSchool.Business.Models.UserCredential;
+using UserAccount = HSchool.Business.Models.UserAccount;
+using UserCreateModel = HSchool.Business.Models.UserCreateModel;
 
 namespace HSchool.Data.SqlRepository
 {
@@ -29,14 +29,14 @@ namespace HSchool.Data.SqlRepository
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
-        public int InsertUpdateUser(UserAccount userInfo)
+        public int SaveUser(UserCreateModel userInfo)
         {
             LogHelper.Info(string.Format("UserRepository.InsertUpdateUser - Begin."));
             int userId = 0;
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
-                Models.UserAccount dUserInfo = Mapper.Map<UserAccount, Models.UserAccount>(userInfo);
+                Models.UserAccount dUserInfo = Mapper.Map<UserCreateModel, Models.UserCreateModel>(userInfo);
                 var results = connection.Query<int>(Procedures.SaveUserInformation, dUserInfo);
                 userId = results.Any() ? results.FirstOrDefault() : 0;
             }

@@ -140,6 +140,7 @@
     <Build Include="Stored Procedures\UpdateUserLoginFlag.sql" />
     <Build Include="Stored Procedures\UpdateStudentGuardian.sql" />
     <Build Include="Stored Procedures\SearchStudents.sql" />
+    <Build Include="Stored Procedures\GetModulePrivilegesByRoleId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="HSchool.DataBase.refactorlog" />
