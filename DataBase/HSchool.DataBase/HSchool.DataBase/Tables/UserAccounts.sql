@@ -18,6 +18,8 @@
 	MobileNumber varchar(15),
 	UserStatus int foreign key references dbo.UserStatus (StatusId),
 	MotherLanguage int foreign key references dbo.MotherLanguages (LanguageId),
+	ProofType int null,
+	ProofNumber nvarchar(25) null,
 	IsVerified bit,
 	IsLocked bit,
 	SMSEnabled bit,

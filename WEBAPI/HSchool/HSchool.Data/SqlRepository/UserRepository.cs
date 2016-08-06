@@ -21,8 +21,7 @@ namespace HSchool.Data.SqlRepository
 {
     public class UserRepository : IUserRepository
     {
-        #region Public Methods      
-       
+        #region Public Methods
 
         /// <summary>
         /// To save user information
@@ -31,26 +30,26 @@ namespace HSchool.Data.SqlRepository
         /// <returns></returns>
         public int SaveUser(UserCreateModel userInfo)
         {
-            LogHelper.Info(string.Format("UserRepository.InsertUpdateUser - Begin."));
+            LogHelper.Info(string.Format("UserRepository.SaveUser - Begin."));
             int userId = 0;
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
                 Models.UserAccount dUserInfo = Mapper.Map<UserCreateModel, Models.UserCreateModel>(userInfo);
-                var results = connection.Query<int>(Procedures.SaveUserInformation, dUserInfo);
+                var results = connection.Query<int>(Procedures.SaveInternalUser, dUserInfo);
                 userId = results.Any() ? results.FirstOrDefault() : 0;
             }
             catch (SqlException ex)
             {
-                LogHelper.Error(string.Format("UserRepository.InsertUpdateUser - Exception:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("UserRepository.SaveUser - Exception:{0}", ex.Message), ex);
                 throw;
             }
             catch (Exception ex)
             {
-                LogHelper.Error(string.Format("UserRepository.InsertUpdateUser - SqlException:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("UserRepository.SaveUser - SqlException:{0}", ex.Message), ex);
                 throw;
             }
-            LogHelper.Info(string.Format("UserRepository.InsertUpdateUser - End. UserId:{0}", userId));
+            LogHelper.Info(string.Format("UserRepository.SaveUser - End. UserId:{0}", userId));
             return userId;
         }
 

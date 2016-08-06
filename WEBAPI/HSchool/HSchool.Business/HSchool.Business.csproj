@@ -99,6 +99,7 @@
     <Compile Include="Models\StudentImage.cs" />
     <Compile Include="Models\StudentSearch.cs" />
     <Compile Include="Models\StudentSearchResponse.cs" />
+    <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Transport.cs" />
     <Compile Include="Models\UserCreateModel.cs" />
     <Compile Include="Models\UserCredential.cs" />

@@ -169,7 +169,7 @@ namespace HSchool.Data.SqlRepository
         /// <returns></returns>
         public List<Classes> GetAllClasses(bool? visibleOnly)
         {
-            LogHelper.Info(string.Format("AdminRepository.SaveClass - Begin"));
+            LogHelper.Info(string.Format("AdminRepository.GetAllClasses - Begin"));
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
@@ -179,12 +179,12 @@ namespace HSchool.Data.SqlRepository
             }
             catch (SqlException ex)
             {
-                LogHelper.Error(string.Format("AdminRepository.SaveClass - SqlException:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("AdminRepository.GetAllClasses - SqlException:{0}", ex.Message), ex);
                 throw;
             }
             catch (Exception ex)
             {
-                LogHelper.Error(string.Format("AdminRepository.SaveClass - Exception:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("AdminRepository.GetAllClasses - Exception:{0}", ex.Message), ex);
                 throw;
             }
         }

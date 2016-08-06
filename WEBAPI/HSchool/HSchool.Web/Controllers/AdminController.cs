@@ -18,13 +18,15 @@ namespace HSchool.Web.Controllers
         #region Fields
         private readonly IAdminRepository _adminRepository;
         private readonly IRolePrivilegeRepository _rolePrivilegeRepository;
+        public readonly IClassRepository _classRepository;
         #endregion
 
         #region Ctor
-        public AdminController(IAdminRepository adminRepository, IRolePrivilegeRepository rolePrivilegeRepository)
+        public AdminController(IAdminRepository adminRepository, IRolePrivilegeRepository rolePrivilegeRepository, IClassRepository classRepository)
         {
             _adminRepository = adminRepository;
             _rolePrivilegeRepository = rolePrivilegeRepository;
+            _classRepository = classRepository;
         }
         #endregion
 
@@ -232,6 +234,71 @@ namespace HSchool.Web.Controllers
                 var response = new MessageResponse<string>(null, ApiConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, ex.Message);
                 return Json(null, JsonRequestBehavior.AllowGet);
             }
+        }
+        #endregion
+
+        #region Subjects
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ViewSubject()
+        {
+            LogHelper.Info(string.Format("AdminController.ViewSubject - Begin"));
+            var subjects = new List<Subject>();
+            try
+            {
+                subjects = _classRepository.GetSubjects();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("AdminController.ViewSubject - Exception:{0}", ex.Message));
+                throw;
+            }
+            LogHelper.Info(string.Format("AdminController.ViewSubject - End"));
+            return PartialView("_ViewSubject", subjects);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditSubject(int? id)
+        {
+            LogHelper.Info(string.Format("AdminController.EditSubject - Begin"));
+            var subject = new Subject();
+            if (id != 0)
+            {
+                subject = _classRepository.GetSubjectById(id);
+            }
+            LogHelper.Info(string.Format("AdminController.EditSubject - End"));
+            return PartialView("_EditSubject", subject);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSubject(Subject model)
+        {
+            LogHelper.Info(string.Format("AdminController.EditSubject [POST] - Begin"));
+            var response = new Response();
+            try
+            {
+                _classRepository.SaveSubject(model);
+                response.IsSuccess = true;
+                LogHelper.Info(string.Format("AdminController.EditSubject [POST] - End"));
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminController.EditSubject [POST] - Exception:{0}", ex.Message), ex);
+                response = new Response { IsSuccess = false, Message = ex.Message, StatusCode = 503 };
+            }
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

@@ -34,6 +34,7 @@ using StudentSearch = HSchool.Business.Models.StudentSearch;
 using StudentSearchResponse = HSchool.Business.Models.StudentSearchResponse;
 using UserCreateModel = HSchool.Business.Models.UserCreateModel;
 using ClassSectionTeacher = HSchool.Business.Models.ClassSectionTeacher;
+using Subject = HSchool.Business.Models.Subject;
 using ClassSubject = HSchool.Business.Models.ClassSubject;
 
 namespace HSchool.CompositionRoot
@@ -130,7 +131,10 @@ namespace HSchool.CompositionRoot
             mapper.CreateMap<Data.Models.ClassSectionTeacher, ClassSectionTeacher>();
 
             mapper.CreateMap<ClassSubject, Data.Models.ClassSubject>();
-            mapper.CreateMap<Data.Models.ClassSubject, ClassSubject>();  
+            mapper.CreateMap<Data.Models.ClassSubject, ClassSubject>();
+
+            mapper.CreateMap<Subject, Data.Models.Subject>();
+            mapper.CreateMap<Data.Models.Subject, Subject>();
         }
     }
 }
