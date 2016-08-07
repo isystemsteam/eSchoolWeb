@@ -24,29 +24,33 @@
             </tr>
         </thead>
         <tbody>
-            {{for Instance.Modules}}
+            {{for Instance.Roles}}
             <tr class="trRolesActive">
                 <td>
-                    {{:ModuleName}} <!--<input type="hidden" class="hdnRoleId" value="{{:RoleId}}" />-->
+                    {{:RoleName}} <!--<input type="hidden" class="hdnRoleId" value="{{:RoleId}}" />-->
                 </td>
-                {{for Privileges ~moduleId=ModuleId}}
+                {{for Privileges ~roleId=RoleId}}
                 {{if IsChecked}}
                 <td class="clsEmpty">
-                    <div class="custom-check">
-                        <div class="cstom-check-margin">
-                            <input type="checkbox" checked="checked" name="{{:~moduleId}}myonoffswitch{{:PrivilegeId}}" id="{{:~moduleId}}myonoffswitch{{:PrivilegeId}}" />
-                            <label for="{{:~moduleId}}myonoffswitch{{:PrivilegeId}}"><span><span><i class="fa fa-check"></i></span></span></label>
-                        </div>
+                    <div class="onoffswitch">
+                        <!--<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>-->
+                        <input type="checkbox" privilegeid="{{:PrivilegeId}}" id="{{:~roleId}}myonoffswitch{{:PrivilegeId}}" checked="checked" class="onoffswitch-checkbox chkRoleEnabled" />
+                        <label class="onoffswitch-label" for="{{:~roleId}}myonoffswitch{{:PrivilegeId}}">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
                     </div>
                     <!---->
                 </td>
                 {{else}}
                 <td class="clsEmpty">
-                    <div class="custom-check">
-                        <div class="cstom-check-margin">
-                            <input type="checkbox" name="{{:~moduleId}}myonoffswitch{{:PrivilegeId}}" id="{{:~moduleId}}myonoffswitch{{:PrivilegeId}}" />
-                            <label for="{{:~moduleId}}myonoffswitch{{:PrivilegeId}}"><span><span><i class="fa fa-check"></i></span></span></label>
-                        </div>
+                    <div class="onoffswitch">
+                        <!--<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>-->
+                        <input type="checkbox" privilegeid="{{:PrivilegeId}}" id="{{:~roleId}}myonoffswitch{{:PrivilegeId}}" class="onoffswitch-checkbox chkRoleEnabled" />
+                        <label class="onoffswitch-label" for="{{:~roleId}}myonoffswitch{{:PrivilegeId}}">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
                     </div>
                 </td>
                 {{/if}}

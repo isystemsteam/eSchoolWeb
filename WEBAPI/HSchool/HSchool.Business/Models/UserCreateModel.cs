@@ -11,10 +11,6 @@ namespace HSchool.Business.Models
     {
         public bool IsEditable { get; set; }
 
-        public bool LoginEnabled { get; set; }
-
-        public List<Address> Addresses { get; set; }
-
         public List<SelectListItem> ListTitles { get; set; }
 
         public List<SelectListItem> ListGender { get; set; }

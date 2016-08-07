@@ -1,0 +1,85 @@
+﻿@model HSchool.Business.Models.RolePrivilegeForm
+
+    <h2>Roles & Privilege</h2>
+
+    <div class="form-container clearfix">
+    <div class="custom-text">
+        @Html.TextBox("txtModuleName", string.Empty, new { @class = "clsTextBox", @id = "txtModuleName", @onclick = "adminView.rolesPrivileges.roleBoxFocus()" })
+        @Html.Hidden("hdnModuleId", new { @id = "hdnModuleId" })
+        <div class="divModulesContainer" style="display:none;position:absolute">
+            @if (Model != null && Model.Modules.Count > 0)
+            {
+                <ul>
+                    @foreach (var item in Model.Modules)
+                    {
+                        <li moduleid="@item.ModuleId" class="clsAppModuleItem">@(item.ModuleName)</li>
+                    }
+                </ul>
+            }
+        </div>
+        @Html.Label("lblModuleName", "Module Name")
+        <i class="fa fa-exclamation-circle" style="display:none"></i>
+        <i class="fa fa-check-circle"></i>
+        <em class="error-msg">Error Message</em>
+    </div>
+
+    <div id="divRolesPrivilegesContainer">
+    </div>
+</div>
+
+<div class="pull-right">
+    <input type="button" value="Save" id="btnRolePrivilege" onclick="adminView.rolesPrivileges.saveRolePrivileges()" class="btn-blue" />
+</div>
+
+
+<script id="tempRolesPrivilege" type="text/x-jsrender">
+    <table class="table table-striped table-hover">
+        <thead class="thead-default">
+            <tr>
+                <th>Roles</th>
+                {{for Instance.Privileges}}
+                <th>{{:PrivilegeName}}</th>
+                {{/for}}
+            </tr>
+        </thead>
+        <tbody>
+            {{for Instance.Roles}}
+            <tr class="trRolesActive">
+                <td>
+                {{:RoleName}} <!--<input type="hidden" class="hdnRoleId" value="{{:RoleId}}" />--> </td>
+                {{for Privileges ~roleId=RoleId}}
+                {{if IsChecked}}
+                <td class="clsEmpty">
+
+                    <div class="onoffswitch">
+                        <!--<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>-->
+                        <input type="checkbox" privilegeid="{{:PrivilegeId}}" id="{{:~roleId}}myonoffswitch{{:PrivilegeId}}" checked="checked" class="onoffswitch-checkbox chkRoleEnabled" />
+                        <label class="onoffswitch-label" for="{{:~roleId}}myonoffswitch{{:PrivilegeId}}">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+
+                    <!---->
+                </td>
+                {{else}}
+                <td class="clsEmpty">
+
+                    <div class="onoffswitch">
+                        <!--<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>-->
+                        <input type="checkbox" privilegeid="{{:PrivilegeId}}" id="{{:~roleId}}myonoffswitch{{:PrivilegeId}}" class="onoffswitch-checkbox chkRoleEnabled" />
+                        <label class="onoffswitch-label" for="{{:~roleId}}myonoffswitch{{:PrivilegeId}}">
+                            <span class="onoffswitch-inner"></span>
+                            <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                
+                    
+                </td>
+                {{/if}}
+                {{/for}}
+            </tr>
+            {{/for}}
+        </tbody>
+    </table>    
+</script>

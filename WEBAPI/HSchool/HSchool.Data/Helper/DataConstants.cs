@@ -13,13 +13,9 @@ namespace HSchool.Data
 
     public class Procedures
     {
-        #region User
         public const string GetUserDetailsById = "GetUserDetailsById";
 
         public const string SaveUserInformation = "SaveUserInformation";
-
-        public const string SaveInternalUser = "SaveInternalUser";
-        #endregion
 
         public const string SaveStudentInformation = "SaveStudentInformation";
 
@@ -27,21 +23,11 @@ namespace HSchool.Data
 
         public const string SaveSettings = "SaveSettings";
 
-        #region Classes
         public const string SaveClasses = "SaveClasses";
 
         public const string GetAllClasses = "GetAllClasses";
 
         public const string GetClassById = "GetClassById";
-        #endregion
-
-        #region Class & Subject
-        public const string SaveClassSubject = "SaveClassSubject";
-        public const string SaveSubjects = "SaveSubjects";
-        public const string GetSubjects = "GetSubjects";
-        public const string GetSubjectById = "GetSubjectById";
-        public const string GetClassSubjects = "GetClassSubjects";
-        #endregion
 
         public const string SaveSections = "SaveSections";
 
@@ -93,9 +79,5 @@ namespace HSchool.Data
         public const string GetApplicationById = "GetApplicationById";
 
         public const string SearchStudents = "SearchStudents";
-
-        #region Privilege
-        public const string GetModulePrivilegesByRoleId = "GetModulePrivilegesByRoleId";
-        #endregion
     }
 }

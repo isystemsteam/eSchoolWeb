@@ -1,8 +1,12 @@
 ﻿$(document).ready(function () {
-    internalUser.loadForm(ADMINFORMS.INTERNAL_USER);
+    officeForm.init();
 });
 
-var internalUser = {
+var officeForm = {
+    formName: "formOfficeUse",
+    init: function () {
+        this.loadForm(this.formName);
+    },
     loadForm: function (formName) {
         var _beforeCallBack = function () {
 
@@ -10,18 +14,15 @@ var internalUser = {
 
         var _successCallback = function (result) {
             if (result != null && result.Instance != null && result.Instance != '') {
-                jQuery.fn.appCommon.route.redirect("application/success/" + result.Instance);
+                jQuery.fn.appCommon.UI.displayMessage(result.Message, null);
             }
         };
 
         jQuery.fn.appCommon.ajax.bind(formName, _beforeCallBack, _successCallback, null, null, null);
     },
-    saveInternalUser: function () {
-        if (jQuery.fn.Validation.validateForm(ADMINFORMS.INTERNAL_USER)) {
-            $("#" + ADMINFORMS.INTERNAL_USER).submit();
+    saveApplication: function () {
+        if (jQuery.fn.Validation.validateForm(this.formName)) {
+            $("#" + this.formName).submit();
         }
-    },
-    reset: function () {
-
     }
 };

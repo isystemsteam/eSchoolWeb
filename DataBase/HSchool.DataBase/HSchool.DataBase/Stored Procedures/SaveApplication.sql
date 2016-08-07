@@ -37,9 +37,7 @@
 	@IsTransportRequired bit,
 	@StudentId int,	
 	@VisibleMark bit,
-	@LoginEnabled bit,	
-	@ProofType int,
-	@ProofNumber nvarchar(25),
+	@LoginEnabled bit,
 	@GuardianLoginEnabled bit,
 	@ReasonMessage varchar(2000),
 	@StudentClass TypeStudentClass Readonly,
@@ -47,8 +45,7 @@
 	@Addresses TypeAddress Readonly,
 	@IsStudentUpdate bit,
 	@IsStudentGuardianUpdate bit,
-	@IsStudentAddressUpdate bit,
-	@IsOfficeFormUpdate bit
+	@IsStudentAddressUpdate bit
 )
 AS
 BEGIN
@@ -72,7 +69,7 @@ BEGIN
 				DECLARE @IsActive INT;
 
 				-- SAVE USER
-				EXEC @UserId=DBO.SaveUserInformation @UserId,@Title,@FirstName,@LastName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled,@CommunityInDetails,@LoginEnabled,@UserRole,@ProofType,@ProofNumber
+				EXEC @UserId=DBO.SaveUserInformation @UserId,@Title,@FirstName,@LastName,@Email,@Gender,@DateOfBirth,@PlaceOfBirth,@BloodGroup,@Religion,@Nationality,@Community,@MobileNumber,@UserStatus,@MotherLanguage,@IsVerified,@IsLocked,@SMSEnabled,@EmailEnabled,@NotificationEnabled,@CommunityInDetails,@LoginEnabled
 
 				-- SAVE STUDENT
 				EXEC @StudentId= dbo.SaveStudent @StudentId,@UserId,@RollNumber,@FluencyinOthers,@IsTransportRequired,@LoginEnabled,@VisibleMark,@GuardianLoginEnabled
@@ -154,12 +151,6 @@ BEGIN
 					)
 				SET @ApplicationId=@@IDENTITY
 			END
-
-		IF(@IsOfficeFormUpdate=1)
-			BEGIN
-				EXEC dbo.UpdateUserRole @UserId,@UserRole
-			END
-
 			COMMIT TRANSACTION H_APPLICATION
 
 			SELECT @ApplicationId

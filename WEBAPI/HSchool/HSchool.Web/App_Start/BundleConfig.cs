@@ -38,7 +38,7 @@ namespace HSchool.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap-select.css",
-                      "~/Content/site.css",
+                      "~/Content/site_Classic.css",
                       "~/Content/font-awesome.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,

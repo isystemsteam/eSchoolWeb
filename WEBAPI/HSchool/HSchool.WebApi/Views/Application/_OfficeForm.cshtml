@@ -1,0 +1,68 @@
+﻿@model HSchool.Business.Models.ApplicationForm
+@if (Model.IsOfficeFormEnabled)
+{
+    using (Html.BeginForm("EditOfficeForm", "Application", FormMethod.Post, new { @id = "formOfficeUse", @name = "formOfficeUse" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.ApplicationId)
+        <h2 class="highlight-bg">For Office Use</h2>
+        <div class="form-container">
+            <div class="row custom-row clearfix">
+                <div class="col-md-12 custom-text">
+                    @Html.DropDownListFor(m => m.ApplicationStatus, Model.ApplicationStatuses, new { @id = "", @class = "selectpicker show-tick required" })
+                    <i class="fa validationResult"></i>
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-12 custom-text">
+                    @Html.LabelFor(m => m.ReasonMessage)
+                    @Html.TextBoxFor(m => m.ReasonMessage, new { @id = "", @class = "" })
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-8 custom-text">
+                    <label for="UserName">UserName Or RollNumber</label>
+                    @Html.TextBoxFor(m => m.UserName, new { @id = "", @class = "required" })
+                    <i class="fa validationResult"></i>
+                </div>
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-4 custom-check">
+                    <div class="cstom-check-margin">
+                        <input type="checkbox" checked="@(Model.LoginEnabled)" name="LoginEnabled" id="LoginEnabled" />
+                        <label for="LoginEnabled"><span><span><i class="fa fa-check"></i></span></span>Student Login Enabled</label>
+                    </div>
+                </div>
+                @*<div class="col-md-4 custom-check">
+                    <div class="cstom-check-margin">
+                        <input type="checkbox" checked="@(Model.GuardianLoginEnabled)" name="GuardianLoginEnabled" id="GuardianLoginEnabled" />
+                        <label for="GuardianLoginEnabled"><span><span><i class="fa fa-check"></i></span></span>Guardian Login Enabled</label>
+                    </div>
+                </div>*@
+            </div>
+            <div class="row custom-row clearfix">
+                <div class="col-md-4 custom-text">
+                    <label for="">Applied Date</label>
+                    @Html.TextBoxFor(m => m.AppliedDate, new { @class = "disableField" })
+                </div>
+                <div class="col-md-4 custom-text">
+                    @Html.LabelFor(m => m.ApprovedDate)
+                    @Html.TextBoxFor(m => m.ApprovedDate, new { @class = "disableField" })
+                </div>
+                <div class="col-md-4 custom-text">
+                    @Html.LabelFor(m => m.ApprovedByText)
+                    @Html.TextBoxFor(m => m.ApprovedByText, new { @class = "disableField" })
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.DateOfBirth)
+        @Html.HiddenFor(m => m.StudentGuardians[0].DateOfBirth)
+        @Html.HiddenFor(m => m.StudentGuardians[0].Email)
+        <div class="row custom-row clearfix">
+            <div class="btn-wrapper pull-right">
+                <input type="button" value="Save" class="btn-blue" onclick="officeForm.saveApplication()" />
+            </div>
+        </div>
+    }
+}
+<script type="text/javascript" src="~/Scripts/Application/OfficeForm.js"></script>

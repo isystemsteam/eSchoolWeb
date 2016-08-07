@@ -126,7 +126,5 @@ namespace HSchool.Business.Models
 
         public string ReasonMessage { get; set; }
 
-        public bool IsOfficeFormUpdate { get; set; }
-
     }
 }

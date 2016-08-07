@@ -13,7 +13,5 @@ namespace HSchool.Business.Models
         public string ModuleName { get; set; }
 
         public bool IsActive { get; set; }
-
-        public List<ApplicationPrivilege> Privileges { get; set; }
     }
 }

@@ -101,7 +101,6 @@
     <Compile Include="Models\StudentImage.cs" />
     <Compile Include="Models\StudentSearch.cs" />
     <Compile Include="Models\StudentSearchResponse.cs" />
-    <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Transport.cs" />
     <Compile Include="Models\UserCreateModel.cs" />
     <Compile Include="Models\UserCredential.cs" />
@@ -115,7 +114,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IAdminRepository.cs" />
     <Compile Include="Repository\IApplicationRepository.cs" />
-    <Compile Include="Repository\IClassRepository.cs" />
     <Compile Include="Repository\ILoginRepository.cs" />
     <Compile Include="Repository\IRolePrivilegeRepository.cs" />
     <Compile Include="Repository\ISectionRepository.cs" />

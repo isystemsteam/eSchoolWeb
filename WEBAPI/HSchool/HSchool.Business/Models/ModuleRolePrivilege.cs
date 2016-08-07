@@ -13,7 +13,5 @@ namespace HSchool.Business.Models
         public List<ApplicationRole> Roles { get; set; }
 
         public List<ApplicationPrivilege> Privileges { get; set; }
-
-        public List<ApplicationModule> Modules { get; set; }
     }
 }

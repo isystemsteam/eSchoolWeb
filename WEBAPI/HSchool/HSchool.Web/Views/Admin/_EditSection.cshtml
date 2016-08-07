@@ -4,7 +4,6 @@
     <div class="form-container">
         @using (Html.BeginForm("EditSection", "Admin", FormMethod.Post, new { @id = "formSectionEdit" }))
         {
-            @Html.HiddenFor(m => m.SectionId)
             <div class="row custom-row clearfix">
                 <div class="col-md-12 custom-text">
                     @Html.LabelFor(m => m.SectionName)

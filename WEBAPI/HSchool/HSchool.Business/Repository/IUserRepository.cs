@@ -11,6 +11,6 @@ namespace HSchool.Business.Repository
     {
         UserAccount GetUserDetailsById(int userId);
 
-        int SaveUser(UserCreateModel userInfo);
+        int InsertUpdateUser(UserAccount userInfo);
     }
 }

@@ -99,21 +99,7 @@ namespace HSchool.Common
         }
         #endregion
 
-        #region UserName & Password
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="role"></param>
-        /// <param name="userId"></param>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <returns></returns>
-        public static string CreateDefaultUserName(string role, int userId, string firstName, string lastName)
-        {
-            LogHelper.Info(string.Format("CommonHelper.CreateDefaultUserName - Begin. FirstName:{0}", firstName));
-            return string.Format("{0}{1}{2}{3}", role.Substring(0, 1), userId, lastName.Substring(0, 1), firstName.Substring(0, 4));
-        }
+        #region Password
         /// <summary>
         /// 
         /// </summary>
