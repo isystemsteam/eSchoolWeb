@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HSchool.Common;
 using System.Threading.Tasks;
+using HSchool.Web.Models;
+using HttpStatusCode = System.Net.HttpStatusCode;
 
 namespace HSchool.Web.Controllers
 {
@@ -22,6 +24,7 @@ namespace HSchool.Web.Controllers
         private readonly IStudentRepository _studentRepository;
         private readonly IApplicationRepository _applicationRepository;
         private ApplicationUserManager _userManager;
+        private readonly IUserRepository _userRepository;
         #endregion
 
         #region Properties
@@ -46,11 +49,12 @@ namespace HSchool.Web.Controllers
         /// <param name="adminRepository"></param>
         /// <param name="studentRepository"></param>
         /// <param name="applicationRepository"></param>
-        public UserController(IAdminRepository adminRepository, IStudentRepository studentRepository, IApplicationRepository applicationRepository)
+        public UserController(IAdminRepository adminRepository, IStudentRepository studentRepository, IApplicationRepository applicationRepository, IUserRepository userRepository)
         {
             _adminRepository = adminRepository;
             _studentRepository = studentRepository;
             _applicationRepository = applicationRepository;
+            _userRepository = userRepository;
         }
         #endregion
 
@@ -66,6 +70,7 @@ namespace HSchool.Web.Controllers
             () => { model.ListRoles = CommonHelper.ConvertListToSelectList<ApplicationRole>(_adminRepository.GetAllRoles(false), "Roles", "RoleId", "RoleName"); },
             () => { model.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender"); }
                 );
+
             }
             catch (Exception ex)
             {
@@ -94,6 +99,7 @@ namespace HSchool.Web.Controllers
             () => { model.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles"); },
             () => { model.ListProofTypes = CommonHelper.ConvertEnumToListItem<ProofTypes>("Proof Type"); }
                 );
+                model.Addresses = new List<Address> { new Address() };
                 model.IsEditable = true;
             }
             catch (Exception ex)
@@ -102,6 +108,57 @@ namespace HSchool.Web.Controllers
             }
             LogHelper.Info(string.Format("UserController.Edit - End. Id:{0}", id));
             return View(model);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(UserCreateModel model)
+        {
+            LogHelper.Info(string.Format("UserController.Edit[HTTPPOST] - Begin."));
+            MessageResponse response;
+            string message = string.Empty;
+            try
+            {
+                var id = _userRepository.SaveUser(model);
+
+                if (model.UserId == 0 && model.LoginEnabled)
+                {
+                    model.UserName = CommonHelper.CreateDefaultUserName(model.UserRoleText, id, model.FirstName, model.LastName);
+                    model.Password = CommonHelper.CreateDefaultPassword(model.UserName, model.DateOfBirth);
+                    var result = CreateUser(model);
+                    if (result.IsCompleted)
+                    {
+                        if (result.Result.Succeeded)
+                        {
+                            message = string.Format("User created succesfully, UserName:{1}", model.UserName);
+                            response = new MessageResponse<string>(message, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                        }
+                    }
+                }
+                message = string.Format("User created succesfully, UserName:{1}", model.UserName);
+                response = new MessageResponse<string>(message, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("UserController.Edit[HTTPPOST] - Exception.{0}", ex.Message));
+                response = new MessageResponse<string>(ex.Message, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+            }
+            LogHelper.Info(string.Format("UserController.Edit[HTTPPOST] - End."));
+            return View(model);
+        }
+
+        public async Task<IdentityResult> CreateUser(UserAccount model)
+        {
+            LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
+            var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+            var result = await UserManager.CreateAsync(user, model.Password);
+            LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
+            return result;
         }
         #endregion
     }

@@ -79,6 +79,8 @@
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\Classes.cs" />
     <Compile Include="Models\ClassSections.cs" />
+    <Compile Include="Models\ClassSectionTeacher.cs" />
+    <Compile Include="Models\ClassSubject.cs" />
     <Compile Include="Models\CommunityMaster.cs" />
     <Compile Include="Models\MotherLanguages.cs" />
     <Compile Include="Models\PasswordQuestions.cs" />
@@ -91,6 +93,8 @@
     <Compile Include="Models\StudentImage.cs" />
     <Compile Include="Models\StudentSearch.cs" />
     <Compile Include="Models\StudentSearchResponse.cs" />
+    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\UserCreateModel.cs" />
     <Compile Include="Models\UserCredential.cs" />
     <Compile Include="Models\StudentGuardian.cs" />
     <Compile Include="Models\UserAccount.cs" />
@@ -100,6 +104,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlRepository\AdminRepository.cs" />
     <Compile Include="SqlRepository\ApplicationRepository.cs" />
+    <Compile Include="SqlRepository\ClassRepository.cs" />
     <Compile Include="SqlRepository\LoginRepository.cs" />
     <Compile Include="SqlRepository\RolePrivilegeRepository.cs" />
     <Compile Include="SqlRepository\SectionRepository.cs" />

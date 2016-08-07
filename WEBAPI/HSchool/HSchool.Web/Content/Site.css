@@ -125,13 +125,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#56c6ef', end
 /* CUSTOM CHEKBOX */
 .custom-check {position:relative}
 .custom-check [type="checkbox"]:not(:checked),[type="checkbox"]:checked {opacity:0}
-.custom-check [type="checkbox"] + label { margin-bottom:0; color:#2bd7ff; font-size:16px; letter-spacing:1px; font-weight:normal; margin-left:15px}
+.custom-check [type="checkbox"] + label { margin-bottom:0; color:#2bd7ff; font-size:16px; letter-spacing:1px; font-weight:normal}
 .custom-check [type="checkbox"]:not(:checked) + label > span, [type="checkbox"]:checked + label > span {}
-.custom-check [type="checkbox"] + label > span {width:24px; height:24px;position:absolute; left:15px;  border:1px solid #2bd7ff; border-radius:2px; outline:none}
+.custom-check [type="checkbox"] + label > span {width:24px; height:24px;position:absolute; left:22px;  border:1px solid #2bd7ff; border-radius:2px; outline:none}
 .custom-check [type="checkbox"]:not(:checked) + label > span > span {opacity:0; transform: scale(0);}
 .custom-check [type="checkbox"]:checked + label > span > span {opacity:1; transform: scale(1); position:relative; top:-1px; left:2px;transition:ease-in 1s }
 .custom-check [type="checkbox"]:checked + label > span > span i {font-style:italic; }
-.custom-check-margin {margin-top:35px}
+.cstom-check-margin {margin:20px 0 0 24px}
 
 
 /* Login */

@@ -31,5 +31,7 @@ namespace HSchool.Data.Models
         public bool IsStudentAddressUpdate { get; set; }
 
         public string ReasonMessage { get; set; }
+
+        public bool IsOfficeFormUpdate { get; set; }
     }
 }

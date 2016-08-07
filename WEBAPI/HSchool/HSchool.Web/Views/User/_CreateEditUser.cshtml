@@ -106,12 +106,19 @@
     </div>
     <div class="row custom-row clearfix">
         <div class="col-md-6 custom-text">
-            @Html.DropDownListFor(m => m.UserProofType, Model.ListProofTypes, new { @id = "", @class = "selectpicker show-tick required" })
+            @Html.DropDownListFor(m => m.ProofType, Model.ListProofTypes, new { @id = "", @class = "selectpicker show-tick required" })
             <i class="fa validationResult"></i>
         </div>
         <div class="col-md-6 custom-text">
-            @Html.LabelFor(m => m.UserProofType)
-            @Html.TextBoxFor(m => m.UserProofType, new { @Id = "ddlProofType", @class = "required" + disableControl, @maxlength = "120" })
+            @Html.LabelFor(m => m.ProofNumber)
+            @Html.TextBoxFor(m => m.ProofNumber, new { @Id = "ddlProofType", @class = "required" + disableControl, @maxlength = "120" })
+            <i class="fa validationResult"></i>
+        </div>
+    </div>
+    <div class="row custom-row clearfix">
+        <div class="col-md-6 custom-text">
+            @Html.LabelFor(m => m.MobileNumber)
+            @Html.TextBoxFor(m => m.MobileNumber, new { @Id = "txtMobileNumber", @class = "required" + disableControl, @maxlength = "12" })
             <i class="fa validationResult"></i>
         </div>
     </div>

@@ -64,5 +64,6 @@ namespace HSchool.Business.Repository
         List<MotherLanguages> GetMotherLanguages();
 
         List<UserRelationship> GetRelationships();
+
     }
 }
