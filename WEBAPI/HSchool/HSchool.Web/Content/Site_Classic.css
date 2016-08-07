@@ -13,22 +13,28 @@ html {background-color:#2d3246}
 /* COMMON */
 header {background-color: #F0677C; color: #fff; padding:10px; text-align: right}
 h1,h2 { text-transform:uppercase;  margin:0}
-h1 {font-family: 'Lobster', cursive;font-size:36px; background-color:#16b0d4; color:#fff; text-transform:capitalize; letter-spacing:3px; padding:10px 100px 10px 20px; box-shadow:1px 1px 5px rgba(0, 0, 0, 0.5); margin:30px 0 20px; display:inline-block}
+h1 {font-family: 'Lobster', cursive;font-size:36px;  color:#fff; opacity:0.9; text-transform:capitalize; letter-spacing:3px;  text-shadow:1px 1px 5px rgba(0, 0, 0, 0.5); margin:30px 0 20px; display:inline-block}
 h2 {font-size:16px; color:#f1f4f5; font-family: 'Orbitron', sans-serif; font-weight:400; text-shadow:1px 1px 5px rgba(0,0,0,0.5); letter-spacing:2px; margin-top:20px; margin-bottom:10px }
+h3 {font-family: 'Poiret One', cursive; color:orange; font-size:16px; margin:0}
 :focus{outline:0}
 .body-padding {padding-top:50px !important; padding-bottom:50px !important}
-.loadingProgress {background-color:#0a89a6; border-radius:3px; padding:20px; width:300px; opacity:0.7}
-#loadingMessage {position: absolute; top: 30px; left: 85px; font-size: 18px; letter-spacing:5px}
-
+.loadingProgress {border:#0a89a6 1px solid; border-radius:3px; padding:15px 10px; opacity:0.5}
+#loadingMessage {position: relative;top: -8px;left: 4px; font-size: 18px; letter-spacing:5px}
 .visiblecheck {margin:30px 0 10px 0}
 .progress {height: 8px; border-radius: 0px;  -webkit-border-radius: 0px; -moz-border-radius: 0px}
 
+/* expand collapse */
+h2 i {font-size: 28px !important; margin-right: 15px;  position: relative;  top: 3px; cursor: pointer;}
+
 /* Data table */
 .table {box-shadow:0px 0px 4px 4px rgba(0,0,0,0.1); border:#42556a 1px solid; margin-top:30px}
-.table thead > tr > th {border-right:#333c46 1px solid}
-.table tbody > tr > td { border-right:#42556a 1px solid;}
+.table thead > tr > th {border-right:#333c46 1px solid; font-size:18px; background-color:#012637}
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table tbody > tr:nth-child(2n+1), .table tbody > tr:nth-child(2n) {background-color:transparent !important}
+.table tbody > tr:nth-child(odd) {background-color:#f1f1f1}
+.table tbody > tr:nth-child(even) {background-color:#e1e1e1}
+.table tbody > tr > td { border-right:#42556a 1px solid; color:#fff !important}
+.table tbody > tr > td a { color:#fff; text-decoration:underline}
 .table thead > tr > th, .table tbody > tr > td {border-bottom:#42556a 1px solid; color:#bbc8d4}
-.table thead > tr > th {background-color:#42556a}
 
 /* CONTAINERS */
 .left-panel {border-right:#0a89a6 1px solid;}
@@ -44,6 +50,8 @@ h2 {font-size:16px; color:#f1f4f5; font-family: 'Orbitron', sans-serif; font-wei
 a.navbar-brand, a.navbar-brand img{outline:none; text-decoration:none}
 .navbar-toggle .icon-bar {background-color:#34c4f4}
 .navbar-brand {padding:15px 0}
+.navbar {border-radius:0}
+
 
 /* Menu */
 .menu-section {border-bottom:#0a89a6 1px solid; font-size:16px}
@@ -78,19 +86,19 @@ a.navbar-brand, a.navbar-brand img{outline:none; text-decoration:none}
 /* Left Menu */
 .left-menu li a {display: block; font-size:16px; padding: 10px 5px 10px 20px;  color:#2bd7ff; border-top:#0a89a6 1px solid;   text-decoration:none; }
 .left-menu li:first-child a {border-top:0}
-.left-menu li a:hover, .left-menu li a.selected {color:#fff !important; cursor: pointer; color: #fff; background-color:#2bd7ff;}
+.left-menu li a:hover, .left-menu li a.selected {color:#fff !important; cursor: pointer; color: #fff; background-color:#5eb9cc;}
 
 /* Input Buttons */
-.btn-grey, .btn-blue, a.btn-grey, a.btn-blue {padding:7px 30px; text-align: center; font-family: 'Indie Flower', cursive; font-size:16px; letter-spacing:1px; text-decoration:none; border:0; margin-left:10px; border-radius:0; transition:ease-in 4s;}
+.btn-grey, .btn-blue, a.btn-grey, a.btn-blue {padding:5px 25px; text-align: center;  font-family: 'Indie Flower', cursive; font-size:18px; box-shadow:0px 1px 3px rgba(0,0,0,0.5); letter-spacing:1px; text-decoration:none; border:0; margin-left:10px; border-radius:0; transition:ease-in 4s;}
 .btn-grey {color:#fff;border:#fff 1px solid; background-color:transparent}
 .btn-blue{  
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#6fdb9e+0,56c6ef+100 */
-background: #6fdb9e; /* Old browsers */
-background: -moz-linear-gradient(left,  #6fdb9e 0%, #56c6ef 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left,  #6fdb9e 0%,#56c6ef 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right,  #6fdb9e 0%,#56c6ef 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6fdb9e', endColorstr='#56c6ef',GradientType=1 ); /* IE6-9 */
-color:#fff;
+    color:#fff;
+border:#4e2010  1px solid;/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#da1900+0,c20800+98 */
+background: #da1900; /* Old browsers */
+background: -moz-linear-gradient(top,  #da1900 0%, #c20800 98%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #da1900 0%,#c20800 98%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #da1900 0%,#c20800 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#da1900', endColorstr='#c20800',GradientType=0 ); /* IE6-9 */
 }
 
 .btn-blue:hover, a.btn-blue:hover, .btn-blue:focus, a.btn-blue:focus{color:#fff; outline:none;
@@ -111,6 +119,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#56c6ef', end
 .custom-list ul li, ul.ulListBox li, .divModulesContainer ul li {padding:5px 10px;}
 .custom-list ul li:hover, ul.ulListBox li:hover, .divModulesContainer ul li:hover {background-color:#f1f1f1; cursor:pointer}
 
+/*input file custmize  */
+.custom-text  .custom-file {border-bottom:1px solid #34c4f4; height:45px; position:relative; margin-top:10px}
+.browse-btn, .browse-text {position:absolute; display:inline-block; padding:5px 20px; }
+.browse-btn {left:0; top:5px; border-radius:2px; background-color:#2bd7ff; color:#fff }
+.browse-text {padding:5px 20px; left:70px; top:5px;color:#2bd7ff;overflow:hidden}
+.custom-text input[type="file"] {width:100%; opacity:0; height:50px}
+
+/* bootstrap caret customized */
+.btn-default .caret {border-top-color:#2bd7ff}
+.dropup .btn-default .caret {border-bottom-color:#2bd7ff}
 
 /* bootstrap dropdown customized */
 .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {width:100%}
@@ -124,14 +142,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#56c6ef', end
 /* CUSTOM CHEKBOX */
 .custom-check {position:relative}
 .custom-check [type="checkbox"]:not(:checked),[type="checkbox"]:checked {opacity:0}
-.custom-check [type="checkbox"] + label { margin-bottom:0; color:#2bd7ff; font-size:16px; letter-spacing:1px; font-weight:normal}
+.custom-check [type="checkbox"] + label { margin-bottom:0; color:#2bd7ff; font-size:16px; letter-spacing:1px; font-weight:normal; margin-left:20px}
 .custom-check [type="checkbox"]:not(:checked) + label > span, [type="checkbox"]:checked + label > span {}
-.custom-check [type="checkbox"] + label > span {width:24px; height:24px;position:absolute; left:22px;  border:1px solid #2bd7ff; border-radius:2px; outline:none}
+.custom-check [type="checkbox"] + label > span {width:24px; height:24px;position:absolute; left:15px; top:0; border:1px solid #2bd7ff; border-radius:2px; outline:none}
 .custom-check [type="checkbox"]:not(:checked) + label > span > span {opacity:0; transform: scale(0);}
 .custom-check [type="checkbox"]:checked + label > span > span {opacity:1; transform: scale(1); position:relative; top:-1px; left:2px;transition:ease-in 1s }
 .custom-check [type="checkbox"]:checked + label > span > span i {font-style:italic; }
-.cstom-check-margin {margin:20px 0 0 24px}
-
+.custom-check-margin {margin-top:35px}
+.custom-check a, .custom-check a:hover {color:#fff; opacity:0.6}
 
 /* Login */
 .login-wrapper {min-height:300px; margin:0px auto; padding:20px}
@@ -149,6 +167,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#56c6ef', end
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {  margin-left: 0;}
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {right: 0px;}
 
+.terms {margin-top:50px; padding-top:10px; border-top:#fff 1px dashed}
 
 /* Footer */
 footer {padding:10px; color: #fff; font-size: 14px; letter-spacing:1px; border-top:#0a89a6 1px solid}
@@ -162,8 +181,7 @@ footer a, footer a:hover {color: #fff; text-decoration: none;}
     .login-wrapper {width:35%}
     .btn-expand-collapse {display:none}
     .navbar {border-bottom:#0a89a6 1px solid; margin-bottom:0}
-
-
+    .navbar-nav {float:right}
 }
 
 @media only screen and (max-width: 767px) {
