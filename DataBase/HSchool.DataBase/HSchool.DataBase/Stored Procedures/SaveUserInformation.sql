@@ -21,7 +21,10 @@
 	@EmailEnabled bit,
 	@NotificationEnabled bit,
 	@CommunityInDetails	varchar(255),
-	@LoginEnabled bit
+	@LoginEnabled bit,
+	@UserRole int,
+	@ProofType int,
+	@ProofNumber nvarchar(25)
 )
 AS
 BEGIN

@@ -22,6 +22,7 @@ var adminView = {
                 this.classSections.load();
                 break;
             case "4":
+                this.subjects.loadGrid();
                 break;
             case "5":
                 break;
@@ -222,7 +223,7 @@ var adminView = {
             $.fn.appCommon.ajax.post(appService.saveClassSections, parameters, 'application/json', successcallback, adminView.handleException);
         }
     },
-    
+
     //academic years
     academicYear: {
         load: function () {
@@ -261,6 +262,54 @@ var adminView = {
         },
         cancel: function () {
             this.loadGrid();
+        }
+    },
+    //Academic years -End
+    //Subjects - Begin
+    subjects: {
+        load: function () {
+            adminView.subjects.loadGrid();
+        },
+        edit: function (id) {
+            //load success
+            var _successcallback = function (result) {
+                $("#" + adminView.editControlId).html(result);
+                adminView.displayBox(true);
+
+                //ajax form before submit call
+                var _beforecallback = function () { };
+
+                //ajax form success callback
+                var _successcallback = function (result) {
+                    if (result != null && result.IsSuccess) {
+                        adminView.subjects.loadGrid();
+                    }
+                    jQuery.fn.appCommon.UI.displayMessage(result.Message, 3);
+                };
+
+                //ajax form errorcallback
+                var _errorcallback = function () { };
+                //bind ajax form
+                $.fn.appCommon.ajax.bind(ADMINFORMS.EDIT_SUBJECT, _beforecallback, _successcallback, _errorcallback);
+            };
+            var parameters = [];
+            parameters.push(new ajaxParam("id", id));
+            $.fn.appCommon.ajax.getForm(appService.editSubject, parameters, _successcallback, null);
+        },
+        loadGrid: function () {
+            var _successcallback = function (result) {
+                $("#" + adminView.viewContainerId).html(result);
+                adminView.displayBox(false);
+            };
+            $.fn.appCommon.ajax.getForm(appService.viewSubject, null, _successcallback, null);
+        },
+        saveSubject: function () {
+            if (jQuery.fn.Validation.validateForm(ADMINFORMS.EDIT_SUBJECT)) {
+                $('#' + ADMINFORMS.EDIT_SUBJECT).submit();
+            }
+        },
+        editCancel: function () {
+            adminView.subjects.loadGrid();
         }
     }
 };

@@ -121,13 +121,15 @@ namespace HSchool.Business.Models
 
         public int UserRole { get; set; }
 
+        public string UserRoleText { get; set; }
+
         public byte[] UserImage { get; set; }
 
         [DisplayName("Proof Type")]
-        public int? UserProofType { get; set; }
+        public int? ProofType { get; set; }
 
         [DisplayName("Proof Number")]
-        public string UserProofNumber { get; set; }
+        public string ProofNumber { get; set; }
 
     }
 }

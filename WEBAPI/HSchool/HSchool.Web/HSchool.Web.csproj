@@ -246,6 +246,7 @@
     <Content Include="Scripts\Application\ApplicationForm.js" />
     <Content Include="Scripts\Application\ApplicationSearch.js" />
     <Content Include="Scripts\Application\Home.js" />
+    <Content Include="Scripts\Application\InternalUser.js" />
     <Content Include="Scripts\Application\LoginView.js" />
     <Content Include="Scripts\Application\Managment.js" />
     <Content Include="Scripts\Application\OfficeForm.js" />
@@ -262,9 +263,11 @@
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Custom\AdminConstants.js" />
     <Content Include="Scripts\Custom\AppCommon.js" />
     <Content Include="Scripts\Custom\AppEvents.js" />
     <Content Include="Scripts\Custom\Common.js" />
+    <Content Include="Scripts\Custom\Constants.js" />
     <Content Include="Scripts\Custom\CustomPlugin.js" />
     <Content Include="Scripts\Custom\Entity.js" />
     <Content Include="Scripts\Custom\TableView.js" />
@@ -356,6 +359,8 @@
     <Content Include="Views\User\_AddressView.cshtml" />
     <Content Include="Views\Application\Request.cshtml" />
     <Content Include="Views\Application\Application.cshtml" />
+    <Content Include="Views\Admin\_ViewSubject.cshtml" />
+    <Content Include="Views\Admin\_EditSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

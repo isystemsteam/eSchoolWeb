@@ -68,8 +68,8 @@ namespace HSchool.Data.Models
 
         public string CommunityInDetails { get; set; }
 
-        public int? UserProofType { get; set; }
+        public int? ProofType { get; set; }
 
-        public string UserProofNumber { get; set; }
+        public string ProofNumber { get; set; }
     }
 }

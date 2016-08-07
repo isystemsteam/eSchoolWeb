@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HSchool.Common;
 using System.Threading.Tasks;
+using HSchool.Web.Models;
+using HttpStatusCode = System.Net.HttpStatusCode;
 
 namespace HSchool.Web.Controllers
 {
@@ -114,23 +116,49 @@ namespace HSchool.Web.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(UserCreateModel model)
         {
             LogHelper.Info(string.Format("UserController.Edit[HTTPPOST] - Begin."));
+            MessageResponse response;
+            string message = string.Empty;
             try
             {
+                var id = _userRepository.SaveUser(model);
+
                 if (model.UserId == 0 && model.LoginEnabled)
                 {
-
+                    model.UserName = CommonHelper.CreateDefaultUserName(model.UserRoleText, id, model.FirstName, model.LastName);
+                    model.Password = CommonHelper.CreateDefaultPassword(model.UserName, model.DateOfBirth);
+                    var result = CreateUser(model);
+                    if (result.IsCompleted)
+                    {
+                        if (result.Result.Succeeded)
+                        {
+                            message = string.Format("User created succesfully, UserName:{1}", model.UserName);
+                            response = new MessageResponse<string>(message, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                        }
+                    }
                 }
-                var id = _userRepository.SaveUser(model);
+                message = string.Format("User created succesfully, UserName:{1}", model.UserName);
+                response = new MessageResponse<string>(message, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
             }
             catch (Exception ex)
             {
                 LogHelper.Error(string.Format("UserController.Edit[HTTPPOST] - Exception.{0}", ex.Message));
+                response = new MessageResponse<string>(ex.Message, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
             }
             LogHelper.Info(string.Format("UserController.Edit[HTTPPOST] - End."));
             return View(model);
+        }
+
+        public async Task<IdentityResult> CreateUser(UserAccount model)
+        {
+            LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
+            var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+            var result = await UserManager.CreateAsync(user, model.Password);
+            LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
+            return result;
         }
         #endregion
     }

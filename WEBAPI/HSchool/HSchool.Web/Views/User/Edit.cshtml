@@ -2,6 +2,7 @@
 <div class="col-md-12 container">
     @using (Html.BeginForm("Edit", "User", FormMethod.Post, new { @Id = "formUser", @name = "formUser" }))
     {
+        @Html.AntiForgeryToken()
         <h2>Create Internal User</h2>
         @Html.Partial("_CreateEditUser", Model)
         @Html.Partial("_AddressView", Model)
@@ -20,5 +21,6 @@
         </div>
     }
 </div>
+@Scripts.Render("~/Scripts/Application/InternalUser.js")
 
 

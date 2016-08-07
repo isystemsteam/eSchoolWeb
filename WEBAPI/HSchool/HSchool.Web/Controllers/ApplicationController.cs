@@ -379,17 +379,13 @@ namespace HSchool.Web.Controllers
         /// <param name="account"></param>
         /// <returns></returns>
 
-        public async Task<bool> CreateUser(UserAccount model)
+        public async Task<IdentityResult> CreateUser(UserAccount model)
         {
             LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            var result = await UserManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
-            {
-
-            }
+            var result = await UserManager.CreateAsync(user, model.Password);            
             LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
-            return result.Succeeded;
+            return result;
         }
 
         #endregion
