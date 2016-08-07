@@ -1,0 +1,19 @@
+﻿@model HSchool.Business.Models.ApplicationRequest
+    <div class="col-md-12 container">
+        <h1>Online Application</h1>
+        @using (Html.BeginForm("Request", "Application", FormMethod.Post, new { @name = "formOnlineApplicationRequest", @id = "formOnlineApplicationRequest" }))
+        {
+            @Html.AntiForgeryToken()           
+            <div class="row custom-row">
+                <div class="col-lg-12">
+
+                </div>
+            </div>
+            <div class="btn-wrapper pull-right">
+                <input type="button" value="Request" class="btn-blue" onclick="applicationForm.saveApplication()" />                
+            </div>
+        }
+    </div>
+    @Scripts.Render("~/Scripts/Application/ApplicationRequest.js")
+
+

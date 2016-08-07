@@ -75,6 +75,7 @@
     <Compile Include="Models\ApplicationModule.cs" />
     <Compile Include="Models\ApplicationPermission.cs" />
     <Compile Include="Models\ApplicationPrivilege.cs" />
+    <Compile Include="Models\ApplicationRequest.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\Classes.cs" />
     <Compile Include="Models\ClassSections.cs" />

@@ -1,0 +1,17 @@
+﻿@model HSchool.Business.Models.ApplicationForm
+<div class="col-md-12 container">
+    <h1>Online Application</h1>
+    @using (Html.BeginForm("Edit", "Application", FormMethod.Post, new { @name = "formOnlineApplication", @id = "formOnlineApplication" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Partial("_ApplicationForm", Model)
+
+        <div class="btn-wrapper pull-right">
+            <input type="button" value="Apply" class="btn-blue" onclick="applicationForm.saveApplication()" />
+            <input type="reset" value="Reset" class="btn-grey" />
+        </div>
+    }
+</div>
+@Scripts.Render("~/Scripts/Application/ApplicationForm.js")
+
+

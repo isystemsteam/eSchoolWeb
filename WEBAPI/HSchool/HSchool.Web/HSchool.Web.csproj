@@ -247,7 +247,9 @@
     <Content Include="Scripts\Application\ApplicationSearch.js" />
     <Content Include="Scripts\Application\Home.js" />
     <Content Include="Scripts\Application\LoginView.js" />
+    <Content Include="Scripts\Application\Managment.js" />
     <Content Include="Scripts\Application\OfficeForm.js" />
+    <Content Include="Scripts\Application\OnlineApplication.js" />
     <Content Include="Scripts\Application\StudentAdmin.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-select.js" />
@@ -352,6 +354,8 @@
     <Content Include="Views\User\_CreateEditUser.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\_AddressView.cshtml" />
+    <Content Include="Views\Application\Request.cshtml" />
+    <Content Include="Views\Application\Application.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
