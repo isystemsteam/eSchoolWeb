@@ -107,6 +107,7 @@
     <Compile Include="SqlRepository\ClassRepository.cs" />
     <Compile Include="SqlRepository\LoginRepository.cs" />
     <Compile Include="SqlRepository\RolePrivilegeRepository.cs" />
+    <Compile Include="SqlRepository\SectionRepository.cs" />
     <Compile Include="SqlRepository\StudentRepository.cs" />
     <Compile Include="SqlRepository\UserRepository.cs" />
   </ItemGroup>

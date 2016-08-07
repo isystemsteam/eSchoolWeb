@@ -1,0 +1,47 @@
+﻿@model HSchool.Business.Models.ClassSubjectViewModel
+<h2>Class & Subjects</h2>
+<div class="form-group-expand-div admin-form">
+    <div class="form-container">
+        <div class="row custom-row clearfix">
+            <div class="col-lg-12">
+                <h2>Classes</h2>
+            </div>
+        </div>
+        <div class="row custom-row clearfix">
+            <div class="col-lg-12">
+                @if (Model.Classes != null && Model.Classes.Any())
+                {
+                    <ul class="">
+                        @foreach (var item in Model.Classes)
+                        {
+                            <li><a href="#" classid="@(item.ClassId)" class="csClassItem">@item.ClassName</a></li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+        <div class="row custom-row clearfix">
+            <div class="col-lg-12">
+                <h2>Sections</h2>
+            </div>
+        </div>
+        <div class="row custom-row clearfix">
+            <div class="col-lg-12">
+                @if (Model.Sections != null && Model.Sections.Any())
+                {
+                    <ul class="">
+                        @foreach (var item in Model.Sections)
+                        {
+                            <li><a href="#" sectionid="@(item.SectionId)" class="csSectionItem">@item.SectionName</a></li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="btn-wrapper clearfix">
+        <div class="pull-right">
+            <a href="#" class="btn-blue" onclick="adminView.classSubject.configure(0)">Configure Class & Subjects</a>
+        </div>
+    </div>
+</div>

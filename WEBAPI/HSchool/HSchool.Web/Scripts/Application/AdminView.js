@@ -25,6 +25,7 @@ var adminView = {
                 this.subjects.loadGrid();
                 break;
             case "5":
+                this.classSubject.load();
                 break;
             case "6":
                 this.academicYear.load();
@@ -310,6 +311,61 @@ var adminView = {
         },
         editCancel: function () {
             adminView.subjects.loadGrid();
+        }
+    },
+    classSubject: {
+        load: function () {
+            adminView.classSubject.loadGrid();
+        },
+        configure: function (id) {
+            var _successcallback = function (result) {
+                $("#" + adminView.viewContainerId).html(result);
+                adminView.displayBox(false);
+            };
+            var parameters = [];
+            parameters.push(new ajaxParam("id", id));
+            parameters.push(new ajaxParam("sectionId", 0));
+            $.fn.appCommon.ajax.getForm(appService.editClassSubject, parameters, _successcallback, null);
+        },
+        loadGrid: function (classId, sectionId) {
+            var _successcallback = function (result) {
+                $("#" + adminView.viewContainerId).html(result);
+                adminView.displayBox(false);
+            };
+            $.fn.appCommon.ajax.getForm(appService.viewClassSubject, null, _successcallback, null);
+        },
+        saveClassSubject: function () {
+
+        },
+        editCancel: function () {
+
+        },
+        selectViewClass: function () {
+
+        },
+        selectViewSection: function () {
+
+        },
+        selectEditClass: function (obj) {
+            var classId = $(obj).val();
+            this.bindEditClassSubjects(classId, 0);
+        },
+        bindEditClassSubjects: function (classId, sectionId) {
+            var successcallback = function (result) {
+                //js render - template 
+                var template = $.templates("#tempClassSectionSubject");
+                var htmlOutput = template.render(result);
+                $("#divEditClassSubject").html(htmlOutput).show();
+
+                //bind events
+                $("#btnUpdateClassSectionSubject").click(function () {
+                    adminView.classSubject.saveClassSections();
+                });
+            };
+            var parameters = [];
+            parameters.push(new ajaxParam("classId", classId));
+            parameters.push(new ajaxParam("sectionId", sectionId));
+            $.fn.appCommon.ajax.get(appService.ViewSubjectsForClass, parameters, 'json', successcallback, adminView.handleException);
         }
     }
 };

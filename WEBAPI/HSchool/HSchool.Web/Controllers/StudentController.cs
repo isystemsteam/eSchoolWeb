@@ -15,13 +15,15 @@ namespace HSchool.Web.Controllers
         #region Variables
         private readonly IAdminRepository _adminRepository;
         private readonly IStudentRepository _studentRepository;
+        private readonly IClassRepository _classRepository;
         #endregion
 
         #region Ctor
-        public StudentController(IAdminRepository adminRepository, IStudentRepository studentRepository)
+        public StudentController(IAdminRepository adminRepository, IStudentRepository studentRepository,IClassRepository classRepository)
         {
             _adminRepository = adminRepository;
             _studentRepository = studentRepository;
+            _classRepository = classRepository;
         }
         #endregion
 
@@ -35,7 +37,7 @@ namespace HSchool.Web.Controllers
         {
             LogHelper.Info(string.Format("StudentController.Index - Begin"));
             var studentSearch = new StudentSearch();
-            studentSearch.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_adminRepository.GetAllClasses(false), "Classes", "ClassId", "ClassName");
+            studentSearch.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_classRepository.GetAllClasses(false), "Classes", "ClassId", "ClassName");
             studentSearch.ListSections = CommonHelper.ConvertListToSelectList<Section>(new List<Section>(), "Sections", "SectionId", "SectionName");
             studentSearch.ListGender = CommonHelper.ConvertEnumToListItem<Gender>("Gender");
             LogHelper.Info(string.Format("StudentController.Index - End"));

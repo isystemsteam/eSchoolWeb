@@ -79,6 +79,7 @@
     <Compile Include="Models\ClassSections.cs" />
     <Compile Include="Models\ClassSectionTeacher.cs" />
     <Compile Include="Models\ClassSubject.cs" />
+    <Compile Include="Models\ClassSubjectViewModel.cs" />
     <Compile Include="Models\CommunityMaster.cs" />
     <Compile Include="Models\Enum.cs" />
     <Compile Include="Models\GridViewData.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Repository\IClassRepository.cs" />
     <Compile Include="Repository\ILoginRepository.cs" />
     <Compile Include="Repository\IRolePrivilegeRepository.cs" />
+    <Compile Include="Repository\ISectionRepository.cs" />
     <Compile Include="Repository\IStudentRepository.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
   </ItemGroup>

@@ -19,14 +19,16 @@ namespace HSchool.Web.Controllers
         private readonly IAdminRepository _adminRepository;
         private readonly IRolePrivilegeRepository _rolePrivilegeRepository;
         public readonly IClassRepository _classRepository;
+        public readonly ISectionRepository _sectionRepository;
         #endregion
 
         #region Ctor
-        public AdminController(IAdminRepository adminRepository, IRolePrivilegeRepository rolePrivilegeRepository, IClassRepository classRepository)
+        public AdminController(IAdminRepository adminRepository, IRolePrivilegeRepository rolePrivilegeRepository, IClassRepository classRepository, ISectionRepository sectionRepository)
         {
             _adminRepository = adminRepository;
             _rolePrivilegeRepository = rolePrivilegeRepository;
             _classRepository = classRepository;
+            _sectionRepository = sectionRepository;
         }
         #endregion
 
@@ -48,7 +50,7 @@ namespace HSchool.Web.Controllers
             var allClasses = new List<Classes>();
             try
             {
-                allClasses = _adminRepository.GetAllClasses((bool?)null);
+                allClasses = _classRepository.GetAllClasses((bool?)null);
             }
             catch (Exception ex)
             {
@@ -70,7 +72,7 @@ namespace HSchool.Web.Controllers
             var hClass = new Classes();
             if (id != 0)
             {
-                hClass = _adminRepository.GetClassById(id);
+                hClass = _classRepository.GetClassById(id);
             }
             LogHelper.Info(string.Format("AdminController.EditClass - End"));
             return PartialView("_EditClass", hClass);
@@ -84,7 +86,7 @@ namespace HSchool.Web.Controllers
             try
             {
                 mClass.IsVisibleToApplication = collection.GetFormValue<bool>("IsVisibleToApplication");
-                _adminRepository.SaveClass(mClass);
+                _classRepository.SaveClass(mClass);
                 response.IsSuccess = true;
                 LogHelper.Info(string.Format("AdminController.EditClass [POST] - End"));
             }
@@ -109,7 +111,7 @@ namespace HSchool.Web.Controllers
             var allSections = new List<Section>();
             try
             {
-                allSections = _adminRepository.GetAllSections(true);
+                allSections = _sectionRepository.GetAllSections(true);
             }
             catch (Exception ex)
             {
@@ -131,7 +133,7 @@ namespace HSchool.Web.Controllers
             var hSection = new Section();
             if (id != 0)
             {
-                hSection = _adminRepository.GetSectionById(id);
+                hSection = _sectionRepository.GetSectionById(id);
             }
             LogHelper.Info(string.Format("AdminController.EditSection - End"));
             return PartialView("_EditSection", hSection);
@@ -149,7 +151,7 @@ namespace HSchool.Web.Controllers
             var response = new Response();
             try
             {
-                _adminRepository.SaveSections(section);
+                _sectionRepository.SaveSections(section);
                 response.IsSuccess = true;
                 LogHelper.Info(string.Format("AdminController.EditSection [POST] - End"));
             }
@@ -169,8 +171,8 @@ namespace HSchool.Web.Controllers
             try
             {
                 var hClassSectionForm = new ClassSectionForm();
-                hClassSectionForm.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_adminRepository.GetAllClasses(false), "Classes", "ClassId", "ClassName");
-                hClassSectionForm.ClassCollection = _adminRepository.GetAllClasses(false);
+                hClassSectionForm.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_classRepository.GetAllClasses(false), "Classes", "ClassId", "ClassName");
+                //hClassSectionForm.ClassCollection = _classRepository.GetAllClasses(false);
                 LogHelper.Info(string.Format("AdminController.EditClassSection - End"));
                 return PartialView("_EditClassSection", hClassSectionForm);
             }
@@ -192,7 +194,7 @@ namespace HSchool.Web.Controllers
             try
             {
                 var classSections = _adminRepository.GetClassSectionsByClassId(classId);
-                var sections = _adminRepository.GetAllSections(true);
+                var sections = _sectionRepository.GetAllSections(true);
                 foreach (Section section in sections)
                 {
                     var item = classSections.Where(sec => sec.SectionId == section.SectionId);
@@ -248,7 +250,7 @@ namespace HSchool.Web.Controllers
             var subjects = new List<Subject>();
             try
             {
-                subjects = _classRepository.GetSubjects();
+                subjects = _classRepository.GetAllSubjects();
             }
             catch (Exception ex)
             {
@@ -299,6 +301,85 @@ namespace HSchool.Web.Controllers
                 response = new Response { IsSuccess = false, Message = ex.Message, StatusCode = 503 };
             }
             return Json(response, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
+        #region Class&Subjects
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ViewClassSubject()
+        {
+            LogHelper.Info(string.Format("AdminController.ViewClassSubject - Begin"));
+            try
+            {
+                var classSubjectViewModel = new ClassSubjectViewModel();
+                System.Threading.Tasks.Parallel.Invoke(
+                    () => { classSubjectViewModel.Classes = _classRepository.GetAllClasses(false); },
+                    () => { classSubjectViewModel.Sections = _sectionRepository.GetAllSections(true); });
+
+                LogHelper.Info(string.Format("AdminController.ViewClassSubject - End"));
+                return PartialView("_ViewClassSubject", classSubjectViewModel);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("AdminController.ViewClassSubject - Exception:{0}", ex.Message));
+                return PartialView("_Error", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="classId"></param>
+        /// <param name="sectionId"></param>
+        /// <returns></returns>
+        public JsonResult ViewSubjectsForClass(int classId, int sectionId)
+        {
+            LogHelper.Info(string.Format("AdminController.ViewSubjectsForClass - Begin"));
+            MessageResponse response;
+            var subjects = new List<Subject>();
+            try
+            {
+                subjects = _classRepository.GetAllSubjects();
+                response = new MessageResponse<List<Subject>>(subjects, ApiConstants.StatusSuccess, (int)HttpStatusCode.OK, string.Empty);
+                LogHelper.Info(string.Format("AdminController.ViewSubjectsForClass - End"));
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("AdminController.ViewSubjectsForClass - Exception:{0}", ex.Message));
+                response = new MessageResponse<string>(ex.Message, ApiConstants.StatusFailure, (int)HttpStatusCode.ExpectationFailed, string.Empty);
+                return Json(response, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="sectionId"></param>
+        /// <returns></returns>
+        public ActionResult EditClassSubject(int id, int sectionId)
+        {
+            LogHelper.Info(string.Format("AdminController.EditClassSubject - Begin"));
+            try
+            {
+                var classSubjectViewModel = new ClassSubjectViewModel();
+                //Parallel Process
+                System.Threading.Tasks.Parallel.Invoke(
+                    () => { classSubjectViewModel.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_classRepository.GetAllClasses(false), "Class", "ClassId", "ClassName"); },
+                    () => { classSubjectViewModel.ListSections = CommonHelper.ConvertListToSelectList<Section>(_sectionRepository.GetAllSections(true), "Section", "SectionId", "SectionName"); },
+                    () => { classSubjectViewModel.Subjects = _classRepository.GetAllSubjects(); });
+                LogHelper.Info(string.Format("AdminController.EditClassSubject - End"));
+                return PartialView("_EditClassSubject", classSubjectViewModel);
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Info(string.Format("AdminController.EditClassSubject - Exception:{0}", ex.Message));
+                return PartialView("_Error", ex.Message);
+            }
         }
         #endregion
 

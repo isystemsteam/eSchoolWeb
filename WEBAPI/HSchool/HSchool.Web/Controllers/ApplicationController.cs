@@ -25,6 +25,7 @@ namespace HSchool.Web.Controllers
         private readonly IAdminRepository _adminRepository;
         private readonly IStudentRepository _studentRepository;
         private readonly IApplicationRepository _applicationRepository;
+        private readonly IClassRepository _classRepository;
         private ApplicationUserManager _userManager;
         #endregion
 
@@ -58,11 +59,12 @@ namespace HSchool.Web.Controllers
         /// <param name="adminRepository"></param>
         /// <param name="studentRepository"></param>
         /// <param name="applicationRepository"></param>
-        public ApplicationController(ApplicationUserManager userManager, IAdminRepository adminRepository, IStudentRepository studentRepository, IApplicationRepository applicationRepository)
+        public ApplicationController(ApplicationUserManager userManager, IAdminRepository adminRepository, IStudentRepository studentRepository, IApplicationRepository applicationRepository, IClassRepository classRepository)
         {
             _adminRepository = adminRepository;
             _studentRepository = studentRepository;
             _applicationRepository = applicationRepository;
+            _classRepository = classRepository;
         }
         #endregion
 
@@ -309,7 +311,7 @@ namespace HSchool.Web.Controllers
             {
                 var applicationSearch = new ApplicationFormSearch();
                 applicationSearch.ListApplicationStatus = CommonHelper.ConvertEnumToListItem<ApplicationStatus>("Application Status");
-                applicationSearch.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_adminRepository.GetAllClasses(false), "Class", "ClassId", "ClassName");
+                applicationSearch.ListClasses = CommonHelper.ConvertListToSelectList<Classes>(_classRepository.GetAllClasses(false), "Class", "ClassId", "ClassName");
                 return View(applicationSearch);
             }
             catch (Exception ex)
@@ -383,7 +385,7 @@ namespace HSchool.Web.Controllers
         {
             LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            var result = await UserManager.CreateAsync(user, model.Password);            
+            var result = await UserManager.CreateAsync(user, model.Password);
             LogHelper.Info(string.Format("ApplicationController.CreateUser-Begin"));
             return result;
         }
@@ -429,7 +431,7 @@ namespace HSchool.Web.Controllers
                 if (isEditable)
                 {
                     System.Threading.Tasks.Parallel.Invoke(
-                        () => { applicationForm.FormClasses = _adminRepository.GetAllClasses(false); },
+                        () => { applicationForm.FormClasses = _classRepository.GetAllClasses(false); },
                         () => { applicationForm.Communities = _adminRepository.GetCommunities(); },
                         () => { applicationForm.RelationShips = _adminRepository.GetRelationships(); },
                         () => { applicationForm.ListTitles = CommonHelper.ConvertEnumToListItem<Titles>("Titles"); },

@@ -9,11 +9,17 @@ namespace HSchool.Business.Repository
 {
     public interface IClassRepository
     {
+        int? SaveClass(Classes classes);
+
+        List<Classes> GetAllClasses(bool? visibleOnly);
+
+        Classes GetClassById(int classId);
+
         int SaveClassSectionTeacher(ClassSectionTeacher csTeacher);
 
         int? SaveSubject(Subject subject);
 
-        List<Subject> GetSubjects();
+        List<Subject> GetAllSubjects();
 
         Subject GetSubjectById(int? id);
     }

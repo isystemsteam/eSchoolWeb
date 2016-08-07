@@ -19,19 +19,9 @@ namespace HSchool.Business.Repository
 
         //CommunityMaster GetCommunityById(int communityId);
 
-        //List<CommunityMaster> GetAllCommunities();
+        //List<CommunityMaster> GetAllCommunities();        
 
-        int? SaveClass(Classes classes);
-
-        List<Classes> GetAllClasses(bool? visibleOnly);
-
-        Classes GetClassById(int classId);
-
-        int? SaveSections(Section section);
-
-        List<Section> GetAllSections(bool isGetAll);
-
-        Section GetSectionById(int sectionId);
+        
 
         void SaveClassSection(List<ClassSection> classSection);
 

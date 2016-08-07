@@ -3,7 +3,7 @@
 	@ClassSubjectId INT,
 	@ClassId int,
 	@SectionId int,
-	@SubjectId int,
+	@SubjectId nvarchar(255),
 	@AcademicYear int
 )
 AS

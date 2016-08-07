@@ -33,7 +33,7 @@ namespace HSchool.Web
                       "~/Scripts/Custom/TableView.js",
                       "~/Scripts/Custom/CustomPlugin.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/admin").Include("~/Scripts/Custom/AdminConstants.js"));
+            bundles.Add(new ScriptBundle("~/bundles/admin").Include("~/Scripts/Custom/AdminConstants.js"));            
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

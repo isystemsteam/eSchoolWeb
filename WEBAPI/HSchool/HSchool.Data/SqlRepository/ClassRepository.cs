@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Insight.Database;
 
+using Classes = HSchool.Business.Models.Classes;
 using ClassSectionTeacher = HSchool.Business.Models.ClassSectionTeacher;
 using Subject = HSchool.Business.Models.Subject;
 
@@ -16,6 +17,90 @@ namespace HSchool.Data.SqlRepository
 {
     public class ClassRepository : IClassRepository
     {
+        #region Classes
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bClass"></param>
+        /// <returns></returns>
+        public int? SaveClass(Classes bClass)
+        {
+            LogHelper.Info(string.Format("AdminRepository.SaveClass - Begin"));
+            try
+            {
+                Models.Classes dClass = Mapper.Map<Classes, Models.Classes>(bClass);
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<int>(Procedures.SaveClasses, dClass);
+                return result != null && result.Any() ? result.First() : (int?)null;
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.SaveClass - SqlException:{0}", ex.Message), ex);
+                throw;
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.SaveClass - Exception:{0}", ex.Message), ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="classId"></param>
+        /// <returns></returns>
+        public Classes GetClassById(int classId)
+        {
+            LogHelper.Info(string.Format("AdminRepository.GetClassById - Begin"));
+            try
+            {
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<Models.Classes>(Procedures.GetClassById, new { @Id = classId });
+                var businessResults = Mapper.Map<IEnumerable<Models.Classes>, IEnumerable<Classes>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.FirstOrDefault() : new Classes();
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetClassById - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetClassById - Exception:{0}", ex.Message), ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// To get all classes
+        /// </summary>
+        /// <param name="visibleOnly"></param>
+        /// <returns></returns>
+        public List<Classes> GetAllClasses(bool? visibleOnly)
+        {
+            LogHelper.Info(string.Format("AdminRepository.GetAllClasses - Begin"));
+            try
+            {
+                SqlConnection connection = SqlDataConnection.GetSqlConnection();
+                var result = connection.Query<Models.Classes>(Procedures.GetAllClasses, visibleOnly);
+                var businessResults = Mapper.Map<IEnumerable<Models.Classes>, IEnumerable<Classes>>(result);
+                return businessResults != null && businessResults.Any() ? businessResults.ToList() : new List<Classes>();
+            }
+            catch (SqlException ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetAllClasses - SqlException:{0}", ex.Message), ex);
+                throw;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(string.Format("AdminRepository.GetAllClasses - Exception:{0}", ex.Message), ex);
+                throw;
+            }
+        }
+        #endregion
+
         ///
         public int SaveClassSectionTeacher(ClassSectionTeacher csTeacher)
         {
@@ -54,9 +139,9 @@ namespace HSchool.Data.SqlRepository
         /// 
         /// </summary>
         /// <returns></returns>
-        public List<Subject> GetSubjects()
+        public List<Subject> GetAllSubjects()
         {
-            LogHelper.Info(string.Format("ClassRepository.GetSubjects - Begin"));
+            LogHelper.Info(string.Format("ClassRepository.GetAllSubjects - Begin"));
             try
             {
                 SqlConnection connection = SqlDataConnection.GetSqlConnection();
@@ -66,12 +151,12 @@ namespace HSchool.Data.SqlRepository
             }
             catch (SqlException ex)
             {
-                LogHelper.Error(string.Format("ClassRepository.GetSubjects - SqlException:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("ClassRepository.GetAllSubjects - SqlException:{0}", ex.Message), ex);
                 throw;
             }
             catch (Exception ex)
             {
-                LogHelper.Error(string.Format("ClassRepository.GetSubjects - Exception:{0}", ex.Message), ex);
+                LogHelper.Error(string.Format("ClassRepository.GetAllSubjects - Exception:{0}", ex.Message), ex);
                 throw;
             }
         }

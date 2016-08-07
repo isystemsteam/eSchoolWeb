@@ -331,7 +331,6 @@
     <Content Include="Views\Admin\_EditAcademicYear.cshtml" />
     <Content Include="Views\Admin\_EditClass.cshtml" />
     <Content Include="Views\Admin\_EditClassSection.cshtml" />
-    <Content Include="Views\Admin\_EditClassSections.cshtml" />
     <Content Include="Views\Admin\_EditRole.cshtml" />
     <Content Include="Views\Admin\_EditSection.cshtml" />
     <Content Include="Views\Admin\_RolesPrivileges.cshtml" />
@@ -361,6 +360,8 @@
     <Content Include="Views\Application\Application.cshtml" />
     <Content Include="Views\Admin\_ViewSubject.cshtml" />
     <Content Include="Views\Admin\_EditSubject.cshtml" />
+    <Content Include="Views\Admin\_ViewClassSubject.cshtml" />
+    <Content Include="Views\Admin\_EditClassSubject.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

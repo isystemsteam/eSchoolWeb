@@ -15,7 +15,10 @@
     getAcademicYears: "/admin/ViewAcademicYear",
     searchApplications: "/application/SearchApplications",
     viewSubject: "/admin/ViewSubject",
-    editSubject:"/admin/EditSubject",
+    editSubject: "/admin/EditSubject",
+    viewClassSubject: '/admin/ViewClassSubject',
+    editClassSubject: '/admin/EditClassSubject',
+    ViewSubjectsForClass: '/admin/ViewSubjectsForClass',
     init: function (keyName) {
         return applicationRootUrl + appService[keyName];
     }

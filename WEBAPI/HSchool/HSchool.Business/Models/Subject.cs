@@ -13,6 +13,8 @@ namespace HSchool.Business.Models
 
         [DisplayName("Subject")]
         public string SubjectName { get; set; }
+
+        public bool IsSelected { get; set; }
         
     }
 }

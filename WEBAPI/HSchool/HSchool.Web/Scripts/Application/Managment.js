@@ -13,13 +13,13 @@ var adminManagment = {
         $("#" + this.viewContainerId).html("");
         switch (typeId) {
             case "1":
-                this.classes.load();
+                this.roles.load();
                 break;
             case "2":
-                this.sections.load();
+                this.rolesPrivileges.load();
                 break;
             case "3":
-                this.classSections.load();
+                this.settings.load();
                 break;
             case "4":
                 break;
@@ -47,15 +47,15 @@ var adminManagment = {
         },
         edit: function (id) {
             var _successcallback = function (result) {
-                $("#" + adminView.editControlId).html(result);
-                adminView.displayBox(true);
+                $("#" + adminManagment.editControlId).html(result);
+                adminManagment.displayBox(true);
                 //ajax form before submit call
                 var _beforecallback = function () { };
 
                 //ajax form success callback
                 var _successcallback = function (result) {
                     if (result != null && result.IsSuccess) {
-                        adminView.roles.loadGrid();
+                        adminManagment.roles.loadGrid();
                     }
                     jQuery.fn.appCommon.UI.displayMessage(result.Message, 3);
                 };
@@ -71,8 +71,8 @@ var adminManagment = {
         },
         loadGrid: function () {
             var _successcallback = function (result) {
-                $("#" + adminView.viewContainerId).html(result);
-                adminView.displayBox(false);
+                $("#" + adminManagment.viewContainerId).html(result);
+                adminManagment.displayBox(false);
             };
             $.fn.appCommon.ajax.getForm(appService.viewRole, null, _successcallback, null);
         },
@@ -93,14 +93,14 @@ var adminManagment = {
         },
         edit: function () {
             var successcallback = function (result) {
-                $("#" + adminView.editControlId).html(result);
-                adminView.displayBox(true);
+                $("#" + adminManagment.editControlId).html(result);
+                adminManagment.displayBox(true);
                 //bind events
                 $(".clsAppModuleItem").click(function () {
                     var moduleId = $(this).attr("moduleid");
                     $("#txtModuleName").val($(this).text());
                     $(".divModulesContainer").hide();
-                    adminView.rolesPrivileges.loadPrivilegesForModule(moduleId);
+                    adminManagment.rolesPrivileges.loadPrivilegesForModule(moduleId);
                 });
 
             };
@@ -165,7 +165,7 @@ var adminManagment = {
             //parameters save
             var parameters = [];
             parameters.push(new ajaxParam("rolesPrivileges", jsonObj));
-            $.fn.appCommon.ajax.post(appService.SaveRolesPrivileges, parameters, 'application/json', successcallback, adminView.handleException);
+            $.fn.appCommon.ajax.post(appService.SaveRolesPrivileges, parameters, 'application/json', successcallback, adminManagment.handleException);
 
         },
         selectModule: function (obj) {
