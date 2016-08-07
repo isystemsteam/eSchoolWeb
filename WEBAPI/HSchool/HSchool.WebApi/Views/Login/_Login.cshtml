@@ -1,8 +1,9 @@
 ﻿@model HSchool.Business.Models.LoginViewModel
 
 @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @id = "hLoginForm" }))
-
-        <div class="login-wrapper clearfix">
+{
+    <div class="login-div clearfix">
+        <div class="login-wrapper">
             <h2>Login</h2>
 
             <div class="row custom-row">
@@ -34,4 +35,5 @@
                 </div>
             </div>
         </div>
-
+    </div>
+}
