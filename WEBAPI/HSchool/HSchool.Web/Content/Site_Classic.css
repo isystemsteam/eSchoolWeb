@@ -58,6 +58,7 @@ a.navbar-brand, a.navbar-brand img{outline:none; text-decoration:none}
 #menu-top a {border-right:#0a89a6 1px solid; color: #fff; letter-spacing:1px; text-decoration: none;  padding:7px 10px; }
 #menu-top a:hover, #menu-top a.menu-top-active:hover {background-color:#2bd7ff; color:#fff !important;}
 .menu-section .dropdown-menu > li > a:hover, .menu-section .dropdown-menu > li > a:focus, #menu-top a.menu-top-active, .menu-section .nav > li > a:hover, .menu-section .nav > li > a:focus  {color: #2bd7ff !important;}
+.menu-section .dropdown-menu > li > a:hover {color:#fff !important;}
 
 /* USER SETTINGS DIV */
 .user-settings-wrapper {margin-top: 10px; color:#fff; font-size:16px; padding:0;}
